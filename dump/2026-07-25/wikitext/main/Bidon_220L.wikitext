@@ -1,0 +1,4 @@
+{{Organic item
+|Item_ref=000M
+|function=Stocker l'eau non potable
+}}

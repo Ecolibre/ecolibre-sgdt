@@ -1,0 +1,6 @@
+[[Has type::Page]]
+[[Property_description_FR::Lien vers la fonction technique que cet item organique réalise.]]
+[[Property_description_EN::Link to the technical function that this organic item realizes.]]
+[[Property_cardinality::multiple]]
+[[Property_domain::Category:Organic item]]
+[[Property_range::Functional item]]

@@ -1,0 +1,29 @@
+Cette page recense les dettes techniques connues sur le Système de Gestion de
+Données Techniques (SGDT) : des comportements identifiés comme imparfaits ou
+fragiles, constatés lors de sessions de reconnaissance ou de correction, mais
+volontairement non corrigés à la date de rédaction — soit parce qu'ils sortent
+du périmètre du lot en cours, soit parce qu'ils demandent un arbitrage ou une
+ressource externe (adminsys, décision de Cyril).
+
+Elle ne remplace pas un suivi de tickets : chaque entrée est datée et indique,
+quand c'est connu, dans quel lot la traiter.
+
+Voir aussi le [[Récapitulatif technique du Système de Gestion de Données Techniques]].
+
+== Dettes ouvertes ==
+
+# '''Racine de l'arbre fonctionnel codée en dur.''' `Catégorie:Functional item` interroge l'arbre avec `root=Assurer les besoins vitaux`. L'ouverture d'une seconde branche racine ferait disparaître ses items de l'affichage sans erreur.
+# '''L'arbre fonctionnel est devenu un graphe orienté acyclique.''' Depuis le 9 août 2026, un item fonctionnel peut avoir plusieurs parents. `format=tree` avec `parent=Part_of` suppose un parent unique, et aucune détection de cycle n'existe côté fonctionnel. Le patron de résolution existe déjà côté physique : `Board_lineage` matérialise la fermeture réflexo-transitive de `Board_parent` ; `Module:Board` porte la détection de cycle.
+# '''Une cellule « Fonctions parentes » vide est ambiguë.''' Rien ne distingue à l'écran l'item racine, légitimement sans parent, d'un item dont le parent aurait été perdu. Un `default=` explicite lèverait l'ambiguïté.
+# '''`Organic item` et `Physical item` gardent des noms de paramètres divergents.''' Trois conventions cohabitent sur les quatre modèles. Seul `Referenced item` a été aligné le 10 août 2026. `Physical item` est le plus délicat : `Inventory_ref` y est composé à partir de `site_code` et `ref_number`, donc ce n'est pas un simple renommage. À traiter dans un lot dédié, hors phase de saisie. Technique retenue pour un lot futur : faire accepter temporairement les deux noms au modèle (`{{{nouveau|{{{ancien|}}}}}}`), réécrire les pages, puis retirer l'ancien.
+# '''`Modèle:Referenced item/doc` est incomplète.''' Elle ne documente ni `Item_description` ni `Corresponds_to_organic`, et écrit `item_ref` en minuscule. Trou antérieur au lot 6.
+# '''`Formulaire:Referenced item` n'a pas de `delimiter=,` explicite''' sur son champ `Part_of`, contrairement à son équivalent fonctionnel. Sans conséquence — la virgule est le séparateur par défaut de Page Forms — mais l'asymétrie entre deux formulaires jumeaux est une source de confusion.
+# '''`$wgFileExtensions` n'autorise pas le SVG.''' Interdit le téléversement de dessins vectoriels sur un système de données techniques. Demande à faire à l'adminsys.
+# '''Les outils de lecture du wiki ne couvrent ni `list=allpages` ni `action=browsebysubject`.''' Ce dernier est le seul moyen de lire les faits SMW réellement stockés ; il faut l'appeler en accès direct à l'API à chaque vérification.
+# '''`Template:Item numbering audit` interroge `[[Item_ref::+]]` sans filtre de catégorie.''' La détection des trous porte sur tout le wiki. À traiter avec le lot de numérotation, hors phase de saisie.
+# '''L'échelle de maturité ne prévoit aucune valeur pour un produit du commerce.''' `Maturity_level` (`Idea`/`Study`/`Prototype`/`Certified`/`Obsolete`) est une échelle de maturité de conception (OSHW), sans valeur adaptée à un produit acheté tel quel chez un fournisseur — cas pourtant majoritaire parmi les items référencés à venir. Constaté le 10 août 2026 sur `Bidon 220L bleu plastique Borde`, dont le `Certified` erroné a été corrigé séparément ; le problème de fond — l'absence de valeur adaptée dans l'échelle elle-même — reste entier.
+# '''`Thread_designation` et `Secondary_diameter` ne disent pas quel filetage va avec quel diamètre sur un raccord à plusieurs orifices.''' Un mamelon réducteur ou un té asymétrique porte plusieurs filetages et plusieurs diamètres, mais les deux listes sont stockées indépendamment l'une de l'autre (deux propriétés multivaluées séparées, sans lien entre position N de l'une et position N de l'autre). Suffisant pour rechercher (« tous les items en 26x34 ») mais insuffisant pour reconstruire la géométrie exacte d'un raccord. Corriger demanderait un sous-objet par orifice (`Has subobject` SMW ou motif équivalent). Constaté le 10 août 2026.
+# '''`000J` est un trou définitif dans la séquence Base 36.''' Référence attribuée puis rendue orpheline (page créée, ensuite renommée ou supprimée). La séquence va de `0001` à `000Q` (25 références), avec une absence entre `000I` et `000K`. Par cohérence avec le principe de non-réemploi des identifiants, `000J` ne doit '''jamais''' être réattribué à un nouvel item, même si le trou subsiste dans la séquence. Constaté et qualifié le 10 août 2026. À traiter avec le lot de numérotation, hors phase de saisie.
+
+----
+Page créée le 10 août 2026, à partir de l'audit consolidé dans le cadrage du lot 6.

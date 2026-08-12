@@ -1,0 +1,2 @@
+'''Références orphelines / manquantes :'''
+{{#invoke:Base36|findGaps|{{#ask: [[Item_ref::+]] |?Item_ref= |mainlabel=- |format=plain |link=none |sep=, |limit=500000 }} }}

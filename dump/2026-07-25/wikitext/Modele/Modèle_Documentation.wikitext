@@ -1,0 +1,14 @@
+<noinclude>
+{{Documentation}}
+</noinclude><includeonly>
+<div style="padding-top: 2em; clear: both;"></div>
+<div style="background-color: #f5faff; border: 1px solid #a2a9b1; padding: 1em; margin: 1em 0;">
+<div style="border-bottom: 1px solid #a2a9b1; margin-bottom: 0.5em; padding-bottom: 0.5em;">
+<span style="font-size: 120%; font-weight: bold;">[[Fichier:Template-info.svg|25px|link=|alt=]] Documentation du modèle</span>
+<span style="float: right; font-size: 90%;"><span class="mw-editsection-bracket">[</span>[[{{FULLPAGENAME}}/doc|voir]]<span class="mw-editsection-bracket">]</span> <span class="mw-editsection-bracket">[</span>[{{fullurl:{{FULLPAGENAME}}/doc|action=edit}} modifier]<span class="mw-editsection-bracket">]</span> <span class="mw-editsection-bracket">[</span>[{{fullurl:{{FULLPAGENAME}}/doc|action=history}} historique]<span class="mw-editsection-bracket">]</span></span>
+</div>
+{{ {{FULLPAGENAME}}/doc }}
+<div style="clear: both;"></div>
+</div>
+[[Catégorie:Modèles de documentation|{{PAGENAME}}]]
+</includeonly>

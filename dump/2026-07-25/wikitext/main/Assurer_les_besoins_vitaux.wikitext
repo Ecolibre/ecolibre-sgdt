@@ -1,0 +1,4 @@
+{{Functional item
+|Item_ref=0001
+|Item_description=Ensemble des fonctions fondamentales nécessaires au maintien de la vie humaine, à la santé et à la dignité, garantissant l'autonomie et la résilience face aux aléas extérieurs.
+}}

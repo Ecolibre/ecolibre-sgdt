@@ -1,0 +1,27 @@
+=== Présentation (Overview) ===
+Ce module permet d'extraire et d'afficher le code source brut d'une page (modèle, formulaire ou autre) sans que le wiki ne l'interprète. Il est utilisé pour automatiser la page de [[Récapitulatif technique]].
+
+''This module extracts and displays the raw source code of any page (template, form, etc.) without interpretation. It is used to automate the [[Technical Summary]] page.''
+
+=== Utilisation (Usage) ===
+La syntaxe de base consiste à utiliser la fonction `get` via un `invoke`. Il est recommandé de l'envelopper dans une balise `<pre>` ou un tag `#tag:pre` pour conserver la mise en forme.
+
+''The basic syntax uses the `get` function. Wrapping it in a `<pre>` tag or `#tag:pre` is recommended to preserve formatting.''
+
+==== Syntaxe (Syntax) ====
+<pre>
+{{#tag:pre|{{#invoke:Source|get|Nom de la page}}}}
+</pre>
+
+==== Paramètres (Parameters) ====
+* '''1 :''' Le nom complet de la page, incluant l'espace de noms (ex: `Template:Referenced item`).
+* '''''1:''' The full name of the page, including the namespace (e.g., `Template:Referenced item`).''
+
+=== Exemple (Example) ===
+Pour afficher le code de ce module lui-même :
+''To display the code of this module itself:''
+<pre>
+{{#tag:pre|{{#invoke:Source|get|Module:Source}}}}
+</pre>
+
+[[Catégorie:Modules interne SGDT]]

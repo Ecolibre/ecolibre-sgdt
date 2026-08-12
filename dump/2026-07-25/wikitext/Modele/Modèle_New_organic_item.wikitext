@@ -1,0 +1,5 @@
+<div style="background: #f9f9f9; border: 1px solid #ddd; padding: 20px; text-align: center;">
+=== Ajouter un nouvel item organique ===
+Tapez le nom de l'item (ex: ''Cuve de récupération d'eau de pluie'') :
+{{#forminput:form=Organic item|size=40|button text=Créer l'item organique|placeholder=Nom de l'item...}}
+</div>

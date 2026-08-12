@@ -1,0 +1,4 @@
+{{Functional item
+|Item_ref=0006
+|Part_of=Irriguer
+}}

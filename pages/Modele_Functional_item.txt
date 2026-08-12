@@ -1,0 +1,42 @@
+<noinclude>
+{{Documentation}}
+</noinclude>
+<includeonly>
+{{#set:
+|Item_ref={{{Item_ref|}}}
+|Item_description={{{Item_description|}}}
+|Part_of={{{Part_of|}}}
+|+sep=,
+}}
+
+{| class="wikitable" style="width:100%"
+! style="background:#f2f2f2; width:30%;" | Référence (Base 36)
+| '''{{{Item_ref|}}}'''
+|-
+! style="background:#f2f2f2" | Description de la fonction
+| {{{Item_description|}}}
+|-
+! style="background:#f2f2f2" | Fonctions parentes
+| {{#arraymap:{{{Part_of|}}}|,|@@@|[[@@@]]|,&#32;}}
+|-
+! style="background:#f2f2f2" | Sous-fonctions (Enfants)
+| 
+{{#ask: [[Part_of::{{FULLPAGENAME}}]]
+ |?Item_ref = Réf.
+ |format=table
+ |default=''Aucune sous-fonction déclarée.''
+ |class=wikitable sortable
+}}
+|-
+! style="background: #e8f0ff" | Solutions organiques (Comment)
+| {{#ask: [[Realizes_function::{{FULLPAGENAME}}]]
+| ?Item_ref=Réf.
+| ?Item_description=Description
+| format=table
+| default=''Aucune solution organique n'est encore référencée pour cette fonction.''
+| class=wikitable sortable
+}}
+|}
+
+[[Category:Functional item]]
+</includeonly>

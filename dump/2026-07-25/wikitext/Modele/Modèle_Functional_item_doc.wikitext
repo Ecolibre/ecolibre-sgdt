@@ -1,0 +1,16 @@
+=== Présentation (Overview) ===
+[[Object_description_FR::Modèle pour la gestion des fonctions techniques (Verbe à l'infinitif).]]
+[[Object_description_EN::Template for managing technical functions (Infinitive verb).]]
+
+Ce modèle permet de définir le "Quoi" (la fonction) indépendamment de la solution technique. 
+'''Règle de nommage :''' Le titre de la page doit commencer par un verbe (ex: "Cuire des aliments").
+
+''This template defines the "What" (the function) independently of the technical solution. 
+'''Naming rule:''' The page title must start with a verb (e.g., "Heat food").''
+
+=== Paramètres (Parameters) ===
+* '''item_ref''' : Référence unique (Base 36).
+* '''description''' : Texte expliquant le but de la fonction.
+* '''parent''' : La fonction supérieure dont celle-ci dépend.
+
+[[Catégorie:Documentation SGDT]]

@@ -1,0 +1,3 @@
+[[Has type::Code]]
+[[Property_description_FR::Référence alphanumérique unique de 4 caractères (Base 36).]]
+[[Property_description_EN::Unique 4-character alphanumeric reference (Base 36).]]

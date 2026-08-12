@@ -1,0 +1,16 @@
+=== Présentation (Overview) ===
+[[Object_description_FR::Formulaire pour l'architecture logique et le lien fonction-référence.]]
+[[Object_description_EN::Form for logical architecture and function-reference linking.]]
+
+Ce formulaire définit comment une fonction est réalisée logiquement avant de choisir une solution technique précise.
+
+=== Utilisation (Usage) ===
+* '''Lien amont :''' Doit pointer vers un [[:Category:Functional item]].
+* '''Lien aval :''' Sera pointé par un Item Référencé.
+
+=== Code Source (Source Code) ===
+<div style="background-color: #f9f9f9; border: 1px dashed #2f6fab; padding: 1em;">
+{{#invoke:Source|get|Form:Organic item}}
+</div>
+
+[[Catégorie:Documentation SGDT]]

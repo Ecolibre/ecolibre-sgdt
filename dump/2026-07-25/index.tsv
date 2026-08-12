@@ -1,0 +1,97 @@
+ns	label	title	revid	timestamp	bytes
+0	main	Accueil	31	2025-04-03T10:48:24Z	1591
+0	main	Pomme	13	2025-03-25T22:00:09Z	33
+0	main	Système de Gestion de Données Techniques orienté matériel libre	140	2026-03-31T22:56:45Z	4539
+0	main	Récapitulatif technique du Système de Gestion de Données Techniques	241	2026-04-07T16:23:11Z	5909
+0	main	Système de Gestion de Données Techniques	104	2026-03-20T23:25:28Z	80
+0	main	SGDT	105	2026-03-20T23:25:39Z	80
+0	main	Récapitulatif technique	70	2026-03-20T22:25:35Z	84
+0	main	Technical Summary	73	2026-03-20T22:32:44Z	84
+0	main	Se nourrir	212	2026-04-06T20:15:43Z	166
+0	main	S'hydrater	225	2026-04-07T15:15:43Z	163
+0	main	Système de Gestion de Données Techniques orienté Open Source Hardware	101	2026-03-20T23:23:48Z	80
+0	main	System for Technical Data Management	102	2026-03-20T23:24:43Z	77
+0	main	Open Source Hardware-Oriented Product Data Management System	103	2026-03-20T23:24:59Z	87
+0	main	Se maintenir au chaud	227	2026-04-07T15:15:53Z	168
+0	main	Embout tuyau ø15 attache rapide	115	2026-03-30T14:08:06Z	982
+0	main	Assurer les besoins vitaux	195	2026-04-06T19:09:52Z	230
+0	main	Se protéger des intempéries	228	2026-04-07T15:15:58Z	168
+0	main	Se soigner	229	2026-04-07T15:16:04Z	160
+0	main	Produire de l'énergie	223	2026-04-07T15:15:28Z	187
+0	main	Stocker des ressources	231	2026-04-07T15:16:14Z	170
+0	main	Se déplacer	226	2026-04-07T15:15:48Z	166
+0	main	Filtrer l'eau	221	2026-04-07T14:52:26Z	55
+0	main	Stocker l'eau potable	232	2026-04-07T15:16:20Z	55
+0	main	Conserver les aliments	217	2026-04-07T14:52:06Z	55
+0	main	Cuire les aliments	218	2026-04-07T14:52:11Z	55
+0	main	Cultiver de la nourriture	219	2026-04-07T14:52:17Z	161
+0	main	Préparer le sol à cultiver	224	2026-04-07T15:15:37Z	70
+0	main	Semer et planter	230	2026-04-07T15:16:09Z	70
+0	main	Irriguer	222	2026-04-07T14:52:30Z	70
+0	main	Extraire l'eau d'un puits	220	2026-04-07T14:52:22Z	53
+0	main	Test mermaid	161	2026-04-02T22:05:20Z	31
+0	main	Stocker l'eau non potable	236	2026-04-07T16:11:28Z	53
+0	main	Administration SGDT	240	2026-04-07T16:21:48Z	88
+0	main	Cuve de récupération d'eau	242	2026-04-08T16:48:43Z	68
+0	main	Bidon 220L	244	2026-04-08T16:54:24Z	68
+8	MediaWiki	MediaWiki:Smw import schema	4	2025-03-23T21:57:26Z	71890
+8	MediaWiki	MediaWiki:Smw import skos	5	2025-03-23T21:57:27Z	1111
+8	MediaWiki	MediaWiki:Smw import foaf	6	2025-03-23T21:57:27Z	1118
+8	MediaWiki	MediaWiki:Smw import owl	7	2025-03-23T21:57:27Z	1203
+10	Modele	Modèle:Referenced item	175	2026-04-03T21:25:54Z	1171
+10	Modele	Modèle:Pending translation	72	2026-03-20T22:31:40Z	547
+10	Modele	Modèle:Documentation	44	2026-03-20T20:18:00Z	1032
+10	Modele	Modèle:Pending translation/doc	76	2026-03-20T22:37:59Z	680
+10	Modele	Modèle:Referenced item/doc	51	2026-03-20T20:51:28Z	996
+10	Modele	Modèle:Functional item	245	2026-04-08T17:04:30Z	998
+10	Modele	Modèle:Functional item/doc	59	2026-03-20T21:46:57Z	824
+10	Modele	Modèle:Organic item	174	2026-04-03T21:25:12Z	1040
+10	Modele	Modèle:Physical item	176	2026-04-03T21:26:30Z	980
+10	Modele	Modèle:Physical item/doc	87	2026-03-20T22:53:19Z	570
+10	Modele	Modèle:New functional item	141	2026-03-31T22:59:29Z	314
+10	Modele	Modèle:New organic item	142	2026-03-31T23:01:21Z	317
+10	Modele	Modèle:New referenced item	143	2026-03-31T23:01:47Z	338
+10	Modele	Modèle:New physical item	144	2026-03-31T23:02:02Z	338
+10	Modele	Modèle:MermaidLine	158	2026-04-02T21:58:41Z	50
+10	Modele	Modèle:Item numbering audit	239	2026-04-07T16:21:25Z	169
+14	Categorie	Catégorie:Projet Ecolibre	18	2025-04-02T20:32:32Z	24
+14	Categorie	Catégorie:Ecolibre	19	2025-04-02T20:32:50Z	23
+14	Categorie	Catégorie:Accueil	20	2025-04-02T20:33:04Z	20
+14	Categorie	Catégorie:Logo Ecolibre	23	2025-04-03T10:04:11Z	38
+14	Categorie	Catégorie:Communication Ecolibre	24	2025-04-03T10:04:22Z	24
+14	Categorie	Catégorie:SGDT	34	2026-03-20T19:11:18Z	31
+14	Categorie	Catégorie:Documentation SGDT	60	2026-03-20T21:47:19Z	50
+14	Categorie	Catégorie:Documentation	61	2026-03-20T21:47:53Z	29
+14	Categorie	Catégorie:Wiki Ecolibre	62	2026-03-20T21:48:19Z	24
+14	Categorie	Catégorie:Modules interne SGDT	67	2026-03-20T22:24:11Z	51
+14	Categorie	Catégorie:Module interne	68	2026-03-20T22:24:23Z	29
+14	Categorie	Catégorie:À traduire en anglais	69	2026-03-20T22:24:59Z	29
+14	Categorie	Catégorie:Functional item	160	2026-04-02T22:04:02Z	1313
+14	Categorie	Catégorie:Item SGDT	108	2026-03-20T23:29:58Z	20
+14	Categorie	Catégorie:Organic item	243	2026-04-08T16:53:13Z	983
+102	Attribut	Attribut:Foaf:knows	8	2025-03-23T21:57:28Z	227
+102	Attribut	Attribut:Foaf:name	9	2025-03-23T21:57:28Z	154
+102	Attribut	Attribut:Foaf:homepage	10	2025-03-23T21:57:29Z	198
+102	Attribut	Attribut:Owl:differentFrom	11	2025-03-23T21:57:29Z	209
+102	Attribut	Attribut:Item ref	191	2026-04-04T21:17:50Z	188
+102	Attribut	Attribut:Maturity level	39	2026-03-20T20:02:01Z	285
+102	Attribut	Attribut:Part of	40	2026-03-20T20:03:40Z	135
+102	Attribut	Attribut:Object description FR	52	2026-03-20T20:53:13Z	224
+102	Attribut	Attribut:Object description EN	53	2026-03-20T20:53:51Z	224
+102	Attribut	Attribut:Item description	56	2026-03-20T21:41:43Z	236
+102	Attribut	Attribut:Property description FR	64	2026-03-20T22:17:27Z	362
+102	Attribut	Attribut:Property description EN	65	2026-03-20T22:18:19Z	362
+102	Attribut	Attribut:Realizes function	77	2026-03-20T22:40:24Z	204
+102	Attribut	Attribut:Corresponds to organic	78	2026-03-20T22:44:12Z	221
+102	Attribut	Attribut:Instance of	85	2026-03-20T22:52:49Z	255
+106	Formulaire	Formulaire:Referenced item	184	2026-04-03T21:50:23Z	861
+106	Formulaire	Formulaire:Organic item	183	2026-04-03T21:50:19Z	671
+106	Formulaire	Formulaire:Functional item	234	2026-04-07T15:29:06Z	1136
+106	Formulaire	Formulaire:Physical item	182	2026-04-03T21:47:09Z	739
+106	Formulaire	Formulaire:Functional item/doc	89	2026-03-20T22:55:10Z	740
+106	Formulaire	Formulaire:Organic item/doc	90	2026-03-20T22:55:22Z	691
+106	Formulaire	Formulaire:Referenced item/doc	91	2026-03-20T22:55:38Z	792
+106	Formulaire	Formulaire:Physical item/doc	92	2026-03-20T22:55:50Z	765
+828	Module	Module:Source	75	2026-03-20T22:37:34Z	416
+828	Module	Module:Source/doc	48	2026-03-20T20:36:50Z	1304
+828	Module	Module:Base36	237	2026-04-07T16:15:52Z	3254

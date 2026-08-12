@@ -1,0 +1,17 @@
+=== Présentation (Overview) ===
+[[Object_description_FR::Formulaire de saisie pour les fonctions techniques (Verbes).]]
+[[Object_description_EN::Input form for technical functions (Verbs).]]
+
+Ce formulaire permet de définir les besoins fonctionnels. Il force l'utilisation d'une référence en base 36 et encourage un nommage par verbe à l'infinitif.
+
+=== Utilisation (Usage) ===
+Utilisé pour documenter le "Quoi" (la fonction attendue).
+* '''Lien amont :''' Aucun (racine du besoin).
+* '''Lien aval :''' Sera pointé par un Item Organique.
+
+=== Code Source (Source Code) ===
+<div style="background-color: #f9f9f9; border: 1px dashed #2f6fab; padding: 1em;">
+{{#invoke:Source|get|Form:Functional item}}
+</div>
+
+[[Catégorie:Documentation SGDT]]

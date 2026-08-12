@@ -1,0 +1,72 @@
+A ce jour, la présentation la plus détaillée se trouve sur : https://forums.assemblee-virtuelle.org/t/systeme-de-gestion-de-donnees-techniques-oriente-open-source-hardware-et-ingenierie-cooperative/745
+
+Cette page définit l'ontologie et les règles de gestion du futur système de données techniques d'Ecolibre. Elle doit servir de contexte de référence pour le développement et l'évolution de l'outil sur le Wiki.
+
+Voir aussi le [[Récapitulatif technique du Système de Gestion de Données Techniques]] pour l'implémentation actuelle.
+
+<br>
+
+=== Vision et Objectifs Métier ===
+* '''Finalité :''' Développer un système de gestion de données techniques (PLM/PDM) dédié à l''''Open Source Hardware (OSHW)''' et à l'ingénierie coopérative.
+* '''Ambition :''' Transformer le wiki d'une simple base textuelle vers une architecture de données structurées permettant, à terme, la génération automatique de nomenclatures (BOM) et de matrices de traçabilité.
+* '''Valeurs :''' Transparence, interopérabilité et respect des savoir-faire locaux.
+
+=== Ontologie des Items (Modèle de Données) ===
+
+Le système repose sur une séparation stricte entre le besoin, la logique et la réalisation. La cohérence est assurée par une **traçabilité ascendante** (Bottom-Up) : l'élément concret pointe vers l'élément abstrait.
+
+{| class="wikitable" style="width:100%"
+! Niveau !! Type d'Item !! Concept !! Exemple de nommage
+|-
+| style="background:#f2f2f2" | 1. **Besoin** || [[:Category:Functional item|Functional Item]] || La fonction pure (le "Quoi"). || ''Se nourrir, Filtrer l'eau'' (Verbes)
+|-
+| style="background:#e8f0ff" | 2. **Logique** || [[:Category:Organic item|Organic Item]] || Le principe de solution (le "Comment"). || ''Filtre à sable, Cuisson solaire''
+|-
+| style="background:#f2f2f2" | 3. **Technique** || [[:Category:Referenced item|Referenced Item]] || Le modèle précis, sa maturité et sa BOM. || ''Cuve v1.2, Réf. A4B9''
+|-
+| style="background:#e8f0ff" | 4. **Réel** || [[:Category:Physical item|Physical Item]] || L'exemplaire physique avec son numéro de série. || ''Exemplaire Atelier #001''
+|}
+
+==== 1. Item Fonctionnel (Le Besoin) ====
+* '''Définition :''' Définit la fonction ou le service attendu (le "Quoi").
+* '''Nommage :''' Le titre de la page commence par un '''verbe à l'infinitif''' (ex: ''"Filtrer l'eau"'').
+* '''Hiérarchie :''' Admet un parent unique via `Property:Part_of` pour créer des arborescences de besoins.
+
+==== 2. Item Organique (La Logique) ====
+* '''Définition :''' Décrit la solution logique ou l'organe qui répond à une fonction (le "Comment"). 
+* '''Liaison :''' Est relié à un Item Fonctionnel via `Property:Realizes_function`.
+* '''Exemple :''' L'item organique ''"Pompe à bras"'' réalise la fonction ''"Puiser l'eau"''.
+
+==== 3. Item Référencé (La Technique) ====
+* '''Définition :''' Porte la nomenclature (BOM), les spécifications techniques et les fichiers de fabrication. 
+* '''Liaison :''' Est relié à l'Item Organique via `Property:Corresponds_to_organic`.
+* '''Référence :''' Identifié par un code de '''4 caractères en Base 36''' (ex: `A1Z9`).
+* '''Maturité :''' Supporte le suivi du cycle de vie (Idée, Étude, Prototype, Certifié, Obsolète).
+
+==== 4. Item Physique (Le Réel) ====
+* '''Définition :''' Représente l'instance réelle, tangible et sérialisée d'un modèle (l'objet sur l'étagère).
+* '''Liaison :''' Est obligatoirement une instance d'un Item Référencé via `Property:Instance_of`.
+* '''Identifiant :''' Utilise la référence du modèle couplée à un numéro de série unique (`Property:Serial_number`).
+
+=== Règles de Gestion et Intégrité ===
+
+* '''Unicité :''' L'identifiant technique (`Item_ref`) sert d'ancre unique pour éviter les doublons.
+* '''Traçabilité :''' Un item technique ne peut être validé s'il n'est pas relié, par étapes, à un besoin fonctionnel initial.
+* '''Standardisation :''' Les descriptions sont centralisées via `Property:Item_description` pour garantir une cohérence d'affichage sur tous les tableaux de bord.
+
+=== Roadmap Technique ===
+
+* '''Phase 1 (Initialisation) :''' Création des propriétés sémantiques, des modèles (`Templates`) et des formulaires de saisie de base.
+
+{{New functional item}}
+	
+{{New organic item}}
+	
+{{New referenced item}}
+	
+{{New physical item}}
+
+* '''Phase 2 (Visualisation) :''' Mise en place des requêtes de traçabilité et intégration de **Mermaid** pour générer des schémas de conception dynamiques.
+* '''Phase 3 (Ingénierie) :''' Implémentation des calculs de nomenclatures (BOM) récursives et gestion des stocks physiques.
+
+[[Catégorie:SGDT]]

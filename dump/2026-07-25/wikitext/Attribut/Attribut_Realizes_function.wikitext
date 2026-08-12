@@ -1,0 +1,3 @@
+[[Has type::Page]]
+[[Property_description_FR::Lien vers la fonction technique que cet item organique réalise.]]
+[[Property_description_EN::Link to the technical function that this organic item realizes.]]

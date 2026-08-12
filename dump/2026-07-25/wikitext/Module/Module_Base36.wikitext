@@ -1,0 +1,101 @@
+local p = {}
+
+function p.next(frame)
+    -- Récupère l'entrée (SMW)
+    local raw_input = frame.args[1] or frame:getParent().args[1] or ""
+    
+    -- NETTOYAGE CHIRURGICAL :
+    -- 1. On enlève les "strip markers" (codes internes de MediaWiki)
+    local clean = mw.text.unstrip(raw_input)
+    -- 2. On enlève les balises HTML (ex: <span>...</span>)
+    clean = clean:gsub("<[^>]+>", "")
+    -- 3. On enlève tout ce qui n'est pas un chiffre ou une lettre
+    clean = clean:match("[%w]+") or ""
+    -- 4. On met en majuscules et on enlève les espaces
+    clean = mw.text.trim(clean):upper()
+    
+    -- Si après nettoyage c'est vide, on commence à 0001
+    if clean == "" then return "0001" end
+    
+    -- Conversion Base 36 -> Décimal
+    local dec = tonumber(clean, 36)
+    
+    -- DEBUG : Si la conversion échoue encore, on affiche ce que Lua a "vu"
+    if not dec then return "ERR_LUA_VOIT:" .. clean end
+    
+    -- Incrémentation
+    dec = dec + 1
+    
+    -- Re-conversion en Base 36
+    local chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    local base36 = ''
+    local temp = dec
+    while temp > 0 do
+        local mod = temp % 36
+        base36 = string.sub(chars, mod + 1, mod + 1) .. base36
+        temp = math.floor(temp / 36)
+    end
+    
+    -- Formatage sur 4 caractères
+    while string.len(base36) < 4 do
+        base36 = '0' .. base36
+    end
+    
+    return base36
+end
+
+-- Détecteur de trous (Gaps) dans la numérotation
+function p.findGaps(frame)
+    local raw_input = frame.args[1] or frame:getParent().args[1] or ""
+    if raw_input == "" then return "Aucune donnée trouvée." end
+
+    local existing_refs = {}
+    local max_dec = 0
+
+    -- 1. On lit toutes les références séparées par des virgules
+    for ref in string.gmatch(raw_input, "([^,]+)") do
+        local clean_ref = mw.text.unstrip(ref)
+        clean_ref = clean_ref:gsub("<[^>]+>", "")
+        clean_ref = mw.text.trim(clean_ref):upper()
+        clean_ref = clean_ref:match("[%w]+")
+        
+        if clean_ref and clean_ref ~= "" then
+            local dec = tonumber(clean_ref, 36)
+            if dec then
+                -- On stocke la référence trouvée
+                existing_refs[dec] = true
+                -- On met à jour le plafond si nécessaire
+                if dec > max_dec then max_dec = dec end
+            end
+        end
+    end
+
+    if max_dec == 0 then return "Aucune référence valide analysée." end
+
+    local missing = {}
+    local chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    
+    -- 2. On compte de 1 jusqu'au plafond et on note les absents
+    for i = 1, max_dec do
+        if not existing_refs[i] then
+            local base36 = ''
+            local temp = i
+            while temp > 0 do
+                local mod = temp % 36
+                base36 = string.sub(chars, mod + 1, mod + 1) .. base36
+                temp = math.floor(temp / 36)
+            end
+            while string.len(base36) < 4 do base36 = '0' .. base36 end
+            table.insert(missing, base36)
+        end
+    end
+
+    -- 3. Affichage du résultat
+    if #missing == 0 then
+        return "Aucun trou détecté dans la séquence (jusqu'à " .. string.format("%04s", max_dec) .. ")."
+    else
+        return table.concat(missing, ", ")
+    end
+end
+
+return p

@@ -1,0 +1,16 @@
+=== Présentation (Overview) ===
+[[Object_description_FR::Formulaire de gestion des références techniques, de la maturité et des nomenclatures (BOM).]]
+[[Object_description_EN::Form for managing technical references, maturity levels, and Bill of Materials (BOM).]]
+
+C'est le formulaire principal pour le bureau d'études. Il permet de construire l'arborescence technique du produit.
+
+=== Utilisation (Usage) ===
+* '''Lien amont :''' Doit pointer vers un [[Category:Organic item]] via le champ "Item Organique correspondant".
+* '''Lien aval :''' Peut contenir d'autres items référencés (BOM).
+
+=== Code Source (Source Code) ===
+<div style="background-color: #f9f9f9; border: 1px dashed #2f6fab; padding: 1em;">
+{{#invoke:Source|get|Form:Referenced item}}
+</div>
+
+[[Catégorie:Documentation SGDT]]

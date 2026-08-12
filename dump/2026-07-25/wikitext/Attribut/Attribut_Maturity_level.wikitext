@@ -1,0 +1,8 @@
+[[Has type::Code]]
+[[Allows value::Idea]]
+[[Allows value::Study]]
+[[Allows value::Prototype]]
+[[Allows value::Certified]]
+[[Allows value::Obsolete]]
+[[Property_description_FR::Niveau de maturité de l'item référencé.]]
+[[Property_description_EN::Maturity level of the referenced item.]]

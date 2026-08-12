@@ -1,0 +1,5 @@
+{{Functional item
+|Item_ref=000F
+|Item_description=Maintenir ou restaurer l'intégrité physique et la santé des individus.
+|Part_of=Assurer les besoins vitaux
+}}

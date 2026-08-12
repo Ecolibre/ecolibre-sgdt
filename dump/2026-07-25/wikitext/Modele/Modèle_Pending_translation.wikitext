@@ -1,0 +1,11 @@
+<includeonly><div style="background-color: #f8f9fa; border: 1px solid #a2a9b1; border-left: 4px solid #3366cc; padding: 15px; margin: 10px 0; clear: both; display: flex; align-items: center;">
+<div style="padding-right: 15px;">
+[[File:Translate.svg|40px|alt=Translation needed|link=]]
+</div>
+<div>
+'''Translation pending'''<br />
+This page is waiting to be translated from the French article: '''[[:{{{1|}}}|{{#titleparts:{{{1|}}}|1|1}}]]'''.
+</div>
+</div>[[Catégorie:À traduire en anglais]]</includeonly><noinclude>
+{{Documentation}}
+</noinclude>

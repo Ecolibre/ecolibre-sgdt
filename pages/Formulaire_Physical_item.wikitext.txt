@@ -1,0 +1,27 @@
+<includeonly>
+{{{info|add title=Ajouter un Item Physique|edit title=Modifier l'Item Physique}}}
+{{{for template|Physical item}}}
+{| class="formtable"
+! Code de site : {{#info: À modifier uniquement pour publier l'exemplaire d'un partenaire ; dans ce cas, recopier aussi le numéro depuis la source.}}
+| {{{field|site_code|mandatory|default={{Préfixe site}}|size=5}}}
+|-
+! Numéro d'inventaire : {{#info: Calculé automatiquement pour un exemplaire de ce site. Pour publier l'exemplaire d'un partenaire, recopier son numéro d'origine plutôt que de laisser le calcul.}}
+| {{{field|ref_number|mandatory|default={{#invoke:Base36|next|{{#ask: [[Category:Physical item]] [[Inventory_site::{{Préfixe site}}]] [[Inventory_number::+]] |?Inventory_number= |sort=Inventory_number |order=desc |limit=1 |mainlabel=- |format=list |link=none |headers=hide |default=0000}} }}|placeholder=0001}}}
+|-
+! Modèle d'origine :
+| {{{field|model_link|input type=combobox|values from category=Referenced item|mandatory}}}
+|-
+! Description / État :
+| {{{field|description|input type=textarea|rows=2|placeholder=Ex: Exemplaire de test, batterie neuve...}}}
+|-
+! Numéro de série :
+| {{{field|sn|placeholder=SN-123456}}}
+|-
+! Installé dans :
+| {{{field|physical_parent|input type=combobox|values from category=Physical item}}}
+|}
+{{{end template}}}
+
+{{{standard input|free text}}}
+{{{standard input|save}}}
+</includeonly>

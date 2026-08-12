@@ -1,0 +1,13 @@
+== Œuvrer pour la réappropriation citoyenne de la technique et des moyens de production. ==
+
+=== Aider à déployer, concevoir et fabriquer des éléments open source hardware en prenant en compte l'intérêt des low-tech, de l'économie circulaire et de l'impact écologique.===
+
+Écolibre, c'est une communauté de gens qui aiment créer des outils ensemble pour un futur qui prend soin de notre planète.
+
+Écolibre a pour vocation de proposer, notamment sur un petit territoire et sur quelques petits projets, une méthodologie qui permettrait à terme, si on déploie de manière plus générale, plus large et plus profonde le concept, de pouvoir faciliter la décentralisation de l'industrie. C'est-à-dire qu'en ayant un réseau suffisamment important et complémentaire d'entreprises, d'artisans, de citoyens et d'associations qui peuvent contribuer à fabriquer ou à diffuser ou à faire des choses communes, l'outil Écolibre va permettre de pouvoir plus facilement collaborer ensemble pour réaliser ces projets. Plus de détails sur [[Système de Gestion de Données Techniques orienté Open Source Hardware]].
+
+En parallèle de développer ce réseau et cet outil de base de données mutualisées, il y a aussi deux projets concrets de conception et fabrication de dispositifs open source. Il y a le [[Anton|véhicule électrique ultraléger]] et l'[[Dôme|habitat léger]].
+
+Nous nous inscrivons dans une démarche d'économie circulaire et utilisons la monnaie libre (la june) pour favoriser les échanges et nous émanciper du modèle monétaire conventionnel qui n'est pas favorable aux usagers.
+
+[[Catégorie : Accueil]]

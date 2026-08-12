@@ -1,0 +1,42 @@
+<noinclude>
+{{Documentation}}
+</noinclude>
+<includeonly>
+{{#set:
+|Inventory_site={{{site_code|}}}
+|Inventory_number={{{ref_number|}}}
+|Inventory_ref={{{site_code|}}}-{{{ref_number|}}}
+|Item_description={{{description|}}}
+|Instance_of={{{model_link|}}}
+|Part_of={{{physical_parent|}}}
+|Serial_number={{{sn|}}}
+}}
+
+{| class="wikitable" style="width:100%"
+! style="background:#f2f2f2; width:30%;" | Référence d'inventaire
+| '''{{{site_code|}}}-{{{ref_number|}}}'''
+|-
+! style="background:#f2f2f2" | Modèle (Réf. technique)
+| {{#if:{{{model_link|}}}|[[{{{model_link|}}}]]}}
+|-
+! style="background:#f2f2f2" | Description individuelle
+| {{{description|}}}
+|-
+! style="background:#f2f2f2" | Numéro de série (Constructeur)
+| {{{sn|''Non spécifié''}}}
+|-
+! style="background:#e8f0ff" | Installé dans (Parent physique)
+| {{#if:{{{physical_parent|}}}|[[{{{physical_parent|}}}]]}}
+|-
+! style="background:#f2f2f2" | Éléments contenus (Enfants)
+| 
+{{#ask: [[Part_of::{{FULLPAGENAME}}]]
+ |?Inventory_ref = Réf.
+ |format=table
+ |default=''Cet item ne contient aucun sous-élément physique.''
+ |class=wikitable sortable
+}}
+|}
+
+[[Category:Physical item]]
+</includeonly>

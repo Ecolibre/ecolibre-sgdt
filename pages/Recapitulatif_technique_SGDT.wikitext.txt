@@ -1,0 +1,296 @@
+'''Version française :''' Cette page constitue l'épine dorsale technique du [[Système de Gestion de Données Techniques]]. Elle répertorie toutes les propriétés sémantiques, les modèles et les formulaires.
+
+''English version: This page is the technical backbone of the [[System for Technical Data Management]]. It lists all semantic properties, templates, and forms.''
+
+Voir aussi les [[Limites connues du Système de Gestion de Données Techniques]].
+
+== 1. Propriétés Sémantiques (Semantic Properties) ==
+Ce tableau liste les "champs de données" utilisés sur l'ensemble du wiki. Les noms sont en anglais pour assurer la compatibilité internationale, mais les descriptions sont fournies dans les deux langues.
+
+''This table lists the "data fields" used across the wiki. Names are in English for international compatibility, but descriptions are provided in both languages.''
+
+{{#ask: [[Has type::+]]
+ |?Has type=Type de donnée / Data Type
+ |?Property_description_FR=Description (FR)
+ |?Property_description_EN=Description (EN)
+ |?Imported from=Vocabulaire externe
+ |?Property_cardinality=Cardinalité
+ |?Property_domain=Domaine
+ |?Property_range=Portée
+ |format=table
+ |limit=200
+ |sort=Has type
+}}
+
+== Les quatre classes ==
+
+Les catégories d'items ne servent pas à la navigation : elles valent
+appartenance à une classe et deviendront des <code>rdf:type</code> à l'export.
+Elles sont posées exclusivement par les modèles et ne doivent jamais être
+ajoutées à la main.
+
+Elles forment une chaîne de quatre niveaux, du besoin à l'objet posé sur le
+terrain.
+
+{| class="wikitable"
+! Classe !! Rôle dans la chaîne !! Posée par !! Lien vers le niveau suivant !! Effectif
+|-
+| [[:Category:Functional item|Functional item]] || la fonction à assurer || [[:Modèle:Functional item|Modèle:Functional item]] || <code>Realizes_function</code> (depuis l'organique) || {{#ask: [[Category:Functional item]] |format=count}}
+|-
+| [[:Category:Organic item|Organic item]] || le type d'objet qui réalise la fonction || [[:Modèle:Organic item|Modèle:Organic item]] || <code>Corresponds_to_organic</code> (depuis le référencé) || {{#ask: [[Category:Organic item]] |format=count}}
+|-
+| [[:Category:Referenced item|Referenced item]] || le moyen de se procurer l'objet || [[:Modèle:Referenced item|Modèle:Referenced item]] || <code>Instance_of</code> (depuis le physique) || {{#ask: [[Category:Referenced item]] |format=count}}
+|-
+| [[:Category:Physical item|Physical item]] || l'exemplaire présent sur un site || [[:Modèle:Physical item|Modèle:Physical item]] || terminus || {{#ask: [[Category:Physical item]] |format=count}}
+|}
+
+La définition complète de chaque classe figure sur sa page de catégorie.
+
+Le découplage entre le troisième et le deuxième niveau est le ressort du
+modèle : le niveau de maturité qualifie une '''voie d'approvisionnement''', pas
+un objet. Un fournisseur peut devenir obsolète pendant que l'item organique et
+les exemplaires en service restent parfaitement valides.
+
+Les effectifs sont calculés en direct et ne peuvent pas se périmer.
+
+=== Numérotation des items physiques ===
+
+Les items physiques ont leur propre numérotation, préfixée par un code de
+site à trois lettres, indépendante de la séquence Base 36 des trois classes
+de conception. Les codes sont enregistrés dans le
+[[Registre des préfixes de site]].
+
+== Lire le tableau des propriétés ==
+
+Trois colonnes décrivent le schéma plutôt que le contenu :
+
+* '''Cardinalité''' — <code>single</code> ou <code>multiple</code>, nombre de valeurs admises.
+* '''Domaine''' — la ou les classes auxquelles la propriété s'applique.
+* '''Portée''' — la classe visée, ou la nature de la valeur littérale attendue.
+
+Ces trois colonnes préfigurent un schéma SHACL, où elles deviendront
+respectivement <code>sh:maxCount</code>, <code>sh:targetClass</code> et
+<code>sh:datatype</code> ou <code>sh:class</code>.
+
+Convention d'écriture, à tenir : le domaine s'écrit sous la forme
+<code>Category:Nom</code>, la portée sous la forme <code>Nom</code> seul.
+
+Onze lignes ont ces trois colonnes vides : les propriétés de description, les
+propriétés importées et les propriétés de schéma elles-mêmes ne décrivent pas
+le modèle métier. La case vide est une information, pas un oubli.
+
+== Vocabulaires externes importés ==
+
+Quatre vocabulaires sont déclarés via le mécanisme d'import de Semantic
+MediaWiki. Chaque page <code>MediaWiki:Smw import <nom></code> porte en première
+ligne l'URI de base du vocabulaire, puis la liste des termes autorisés.
+
+L'URI de base est l'''espace de noms de l'ontologie'', et non l'adresse de son
+document de spécification : SMW concatène le terme directement à cette URI. Une
+adresse de spécification produirait des URI syntaxiquement valides et
+sémantiquement muettes.
+
+{| class="wikitable"
+! Vocabulaire !! URI de base !! Attributs qui en dérivent
+|-
+| foaf || <code>http://xmlns.com/foaf/0.1/</code> || <code>Foaf:name</code>, <code>Foaf:homepage</code>, <code>Foaf:knows</code>
+|-
+| owl || <code>http://www.w3.org/2002/07/owl#</code> || <code>Owl:differentFrom</code>
+|-
+| schema.org (v14.0) || <code>https://schema.org/</code> || aucun
+|-
+| skos || <code>http://www.w3.org/2004/02/skos/core#</code> || aucun
+|}
+
+Les quatre attributs dérivés ne sont utilisés nulle part à ce jour : ils
+préparent la modélisation des personnes et des organisations.
+
+L'espace de noms <code>MediaWiki:</code> exige le droit
+<code>editinterface</code>. Ces pages ne sont modifiables ni par un compte
+ordinaire, ni par un compte robot.
+
+Les URI de owl et de skos ont été corrigées le 25 juillet 2026 ; elles
+pointaient jusque-là vers les documents de spécification.
+
+== Règles métier ==
+
+Ces contraintes sont énoncées dans les info-bulles des formulaires. Elles sont
+reprises ici parce qu'une contrainte qui ne vit que dans une aide de saisie
+n'est pas opposable.
+
+* Le titre d'un item fonctionnel est un '''verbe à l'infinitif'''.
+* Une référence est un identifiant '''Base 36 de quatre caractères''', en majuscules.
+* Un nom de tableau kanban '''ne contient pas de virgule'''.
+* Un nom d'item référencé '''ne contient pas de virgule''' — depuis le 25 juillet 2026, la virgule sert de séparateur de valeurs pour <code>Part_of</code> dans <code>Modèle:Referenced item</code>.
+* Un nom d'item fonctionnel '''ne contient pas de virgule''' — depuis que <code>Realizes_function</code> est multivaluée, la virgule y sert de séparateur de valeurs.
+
+== Règles implicites ==
+
+Ces règles ne sont lisibles qu'en lisant le code des modèles et des modules.
+Les consigner ici est le seul moyen qu'elles survivent à leur auteur.
+
+* La '''séquence Base 36 est partagée''' entre les items fonctionnels, organiques et référencés : le calcul du numéro suivant interroge les trois catégories ensemble. Ce filtre est '''recopié à l'identique dans les trois formulaires''' — modifier l'un sans les autres ferait diverger les séquences sans que rien ne le signale.
+* Les items physiques '''ne portent pas <code>Item_ref</code>''' : ils ont leur propre numérotation d'inventaire, préfixée par un code de site, indépendante de la séquence de conception.
+* <code>Template:Item numbering audit</code> interroge <code>[[Item_ref::+]]</code> '''sans aucun filtre de catégorie''' : la détection des trous porte sur tout le wiki, pas sur une classe.
+* <code>Realizes_function</code> est multivaluée : un item organique peut réaliser plusieurs fonctions.
+* Le module de numérotation '''détecte les trous de séquence, mais pas les doublons'''.
+* <code>Part_of</code> est déclarée <code>multiple</code>, mais n'est réellement multivaluée que '''pour les items référencés''' — où elle sert de nomenclature, une même référence pouvant entrer dans plusieurs ensembles. Aux trois autres niveaux elle est alimentée par une liste déroulante à valeur unique. Semantic MediaWiki attache la cardinalité à la propriété et non au couple classe-propriété : seul un schéma SHACL saura exprimer la nuance.
+* Les '''libellés de formulaire sont en français''', les '''noms de propriétés et de catégories en anglais'''. C'est une convention, pas une contrainte technique.
+* Cette page apparaît dans les transclusions des quatre modèles d'items, parce qu'elle en affiche le code source via <code>#invoke:Source</code>. Ce n'est '''pas''' une instance de classe, et tout recensement doit l'écarter.
+
+== Requêtes portées par les pages ==
+
+Le comportement du système ne réside pas seulement dans les modèles. Dix
+requêtes sont portées directement par des pages.
+
+{| class="wikitable"
+! Page !! Nombre !! Formats employés
+|-
+| Cette page || 1 || tableau des propriétés (<code>[[Has type::+]]</code>)
+|-
+| [[:Category:Functional item|Category:Functional item]] || 5 || <code>tree</code>, graphe Mermaid via <code>template</code>, <code>outline</code>, <code>table</code>, <code>datatable</code>
+|-
+| [[:Category:Organic item|Category:Organic item]] || 4 || <code>tree</code>, <code>outline</code>, <code>table</code>, <code>datatable</code>
+|}
+
+Les catégories des items référencés et physiques ne portent aucune requête.
+
+== Configuration hors wiki ==
+
+=== Socle logiciel ===
+
+MediaWiki 1.39.11, langue <code>fr</code>. Semantic MediaWiki 4.2.0, Semantic
+Result Formats 4.2.1, Page Forms 5.8.1, Mermaid 6.0.2, Scribunto.
+
+Extensions ayant un effet sur les droits ou permettant des modifications en
+masse, à connaître avant toute automatisation : '''Lockdown''', '''Nuke''',
+'''Replace Text''', '''UserMerge'''.
+
+=== Espaces de noms ===
+
+102 <code>Attribut</code>, 106 <code>Formulaire</code>, 108 <code>Concept</code>,
+828 <code>Module</code>.
+
+=== Types de fichiers autorisés ===
+
+png, gif, jpg, jpeg, webp, pdf, doc, docx, odt, xls, xlsx, ods, ppt, pptx, odp,
+tiff, bmp, ico.
+
+'''Le format svg n'est pas autorisé''', ce qui interdit le téléversement de
+dessins vectoriels — contrainte notable pour un système de données techniques.
+
+=== Suivi des dépendances de requêtes ===
+
+<code>$smwgEnabledQueryDependencyLinksStore</code> est activé depuis le
+26 juillet 2026. Une page contenant un <code>#ask</code> se rafraîchit
+automatiquement quand les données qu'elle interroge changent, sans purge
+manuelle. C'est un prérequis du kanban.
+
+Deux limites : les requêtes à conditions génériques utilisant <code>~</code> ne
+sont pas suivies, et la file de travaux doit tourner pour que les
+rafraîchissements s'appliquent.
+
+=== Droits ===
+
+Aucune protection n'est posée page par page. Le contrôle d'accès s'exerce par
+groupe et par espace de noms, via les droits d'utilisateur et l'extension
+Lockdown. Une interrogation des protections ne permet donc '''pas''' de prévoir
+si une écriture sera acceptée : un refus doit être traité comme un résultat
+normal.
+
+=== Ce qui reste à documenter ===
+
+Relevés dans <code>LocalSettings.php</code>, non exposés par l'API :
+<code>$wgNamespacePermissionLockdown</code>, <code>$wgGroupPermissions</code>,
+et les autres réglages <code>$smwg*</code>.
+
+== 2. Modèles de Structure (Templates) ==
+Les modèles définissent comment les données sont stockées en base de données (`#set`) et comment elles sont affichées sur les pages.
+
+''Templates define how data is stored in the database (#set) and how it is displayed on the page.''
+
+=== [[Template:Functional item]] ===
+'''Description (FR) :''' {{#show: Template:Functional item/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Functional item/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Functional item}}}}
+
+=== [[Template:Organic item]] ===
+'''Description (FR) :''' {{#show: Template:Organic item/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Organic item/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Organic item}}}}
+
+=== [[Template:Referenced item]] ===
+'''Description (FR) :''' {{#show: Template:Referenced item/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Referenced item/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Referenced item}}}}
+
+=== [[Template:Physical item]] ===
+'''Description (FR) :''' {{#show: Template:Physical item/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Physical item/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Physical item}}}}
+
+== 3. Formulaires de Saisie (Forms) ==
+Les formulaires permettent aux utilisateurs de saisir des données sans toucher au Wikicode. Les étiquettes (labels) sont en français pour les utilisateurs actuels.
+
+''Forms allow users to enter data without touching the Wikicode. Labels are in French for current users.''
+
+=== [[Form:Functional item]] ===
+'''Documentation (FR) :''' [[Form:Functional item/doc]]
+{{#tag:pre|{{#invoke:Source|get|Form:Functional item}}}}
+
+=== [[Form:Organic item]] ===
+'''Documentation (FR) :''' [[Form:Organic item/doc]]
+{{#tag:pre|{{#invoke:Source|get|Form:Organic item}}}}
+
+=== [[Form:Referenced item]] ===
+'''Documentation (FR) :''' [[Form:Referenced item/doc]]
+{{#tag:pre|{{#invoke:Source|get|Form:Referenced item}}}}
+
+=== [[Form:Physical item]] ===
+'''Documentation (FR) :''' [[Form:Physical item/doc]]
+{{#tag:pre|{{#invoke:Source|get|Form:Physical item}}}}
+
+== 4. Modules Lua (Scribunto) ==
+Les modules Lua gèrent la logique complexe et les fonctions avancées du wiki. Contrairement aux modèles classiques, ils utilisent le langage de programmation Lua.
+
+''Lua modules handle complex logic and advanced wiki functions. Unlike standard templates, they use the Lua programming language.''
+
+=== [[Module:Source]] ===
+'''Description (FR) :''' {{#show: Module:Source/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Module:Source/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Module:Source}}}}
+
+=== [[Module:Base36]] ===
+'''Description (FR) :''' {{#show: Module:Base36/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Module:Base36/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Module:Base36}}}}
+
+== Audit de la numérotation des Items : [[Template:Item numbering audit]]==
+{{#tag:pre|{{#invoke:Source|get|Template:Item numbering audit}}}}
+
+== 5. Modèles auxiliaires ==
+=== Encart d'ajout d'items ===
+==== [[Template : New functional item]] ====
+{{#tag:pre|{{#invoke:Source|get|Template:New functional item}}}}
+==== [[Template : New organic item]] ====
+{{#tag:pre|{{#invoke:Source|get|Template:New organic item}}}}
+==== [[Template : New referenced item]] ====
+{{#tag:pre|{{#invoke:Source|get|Template:New referenced item}}}}
+==== [[Template : New physical item]] ====
+{{#tag:pre|{{#invoke:Source|get|Template:New physical item}}}}
+=== [[Template:Pending translation]] ===
+'''Description (FR) :''' {{#show: Template:Pending translation/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Pending translation/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Pending translation}}}}
+
+=== [[Template:Documentation]] ===
+'''Description (FR) :''' {{#show: Template:Documentation/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Documentation/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Documentation}}}}
+
+=== [[Template:MermaidLine]] ===
+'''Description (FR) :''' {{#show: Template:MermaidLine/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:MermaidLine/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:MermaidLine}}}}
+
+[[Catégorie : SGDT]]

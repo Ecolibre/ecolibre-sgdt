@@ -1,0 +1,26 @@
+Chaque organisation de la fédération dispose d'un code à trois lettres qui
+préfixe les références d'inventaire de ses items physiques. Ce code permet à
+chacune de numéroter son inventaire sans coordination avec les autres.
+
+Comme un exemplaire peut être publié sur un wiki qui n'est pas celui de son
+détenteur, ces codes doivent être uniques sur l'ensemble de la fédération. Une
+organisation enregistre son code ici '''avant''' de l'utiliser, et un code
+attribué ne se réutilise jamais, même après la fermeture d'un wiki.
+
+{| class="wikitable"
+! Code !! Organisation !! Wiki !! Wiki faisant autorité
+|-
+|ADD
+|Atelier du Dôme
+|add.ecolibre.org
+|
+|-
+|CWL
+|CWL Optéos
+|cwl.ecolibre.org
+|wiki.ecolibre.org
+|-
+| ECL || Ecolibre || wiki.ecolibre.org || wiki.ecolibre.org
+|}
+
+[[Category:Documentation SGDT]]

@@ -1,0 +1,5 @@
+{{Functional item
+|Item_ref=000H
+|Item_description=Conserver des matières premières ou des produits finis sur une durée déterminée.
+|Part_of=Assurer les besoins vitaux
+}}

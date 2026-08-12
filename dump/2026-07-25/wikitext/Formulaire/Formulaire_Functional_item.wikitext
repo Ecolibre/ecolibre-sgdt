@@ -1,0 +1,29 @@
+<noinclude>
+{{Documentation}}
+</noinclude>
+<includeonly>
+{{{info|add title=Ajouter une Fonction|edit title=Modifier la Fonction}}}
+
+<div class="info-box">
+'''Règle de nommage :''' Le titre de la page doit être un '''verbe à l'infinitif''' (ex: ''Cuire des aliments'', ''Stocker l'énergie'').
+</div>
+
+{{{for template|Functional item}}}
+{| class="formtable"
+! style="width:30%" | Référence (4 car. Base 36) :
+| {{{field|Item_ref|mandatory|default={{#invoke:Base36|next|{{#ask: [[Category:Functional item||Organic item||Referenced item]] [[Item_ref::+]] |?Item_ref= |sort=Item_ref |order=desc |limit=1 |mainlabel=- |format=list |link=none |headers=hide |default=0000}} }} }}}
+|-
+! Description de la fonction :
+| {{{field|Item_description|input type=textarea|rows=3|placeholder=Décrivez l'objectif...}}}
+|-
+! Fonction parente :
+| {{{field|Part_of|input type=combobox|values from category=Functional item|placeholder=Sélectionner...}}}
+|}
+{{{end template}}}
+
+'''Texte libre / Détails supplémentaires :'''
+{{{standard input|free text}}}
+
+<hr />
+{{{standard input|save}}} {{{standard input|preview}}} {{{standard input|cancel}}}
+</includeonly>

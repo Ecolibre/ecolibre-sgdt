@@ -1,0 +1,13 @@
+local p = {}
+
+function p.get(frame)
+    local title = frame.args[1]
+    local page = mw.title.new(title)
+    if not page then return "Page non trouvée" end
+    local content = page:getContent()
+    if not content then return "Contenu vide" end
+    -- On enveloppe dans nowiki pour éviter que le wiki n'interprète les balises includeonly
+    return frame:preprocess("<nowiki>" .. content .. "</nowiki>")
+end
+
+return p

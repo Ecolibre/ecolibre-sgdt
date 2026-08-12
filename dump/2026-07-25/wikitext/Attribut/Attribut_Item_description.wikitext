@@ -1,0 +1,3 @@
+[[Has type::Text]]
+[[Property_description_FR::Description textuelle de l'item (fonctionnel, organique, référencé ou physique).]]
+[[Property_description_EN::Textual description of the item (functional, organic, referenced or physical).]]

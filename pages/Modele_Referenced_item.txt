@@ -1,0 +1,78 @@
+<noinclude>
+{{Documentation}}
+</noinclude>
+<includeonly>
+{{#set:
+|Item_ref={{{Item_ref|}}}
+|Item_description={{{Item_description|}}}
+|Maturity_level={{{Maturity_level|}}}
+|Part_of={{{Part_of|}}}
+|+sep=,
+|Corresponds_to_organic={{{Corresponds_to_organic|}}}
+|Max_head={{{Max_head|}}}
+|Supplier={{{Supplier|}}}
+|Supplier_reference={{{Supplier_reference|}}}
+|Manufacturer={{{Manufacturer|}}}
+|Manufacturer_reference={{{Manufacturer_reference|}}}
+}}
+
+{| class="wikitable" style="width:100%"
+! style="background:#f2f2f2; width:30%;" | Référence (Base 36)
+| '''{{{Item_ref|}}}'''
+|-
+! style="background:#f2f2f2" | Description technique
+| {{{Item_description|}}}
+|-
+! style="background:#e8f0ff" | Item Organique associé
+| {{#if:{{{Corresponds_to_organic|}}}|[[{{{Corresponds_to_organic|}}}]]}}
+|-
+! style="background:#f2f2f2" | État de maturité
+| {{#switch: {{{Maturity_level|}}}
+ | Idea = Idée
+ | Study = Étude
+ | Prototype = Prototype
+ | Certified = <span style="color:green">'''Certifié (OSHW)'''</span>
+ | Obsolete = <span style="color:red">Obsolète</span>
+ | #default = {{{Maturity_level|}}}
+}}
+|-
+! style="background:#f2f2f2" | Hauteur de refoulement max. (cm)
+| {{{Max_head|}}}
+|-
+! style="background:#e8f0ff" | Fournisseur
+| {{#if:{{{Supplier|}}}|[[{{{Supplier|}}}]]}}
+|-
+! style="background:#f2f2f2" | Réf. fournisseur
+| {{{Supplier_reference|}}}
+|-
+! style="background:#e8f0ff" | Fabricant
+| {{#if:{{{Manufacturer|}}}|[[{{{Manufacturer|}}}]]}}
+|-
+! style="background:#f2f2f2" | Réf. fabricant
+| {{{Manufacturer_reference|}}}
+|-
+! style="background:#f2f2f2" | Cas d'emploi (Parents)
+| {{#arraymap:{{{Part_of|}}}|,|@@@|[[@@@]]|,&#32;}}
+|-
+! style="background:#f2f2f2" | Composants enfants (BOM)
+| 
+{{#ask: [[Part_of::{{FULLPAGENAME}}]]
+ |?Item_ref = Réf.
+ |?Maturity_level = Maturité
+ |format=table
+ |default=''Aucun sous-composant déclaré.''
+ |class=wikitable sortable
+}}
+|-
+! style="background:#f2f2f2" | Exemplaires physiques
+|
+{{#ask:[[Category:Physical item]][[Instance_of::{{FULLPAGENAME}}]]
+ |?Inventory_ref=Réf. inventaire
+ |?Inventory_site=Site
+ |format=table
+ |default=''Aucun exemplaire physique enregistré.''
+}}
+|}
+
+[[Category:Referenced item]]
+</includeonly>

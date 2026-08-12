@@ -1,0 +1,6 @@
+{{Organic item
+|Item_ref=TEST
+|description=Page de test du lot 5, à vider après contrôle.
+|function=Filtrer l'eau,Stocker l'eau potable
+|parent=
+}}

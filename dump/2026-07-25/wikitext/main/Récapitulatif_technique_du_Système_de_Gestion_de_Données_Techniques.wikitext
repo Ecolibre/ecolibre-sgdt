@@ -1,0 +1,108 @@
+'''Version française :''' Cette page constitue l'épine dorsale technique du [[Système de Gestion de Données Techniques]]. Elle répertorie toutes les propriétés sémantiques, les modèles et les formulaires.
+
+''English version: This page is the technical backbone of the [[System for Technical Data Management]]. It lists all semantic properties, templates, and forms.''
+
+== 1. Propriétés Sémantiques (Semantic Properties) ==
+Ce tableau liste les "champs de données" utilisés sur l'ensemble du wiki. Les noms sont en anglais pour assurer la compatibilité internationale, mais les descriptions sont fournies dans les deux langues.
+
+''This table lists the "data fields" used across the wiki. Names are in English for international compatibility, but descriptions are provided in both languages.''
+
+{{#ask: [[Has type::+]]
+ |?Has type=Type de donnée / Data Type
+ |?Property_description_FR=Description (FR)
+ |?Property_description_EN=Description (EN)
+ |format=table
+ |limit=200
+ |sort=Has type
+}}
+
+== 2. Modèles de Structure (Templates) ==
+Les modèles définissent comment les données sont stockées en base de données (`#set`) et comment elles sont affichées sur les pages.
+
+''Templates define how data is stored in the database (#set) and how it is displayed on the page.''
+
+=== [[Template:Functional item]] ===
+'''Description (FR) :''' {{#show: Template:Functional item/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Functional item/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Functional item}}}}
+
+=== [[Template:Organic item]] ===
+'''Description (FR) :''' {{#show: Template:Organic item/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Organic item/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Organic item}}}}
+
+=== [[Template:Referenced item]] ===
+'''Description (FR) :''' {{#show: Template:Referenced item/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Referenced item/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Referenced item}}}}
+
+=== [[Template:Physical item]] ===
+'''Description (FR) :''' {{#show: Template:Physical item/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Physical item/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Physical item}}}}
+
+== 3. Formulaires de Saisie (Forms) ==
+Les formulaires permettent aux utilisateurs de saisir des données sans toucher au Wikicode. Les étiquettes (labels) sont en français pour les utilisateurs actuels.
+
+''Forms allow users to enter data without touching the Wikicode. Labels are in French for current users.''
+
+=== [[Form:Functional item]] ===
+'''Documentation (FR) :''' [[Form:Functional item/doc]]
+{{#tag:pre|{{#invoke:Source|get|Form:Functional item}}}}
+
+=== [[Form:Organic item]] ===
+'''Documentation (FR) :''' [[Form:Organic item/doc]]
+{{#tag:pre|{{#invoke:Source|get|Form:Organic item}}}}
+
+=== [[Form:Referenced item]] ===
+'''Documentation (FR) :''' [[Form:Referenced item/doc]]
+{{#tag:pre|{{#invoke:Source|get|Form:Referenced item}}}}
+
+=== [[Form:Physical item]] ===
+'''Documentation (FR) :''' [[Form:Physical item/doc]]
+{{#tag:pre|{{#invoke:Source|get|Form:Physical item}}}}
+
+== 4. Modules Lua (Scribunto) ==
+Les modules Lua gèrent la logique complexe et les fonctions avancées du wiki. Contrairement aux modèles classiques, ils utilisent le langage de programmation Lua.
+
+''Lua modules handle complex logic and advanced wiki functions. Unlike standard templates, they use the Lua programming language.''
+
+=== [[Module:Source]] ===
+'''Description (FR) :''' {{#show: Module:Source/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Module:Source/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Module:Source}}}}
+
+=== [[Module:Base36]] ===
+'''Description (FR) :''' {{#show: Module:Base36/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Module:Base36/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Module:Base36}}}}
+
+== Audit de la numérotation des Items : [[Template:Item numbering audit]]==
+{{#tag:pre|{{#invoke:Source|get|Template:Item numbering audit}}}}
+
+== 5. Modèles auxiliaires ==
+=== Encart d'ajout d'items ===
+==== [[Template : New functional item]] ====
+{{#tag:pre|{{#invoke:Source|get|Template:New functional item}}}}
+==== [[Template : New organic item]] ====
+{{#tag:pre|{{#invoke:Source|get|Template:New organic item}}}}
+==== [[Template : New referenced item]] ====
+{{#tag:pre|{{#invoke:Source|get|Template:New referenced item}}}}
+==== [[Template : New physical item]] ====
+{{#tag:pre|{{#invoke:Source|get|Template:New physical item}}}}
+=== [[Template:Pending translation]] ===
+'''Description (FR) :''' {{#show: Template:Pending translation/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Pending translation/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Pending translation}}}}
+
+=== [[Template:Documentation]] ===
+'''Description (FR) :''' {{#show: Template:Documentation/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Documentation/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Documentation}}}}
+
+=== [[Template:MermaidLine]] ===
+'''Description (FR) :''' {{#show: Template:MermaidLine/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:MermaidLine/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:MermaidLine}}}}
+
+[[Catégorie : SGDT]]

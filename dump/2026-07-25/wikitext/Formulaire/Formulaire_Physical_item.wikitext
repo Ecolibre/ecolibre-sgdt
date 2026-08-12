@@ -1,0 +1,24 @@
+<includeonly>
+{{{info|add title=Ajouter un Item Physique|edit title=Modifier l'Item Physique}}}
+{{{for template|Physical item}}}
+{| class="formtable"
+! Référence (Base 36) :
+| {{{field|Item_ref|mandatory|placeholder=Ex: P90X}}}
+|-
+! Modèle d'origine :
+| {{{field|model_link|input type=combobox|values from category=Referenced item|mandatory}}}
+|-
+! Description / État :
+| {{{field|description|input type=textarea|rows=2|placeholder=Ex: Exemplaire de test, batterie neuve...}}}
+|-
+! Numéro de série :
+| {{{field|sn|placeholder=SN-123456}}}
+|-
+! Installé dans :
+| {{{field|physical_parent|input type=combobox|values from category=Physical item}}}
+|}
+{{{end template}}}
+
+{{{standard input|free text}}}
+{{{standard input|save}}}
+</includeonly>

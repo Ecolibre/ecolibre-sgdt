@@ -1,0 +1,5 @@
+<div style="background: #f9f9f9; border: 1px solid #ddd; padding: 20px; text-align: center;">
+=== Ajouter un nouvel item référencé ===
+Tapez la spécification de l'objet (ex: ''Cuve à eau cylindrique vert 510 L GARANTIA'') :
+{{#forminput:form=Referenced item|size=40|button text=Créer l'item référencé|placeholder=Spécification...}}
+</div>

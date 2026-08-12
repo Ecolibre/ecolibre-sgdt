@@ -1,0 +1,5 @@
+{{Functional item
+|Item_ref=0005
+|Item_description=Action de produire des ressources comestibles (végétales ou animales) de manière gérée.
+|Part_of=Se nourrir
+}}

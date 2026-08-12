@@ -1,0 +1,17 @@
+<includeonly>
+{{{for template|Organic item}}}
+{| class="formtable"
+! Référence (Base 36) :
+| {{{field|Item_ref|mandatory|default={{#invoke:Base36|next|{{#ask: [[Category:Functional item||Organic item||Referenced item]] [[Item_ref::+]] |?Item_ref= |sort=Item_ref |order=desc |limit=1 |mainlabel=- |format=list |link=none |headers=hide |default=0000}} }} }}}
+|-
+! Description :
+| {{{field|description|input type=textarea|rows=3}}}
+|-
+! Réalise la fonction :
+| {{{field|function|input type=combobox|values from category=Functional item}}}
+|-
+! Parent organique :
+| {{{field|parent|input type=combobox|values from category=Organic item}}}
+|}
+{{{end template}}}
+</includeonly>

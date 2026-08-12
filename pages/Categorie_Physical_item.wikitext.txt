@@ -1,0 +1,18 @@
+== Définition ==
+
+Un exemplaire concret présent sur un site, rattaché au moyen
+d'approvisionnement dont il provient. C'est ce rattachement qui permet de
+distinguer deux exemplaires identiques venus de sources différentes.
+
+Le code de site qui préfixe la référence d'inventaire est attribué par le
+[[Registre des préfixes de site]].
+
+Cette catégorie est posée automatiquement par [[:Modèle:Physical item|Modèle:Physical item]]. Elle
+ne doit jamais être ajoutée à la main : elle vaut appartenance à la classe, pas
+navigation.
+
+== Position dans la chaîne ==
+
+Referenced item → '''Physical item''' → (aucun — terminus de la chaîne)
+
+[[Catégorie:Item SGDT]]

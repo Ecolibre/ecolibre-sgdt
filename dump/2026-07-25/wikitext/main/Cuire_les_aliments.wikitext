@@ -1,0 +1,4 @@
+{{Functional item
+|Item_ref=0004
+|Part_of=Se nourrir
+}}

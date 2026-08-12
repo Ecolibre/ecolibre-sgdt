@@ -1,0 +1,12 @@
+# Secrets et session (déjà présent, conservé)
+.env
+.env.*
+.cookies.txt
+
+# Copies locales de configuration serveur — contiennent DB password,
+# secret key, upgrade key, contact hébergement (voir point 3)
+Serveur3/
+
+# Configuration Claude Code locale à cette machine — peut accumuler des
+# chemins et comptes système locaux (voir .claude/settings.local.json, point 2)
+.claude/settings.local.json

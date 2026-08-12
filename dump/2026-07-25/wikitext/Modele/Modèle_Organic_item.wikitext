@@ -1,0 +1,45 @@
+<noinclude>
+{{Documentation}}
+</noinclude>
+<includeonly>
+{{#set:
+|Item_ref={{{Item_ref|}}}
+|Item_description={{{description|}}}
+|Realizes_function={{{function|}}}
+|Part_of={{{parent|}}}
+}}
+
+{| class="wikitable" style="width:100%"
+! style="background:#f2f2f2; width:30%;" | Référence (Base 36)
+| '''{{{Item_ref|}}}'''
+|-
+! style="background:#f2f2f2" | Description organique
+| {{{description|}}}
+|-
+! style="background:#e8f0ff" | Réalise la fonction
+| [[{{{function|}}}]]
+|-
+! style="background:#e8f0ff" | Implémenté par (Solution technique)
+| 
+{{#ask: [[Corresponds_to_organic::{{FULLPAGENAME}}]]
+ |?Item_ref = Réf. SMW
+ |?Maturity_level = Maturité
+ |format=list
+ |default=''Aucune solution technique référencée pour le moment.''
+}}
+|-
+! style="background:#f2f2f2" | Parent organique
+| {{{parent|}}}
+|-
+! style="background:#f2f2f2" | Sous-systèmes (Enfants)
+| 
+{{#ask: [[Part_of::{{FULLPAGENAME}}]]
+ |?Item_ref = Réf.
+ |format=table
+ |default=''Aucun sous-système.''
+ |class=wikitable sortable
+}}
+|}
+
+[[Category:Organic item]]
+</includeonly>

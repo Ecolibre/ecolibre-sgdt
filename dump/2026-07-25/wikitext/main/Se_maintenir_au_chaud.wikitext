@@ -1,0 +1,5 @@
+{{Functional item
+|Item_ref=000D
+|Item_description=Réguler la température corporelle face aux conditions climatiques extérieures.
+|Part_of=Assurer les besoins vitaux
+}}

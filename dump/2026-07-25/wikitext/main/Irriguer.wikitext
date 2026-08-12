@@ -1,0 +1,4 @@
+{{Functional item
+|Item_ref=0008
+|Part_of=Cultiver de la nourriture
+}}

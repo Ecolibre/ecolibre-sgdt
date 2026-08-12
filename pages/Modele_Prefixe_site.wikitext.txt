@@ -1,0 +1,12 @@
+<includeonly>ECL</includeonly><noinclude>
+Code à trois lettres de l'organisation qui exploite ce wiki. Il sert de
+'''valeur par défaut''' au champ de site à la création d'un item physique.
+
+Il ne détermine pas le site d'un exemplaire déjà enregistré : un exemplaire
+détenu par un partenaire et publié ici conserve le code de son détenteur. Le
+code de site est une donnée de l'item, pas du wiki.
+
+Se règle une fois à l'installation et ne change plus.
+
+Les codes sont enregistrés dans [[Registre des préfixes de site]].
+</noinclude>

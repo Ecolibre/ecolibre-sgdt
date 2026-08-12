@@ -1,0 +1,5 @@
+{{Functional item
+|Item_ref=000B
+|Item_description=Garantir l'accès à une eau potable exempte de pathogènes et de polluants.
+|Part_of=Assurer les besoins vitaux
+}}

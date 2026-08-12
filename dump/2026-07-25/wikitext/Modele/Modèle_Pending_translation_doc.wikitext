@@ -1,0 +1,14 @@
+=== Présentation (Overview) ===
+[[Object_description_FR::Modèle d'avertissement indiquant qu'une traduction vers l'anglais est nécessaire.]]
+[[Object_description_EN::Warning template indicating that a translation to English is required.]]
+
+Ce modèle affiche un bandeau d'information et ajoute la page à la [[:Catégorie:À traduire en anglais]].
+
+''This template displays an information banner and adds the page to [[:Category:To be translated into English]].''
+
+=== Code Source du Modèle (Source Code) ===
+<div style="background-color: #f9f9f9; border: 1px dashed #2f6fab; padding: 1em;">
+{{#invoke:Source|get|Template:Pending translation}}
+</div>
+
+[[Catégorie:Documentation SGDT]]

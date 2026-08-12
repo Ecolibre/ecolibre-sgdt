@@ -1,0 +1,19 @@
+=== Présentation (Overview) ===
+[[Object_description_FR::Modèle pour la gestion des items référencés (Maturité EN/FR, BOM ascendante et référence unique globale).]]
+[[Object_description_EN::Template for referenced items management (EN/FR maturity, bottom-up BOM and global unique reference).]]
+
+Ce modèle structure les données techniques d'un produit ou d'un composant (Nomenclature/BOM).
+
+''This template structures technical data for a product or component (Bill of Materials/BOM).''
+
+=== Paramètres (Parameters) ===
+* '''item_ref''' : Référence unique de 4 caractères en base 36.
+* '''maturity''' : Niveau de maturité (Valeurs stockées en anglais : Idea, Study, Prototype, Certified, Obsolete).
+* '''parents''' : Liste des assemblages dans lesquels cet item est utilisé.
+
+=== Utilisation (Usage) ===
+Ce modèle est généralement appelé via le formulaire [[Formulaire:Referenced item]].
+
+''This template is usually called via the form [[Form:Referenced item]].''
+
+[[Catégorie:Documentation SGDT]]

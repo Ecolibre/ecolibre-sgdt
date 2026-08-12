@@ -1,0 +1,16 @@
+=== Présentation (Overview) ===
+[[Object_description_FR::Formulaire pour la déclaration d'objets réels (numéros de série et exemplaires).]]
+[[Object_description_EN::Form for declaring real objects (serial numbers and instances).]]
+
+Ce formulaire est utilisé pour le suivi d'inventaire, la maintenance et la localisation des exemplaires physiques.
+
+=== Utilisation (Usage) ===
+* '''Lien amont :''' Doit obligatoirement pointer vers un [[:Category:Referenced item]] (le modèle technique).
+* '''Spécificité :''' Permet de saisir un numéro de série constructeur unique.
+
+=== Code Source (Source Code) ===
+<div style="background-color: #f9f9f9; border: 1px dashed #2f6fab; padding: 1em;">
+{{#invoke:Source|get|Form:Physical item}}
+</div>
+
+[[Catégorie:Documentation SGDT]]

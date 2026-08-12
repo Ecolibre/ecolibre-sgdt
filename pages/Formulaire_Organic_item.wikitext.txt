@@ -1,0 +1,41 @@
+<includeonly>
+{{{for template|Organic item}}}
+{| class="formtable"
+! Référence (Base 36) :
+| {{{field|Item_ref|mandatory|default={{#invoke:Base36|next|{{#ask: [[Category:Functional item||Organic item||Referenced item]] [[Item_ref::+]] |?Item_ref= |sort=Item_ref |order=desc |limit=1 |mainlabel=- |format=list |link=none |headers=hide |default=0000}} }} }}}
+|-
+! Description :
+| {{{field|Item_description|input type=textarea|rows=3}}}
+|-
+! Réalise la fonction :
+| {{{field|Realizes_function|input type=tokens|values from category=Functional item|list}}}
+|-
+! Parent organique :
+| {{{field|Part_of|list|delimiter=,|input type=tokens|values from category=Organic item}}}
+|-
+! Genre de connexion :
+| {{{field|Connection_gender|input type=dropdown|values=M,F,MM,FF,MF}}}
+|-
+! Désignation du filetage :
+| {{{field|Thread_designation|input type=tokens|values=12x17,15x21,20x27,26x34,33x42,40x49,50x60|list|delimiter=,}}}
+|-
+! Diamètre nominal (mm) :
+| {{{field|Nominal_diameter|input type=text}}}
+|-
+! Autres diamètres (mm) :
+| {{{field|Secondary_diameter|input type=text|list|delimiter=,}}}
+|-
+! Norme de raccordement :
+| {{{field|Connection_standard|input type=tokens|values=filetage gaz,compression PE,raccord rapide,à butée|list|delimiter=,}}}
+|-
+! Famille de raccord :
+| {{{field|Fitting_family|input type=dropdown|values=mamelon,manchon,coude,té,nez de robinet,vanne,adaptateur}}}
+|-
+! Matériau :
+| {{{field|Material|input type=tokens|values=laiton,PE,PVC,inox|list|delimiter=,}}}
+|-
+! Classification externe (URL) :
+| {{{field|External_classification|input type=text}}}
+|}
+{{{end template}}}
+</includeonly>

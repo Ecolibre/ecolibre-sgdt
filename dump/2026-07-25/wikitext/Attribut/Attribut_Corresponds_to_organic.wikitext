@@ -1,0 +1,3 @@
+[[Has type::Page]]
+[[Property_description_FR::Lien vers l'item organique (logique) que cet item référencé implémente.]]
+[[Property_description_EN::Link to the organic (logical) item that this referenced item implements.]]

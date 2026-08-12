@@ -1,0 +1,5 @@
+<div style="background: #f9f9f9; border: 1px solid #ddd; padding: 20px; text-align: center;">
+=== Ajouter un nouvel item physique ===
+Tapez le nom de l'instance de l'item (ex: ''Cuve à eau Weldom Langeac du 23/05/2023'') :
+{{#forminput:form=Physical item|size=40|button text=Créer l'item physique|placeholder=Nom de l'instance...}}
+</div>

@@ -1,0 +1,5 @@
+{{Functional item
+|Item_ref=0009
+|Item_description=Convertir des ressources naturelles en vecteurs énergétiques exploitables (chaleur, électricité).
+|Part_of=Assurer les besoins vitaux
+}}

@@ -1,0 +1,5 @@
+{{Functional item
+|Item_ref=0002
+|Item_description=Assurer l'apport calorique et nutritionnel nécessaire au métabolisme humain.
+|Part_of=Assurer les besoins vitaux
+}}

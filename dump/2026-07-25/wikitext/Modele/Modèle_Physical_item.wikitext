@@ -1,0 +1,40 @@
+<noinclude>
+{{Documentation}}
+</noinclude>
+<includeonly>
+{{#set:
+|Item_ref={{{Item_ref|}}}
+|Item_description={{{description|}}}
+|Instance_of={{{model_link|}}}
+|Part_of={{{physical_parent|}}}
+|Serial_number={{{sn|}}}
+}}
+
+{| class="wikitable" style="width:100%"
+! style="background:#f2f2f2; width:30%;" | Référence unique (Base 36)
+| '''{{{Item_ref|}}}'''
+|-
+! style="background:#f2f2f2" | Modèle (Réf. technique)
+| [[{{{model_link|}}}]]
+|-
+! style="background:#f2f2f2" | Description individuelle
+| {{{description|}}}
+|-
+! style="background:#f2f2f2" | Numéro de série (Constructeur)
+| {{{sn|''Non spécifié''}}}
+|-
+! style="background:#e8f0ff" | Installé dans (Parent physique)
+| [[{{{physical_parent|}}}]]
+|-
+! style="background:#f2f2f2" | Éléments contenus (Enfants)
+| 
+{{#ask: [[Part_of::{{FULLPAGENAME}}]]
+ |?Item_ref = Réf.
+ |format=table
+ |default=''Cet item ne contient aucun sous-élément physique.''
+ |class=wikitable sortable
+}}
+|}
+
+[[Category:Physical item]]
+</includeonly>

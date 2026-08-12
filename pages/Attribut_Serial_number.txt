@@ -1,0 +1,3 @@
+[[Has type::Keyword]]
+[[Property_description_FR::Numéro de série attribué par le constructeur, propre à l'exemplaire physique.]]
+[[Property_description_EN::Manufacturer-assigned serial number, specific to the physical instance.]]

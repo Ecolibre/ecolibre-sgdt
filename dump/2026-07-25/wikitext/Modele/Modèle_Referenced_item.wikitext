@@ -1,0 +1,48 @@
+<noinclude>
+{{Documentation}}
+</noinclude>
+<includeonly>
+{{#set:
+|Item_ref={{{Item_ref|}}}
+|Item_description={{{description|}}}
+|Maturity_level={{{maturity|}}}
+|Part_of={{{parents|}}}
+|Corresponds_to_organic={{{organic_link|}}}
+}}
+
+{| class="wikitable" style="width:100%"
+! style="background:#f2f2f2; width:30%;" | Référence (Base 36)
+| '''{{{Item_ref|}}}'''
+|-
+! style="background:#f2f2f2" | Description technique
+| {{{description|}}}
+|-
+! style="background:#e8f0ff" | Item Organique associé
+| [[{{{organic_link|}}}]]
+|-
+! style="background:#f2f2f2" | État de maturité
+| {{#switch: {{{maturity|}}}
+ | Idea = Idée
+ | Study = Étude
+ | Prototype = Prototype
+ | Certified = <span style="color:green">'''Certifié (OSHW)'''</span>
+ | Obsolete = <span style="color:red">Obsolète</span>
+ | #default = {{{maturity|}}}
+}}
+|-
+! style="background:#f2f2f2" | Cas d'emploi (Parents)
+| {{{parents|}}}
+|-
+! style="background:#f2f2f2" | Composants enfants (BOM)
+| 
+{{#ask: [[Part_of::{{FULLPAGENAME}}]]
+ |?Item_ref = Réf.
+ |?Maturity_level = Maturité
+ |format=table
+ |default=''Aucun sous-composant déclaré.''
+ |class=wikitable sortable
+}}
+|}
+
+[[Category:Referenced item]]
+</includeonly>

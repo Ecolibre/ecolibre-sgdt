@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Bash(rm:*)",
+      "Bash(sudo:*)",
+      "Bash(ssh:*)",
+      "Bash(mysql:*)",
+      "Bash(mysqldump:*)",
+      "Edit(./.env)",
+      "Edit(./.env.*)",
+      "Edit(./.cookies.txt)"
+    ],
+    "ask": [
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(git push:*)"
+    ],
+    "allow": [
+      "Bash(bin/wiki-get.sh:*)",
+      "Bash(bin/wiki-put.sh:*)",
+      "Bash(bin/wiki-api.sh:*)",
+      "Bash(bin/wiki-login.sh:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(find:*)",
+      "Bash(diff:*)",
+      "Bash(jq:*)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "WebFetch(domain:wiki.ecolibre.org)"
+    ]
+  }
+}

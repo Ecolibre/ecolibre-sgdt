@@ -1,0 +1,20 @@
+<includeonly>
+{{{for template|Referenced item}}}
+{| class="formtable"
+! Référence (Base 36) :
+| {{{field|Item_ref|mandatory|default={{#invoke:Base36|next|{{#ask: [[Category:Functional item||Organic item||Referenced item]] [[Item_ref::+]] |?Item_ref= |sort=Item_ref |order=desc |limit=1 |mainlabel=- |format=list |link=none |headers=hide |default=0000}} }} }}}
+|-
+! Description technique :
+| {{{field|description|input type=textarea|rows=3}}}
+|-
+! Item Organique correspondant :
+| {{{field|organic_link|input type=combobox|values from category=Organic item}}}
+|-
+! Maturité :
+| {{{field|maturity|input type=dropdown|values=Idea,Study,Prototype,Certified,Obsolete|labels=Idée,Étude,Prototype,Certifié,Obsolète}}}
+|-
+! S'intègre dans (Parents) :
+| {{{field|parents|input type=tokens|values from category=Referenced item|list}}}
+|}
+{{{end template}}}
+</includeonly>

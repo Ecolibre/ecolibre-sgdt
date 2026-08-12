@@ -1,0 +1,12 @@
+=== Présentation (Overview) ===
+[[Object_description_FR::Modèle pour la gestion des instances physiques (objets réels avec numéro de série).]]
+[[Object_description_EN::Template for physical instances management (real objects with serial numbers).]]
+
+L'item physique représente un exemplaire unique d'un produit. Il permet le suivi de maintenance et la localisation.
+
+=== Code Source (Source Code) ===
+<div style="background-color: #f9f9f9; border: 1px dashed #2f6fab; padding: 1em;">
+{{#invoke:Source|get|Template:Physical item}}
+</div>
+
+[[Catégorie:Documentation SGDT]]

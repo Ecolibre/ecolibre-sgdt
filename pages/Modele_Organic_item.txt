@@ -1,0 +1,83 @@
+<noinclude>
+{{Documentation}}
+</noinclude>
+<includeonly>
+{{#set:
+|Item_ref={{{Item_ref|}}}
+|Item_description={{{Item_description|}}}
+|Realizes_function={{{Realizes_function|}}}
+|+sep=,
+|Part_of={{{Part_of|}}}
+|+sep=,
+|Connection_gender={{{Connection_gender|}}}
+|Thread_designation={{#arraymap:{{{Thread_designation|}}}|,|@@@|@@@|,}}
+|+sep=,
+|Nominal_diameter={{{Nominal_diameter|}}}
+|Secondary_diameter={{#arraymap:{{{Secondary_diameter|}}}|,|@@@|@@@|,}}
+|+sep=,
+|Connection_standard={{#arraymap:{{{Connection_standard|}}}|,|@@@|@@@|,}}
+|+sep=,
+|Fitting_family={{{Fitting_family|}}}
+|Material={{#arraymap:{{{Material|}}}|,|@@@|@@@|,}}
+|+sep=,
+|External_classification={{{External_classification|}}}
+}}
+
+{| class="wikitable" style="width:100%"
+! style="background:#f2f2f2; width:30%;" | Référence (Base 36)
+| '''{{{Item_ref|}}}'''
+|-
+! style="background:#f2f2f2" | Description organique
+| {{{Item_description|}}}
+|-
+! style="background:#e8f0ff" | Réalise la fonction
+| {{#if:{{{Realizes_function|}}}|[[{{{Realizes_function|}}}]]}}
+|-
+! style="background:#e8f0ff" | Implémenté par (Solution technique)
+| 
+{{#ask: [[Corresponds_to_organic::{{FULLPAGENAME}}]]
+ |?Item_ref = Réf. SMW
+ |?Maturity_level = Maturité
+ |format=list
+ |default=''Aucune solution technique référencée pour le moment.''
+}}
+|-
+! style="background:#f2f2f2" | Parent organique
+| {{#arraymap:{{{Part_of|}}}|,|@@@|[[@@@]]|,&#32;}}
+|-
+! style="background:#f2f2f2" | Sous-systèmes (Enfants)
+| 
+{{#ask: [[Part_of::{{FULLPAGENAME}}]]
+ |?Item_ref = Réf.
+ |format=table
+ |default=''Aucun sous-système.''
+ |class=wikitable sortable
+}}
+|-
+! style="background:#f2f2f2" | Genre de connexion
+| {{{Connection_gender|}}}
+|-
+! style="background:#f2f2f2" | Désignation du filetage
+| {{#arraymap:{{{Thread_designation|}}}|,|@@@|@@@|,&#32;}}
+|-
+! style="background:#f2f2f2" | Diamètre nominal (mm)
+| {{{Nominal_diameter|}}}
+|-
+! style="background:#f2f2f2" | Autres diamètres (mm)
+| {{#arraymap:{{{Secondary_diameter|}}}|,|@@@|@@@|,&#32;}}
+|-
+! style="background:#f2f2f2" | Norme de raccordement
+| {{#arraymap:{{{Connection_standard|}}}|,|@@@|@@@|,&#32;}}
+|-
+! style="background:#f2f2f2" | Famille de raccord
+| {{{Fitting_family|}}}
+|-
+! style="background:#f2f2f2" | Matériau
+| {{#arraymap:{{{Material|}}}|,|@@@|@@@|,&#32;}}
+|-
+! style="background:#f2f2f2" | Classification externe
+| {{{External_classification|}}}
+|}
+
+[[Category:Organic item]]
+</includeonly>

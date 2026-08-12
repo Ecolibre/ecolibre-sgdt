@@ -1,0 +1,5 @@
+<div style="background: #f9f9f9; border: 1px solid #ddd; padding: 20px; text-align: center;">
+=== Ajouter un nouvel item fonctionnel ===
+Tapez un verbe à l'infinitif (ex: ''Stocker l'eau'') :
+{{#forminput:form=Functional item|size=40|button text=Créer l'item fonctionnel|placeholder=Verbe à l'infinitif...}}
+</div>

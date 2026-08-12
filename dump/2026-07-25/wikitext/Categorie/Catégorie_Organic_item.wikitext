@@ -1,0 +1,45 @@
+{{#default_form:Organic item}}
+
+{{New organic item}}
+
+== Hiérarchie (Format Arbre) ==
+{{#ask: [[Category:Organic item]]
+ |?Part_of=Parent
+ |format=tree
+ |parent=Part_of
+ |root=
+ |order=ascending
+ |default=''L'arbre est vide. Vérifiez que la page "Assurer les besoins vitaux" existe.''
+}}
+
+== Arborescence textuelle ==
+{{#ask: [[Category:Organic item]]
+ |?Part_of=Parent
+ |format=outline
+ |order=ascending
+}}
+
+== Liste des fonctions enregistrées ==
+{{#ask: [[Category:Organic item]]
+ |?Item_ref = Référence
+ |?Item_description = Description
+ |?Part_of = Parent
+ |format=table
+ |limit=100
+ |class=wikitable sortable
+ |mainlabel=Type de produit ou service
+}}
+
+== Tableau de bord ==
+{{#ask: [[Category:Organic item]]
+ |?Item_ref = Référence
+ |?Item_description = Description
+ |?Part_of = Parent
+ |format=datatable
+ |limit=100
+ |class=display compact
+ |mainlabel=Type de produit ou service
+ |default=''Aucune fonction n'a été trouvée dans la base de données.''
+}}
+
+[[Catégorie:Item SGDT]]

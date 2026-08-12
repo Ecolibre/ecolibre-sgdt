@@ -1,0 +1,3 @@
+[[Has type::Text]]
+[[Property_description_FR::Description en français de l'objet technique (Modèle, Formulaire ou Module).]]
+[[Property_description_EN::French description of the technical object (Template, Form or Module).]]

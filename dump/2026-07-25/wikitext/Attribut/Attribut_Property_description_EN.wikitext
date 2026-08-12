@@ -1,0 +1,8 @@
+[[Has type::Text]]
+[[Property_description_FR::Description textuelle de la propriété en anglais.]]
+[[Property_description_EN::Textual description of the property in English.]]
+
+=== Usage ===
+Cette propriété est utilisée pour documenter automatiquement le [[Récapitulatif technique]].
+
+''This property is used to automatically document the [[Technical Summary]].''

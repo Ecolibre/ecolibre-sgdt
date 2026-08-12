@@ -1,0 +1,35 @@
+<includeonly>
+{{{for template|Referenced item}}}
+{| class="formtable"
+! Référence (Base 36) :
+| {{{field|Item_ref|mandatory|default={{#invoke:Base36|next|{{#ask: [[Category:Functional item||Organic item||Referenced item]] [[Item_ref::+]] |?Item_ref= |sort=Item_ref |order=desc |limit=1 |mainlabel=- |format=list |link=none |headers=hide |default=0000}} }} }}}
+|-
+! Description technique :
+| {{{field|Item_description|input type=textarea|rows=3}}}
+|-
+! Item Organique correspondant :
+| {{{field|Corresponds_to_organic|input type=combobox|values from category=Organic item}}}
+|-
+! Maturité :
+| {{{field|Maturity_level|input type=dropdown|values=Idea,Study,Prototype,Certified,Obsolete|labels=Idée,Étude,Prototype,Certifié,Obsolète}}}
+|-
+! S'intègre dans (Parents) :
+| {{{field|Part_of|input type=tokens|values from category=Referenced item|list}}}
+|-
+! Hauteur de refoulement max. (cm) :
+| {{{field|Max_head|input type=text}}}
+|-
+! Fournisseur :
+| {{{field|Supplier|input type=combobox|values from property=Supplier}}}
+|-
+! Réf. fournisseur :
+| {{{field|Supplier_reference|input type=text}}}
+|-
+! Fabricant :
+| {{{field|Manufacturer|input type=combobox|values from property=Manufacturer}}}
+|-
+! Réf. fabricant :
+| {{{field|Manufacturer_reference|input type=text}}}
+|}
+{{{end template}}}
+</includeonly>

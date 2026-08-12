@@ -1,0 +1,5 @@
+{{Functional item
+|Item_ref=000C
+|Item_description=Permettre le transport de personnes ou de charges d'un point A à un point B.
+|Part_of=Assurer les besoins vitaux
+}}

@@ -1,0 +1,5 @@
+{{Functional item
+|Item_ref=000E
+|Item_description=Offrir un abri physique contre la pluie, le vent et les rayonnements solaires.
+|Part_of=Assurer les besoins vitaux
+}}
