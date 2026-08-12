@@ -10,3 +10,5 @@ Serveur3/
 # Configuration Claude Code locale à cette machine — peut accumuler des
 # chemins et comptes système locaux (voir .claude/settings.local.json, point 2)
 .claude/settings.local.json
+.claude/settings (*).json
+bin/wiki-*(*).sh
