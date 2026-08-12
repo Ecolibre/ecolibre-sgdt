@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-# Usage: bin/wiki-put.sh "Nom de la page" fichier.txt "résumé de modif" [--createonly]
-#   --createonly : échoue si la page existe déjà (articleexists), au lieu de
-#                  l'écraser. À utiliser pour toute création de page.
+# Usage: bin/wiki-purge.sh "Titre 1|Titre 2"
+#   Purge une ou plusieurs pages (titres séparés par |), en POST avec jeton
+#   CSRF (action=purge exige POST sur ce wiki, voir CLAUDE.md/leçons de
+#   méthode). forcelinkupdate=1 est toujours ajouté. Aucun autre paramètre
+#   n'est accepté, aucune autre action que purge n'est exécutée.
 #
 # .env et .cookies.txt sont cherchés d'abord dans $SGDT_PRIVE (par défaut
 # ../ecolibre-sgdt-prive/, un répertoire voisin du dépôt, hors publication),
@@ -29,12 +31,12 @@ else
   exit 1
 fi
 
-PAGE="$1"; FILE="$2"; SUMMARY="${3:-Modification via Claude Code}"
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 \"Titre 1|Titre 2\"" >&2
+  exit 1
+fi
 
-CREATEONLY=0
-for arg in "$@"; do
-  [ "$arg" = "--createonly" ] && CREATEONLY=1
-done
+TITLES="$1"
 
 CSRF=$(curl -s -b "$C" -c "$C" -G "$WIKI_API" \
   -d action=query -d meta=tokens -d format=json -d formatversion=2 \
@@ -44,14 +46,10 @@ if [ "$CSRF" = '+\' ]; then
   echo "Session expirée : relance bin/wiki-login.sh"; exit 1
 fi
 
-EDIT_OPTS=(-d assert=user -d format=json -d formatversion=2)
-[ "$CREATEONLY" = 1 ] && EDIT_OPTS+=(-d createonly=1)
-
 curl -s -b "$C" -c "$C" "$WIKI_API" \
-  --data-urlencode "action=edit" \
-  --data-urlencode "title=$PAGE" \
-  --data-urlencode "text@$FILE" \
-  --data-urlencode "summary=$SUMMARY" \
+  --data-urlencode "action=purge" \
+  --data-urlencode "titles=$TITLES" \
+  --data-urlencode "forcelinkupdate=1" \
   --data-urlencode "token=$CSRF" \
-  "${EDIT_OPTS[@]}" \
+  -d format=json -d formatversion=2 \
   | python3 -m json.tool

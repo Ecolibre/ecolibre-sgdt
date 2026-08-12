@@ -13,9 +13,11 @@ serait autrement perdu à la fermeture d'une conversation.
 ## Contenu
 
 - **`bin/`** — scripts de lecture et d'écriture de l'API MediaWiki
-  (`wiki-login.sh`, `wiki-get.sh`, `wiki-put.sh`, `wiki-api.sh`), en
-  lecture seule stricte sauf `wiki-put.sh`, explicitement dédié à
-  l'écriture.
+  (`wiki-login.sh`, `wiki-get.sh`, `wiki-put.sh`, `wiki-api.sh`,
+  `wiki-purge.sh`), en lecture seule stricte sauf `wiki-put.sh` (écriture
+  de page) et `wiki-purge.sh` (invalidation de cache), tous deux
+  explicitement dédiés à leur seule action. Voir « Configuration requise »
+  ci-dessous pour l'emplacement attendu des identifiants.
 - **`CLAUDE.md`** — méthode de travail, garde-fous d'exécution et leçons
   apprises sur l'outillage et sur MediaWiki/Semantic MediaWiki/Page Forms.
 - **`controle-de-fin-de-session.md`** — procédure de répartition de
@@ -31,6 +33,25 @@ serait autrement perdu à la fermeture d'une conversation.
 - **`dump/`**, **`pages/`** — copies locales de pages du wiki (miroir de
   travail et brouillons), utilisées pour comparer l'état attendu à l'état
   réel avant et après écriture.
+
+## Configuration requise
+
+Les scripts de `bin/` qui ont besoin d'un identifiant ou d'une session
+(`wiki-login.sh`, `wiki-put.sh`, `wiki-purge.sh`) attendent un fichier
+`.env` définissant `WIKI_API`, `WIKI_USER` et `WIKI_PASS` ; `wiki-login.sh`
+y écrit ensuite `.cookies.txt`. Aucun des deux ne vit dans ce dépôt.
+
+Ils sont cherchés dans un **répertoire privé voisin du dépôt**, hors
+publication : `../ecolibre-sgdt-prive/` par défaut, à côté du dossier
+cloné. Ce chemin est surchargeable par la variable d'environnement
+`SGDT_PRIVE` (utile si l'arborescence de votre clone diffère). Si absent
+des deux emplacements, chaque script échoue avec un message explicite
+indiquant où il a cherché — jamais d'échec silencieux ni de repli sur des
+identifiants par défaut.
+
+Les scripts de lecture seule (`wiki-get.sh`, `wiki-api.sh`) suivent la même
+recherche pour `.cookies.txt`, mais s'en passent sans erreur s'il est
+introuvable : ils lisent alors en session anonyme.
 
 ## Licence
 

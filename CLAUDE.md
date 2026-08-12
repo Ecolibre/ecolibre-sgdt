@@ -16,14 +16,25 @@ Scribunto/Lua, Semantic Result Formats.
   `backlinks`, `expandtemplates`, `intestactions`…) ; lecture seule stricte,
   refuse les actions d'écriture connues du cœur MediaWiki et des extensions
   locales (`pfautoedit`, `sfautoedit`, `smwtask`), et tout paramètre `action=`
-  dupliqué. `action=purge` exige une requête POST : hors du périmètre GET de
-  ce script, à faire en curl direct avec jeton CSRF.
+  dupliqué. `--facts "subject=...&ns=..."` : raccourci pour
+  `action=browsebysubject`, affiche une ligne `propriété -> [valeurs]` par
+  fait au lieu du JSON brut. `action=purge` exige une requête POST : hors du
+  périmètre GET de ce script, voir `bin/wiki-purge.sh`.
+- `bin/wiki-purge.sh "Titre 1|Titre 2"` — purger une ou plusieurs pages
+  (POST + jeton CSRF, `forcelinkupdate=1` systématique). Aucun autre
+  paramètre, aucune autre action que purge.
 
 **Forme d'appel canonique** : toujours invoquer ces scripts en relatif à la racine
 du dépôt, sous la forme `bin/wiki-get.sh ...` / `bin/wiki-put.sh ...` — jamais
 `./wiki-get.sh` ni de chemin absolu. Les règles de permission dans
 `.claude/settings.json` matchent sur ce préfixe exact ; un autre chemin passerait
 à côté des règles `allow` et redemanderait confirmation à chaque appel.
+
+**`.env` et `.cookies.txt` ne vivent pas dans ce dépôt** : cherchés d'abord
+dans `$SGDT_PRIVE` (défaut `../ecolibre-sgdt-prive/`, voisin du dépôt), puis
+dans le dépôt lui-même par compatibilité. `wiki-get.sh`/`wiki-api.sh`
+dégradent en lecture anonyme si introuvables ; `wiki-login.sh`/`wiki-put.sh`/
+`wiki-purge.sh` échouent avec un message donnant les deux chemins cherchés.
 
 Les copies locales de pages vont dans `pages/`.
 

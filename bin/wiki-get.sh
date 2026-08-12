@@ -21,15 +21,27 @@
 # Lockdown. Aucun identifiant n'est jamais lu, construit ou passé en
 # argument ici : ce script ne connaît que le chemin du fichier de cookies,
 # jamais leur contenu.
+#
+# .cookies.txt est cherché d'abord dans $SGDT_PRIVE (par défaut
+# ../ecolibre-sgdt-prive/, un répertoire voisin du dépôt, hors publication),
+# puis dans le dépôt lui-même. Absent des deux : lecture anonyme, sans échec
+# (comportement inchangé — ce script fonctionne sans session).
 set -euo pipefail
 
 readonly WIKI_API="https://wiki.ecolibre.org/api.php"
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-COOKIES="$DIR/.cookies.txt"
+PRIVE_DIR="${SGDT_PRIVE:-$DIR/../ecolibre-sgdt-prive}"
+if [ -f "$PRIVE_DIR/.cookies.txt" ]; then
+  COOKIES="$PRIVE_DIR/.cookies.txt"
+elif [ -f "$DIR/.cookies.txt" ]; then
+  COOKIES="$DIR/.cookies.txt"
+else
+  COOKIES=""
+fi
 
 CURL_OPTS=(-s -G)
-[ -f "$COOKIES" ] && CURL_OPTS+=(-b "$COOKIES")
+[ -n "$COOKIES" ] && CURL_OPTS+=(-b "$COOKIES")
 
 if [ "$#" -eq 2 ] && [ "$1" = "--category" ]; then
   case "$2" in

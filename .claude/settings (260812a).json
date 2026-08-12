@@ -4,11 +4,6 @@
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
-      "Read(./.cookies.txt)",
-      "Read(//home/spheres/ecolibre-sgdt-prive/.env)",
-      "Read(//home/spheres/ecolibre-sgdt-prive/.cookies.txt)",
-      "Edit(//home/spheres/ecolibre-sgdt-prive/.env)",
-      "Edit(//home/spheres/ecolibre-sgdt-prive/.cookies.txt)",
       "Bash(rm:*)",
       "Bash(sudo:*)",
       "Bash(ssh:*)",
@@ -26,7 +21,6 @@
     "allow": [
       "Bash(bin/wiki-get.sh:*)",
       "Bash(bin/wiki-put.sh:*)",
-      "Bash(bin/wiki-purge.sh:*)",
       "Bash(bin/wiki-api.sh:*)",
       "Bash(bin/wiki-login.sh:*)",
       "Bash(grep:*)",
