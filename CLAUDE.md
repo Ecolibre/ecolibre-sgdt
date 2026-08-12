@@ -45,7 +45,9 @@ Les copies locales de pages vont dans `pages/`.
 2. **Une modification = une édition = un résumé explicite.** Format réellement
    utilisé depuis le lot 6 : `[Lot X][Tâche N] <action>` — et non
    `[Lot X] <point> — <action>` comme l'écrivait cette règle jusqu'au lot 8.
-   Rend le travail annulable page par page.
+   Rend le travail annulable page par page. Une écriture qui ne relève pas
+   d'un lot en cours porte `[Correctif] <action>`, jamais un numéro de lot :
+   ne jamais réserver un numéro de lot pour une correction ponctuelle.
 3. **`createonly=1`** sur toute création de page. Si la page existe déjà, l'appel
    doit échouer et remonter, jamais écraser.
 4. **Aucune nouvelle référence Base36 ne doit être créée hors ligne** : le compteur
@@ -75,7 +77,8 @@ Les copies locales de pages vont dans `pages/`.
   lien MediaWiki.** Aucune erreur d'API à l'écriture, mais le lien est absent
   de `pagelinks` et donc de `list=backlinks`. Toujours écrire un lien sur une
   seule ligne, et contrôler par `list=backlinks` après toute édition qui en
-  ajoute un.
+  ajoute un. Ne jamais replier une balise `[[ ]]` pour respecter une largeur
+  de ligne, même quand le titre est long.
 
 - **`+sep=` est par propriété et sa position compte.** Dans un `#set`,
   `|+sep=` s'applique à la propriété qui le précède immédiatement, pas au
