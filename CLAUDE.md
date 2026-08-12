@@ -23,6 +23,11 @@ Scribunto/Lua, Semantic Result Formats.
 - `bin/wiki-purge.sh "Titre 1|Titre 2"` — purger une ou plusieurs pages
   (POST + jeton CSRF, `forcelinkupdate=1` systématique). Aucun autre
   paramètre, aucune autre action que purge.
+- `bin/wiki-upload.sh fichier.jpg` — téléverser un fichier local sous son nom
+  de base (aucun renommage par le script) ; jamais `ignorewarnings`, jamais
+  `bot=1` : un nom déjà pris fait échouer l'appel (`result` différent de
+  `Success`) au lieu d'écraser, équivalent de `--createonly` côté
+  `wiki-put.sh`.
 
 **Forme d'appel canonique** : toujours invoquer ces scripts en relatif à la racine
 du dépôt, sous la forme `bin/wiki-get.sh ...` / `bin/wiki-put.sh ...` — jamais
@@ -65,6 +70,16 @@ Les copies locales de pages vont dans `pages/`.
 ## Règles impératives (modèle de données)
 - **Aucune virgule dans les noms de tableaux kanban ni de pages** : la virgule est
   le délimiteur multi-valeurs partout dans le modèle.
+- **Convention de nommage des fichiers média** (appliquée aux 73 photos du
+  lot 9) : `ECL-<lieu>-<plante>-<AAAA-MM-JJ>_<nn>.jpg` — tiret entre les
+  4 champs principaux (ECL, lieu, plante, date+numéro), underscore à
+  l'intérieur d'un champ multi-mots (`Buisson_Cerzat`, `Ail_elephant`) et
+  entre la date et le numéro (`2026-08-07_01`). Jamais d'espace, jamais
+  d'accent. Le tiret est le séparateur de champs, l'underscore appartient au
+  contenu d'un champ : un découpage se fait sur le tiret, jamais sur
+  l'underscore. Deux fichiers du lot ont dû être renommés après refus
+  badfilename de MediaWiki (espace parasite) — vérifier les noms avant de
+  téléverser, pas après.
 - Page bac à sable pour les essais : `Utilisateur:Cywil/Bac à sable`.
 
 ## Corrections en attente sur les modèles
@@ -143,6 +158,12 @@ Les copies locales de pages vont dans `pages/`.
   session sont possibles à tout moment (Cyril via le formulaire, un autre
   outil). Un diagnostic bâti sur une copie locale peut être faux avant même
   d'aboutir à une proposition d'écriture.
+
+- **Une convention rédigée de mémoire ne fait pas foi.** La convention de
+  nommage des 73 fichiers du lot 9 a été dictée dans une forme inexacte
+  (tout en underscore) et corrigée en lisant les noms réellement en place.
+  Vaut pour les fichiers comme pour le wiki : lire l'état réel avant
+  d'écrire une règle qui le décrit.
 
 ## Ne jamais faire
 - Ne pas toucher au `composer.json` de MediaWiki (utiliser `composer.local.json`).
