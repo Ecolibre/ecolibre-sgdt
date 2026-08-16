@@ -326,6 +326,24 @@ tentative isolée, pas de boucle serrée).
 - Correction sur `Attribut:Specimen_status` : ajout de la valeur `en réserve`
   (`Allows value` + `Property_description_FR`/`EN` révisées).
 
+**Correction du 15 août 2026 — `Allows value` rejette, il n'avertit pas.**
+Vérifié par Cyril sur `Test 260915a` : `Specimen_status=en réserve` ne
+remonte pas dans Spécial:Parcourir, alors que `Specimen_status=en place`
+(saisi sur un autre item de test) y remonte normalement. Ceci contredit ce
+qui avait été supposé ailleurs dans le lot (tâche 4) — qu'un avertissement
+« Has improper value for » serait affiché mais la valeur tout de même
+stockée. Ce n'est pas le cas : tant que `en réserve` n'est pas dans
+`Allows value` de `Attribut:Specimen_status`, la valeur est **rejetée**, pas
+seulement signalée.
+
+**Conséquence pratique, propagée au modèle de facette :** `Specimen_status`
+porte le `#if` qui déclenche `Modèle:Physical facet plant` (décision actée
+en tâche 2). Une valeur rejetée équivaut à un champ vide pour ce `#if`. Tant
+que le verrou SMW n'est pas levé, une plantation saisie avec le statut
+`en réserve` n'émet **ni facette, ni catégorie, ni ligne de récapitulatif**
+— la donnée saisie au formulaire est silencieusement perdue au niveau du
+modèle, pas seulement mal affichée en page Attribut.
+
 ---
 
 ## Résumé — ce qui doit revenir à Cyril avant toute écriture

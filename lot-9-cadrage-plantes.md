@@ -404,6 +404,12 @@ un, se pose alors sur `Specimen_status`.
 3. **Le titre de la page récapitulative.**
 4. **La formule de `Property_domain`** pour les trois propriétés de page
    `Fichier:` — premier cas du genre.
+5. **`default=` d'un `#ask` en `format=gallery` ne s'affiche pas.** Constaté
+   sur `Test 260915a` : cellule « Photos de cette plantation » vide au lieu
+   du texte par défaut prévu quand la requête ne remonte aucune photo.
+   Comportement à vérifier (bug SRF, syntaxe du paramètre, ou incompatibilité
+   spécifique à `format=gallery`) avant de s'appuyer dessus pour l'état vide.
+   À reprendre après la tâche 8.
 
 ---
 

@@ -1,0 +1,40 @@
+# Lignes commençant par # ignorées à la génération.
+id	lieu	nom_courant	taxon	cultivar	date_plantation	provenance	annee_source	issu_de	rang	statut	nom_photo
+	#Buisson_Cerzat	Poireau perpétuel	Allium ampeloprasum var. porrum		2026-08-08	pépinière Un Peu d'Air	2025		30	en place	Poireau_perpetuel
+1	Buisson_Cerzat										Ail_elephant
+2	Buisson_Cerzat										Bourrache
+3	Buisson_Cerzat										Brocoli_vivace
+4	Buisson_Cerzat										Capucine_tubereuse
+5	Buisson_Cerzat										Chayote
+6	Buisson_Cerzat										Chou_Daubenton
+7	Jardin_Cyril_Chilhac										Chou_Daubenton
+8	Buisson_Cerzat										Consoude_B14
+9	Buisson_Cerzat										Consoude_naine
+10	Buisson_Cerzat										Crosne_du_Japon
+11	Buisson_Cerzat										Egopode
+12	Buisson_Cerzat										Fraisier_X
+13	Buisson_Cerzat										Fraisier_X2
+14	Jardin_Cyril_Chilhac										Framboisier_classique
+15	Jardin_Cyril_Chilhac										Framboisier_jaune
+16	Terrasse_Cyril_Chilhac										Groseiller
+17	Jardin_Cyril_Chilhac										Groseiller_a_maquereau
+18	Buisson_Cerzat										Helianthi
+19	Buisson_Cerzat										Hemerocalle
+20	Buisson_Cerzat	Hysope									
+21	Buisson_Cerzat										Menthe_X
+22	Terrasse_Cyril_Chilhac	Menthe_X									Menthe_X_&_Chayote
+23	Terrasse_Cyril_Chilhac	Chayote									Menthe_X_&_Chayote
+24	Buisson_Cerzat										Menthe_bergamote
+25	Buisson_Cerzat										Miscanthus
+26	Buisson_Cerzat										Oignon_rocambole
+27	Jardin_Cyril_Chilhac	Oignon_rocambole									
+28	Buisson_Cerzat										Paulownia
+29	Terrasse_Cyril_Chilhac										Persil_japonais
+30	Buisson_Cerzat										Poireau_perpetuel
+31	Buisson_Cerzat							30			Poireau_perpetuel
+32	Jardin_Cyril_Chilhac										Poireau_perpetuel
+33	Buisson_Cerzat										Roquette_sauvage
+34	Terrasse_Cyril_Chilhac										Roquette_sauvage
+35	Buisson_Cerzat										Sarrasin_vivace
+36	Buisson_Cerzat										Tomates
+37	Buisson_Cerzat										Yacon
