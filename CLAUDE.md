@@ -82,9 +82,33 @@ Les copies locales de pages vont dans `pages/`.
   téléverser, pas après.
 - Page bac à sable pour les essais : `Utilisateur:Cywil/Bac à sable`.
 
-## Corrections en attente sur les modèles
-1. Module d'audit Base36 : ajouter la détection de doublons (en plus des trous).
-2. Décider si les objets physiques rejoignent la séquence Base36 auto-incrémentée.
+## Corrections sur les modèles — liste unique et numérotation de référence
+
+**Cette liste fait foi.** Jusqu'au lot 9, deux entrées vivaient ici pendant
+qu'une numérotation informelle à cinq circulait dans les rapports du lot :
+« la n° 3 » désignait deux choses différentes selon le document. Les numéros
+ci-dessous sont désormais les seuls valides ; les entrées fermées restent
+listées avec leur numéro, jamais supprimées ni renumérotées — sans quoi un
+renvoi passé pointerait sur autre chose. Une correction nouvelle prend le
+numéro suivant.
+
+| N° | Objet | État |
+|---|---|---|
+| 1 | **Module d'audit Base36 : détection des doublons** (en plus des trous). | **ouverte** |
+| 2 | Les objets physiques rejoignent-ils la séquence Base36 auto-incrémentée ? | **fermée** — lot 9, 13/08/2026 : non, deux banques distinctes (`Item_ref` pour les trois classes de conception, `Inventory_number` pour les physiques). |
+| 3 | **`Module:Base36` s'arrête au tiret** (`clean:match("[%w]+")`) : une référence préfixée serait silencieusement mal lue. C'est pourquoi `ECL` est un affichage, jamais une valeur stockée. | **ouverte** |
+| 4 | `+sep=,` sur `Part_of` de `Modèle:Referenced item`. | **fermée** — était déjà en place avant le lot 9, constaté en tâche 7bis (fait vérifié en ligne, pas supposé). |
+| 5 | Filtre de catégorie manquant sur les requêtes `Part_of` des modèles d'item. | **fermée** — 15/08/2026, en deux éditions `[Correctif]` : `Modèle:Physical item` (« Éléments contenus », revid 544) et `Modèle:Referenced item` (« Composants enfants / BOM », revid 549). |
+
+Les n° 1 et 3 portent toutes deux sur `Module:Base36` : un lot dédié devrait
+les traiter ensemble, hors phase de saisie.
+
+À ne pas confondre avec les n° 1 et 3 : `Template:Item numbering audit`
+interroge `[[Item_ref::+]]` **sans filtre de catégorie**, et ne voit donc pas
+la banque physique, qui vit dans `Inventory_number`. Aucune donnée n'est
+corrompue — l'audit est simplement aveugle à la seconde banque. L'absence de
+filtre est déjà consignée dans les *Limites connues du SGDT* ; la conséquence
+sur la banque physique est notée ici. À traiter avec le lot de numérotation.
 
 ## Leçons de méthode (wiki et outillage)
 
