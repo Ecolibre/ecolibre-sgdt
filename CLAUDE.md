@@ -55,6 +55,32 @@ dégradent en lecture anonyme si introuvables ; `wiki-login.sh`/`wiki-put.sh`/
 
 Les copies locales de pages vont dans `pages/`.
 
+## Serveur
+
+| | |
+|---|---|
+| Accès SSH | `clibert@serveur3.initiative.place` |
+| Cœur MediaWiki, **partagé** | `/home/fuzzy/mediawiki/mediawiki-1.39/` |
+| Configuration du site | `LocalSettings_ecolibre.php` |
+| Base de données | `mediawiki_ecolibre_prod` |
+
+**Règle impérative — préfixer tout script de maintenance par
+`SERVER_NAME=wiki.ecolibre.org`.** L'aiguilleur du cœur teste
+`$_SERVER['SERVER_NAME']` pour choisir quel wiki de la ferme charger. Cette
+variable **n'existe pas en CLI** : un script lancé sans elle ne cible aucun
+wiki, ou pire, celui par défaut.
+
+```
+SERVER_NAME=wiki.ecolibre.org php maintenance/runJobs.php
+```
+
+**Le cœur est partagé par toute la ferme** : une commande de maintenance mal
+ciblée ne touche pas seulement Ecolibre. Ne jamais lancer un script sans avoir
+ciblé le wiki.
+
+Ce que Cyril peut lancer seul, et ce qui relève de fuzzy : voir
+`demandes-adminsys.md`.
+
 ## Garde-fous d'exécution (toute édition sur le wiki)
 1. **Lire avant d'écrire.** Toujours récupérer le wikitexte courant
    (`wiki-get.sh` / `action=parse&prop=wikitext`), calculer le diff, le proposer,
@@ -194,6 +220,23 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   session sont possibles à tout moment (Cyril via le formulaire, un autre
   outil). Un diagnostic bâti sur une copie locale peut être faux avant même
   d'aboutir à une proposition d'écriture.
+
+- **Un exemple de syntaxe SMW écrit dans une page de documentation crée une
+  vraie annotation.** `[[Propriété::valeur]]` cité en exemple n'est pas
+  affiché : il est **exécuté**, et la page de documentation se met à porter le
+  fait. Constaté le 16 août 2026 sur *Limites connues du SGDT*, qui portait
+  `X -> !+`, `Main_image -> !+` et `Item_ref -> +` — ce dernier depuis sa
+  rédaction initiale, plusieurs lots auparavant. Le fait `Main_image` faussait
+  un comptage réel du wiki (1 au lieu de 0).
+
+  **`<code>` ne protège pas** : il met en forme, il n'échappe rien. C'est
+  `<nowiki>` qui échappe, et lui seul — `<code><nowiki>[[X::Y]]</nowiki></code>`
+  pour avoir les deux. Vaut aussi pour les fonctions d'analyseur : un
+  `{{#ifexpr: … > 0}}` cité en exemple s'évalue et rend une erreur d'expression.
+
+  **Contrôle à faire** après toute écriture sur une page de documentation :
+  `browsebysubject` **sur cette page**, pour vérifier qu'elle ne porte que
+  `_MDAT` et `_SKEY`. Une page qui décrit le modèle de données peut le polluer.
 
 - **Une convention rédigée de mémoire ne fait pas foi.** La convention de
   nommage des 73 fichiers du lot 9 a été dictée dans une forme inexacte

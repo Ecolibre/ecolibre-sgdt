@@ -320,6 +320,36 @@ pas tourné. Ne pas retenter en boucle une édition bloquée par ce code
 d'erreur — attendre un signal explicite que le verrou est levé (nouvelle
 tentative isolée, pas de boucle serrée).
 
+**Diagnostic serveur effectué le 16 août 2026 — trois résultats négatifs, à ne
+pas refaire.** L'hypothèse de travail ci-dessus (« le verrou tient tant que le
+`ChangePropagationDispatchJob` n'a pas tourné ») a été testée en direct sur
+`serveur3.initiative.place`, avec `SERVER_NAME=wiki.ecolibre.org` sur chaque
+commande. Les trois pistes échouent :
+
+1. **`showJobs.php --group` rend une file vide.** Il n'y a aucun
+   `ChangePropagationDispatchJob` en attente — donc rien à exécuter, et
+   `runJobs.php` n'a rien à traiter qui puisse lever le verrou. C'est le
+   résultat qui invalide l'hypothèse : le verrou n'attend pas un job, il
+   survit à son absence.
+2. **La purge ne reprogramme aucun job.** `bin/wiki-purge.sh` sur une page
+   verrouillée laisse la file vide — la purge ne recrée pas le job manquant,
+   contrairement à ce que la note ci-dessus laissait espérer.
+3. **`rebuildData.php --page` traite la page sans relâcher le verrou.** Le
+   traitement se déroule normalement, et la page reste verrouillée après.
+
+**Conclusion : verrou orphelin.** Le drapeau de protection subsiste sans job
+associé pour le consommer, et aucune commande de maintenance en lecture ou en
+reconstruction ne le retire. **Le seul levier restant est
+`$smwgChangePropagationProtection`** dans la configuration du site
+(`LocalSettings_ecolibre.php`), **côté fuzzy** — hors de portée de Cyril par
+convention de gouvernance (voir `demandes-adminsys.md`), et hors de portée du
+compte bot en tout état de cause.
+
+**Ne pas refaire ce diagnostic** : les trois commandes ci-dessus ont été
+passées, leur résultat est négatif et consigné. Toute nouvelle tentative de
+lever le verrou par la file de travaux ou par `rebuildData` perdra du temps
+sans rien changer.
+
 **Restent dues, non appliquées :**
 - Correction sur `Attribut:Propagated_from` : retrait de la restriction
   « sur le même terrain » (`Property_description_FR`/`EN`).

@@ -113,6 +113,29 @@ la récolte (événement daté et répété), la présence (entité, lieu, crén
 besoins, une seule construction. Le jour où l'un des trois sera traité, il devra
 l'être pour les trois.
 
+**Quatrième occurrence (ajoutée en clôture du lot 9) — l'assertion sourcée.**
+Une même propriété peut recevoir **deux valeurs contradictoires selon la
+source**. Cas réellement rencontré : la comestibilité, qu'une source donne pour
+acquise et une autre pour douteuse ou conditionnelle. Le réflexe serait d'en
+faire un champ multivalué : ce serait une erreur, car les deux valeurs ne
+s'additionnent pas — elles s'opposent, et rien ne dirait laquelle croire.
+
+Ce qu'il faut stocker n'est pas une valeur mais un **quadruplet** : la valeur,
+sa **source**, sa **date**, et la **confiance** qu'on lui accorde. C'est
+exactement la même forme que les trois autres besoins : une valeur qui n'a de
+sens que rapportée à un contexte.
+
+**Piste retenue pour les quatre : `#subobject` de SMW**, qui permet d'attacher
+à une page un objet secondaire portant ses propres propriétés — la réception,
+la récolte, la présence et l'assertion sourcée étant quatre instances du même
+patron. Le motif est déjà employé sur ce wiki (`Board_lineage` / `Module:Board`
+côté physique), il n'est donc pas à inventer.
+
+**Quatre besoins, une seule construction.** La règle du paragraphe précédent
+s'étend : le jour où l'un des quatre sera traité, il devra l'être pour les
+quatre — sans quoi le wiki portera deux mécanismes concurrents pour le même
+problème.
+
 ---
 
 ## 2. Tâches modifiées
