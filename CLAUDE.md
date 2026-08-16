@@ -29,6 +29,18 @@ Scribunto/Lua, Semantic Result Formats.
   `Success`) au lieu d'écraser, équivalent de `--createonly` côté
   `wiki-put.sh`.
 
+  **Seule exception admise à « jamais `ignorewarnings` », et elle ne passe pas
+  par ce script** : l'avertissement `duplicate-archive`, qui signale un contenu
+  identique présent dans l'**archive des fichiers supprimés**, pas sur un nom
+  occupé. Il bloque tout ré-téléversement d'une photo dont la version mal
+  nommée a été supprimée — cas réel de la tâche 11 du lot 9. Il ne peut rien
+  écraser : la cible est libre. Conditions à réunir avant de le lever, toutes
+  les trois : le nom cible vérifié `missing` en ligne **immédiatement avant**
+  l'appel ; l'autorisation explicite de Cyril, demandée au cas par cas ;
+  et un script jetable de session, jamais une modification de
+  `bin/wiki-upload.sh`, qui doit rester sans `ignorewarnings`. Tout autre
+  avertissement (`exists`, `duplicate`, `badfilename`…) reste bloquant.
+
 **Forme d'appel canonique** : toujours invoquer ces scripts en relatif à la racine
 du dépôt, sous la forme `bin/wiki-get.sh ...` / `bin/wiki-put.sh ...` — jamais
 `./wiki-get.sh` ni de chemin absolu. Les règles de permission dans

@@ -1,10 +1,24 @@
-# Lot 9 — Tâche 11 : rapport — bloquée au téléversement
+# Lot 9 — Tâche 11 : rapport
 
-**État : les points 1 et 2 sont faits, les points 3 et 4 n'ont pas pu être
-exécutés.** Les deux fichiers corrigés **ne sont pas sur le wiki** :
-`list=allimages&aiprefix=ECL` en compte toujours **73**, et les deux pages
-`Fichier:` visées ressortent `missing: true`. Rien n'a été annoté, rien n'a
-été supprimé, rien n'a été renommé.
+**État final : terminée.** Les deux photos sont en ligne sous leur nom
+conforme, annotées et vérifiées ; `Category:Photo de plantation` compte
+**65 membres**, le chiffre attendu. Les 73 fichiers `ECL-*` du wiki
+respectent désormais tous la convention de nommage, sans exception.
+
+La tâche s'est faite **en deux temps, séparés par deux blocages successifs**
+et par une suppression manuelle de Cyril. Le récit ci-dessous garde les deux
+blocages : le second a produit une exception à un garde-fou de `CLAUDE.md`,
+qui doit rester traçable.
+
+---
+
+# Première passe — bloquée au téléversement
+
+**État à ce moment : les points 1 et 2 faits, les points 3 et 4 impossibles.**
+Les deux fichiers corrigés n'étaient **pas** sur le wiki :
+`list=allimages&aiprefix=ECL` en comptait toujours **73**, et les deux pages
+`Fichier:` visées ressortaient `missing: true`. Rien n'avait été annoté,
+supprimé ni renommé.
 
 ## 1. Renommage des copies locales — fait
 
@@ -103,3 +117,100 @@ autre nom.** `wiki-upload.sh` est conçu pour que le refus soit visible plutôt
 que contourné — il l'a été. La correction d'un nom de fichier par
 ré-téléversement suppose donc que l'ancien soit supprimé **d'abord**, pas
 après. À retenir pour toute future correction de nommage.
+
+---
+
+# Seconde passe — après suppression des originaux par Cyril
+
+## Second blocage : `duplicate` devient `duplicate-archive`
+
+Suppressions confirmées avant toute reprise : `allimages&aiprefix=ECL` à
+**71** fichiers, les deux noms défectueux absents. Les deux téléversements
+relancés par `bin/wiki-upload.sh` ont pourtant été refusés une seconde fois,
+sur un avertissement **différent** :
+
+```
+ECL-Buisson_Cerzat-Hysope-2026-08-08_01.jpg
+  → warnings.duplicate-archive = "ECL-Buisson_CerzatHysope-2026-08-08_01.jpg"
+ECL-Jardin_Cyril_Chilhac-Oignon_rocambole-2026-08-09_01.jpg
+  → warnings.duplicate-archive = "ECL-Jardin_Cyril_Chilhac-Oignon_rocambole_2026-08-09_01.jpg"
+```
+
+Une suppression MediaWiki retire la page et la version courante, mais laisse
+le fichier dans l'**archive**. Un contenu identique y étant toujours,
+l'avertissement `duplicate-archive` se déclenche — et bloque tout autant que
+`duplicate` en l'absence d'`ignorewarnings`. Vérifié, là encore, que rien
+n'était publié : 71 fichiers, les deux cibles `missing: true`.
+
+**Nuance qui a motivé l'arbitrage plutôt que l'arrêt :** `duplicate-archive`
+n'est pas un risque d'écrasement. Le nom cible était libre. Or le garde-fou de
+`CLAUDE.md` protège explicitement contre l'écrasement d'un nom déjà pris —
+un cas que cet avertissement ne recouvre pas. La règle étant néanmoins écrite
+sans exception, la décision a été posée à Cyril, non tranchée seul.
+
+## Exception autorisée, et sa forme
+
+Cyril a autorisé `ignorewarnings` pour ces deux appels. Forme retenue, pour
+que l'exception reste une exception :
+
+- **`bin/wiki-upload.sh` n'a pas été modifié.** Il reste sans
+  `ignorewarnings`, et c'est lui qui vaut pour tout téléversement futur.
+- Un **script jetable de session** a porté l'appel, avec son propre
+  garde-fou : il interroge le nom cible en ligne et **refuse de partir si la
+  page existe** (`ARRET: … existe déjà en ligne — pas d'écrasement`). Les deux
+  appels ont affiché « nom cible libre » avant de téléverser.
+- `comment` et `text` strictement identiques à ceux des 71 autres photos —
+  vérifié en relisant une page annotée en tâche 8 avant d'écrire.
+
+Les deux appels rendent `"result": "Success"`, avec l'avertissement
+`duplicate-archive` conservé dans la réponse (signalé, pas masqué).
+`allimages&aiprefix=ECL` : **73 fichiers**, dont les deux noms corrigés.
+
+L'exception est consignée dans `CLAUDE.md`, sous l'entrée `wiki-upload.sh`,
+avec les trois conditions à réunir (nom cible vérifié `missing` juste avant,
+autorisation explicite au cas par cas, script jetable jamais fusionné dans
+`bin/`). Tout autre avertissement — `exists`, `duplicate`, `badfilename` —
+reste bloquant.
+
+## 3. Annotation — faite
+
+Wikitexte des deux pages relu avant écriture : identique au texte-type des 71
+(« Photo prise par Cyril Libert. Licence CC BY-SA 4.0… »), aucune variante.
+`{{Specimen photo}}` ajouté à la suite, même forme qu'en tâche 8.
+
+| Page | `Depicts_specimen` | `Image_date` | `Image_location` | revid |
+|---|---|---|---|---|
+| `ECL-Buisson_Cerzat-Hysope-2026-08-08_01.jpg` | Hysope — Le Buisson de Cerzat (ECL-0022) | 2026-08-08 | Le Buisson de Cerzat | 731 |
+| `ECL-Jardin_Cyril_Chilhac-Oignon_rocambole-2026-08-09_01.jpg` | Oignon rocambole — Jardin de Chilhac (ECL-0029) | 2026-08-09 | Jardin de Chilhac | 732 |
+
+Résumé sur les deux : `[Lot 9][Tâche 11] Annotation Specimen photo
+(Image_date/Image_location/Depicts_specimen)`.
+
+## 4. Vérification — conforme
+
+`browsebysubject` sur les deux pages, lues individuellement :
+
+- **Hysope** : `Depicts_specimen` → `Hysope_—_Le_Buisson_de_Cerzat_(ECL-0022)`,
+  `Image_date` → `1/2026/8/8`, `Image_location` → `Le_Buisson_de_Cerzat`,
+  `_INST` → `Photo_de_plantation`.
+- **Oignon rocambole (Jardin)** : `Depicts_specimen` →
+  `Oignon_rocambole_—_Jardin_de_Chilhac_(ECL-0029)`, `Image_date` →
+  `1/2026/8/9`, `Image_location` → `Jardin_de_Chilhac`, `_INST` →
+  `Photo_de_plantation`.
+
+Les trois propriétés sont stockées sur les deux pages, chacune avec une seule
+valeur, pointant vers des plantations existantes. Sérialisation conforme aux
+pièges déjà connus (`1/AAAA/M/J` non préfixé de zéro, propriétés de type Page
+en underscore avec suffixe `#0##`).
+
+**`Category:Photo de plantation` : 65 membres** (`list=categorymembers`),
+exactement le chiffre attendu — 63 après la tâche 8, plus ces deux-ci, tous
+deux présents nommément dans la liste.
+
+## État final du nommage
+
+Les **73** fichiers `ECL-*` du wiki respectent maintenant la convention
+`ECL-<lieu>-<plante>-<AAAA-MM-JJ>_<nn>.jpg` sans exception. Les 8 photos hors
+sujet végétal restent volontairement hors de `Category:Photo de plantation`
+(sans `Depicts_specimen`), conformément à la décision de la tâche 8 : 73
+fichiers, 65 photos de plantation.
