@@ -65,6 +65,37 @@ Par ordre d'urgence.
 
 ### 2.2 Configuration
 
+- **Collation `uca-fr` — le tri du wiki est aujourd'hui binaire.** Constat du
+  17 août 2026 : le tri SMW se fait sur les points de code. `Égopode`
+  (`É` = U+00C9) tombe après `Yacon` (`Y` = U+0059), et `Hémérocalle` après
+  `Hysope`. Mesuré en prévisualisation sur `Le Buisson de Cerzat`, sans
+  écriture. **Conséquence : aucune vue du wiki ne peut reposer sur un tri
+  alphabétique** tant que ce réglage n'a pas changé.
+
+  Demandé, dans `LocalSettings_ecolibre.php` :
+
+  ```php
+  $wgCategoryCollation = 'uca-fr';
+  $smwgEntityCollation = 'uca-fr';
+  ```
+
+  **Les deux, et à la même valeur** : les laisser différer produit un tri
+  incohérent entre les catégories et les requêtes.
+
+  Puis, **dans cet ordre** : `updateEntityCollation.php` côté SMW, qui met à
+  jour en masse le champ `smw_sort` ; puis `updateCollation.php` côté
+  MediaWiki. Préfixer `SERVER_NAME=wiki.ecolibre.org` et utiliser `php7.4`.
+
+  **Dépendance à vérifier avant tout** : l'extension PHP `intl`, dont
+  dépendent les collations `uca-`. Commande : `php7.4 -m | grep intl`.
+
+  **À vérifier avant de mobiliser l'adminsys** : aucun de ces deux scripts ne
+  réclame `root`, et Cyril appartient au groupe `fuzzy`. Contrôler d'abord les
+  droits en écriture sur `LocalSettings_ecolibre.php` — **si le groupe a
+  l'écriture, ce n'est pas une demande adminsys**, seulement une modification
+  de configuration à faire dans le cadre de gouvernance rappelé en tête de
+  page.
+
 - **Autoriser le SVG dans `$wgFileExtensions`.** Interdit aujourd'hui, ce qui
   ferme la porte aux dessins vectoriels sur un système de données techniques.
   **Réserve de sécurité à porter dans la demande** : un fichier SVG peut
