@@ -98,8 +98,8 @@ Le modèle visé n'existe pas sous le nom annoncé : le titre réel est
 - mais il a **0 transclusion**, et `Catégorie:Item à facette raccord` **0
   membre**.
 
-Le défaut est donc **latent, pas actif** : aucun item n'est aujourd'hui mal
-classé. L'entrée le dit, et en tire l'argument utile — c'est ce qui rend la
+Le défaut est donc **latent, pas actif** : au 16 août 2026, aucun item n'est
+mal classé. L'entrée le dit, et en tire l'argument utile — c'est ce qui rend la
 correction facile, et il faut la faire **avant la création du premier item à
 facette raccord**, tant qu'aucun effectif n'est en jeu. La première rédaction,
 qui parlait d'un contrôle d'effectif avant/après, aurait fait perdre du temps
@@ -114,10 +114,10 @@ défaut.
 ## 7. Leçon des annotations parasites — écrite, mais pas telle que dictée
 
 **La consigne disait « envelopper dans `<nowiki>` ou `<code>` ». C'est faux
-pour `<code>`, et c'est précisément l'erreur commise hier.** Les trois
-annotations parasites de *Limites connues* étaient **déjà dans des balises
-`<code>`** : elles ont été stockées quand même. `<code>` met en forme, il
-n'échappe rien ; seul `<nowiki>` échappe.
+pour `<code>`, et c'est précisément l'erreur commise la veille, le 16 août
+2026.** Les trois annotations parasites de *Limites connues* étaient **déjà
+dans des balises `<code>`** : elles ont été stockées quand même. `<code>` met
+en forme, il n'échappe rien ; seul `<nowiki>` échappe.
 
 La leçon écrite dans `CLAUDE.md` dit donc :
 `<code><nowiki>[[X::Y]]</nowiki></code>` pour avoir la mise en forme **et**
@@ -126,16 +126,22 @@ cité en exemple s'évalue et rend une erreur), et le contrôle à faire —
 `browsebysubject` **sur la page de documentation elle-même**, qui ne doit
 porter que `_MDAT` et `_SKEY`.
 
-Ce contrôle a été appliqué aux deux pages écrites aujourd'hui : la Feuille de
-route ne porte que `_MDAT` et `_SKEY`, et son rendu est à 0 erreur, 0 lien
+Ce contrôle a été appliqué aux deux pages écrites le 17 août 2026 : la Feuille
+de route ne porte que `_MDAT` et `_SKEY`, et son rendu est à 0 erreur, 0 lien
 rouge.
 
 ---
 
 ## Relecture de `CLAUDE.md` — quatre points à trancher
 
-Trois contradictions réelles et une imprécision. Aucune n'est corrigée
-d'office : elles touchent des règles, pas des faits.
+Trois contradictions réelles et une imprécision. Elles n'ont pas été corrigées
+d'office au moment de la relecture : elles touchent des règles, pas des faits.
+
+> **Arbitrage du 17 août 2026 : les quatre propositions sont validées et
+> appliquées**, avec trois ajustements demandés par Cyril, plus exigeants que
+> ce qui était proposé. Le détail est en fin de section (« Ce qui a été
+> appliqué »). Les quatre énoncés ci-dessous sont conservés tels qu'écrits :
+> ils disent pourquoi la modification a eu lieu.
 
 ### a. La méthode de lecture des faits SMW est périmée
 
@@ -173,7 +179,7 @@ elle est nécessaire et insuffisante. **Proposition : le dire en une clause.**
 Le garde-fou n° 6 énumère les modèles d'items « Functional, Organic,
 Referenced, Physical ». Les modèles de **facette** (`Organic facet plant`,
 `Physical facet plant`, `Organic facet fitting`) n'y figurent pas, alors que
-`Modèle:Organic facet plant` a été modifié aujourd'hui — à juste titre, après
+`Modèle:Organic facet plant` a été modifié le 16 août 2026 — à juste titre, après
 validation explicite, donc dans l'esprit de la règle mais hors de sa lettre.
 **Proposition : les ajouter à l'énumération.**
 
@@ -185,3 +191,41 @@ par trois conditions et explicitement tenue hors de `bin/wiki-upload.sh`. La
 liste numérotée des corrections sur les modèles est cohérente avec les
 rapports du lot. La convention de nommage des médias décrit l'état réel des
 73 fichiers, désormais tous conformes.
+
+### Ce qui a été appliqué — 17 août 2026
+
+Les quatre points validés par Cyril, avec trois ajustements qui vont plus loin
+que les propositions initiales. Le point commun des trois : **remplacer une
+énumération par un critère**, pour qu'une liste ne se périme pas.
+
+**a. Méthode de lecture des faits SMW** — tel que proposé. La commande `curl`
+cède la place à `bin/wiki-api.sh --facts "subject=...&ns=0"`, avec la forme
+JSON brut conservée en second pour les cas où la sérialisation exacte compte,
+et le rappel du piège d'encodage (`%20`, `%26`) propre à ce script.
+
+**b. Format de résumé — la règle, pas la liste.** L'ajustement demandé écarte
+l'énumération que je proposais (`[Complément]`, `[Clôture]`) : elle aurait
+rouvert la question à la prochaine étiquette. La règle écrite est le critère —
+**le second crochet indique à quel titre l'écriture a lieu** : une tâche
+numérotée quand elle en relève, un libellé explicite sinon. Un libellé nouveau
+est donc légitime d'avance. **Reste interdit : un crochet vide ou décoratif.**
+
+**c. Protections — « nécessaire et insuffisante ».** Formulation reprise telle
+que dictée. La requête `prop=info&inprop=protection` n'attrape que les
+protections natives ; elle ne voit ni Lockdown ni les verrous SMW. **Un refus
+d'écriture est un résultat normal, pas une anomalie.** Les deux cas du 16 août
+2026 sont cités nommément, tous deux invisibles à `prop=info` :
+`smw-change-propagation-protection` et `duplicate-archive`.
+
+**d. Périmètre — le critère est la mise en service.** Les modèles de facette
+sont ajoutés à l'énumération, mais l'ajustement demandé va au-delà : la règle
+porte désormais sur **tout modèle transclus par des pages existantes**, à
+vérifier par `list=embeddedin` plutôt que par une liste de noms « toujours en
+retard d'un modèle ». `Modèle:Organic facet fitting` sert d'illustration dans
+la règle elle-même : dans la classe visée, mais à zéro transclusion, donc
+modifiable sans le même risque.
+
+Aucune écriture wiki dans cette application : les quatre points ne touchent que
+`CLAUDE.md`. Les « aujourd'hui » de ce rapport ont été convertis en dates
+explicites au même moment — un rapport se relit des mois plus tard, quand le
+déictique ne désigne plus rien.

@@ -85,24 +85,55 @@ Ce que Cyril peut lancer seul, et ce qui relève de fuzzy : voir
 1. **Lire avant d'écrire.** Toujours récupérer le wikitexte courant
    (`wiki-get.sh` / `action=parse&prop=wikitext`), calculer le diff, le proposer,
    puis écrire. Jamais d'écriture à l'aveugle.
-2. **Une modification = une édition = un résumé explicite.** Format réellement
-   utilisé depuis le lot 6 : `[Lot X][Tâche N] <action>` — et non
+2. **Une modification = une édition = un résumé explicite.** Format en usage
+   depuis le lot 6 : `[Lot X][<à quel titre>] <action>` — et non
    `[Lot X] <point> — <action>` comme l'écrivait cette règle jusqu'au lot 8.
-   Rend le travail annulable page par page. Une écriture qui ne relève pas
-   d'un lot en cours porte `[Correctif] <action>`, jamais un numéro de lot :
-   ne jamais réserver un numéro de lot pour une correction ponctuelle.
+   Rend le travail annulable page par page.
+
+   **Le second crochet indique à quel titre l'écriture a lieu** : une tâche
+   numérotée quand l'écriture en relève (`[Tâche 7]`), un libellé explicite
+   sinon (`[Complément]`, `[Clôture]`, `[Amendement]`…). La règle est le
+   critère, pas la liste — un libellé nouveau est légitime dès lors qu'il dit
+   à quel titre on écrit. **Reste interdit : un crochet vide, ou décoratif**,
+   qui n'apprend rien à qui relit l'historique.
+
+   Une écriture qui ne relève d'aucun lot en cours porte `[Correctif]
+   <action>`, jamais un numéro de lot : ne jamais réserver un numéro de lot
+   pour une correction ponctuelle.
 3. **`createonly=1`** sur toute création de page. Si la page existe déjà, l'appel
    doit échouer et remonter, jamais écraser.
 4. **Aucune nouvelle référence Base36 ne doit être créée hors ligne** : le compteur
    est en production, toute création locale risque une collision.
-5. **Pages protégées.** Vérifier `prop=info&inprop=protection` avant d'écrire, et
-   remonter si le niveau dépasse les droits du compte bot. L'extension **Lockdown**
-   est installée sur ce wiki : une restriction par namespace peut s'appliquer sans
-   apparaître dans `prop=info|protection`. Si une écriture échoue de façon
-   inattendue, suspecter Lockdown avant un bug de script.
-6. **Périmètre.** Ne modifier les modèles/formulaires d'items (Functional, Organic,
-   Referenced, Physical) que dans le cadre d'une action explicitement validée par
-   Cyril. Le reste est reconnaissance en lecture seule, ou rédaction à soumettre
+5. **Pages protégées — la vérification est nécessaire et insuffisante.**
+   Vérifier `prop=info&inprop=protection` avant d'écrire, et remonter si le
+   niveau dépasse les droits du compte bot. Mais **cette requête n'attrape que
+   les protections natives** : elle ne voit ni les restrictions de l'extension
+   **Lockdown** (par espace de noms), ni les verrous posés par Semantic
+   MediaWiki. Un `protection: []` ne prédit donc pas qu'une écriture passera.
+
+   **Un refus d'écriture est un résultat normal, pas une anomalie** — à
+   traiter comme tel, sans suspecter d'abord un bug de script. Deux cas
+   rencontrés le 16 août 2026, tous deux **invisibles à `prop=info`** :
+   `smw-change-propagation-protection` (15 pages `Attribut:` verrouillées en
+   modification, verrou orphelin — voir `demandes-adminsys.md`) et
+   `duplicate-archive` au téléversement (contenu identique présent dans
+   l'archive des fichiers supprimés).
+6. **Périmètre — la règle porte sur les modèles en service.** Ne modifier un
+   modèle ou un formulaire **transclus par des pages existantes** que dans le
+   cadre d'une action explicitement validée par Cyril. Cela couvre les quatre
+   classes d'items (Functional, Organic, Referenced, Physical) **et les
+   modèles de facette** (`Organic facet plant`, `Physical facet plant`,
+   `Organic facet fitting`…), dont une modification se propage à toutes les
+   pages qui les appellent.
+
+   **Le critère est la mise en service, pas le nom** : une liste de noms sera
+   toujours en retard d'un modèle. Vérifier par `list=embeddedin` plutôt que
+   par cette énumération. `Modèle:Organic facet fitting` illustre la nuance —
+   il est bien dans la classe visée, mais à **zéro transclusion** au 16 août
+   2026, donc modifiable sans le même risque : aucune page existante n'en
+   dépend.
+
+   Le reste est reconnaissance en lecture seule, ou rédaction à soumettre
    avant publication.
 
 ## Règles impératives (modèle de données)
@@ -193,11 +224,18 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
 
 - **Comment vérifier un fait SMW réellement stocké.** `bin/wiki-get.sh` ne
   gère pas `action=browsebysubject`, et la lecture du wikitexte ne montre pas
-  ce qui est stocké :
+  ce qui est stocké. C'est `bin/wiki-api.sh` qui s'en charge, avec son
+  raccourci dédié :
   ```
-  curl -s "https://wiki.ecolibre.org/api.php?action=browsebysubject&subject=NOM_DE_PAGE&format=json&formatversion=2" \
-    | jq '.query.data[] | select(.property=="NOM_PROPRIETE")'
+  bin/wiki-api.sh --facts "subject=NOM_DE_PAGE&ns=0"
   ```
+  Une ligne `propriété -> [valeurs]` par fait. Pour le JSON brut — utile quand
+  on veut la sérialisation exacte plutôt que l'affichage :
+  ```
+  bin/wiki-api.sh "action=browsebysubject&subject=NOM_DE_PAGE&format=json&formatversion=2"
+  ```
+  Rappel du piège d'encodage : `bin/wiki-api.sh` ne réencode pas sa chaîne de
+  paramètres, donc `%20` pour les espaces et `%26` pour un `&` dans un titre.
   Un seul `dataitem` contenant le séparateur = découpage non appliqué.
   Propriété absente = le `#set` ne reçoit pas le paramètre. **L'affichage ne
   prouve rien** : `#arraymap` rogne les espaces, `#set` non — deux liens
