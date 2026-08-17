@@ -247,6 +247,17 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   nom d'affichage. Filtrer sur le nom d'affichage donne un faux « absente ».
   Toujours faire un premier passage sans filtre pour voir les clés réelles.
 
+  **Et `_PVAL` peut être en retard sur ce qui est réellement appliqué.** Après
+  l'ajout d'une valeur autorisée, `browsebysubject` sur la page de propriété
+  peut rendre l'**ancienne** liste alors que la contrainte à jour est déjà
+  appliquée — et **purger la page de propriété n'y change rien**. Mesuré le
+  17 août 2026 sur `Specimen_status` : `_PVAL` rendait cinq valeurs quand la
+  charge `_CHGPRO` en portait six, et « en réserve » était pourtant déjà
+  acceptée à l'enregistrement. **La vérification qui fait foi est le
+  ré-enregistrement d'un item réel portant la nouvelle valeur, puis la lecture
+  de ses faits** — pas la lecture de la page de propriété. Conclure « la valeur
+  n'est pas prise en compte » depuis `_PVAL` seul est un faux négatif.
+
 - **`bin/wiki-api.sh` ne réencode pas la chaîne de paramètres.** Un espace
   non encodé dans un titre fait échouer `curl` en silence (code de sortie 3,
   aucun message API). Toujours passer les titres contenant un espace en
