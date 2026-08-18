@@ -41,27 +41,19 @@ Par ordre d'urgence.
 
 ### 2.1 Bloquant
 
-- **`$smwgChangePropagationProtection` — lever le verrou orphelin.**
-  15 pages `Attribut:` créées le 15 août 2026 sont verrouillées en
-  modification (`smw-change-propagation-protection`). Deux corrections de
-  données restent dues et impossibles de ce fait : le retrait de la
-  restriction « sur le même terrain » sur `Attribut:Propagated_from`, et
-  l'ajout de la valeur `en réserve` sur `Attribut:Specimen_status` — cette
-  seconde laissant aujourd'hui une plantation réelle (`ECL-0042`) sans statut
-  stocké.
-
-  **Diagnostic déjà fait, résultats négatifs, à ne pas refaire** (détail dans
-  `lot-9-tache0-rapport.md` §10) : la file de travaux est **vide**
-  (`showJobs.php --group`), la purge ne reprogramme aucun job, et
-  `rebuildData.php --page` traite la page sans relâcher le verrou. Le verrou
-  est **orphelin** : il n'attend aucun job. Le seul levier restant est le
-  paramètre de configuration, donc `LocalSettings_ecolibre.php`.
-
-- **Un cron sur `runJobs.php` — la cause racine.** La file de travaux ne se
-  vide pas d'elle-même sous le seul trafic de lecture. Tant qu'aucune
-  exécution régulière n'est en place, les jobs s'accumulent et les
-  symptômes reviendront. **Cyril peut proposer de s'en charger** — c'est une
-  tâche planifiée, pas une modification de configuration du wiki.
+- **Un cron sur `runJobs.php` — FAIT, mais pas la cause racine.** Benjamin
+  l'a mis en place le 17 août 2026 : la file de travaux ne se vide plus au
+  seul gré du trafic de lecture, et se traite désormais à intervalle
+  régulier. Il ne faut pourtant pas lire ce cron comme l'explication du
+  verrou observé fin lot 9 : le rapport `lot-9-tache0-rapport.md` §10
+  constatait déjà, au moment où le verrou bloquait, une file **vide**
+  (`showJobs.php --group`), une purge qui ne reprogrammait aucun job, et un
+  `rebuildData.php --page` sans effet sur le verrou. Le verrou était
+  **orphelin** — il n'attendait aucun job, donc aucune file non vidée ne
+  pouvait en être la cause. Benjamin rapporte par ailleurs que
+  `$wgJobRunRate` valait déjà `1`. Le cron reste utile : il rend la
+  propagation prompte au lieu de dépendre du trafic — mais il ne prévient pas
+  nécessairement une récidive du même verrou.
 
 ### 2.2 Configuration
 
@@ -71,6 +63,16 @@ Par ordre d'urgence.
   `Hysope`. Mesuré en prévisualisation sur `Le Buisson de Cerzat`, sans
   écriture. **Conséquence : aucune vue du wiki ne peut reposer sur un tri
   alphabétique** tant que ce réglage n'a pas changé.
+
+  > **Incident du 18 août 2026.** Cette demande, telle qu'elle était rédigée
+  > jusqu'ici — deux commandes seulement, sans passage préalable par
+  > `setupStore.php` — a mis le wiki hors service pour tout le monde, pages
+  > et API confondues (`ERROR_SCHEMA_INVALID_KEY`) : `$smwgEntityCollation`
+  > change la clé de version que SMW attend, et SMW refuse de servir tant que
+  > cette clé n'a pas été appliquée par une exécution de `setupStore.php` (ou
+  > `update.php`). L'étape manquante était celle-là, pas les deux qui
+  > suivent. Cette mise en garde reste sur la page parce qu'elle sera relue —
+  > pour le wiki de l'Atelier du Dôme notamment.
 
   Demandé, dans `LocalSettings_ecolibre.php` :
 
@@ -82,16 +84,25 @@ Par ordre d'urgence.
   **Les deux, et à la même valeur** : les laisser différer produit un tri
   incohérent entre les catégories et les requêtes.
 
-  Puis, **dans cet ordre** : `updateEntityCollation.php` côté SMW, qui met à
-  jour en masse le champ `smw_sort` ; puis `updateCollation.php` côté
-  MediaWiki. Préfixer `SERVER_NAME=wiki.ecolibre.org` et utiliser `php7.4`.
+  Puis, **dans cet ordre** :
+  1. `setupStore.php` côté SMW, **sans l'option `--delete`** — qui viderait
+     le magasin. C'est cette exécution qui applique la clé de version que le
+     nouveau réglage de collation exige ; `maintenance/update.php` est
+     l'alternative que la page d'erreur de SMW nomme elle-même, et couvre la
+     même étape côté cœur MediaWiki.
+  2. `updateEntityCollation.php` côté SMW, qui met à jour en masse le champ
+     `smw_sort`.
+  3. `updateCollation.php` côté MediaWiki.
+
+  Préfixer chaque commande `SERVER_NAME=wiki.ecolibre.org` et utiliser
+  `php7.4`.
 
   **Dépendance à vérifier avant tout** : l'extension PHP `intl`, dont
   dépendent les collations `uca-`. Commande : `php7.4 -m | grep intl`.
 
-  **À vérifier avant de mobiliser l'adminsys** : aucun de ces deux scripts ne
-  réclame `root`, et Cyril appartient au groupe `fuzzy`. Contrôler d'abord les
-  droits en écriture sur `LocalSettings_ecolibre.php` — **si le groupe a
+  **À vérifier avant de mobiliser l'adminsys** : aucun de ces trois scripts
+  ne réclame `root`, et Cyril appartient au groupe `fuzzy`. Contrôler d'abord
+  les droits en écriture sur `LocalSettings_ecolibre.php` — **si le groupe a
   l'écriture, ce n'est pas une demande adminsys**, seulement une modification
   de configuration à faire dans le cadre de gouvernance rappelé en tête de
   page.
@@ -104,12 +115,24 @@ Par ordre d'urgence.
 - **Extension Page Exchange.**
 - **Répertoire de déploiement du vocabulaire.**
 - **Script de création de wiki.**
+- **`$smwgChangePropagationProtection` — en réserve, la demande n'est plus
+  bloquante.** Le verrou orphelin qui bloquait 15 pages `Attribut:` créées le
+  15 août 2026 n'empêche plus rien d'observable : les deux corrections de
+  données qu'il retenait sont faites — `en réserve` ajouté aux valeurs
+  autorisées d'`Attribut:Specimen_status`, et le retrait de la restriction
+  « sur le même terrain » sur `Attribut:Propagated_from`. Depuis le
+  17 août 2026, une douzaine d'écritures sur des pages `Attribut:` sont
+  passées sans refus. **Recours si le symptôme revient** :
+  `$smwgChangePropagationProtection = false` dans
+  `LocalSettings_ecolibre.php`.
 
 ### 2.3 Infrastructure
 
 - **Migration Scaleway.**
 - **Wiki Atelier du Dôme.**
-- **Dump SQL et archive des images**, pour constituer le miroir local.
+- **Dump SQL et archive des images — FAIT.** Benjamin, 17 août 2026 :
+  `mediawiki_ecolibre_prod.sql.gz` et `mediawiki_images_ecolibre.tar.gz`,
+  déposés dans le répertoire `mediawiki-1.39`.
 
 ### 2.4 Gouvernance
 
