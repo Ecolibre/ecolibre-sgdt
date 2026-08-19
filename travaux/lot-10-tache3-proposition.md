@@ -179,11 +179,22 @@ l'échantillon ne les appelle.
    écriture le jour où une valeur manque.
 3. **`Property_range` sous 85 caractères.** Les cinq valeurs proposées font
    entre 1 et 24 caractères. Contrôle à appliquer quand même.
-4. **Le point décimal, jamais la virgule**, pour les deux propriétés `Number` —
-   `0.2` et non `0,2`. Le type `Number` rejette la virgule au stockage sans
-   rien signaler.
+4. La virgule décimale, jamais le point — 0,2 et non 0.2. Mesuré le
+   19 août 2026 : la langue de contenu du wiki est fr, et smw_decseparator
+   vaut la virgule, valeur par défaut du fichier de langue française sans
+   surcharge locale. Une valeur écrite avec un point est rejetée à
+   l'enregistrement : SMW lit le nombre jusqu'au point, traite le reste
+   comme du texte parasite, pose une clé _ERRC et ne stocke rien. Aucune
+   valeur fausse n'est produite — soit la valeur est correcte, soit elle
+   est absente. Les trois pages de lieu portant des coordonnées sont
+   saisies à la virgule et stockées exactement.
 5. **Vérifier le magasin, pas le wikitexte**, après chaque création, et
    l'absence de clé `_ERR*`.
+6. Les fiches techniques de fabricants sont en anglais et utilisent le
+   point. Pour Power_rating et Max_thickness, la forme fautive sera donc la
+   forme naturelle de la source recopiée. Une infobulle ne suffit pas : la
+   conversion doit être faite par le modèle, pas par la personne qui
+   saisit.
 
 ---
 
