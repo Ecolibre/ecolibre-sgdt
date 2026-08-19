@@ -22,12 +22,13 @@ tâche 0 n'a pas été versée au dépôt.
 | Modèle | **`Manufacturer_reference`** existe — type `Code`. C'est la référence produit du fabricant, donc le modèle |
 | Numéro de série | **`Serial_number`** existe — `single`, sur `Physical item` |
 | Fournisseur | **`Supplier`** et **`Supplier_reference`** existent, distincts du fabricant |
-| Origine d'acquisition | **`Procurement_route`** existe depuis le lot 9 — couvre le banc auto-construit |
+| Origine d'acquisition | **`Procurement_route`** **n'existe pas** — vérifié sur le wiki vivant le 19 août 2026 (`browsebysubject` vide, absente des 90 pages de l'espace `Attribut:`). `lot-9-tache0-rapport.md` §6 et `lot-9-amendement-1.md` le disaient déjà : reliquat du lot 7, jamais exécuté. |
 
-**Le lot n'a donc besoin que de quatre propriétés neuves.** C'est en deçà des
-quatre à six annoncées au cadrage, et c'est le bon signe : le modèle avait déjà
-ce qu'il fallait pour identifier un objet sourcé. Ce qui manque est d'une autre
-nature — ce que la machine *sait faire*, pas ce qu'elle *est*.
+**Le lot a donc besoin de cinq propriétés neuves**, pas quatre. C'est dans la
+fourchette de quatre à six annoncée au cadrage. Le modèle avait déjà ce qu'il
+fallait pour identifier un objet sourcé — marque, modèle, fournisseur ; il lui
+manque encore de dire *comment* l'objet a été obtenu, et ce que la machine
+*sait faire*, pas seulement ce qu'elle *est*.
 
 ---
 
@@ -55,12 +56,29 @@ documente où fabriquer, pas ce qu'il y a dans un atelier.
 
 ---
 
-## 3. Les quatre propriétés à créer
+## 3. Les cinq propriétés à créer
 
 Toutes sur `Referenced item` : c'est le niveau où existe un objet réel, avec
 des caractéristiques réelles. Un type d'outil ne consomme pas de watts, un
 modèle précis si — c'est aussi ce qui distingue les deux fers à souder, et donc
 ce qui justifie l'arbitrage « un organique, deux référencés ».
+
+### `Procurement_route`
+
+```
+[[Has type::Text]]
+[[Property_description_FR::Mode d'obtention de l'objet référencé.]]
+[[Property_description_EN::How the referenced object was obtained.]]
+[[Property_cardinality::single]]
+[[Property_domain::Category:Referenced item]]
+[[Property_range::valeurs laissées émerger]]
+```
+**Motif :** c'est elle qui rend dicible le banc auto-construit, et donc qui
+fait exister l'épreuve du niveau référencé « plan à fabriquer soi-même »
+prévue au cadrage. L'absence de `Supplier` ne peut pas en tenir lieu — SMW ne
+sait pas interroger l'absence d'une propriété. Elle ne réencode ni `Supplier`
+ni `Manufacturer_reference`, qui existent déjà : elle dit le mode d'obtention,
+pas la source. Reprise d'un reliquat du lot 7, jamais exécuté.
 
 ### `Power_rating`
 
@@ -159,7 +177,7 @@ l'échantillon ne les appelle.
    inconnue.
 2. **Aucun `Allows value`.** Une énumération fermée exigerait une seconde
    écriture le jour où une valeur manque.
-3. **`Property_range` sous 85 caractères.** Les quatre valeurs proposées font
+3. **`Property_range` sous 85 caractères.** Les cinq valeurs proposées font
    entre 1 et 24 caractères. Contrôle à appliquer quand même.
 4. **Le point décimal, jamais la virgule**, pour les deux propriétés `Number` —
    `0.2` et non `0,2`. Le type `Number` rejette la virgule au stockage sans
@@ -181,3 +199,8 @@ l'échantillon ne les appelle.
    passées au modèle seront inertes, comme au §1.3 de la tâche 2. C'est une
    modification de modèle en service, donc garde-fou 6 : à soumettre à Cyril
    avec le diff, pas à décider en séance.
+4. **Leçon retenue sur `Procurement_route` (§1) :** l'affirmation erronée
+   « existe depuis le lot 9 » venait d'un résumé, pas des rapports du dépôt —
+   `lot-9-tache0-rapport.md` §6 et `lot-9-amendement-1.md` disaient
+   l'inverse, et étaient disponibles au moment d'écrire le §1. Un résumé
+   n'est pas une source.
