@@ -1,9 +1,9 @@
 ---
-description: Écrit un rapport de session (écritures wiki, reconnaissance, échecs) dans rapport-AAAA-MM-JJ.md
+description: Écrit un rapport de session (écritures wiki, reconnaissance, échecs) dans travaux/rapport-AAAA-MM-JJ.md
 ---
 
-Rédige un rapport de la session en cours dans `rapport-AAAA-MM-JJ.md` à la racine
-du dépôt (`~/ecolibre-sgdt/`), où `AAAA-MM-JJ` est la date du jour (voir
+Rédige un rapport de la session en cours dans `travaux/rapport-AAAA-MM-JJ.md`
+(`~/ecolibre-sgdt/travaux/`), où `AAAA-MM-JJ` est la date du jour (voir
 `currentDate` dans le contexte). Si le fichier existe déjà pour aujourd'hui,
 lis-le d'abord et complète-le plutôt que de l'écraser.
 
@@ -11,8 +11,8 @@ Ne documente que ce qui a réellement été fait dans cette session — pas de
 reconstitution ni d'anticipation. Si une section n'a rien à rapporter, dis-le
 explicitement plutôt que de l'omettre.
 
-Structure attendue (voir `rapport-reconnaissance.md` du 2026-07-25 comme
-gabarit de style) :
+Structure attendue (voir `travaux/rapport-reconnaissance.md` du 2026-07-25
+comme gabarit de style) :
 
 ## 1. Écritures sur le wiki
 Pour chaque édition réellement effectuée (`wiki-put.sh` ou appel curl direct) :

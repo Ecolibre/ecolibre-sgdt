@@ -45,7 +45,7 @@ Par ordre d'urgence.
   l'a mis en place le 17 août 2026 : la file de travaux ne se vide plus au
   seul gré du trafic de lecture, et se traite désormais à intervalle
   régulier. Il ne faut pourtant pas lire ce cron comme l'explication du
-  verrou observé fin lot 9 : le rapport `lot-9-tache0-rapport.md` §10
+  verrou observé fin lot 9 : le rapport `travaux/lot-9-tache0-rapport.md` §10
   constatait déjà, au moment où le verrou bloquait, une file **vide**
   (`showJobs.php --group`), une purge qui ne reprogrammait aucun job, et un
   `rebuildData.php --page` sans effet sur le verrou. Le verrou était

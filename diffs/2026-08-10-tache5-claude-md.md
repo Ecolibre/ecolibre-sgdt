@@ -13,7 +13,7 @@ donc pas de nouvelle section à créer.
 **Taille :** 63 → 115 lignes. Sous le seuil de 200 lignes fixé par le
 cadrage — pas de découpage en fichier séparé proposé.
 
-**Source :** les neuf règles de `lot-6-suite.md` (Tâche 5), reprises et
+**Source :** les neuf règles de `travaux/lot-6-suite.md` (Tâche 5), reprises et
 condensées — la numérotation et les dates de constat (« le 9 août », « le 10
 août ») propres au journal de session ont été retirées, `CLAUDE.md` étant une
 référence durable et non un journal.

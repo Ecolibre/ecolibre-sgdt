@@ -22,12 +22,15 @@ serait autrement perdu à la fermeture d'une conversation.
   apprises sur l'outillage et sur MediaWiki/Semantic MediaWiki/Page Forms.
 - **`controle-de-fin-de-session.md`** — procédure de répartition de
   l'information entre le wiki et ce dépôt en fin de session.
-- **`rapport-*.md`**, **`rapport-reconnaissance.md`** — comptes rendus de
-  session : écritures effectuées, résultats de reconnaissance, échecs et
-  hypothèses infirmées.
-- **`lot-*.md`**, **`ecolibre-sgdt-lot*.md`**, **`recap-maj-consolidee.md`**,
-  **`sgdt-etat-des-lieux*.md`**, **`sgdt-passation-2026-08-10.md`** —
-  documents de cadrage et de passation des différents lots de travail.
+- **`travaux/`** — tout document destiné à être lu dans une conversation
+  Claude : rapports de session (`rapport-*.md`, `rapport-reconnaissance.md`),
+  cadrages, propositions et amendements de lot (`lot-*.md`,
+  `ecolibre-sgdt-lot*.md`, `recap-maj-consolidee.md`), notes de passation
+  (`sgdt-etat-des-lieux*.md`, `sgdt-passation-2026-08-10.md`). Synchronisé
+  par Syncthing avec le téléphone Android de Cyril, dans les deux sens ; seul
+  le markdown y est versionné (voir `CLAUDE.md`, section « Dossier
+  `travaux/` »). Ce n'est pas une zone tampon : il porte le récit de la
+  construction du système et n'a pas vocation à être nettoyé.
 - **`diffs/`** — diffs de modifications proposées ou appliquées au fil des
   sessions.
 - **`dump/`**, **`pages/`** — copies locales de pages du wiki (miroir de

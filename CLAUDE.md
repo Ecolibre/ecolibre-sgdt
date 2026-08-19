@@ -55,6 +55,35 @@ dégradent en lecture anonyme si introuvables ; `wiki-login.sh`/`wiki-put.sh`/
 
 Les copies locales de pages vont dans `pages/`.
 
+## Dossier `travaux/`
+
+`travaux/` existe à la racine du dépôt et est synchronisé par **Syncthing**,
+dans les deux sens, avec le téléphone Android de Cyril.
+
+**Tout fichier destiné à être lu dans une conversation Claude — rapports de
+session, cadrages, propositions et amendements de lot, notes de passation —
+s'écrit dans `travaux/` et nulle part ailleurs.** Aucune copie ailleurs dans
+le dépôt. Les fichiers déposés depuis le téléphone y sont lisibles
+directement, sans étape intermédiaire.
+
+**Rien de secret n'y va** : le dépôt est public, la synchronisation
+Syncthing est automatique alors que le commit ne l'est pas, et Syncthing ne
+lit pas `.gitignore` — un fichier non versionné déposé dans `travaux/` est
+quand même envoyé au téléphone.
+
+`travaux/` porte le récit de la construction du système — pourquoi les
+choses ont été décidées ainsi. **Ce n'est pas une zone tampon et ça n'a pas
+vocation à être nettoyé.** La racine porte ce qui dit *comment* travailler :
+`CLAUDE.md`, `installation-nouveau-poste.md`, `demandes-adminsys.md`,
+`Serveur3/`. Cette documentation-là ne bouge pas.
+
+**Le `.gitignore` de `travaux/` suppose que le dossier reste plat.** Seul le
+markdown y est versionné (`travaux/*` puis `!travaux/*.md`) ; tout le reste
+déposé depuis le téléphone reste invisible pour git tant qu'aucune exception
+explicite n'est ajoutée. Un fichier placé dans un sous-dossier de `travaux/`
+ne serait pas réinclus par cette négation — si un sous-dossier devient
+nécessaire un jour, le `.gitignore` devra être repris.
+
 ## Serveur
 
 | | |
@@ -292,6 +321,15 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   (tout en underscore) et corrigée en lisant les noms réellement en place.
   Vaut pour les fichiers comme pour le wiki : lire l'état réel avant
   d'écrire une règle qui le décrit.
+
+- **Après création ou modification d'une page de propriété, les faits ne
+  sont pas lisibles immédiatement.** La file de propagation des changements
+  de SMW doit d'abord se vider. Une première lecture peut ne montrer
+  qu'une clé `_CHGPRO` portant les valeurs en JSON, sans aucun fait direct
+  (`Has type`, `Property_range`… absents de `browsebysubject`). **Ce n'est
+  pas un échec de stockage.** Relire après vidage de la file plutôt que
+  réécrire. Constaté le 19 août 2026, seize jobs en attente
+  (`action=query&meta=siteinfo&siprop=statistics`, clé `jobs`).
 
 ## Ne jamais faire
 - Ne pas toucher au `composer.json` de MediaWiki (utiliser `composer.local.json`).

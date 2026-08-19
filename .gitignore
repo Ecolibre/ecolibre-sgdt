@@ -12,3 +12,12 @@ Serveur3/
 .claude/settings.local.json
 .claude/settings (*).json
 bin/wiki-*(*).sh
+
+# travaux/ — seul le markdown est versionné
+travaux/*
+!travaux/*.md
+
+# artefacts Syncthing
+.stfolder/
+.stversions/
+*.sync-conflict-*
