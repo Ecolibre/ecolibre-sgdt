@@ -31,6 +31,13 @@ fi
 
 PAGE="$1"; FILE="$2"; SUMMARY="${3:-Modification via Claude Code}"
 
+case "$PAGE" in
+  MediaWiki:*)
+    echo "ERREUR: refus d'écrire sur '$PAGE' — l'espace MediaWiki: porte la configuration du wiki et se modifie à la main, jamais par le bot." >&2
+    exit 1
+    ;;
+esac
+
 CREATEONLY=0
 for arg in "$@"; do
   [ "$arg" = "--createonly" ] && CREATEONLY=1
