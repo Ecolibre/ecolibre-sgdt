@@ -272,3 +272,275 @@ sur la donnée).
 
 Les outils ne sont rattachés à aucun procédé : c'est la tâche 4, et aucun
 `Realizes_function` n'a été écrit.
+
+---
+
+## 6. Solde de la tâche 2 — 19 août 2026
+
+Deux arbitrages reçus de Cyril, tranchant les points laissés ouverts en §5 :
+
+- **Arbitrage 1** — `[[Catégorie:Procédé]]` reste sur `Assembler`. Les cinq
+  pages sont justes : la catégorie marque l'appartenance au référentiel, pas
+  la réalisabilité par un outil. Rien à défaire.
+- **Arbitrage 2** — garde-fou 6 explicitement levé sur `Modèle:Functional
+  item`, pour cette modification et elle seule.
+
+### 6.1 Étape 1 — modification de `Modèle:Functional item`
+
+Trois paramètres optionnels ajoutés : `Practice_domain` (multivaluée),
+`External_classification` (simple), `Procédé` (déclenche
+`[[Catégorie:Procédé]]` quand il vaut `oui`).
+
+**Wikitexte avant** (revid 318, en place depuis le 9 août) :
+
+```
+<noinclude>
+{{Documentation}}
+</noinclude>
+<includeonly>
+{{#set:
+|Item_ref={{{Item_ref|}}}
+|Item_description={{{Item_description|}}}
+|Part_of={{{Part_of|}}}
+|+sep=,
+}}
+
+{| class="wikitable" style="width:100%"
+! style="background:#f2f2f2; width:30%;" | Référence (Base 36)
+| '''{{{Item_ref|}}}'''
+|-
+! style="background:#f2f2f2" | Description de la fonction
+| {{{Item_description|}}}
+|-
+! style="background:#f2f2f2" | Fonctions parentes
+| {{#arraymap:{{{Part_of|}}}|,|@@@|[[@@@]]|,&#32;}}
+|-
+! style="background:#f2f2f2" | Sous-fonctions (Enfants)
+| 
+{{#ask: [[Part_of::{{FULLPAGENAME}}]]
+ |?Item_ref = Réf.
+ |format=table
+ |default=''Aucune sous-fonction déclarée.''
+ |class=wikitable sortable
+}}
+|-
+! style="background: #e8f0ff" | Solutions organiques (Comment)
+| {{#ask: [[Realizes_function::{{FULLPAGENAME}}]]
+| ?Item_ref=Réf.
+| ?Item_description=Description
+| format=table
+| default=''Aucune solution organique n'est encore référencée pour cette fonction.''
+| class=wikitable sortable
+}}
+|}
+
+[[Category:Functional item]]
+</includeonly>
+```
+
+**Wikitexte après** (revid **800**, état final) :
+
+```
+<noinclude>
+{{Documentation}}
+</noinclude>
+<includeonly>
+{{#set:
+|Item_ref={{{Item_ref|}}}
+|Item_description={{{Item_description|}}}
+|Part_of={{{Part_of|}}}
+|+sep=,
+|External_classification={{{External_classification|}}}
+}}{{#if:{{{Practice_domain|}}}|{{#arraymap:{{{Practice_domain}}}|,|@@@|{{#set:Practice_domain=@@@}}|}}}}{{#ifeq:{{{Procédé|}}}|oui|[[Catégorie:Procédé]]}}
+
+{| class="wikitable" style="width:100%"
+! style="background:#f2f2f2; width:30%;" | Référence (Base 36)
+| '''{{{Item_ref|}}}'''
+|-
+! style="background:#f2f2f2" | Description de la fonction
+| {{{Item_description|}}}
+|-
+! style="background:#f2f2f2" | Fonctions parentes
+| {{#arraymap:{{{Part_of|}}}|,|@@@|[[@@@]]|,&#32;}}
+|-
+! style="background:#f2f2f2" | Sous-fonctions (Enfants)
+| 
+{{#ask: [[Part_of::{{FULLPAGENAME}}]]
+ |?Item_ref = Réf.
+ |format=table
+ |default=''Aucune sous-fonction déclarée.''
+ |class=wikitable sortable
+}}
+|-
+! style="background: #e8f0ff" | Solutions organiques (Comment)
+| {{#ask: [[Realizes_function::{{FULLPAGENAME}}]]
+| ?Item_ref=Réf.
+| ?Item_description=Description
+| format=table
+| default=''Aucune solution organique n'est encore référencée pour cette fonction.''
+| class=wikitable sortable
+}}
+|}
+
+[[Category:Functional item]]
+</includeonly>
+```
+
+**Pourquoi `Practice_domain` ne passe pas simplement par `+sep=,` sur le
+`#set` existant.** `Attribut:Practice_domain` est de type **Texte**
+(`_txt`), pas Page. La leçon de méthode de `CLAUDE.md` s'applique
+directement : « SMW ne rogne pas les espaces des valeurs intermédiaires » —
+une propriété Texte conserve l'espace après une virgule, contrairement à une
+propriété Page qui l'absorbe par normalisation de titre. Un simple
+`|Practice_domain={{{Practice_domain|}}}|+sep=,` aurait donc stocké `"
+plomberie"` avec un espace de tête, silencieusement. J'ai vérifié cette
+hypothèse avant d'écrire, par `action=expandtemplates` en lecture seule sur
+un `#arraymap` isolé : le résultat confirme que `#arraymap` **rogne bien**
+chaque élément découpé, contrairement à `+sep=,` seul. D'où le choix
+d'`#arraymap` appelant un `{{#set:Practice_domain=@@@}}` par valeur — chaque
+valeur devient sa propre annotation, correctement rognée, sans passer par
+`+sep=,`.
+
+**Pourquoi `{{#set:Practice_domain=@@@}}` plutôt que
+`[[Practice_domain::@@@]]` dans la formule de l'`#arraymap`.** La seconde
+forme est une annotation inline : elle stocke, mais elle **s'affiche** aussi
+comme texte visible sur la page. Le `#set` ne rend jamais rien à l'écran — la
+consigne « ne touche à rien d'autre » interdisait d'ajouter du texte visible
+en dehors du tableau existant.
+
+**Un aller-retour sur la mise en page.** Le premier jet plaçait `#if` et
+`#ifeq` chacun sur sa propre ligne, sous le `#set`. Purge et relecture du
+rendu de `Irriguer` (`action=parse&prop=text`) après cette première version
+(revid 792) montraient **trois** paragraphes vides (`<p><br /></p>`) au lieu
+d'un — chaque ligne source qui s'évalue à vide en ajoute un. Correctif
+immédiat (revid 798) : les trois appels regroupés sur une seule ligne, contre
+laquelle plus aucune ligne vide propre ne s'ajoute. **Vérification de la
+ligne de référence, pas seulement de la correction :** un rétablissement
+transitoire de la version d'origine (revid 318 → écriture revid 799, mesure,
+puis restauration revid 800) a montré que la page `Irriguer` produisait déjà
+**deux** paragraphes vides avant toute modification — c'est un artefact
+préexistant de l'adjacence `</noinclude><includeonly>`, sans rapport avec
+cette tâche. Le rendu final (revid 800) produit exactement **deux**
+paragraphes vides sur `Irriguer`, identique au relevé fait sur revid 318 :
+aucune régression visuelle, la correction ramène au même compte que
+l'original, pas en dessous.
+
+Revids de `Modèle:Functional item` dans l'ordre : **792** (ajout initial) →
+**798** (correctif de mise en page) → **799** (mesure transitoire, contenu
+revid 318) → **800** (état final, identique à 798).
+
+### 6.2 Étape 2 — non-régression, avant de toucher aux procédés
+
+`Irriguer` purgée et relue avant toute écriture sur les cinq pages de
+procédé :
+
+```
+Item_ref -> ['0008']
+Part_of -> ['Cultiver_de_la_nourriture#0##']
+_INST -> ['Functional_item#14##']
+```
+
+Ni `Practice_domain`, ni `External_classification`, ni `Procédé#14##` dans
+`_INST` : la branche de service n'est pas affectée. Reconfirmé une seconde
+fois après la restauration finale du modèle (§6.1) — résultat identique.
+
+### 6.3 Étape 3 — réécriture des cinq pages de procédé
+
+Toutes les annotations manuelles et la ligne `[[Catégorie:Procédé]]`
+retirées ; `Item_ref`, `Part_of`, `Item_description` inchangés ; les valeurs
+passent en paramètres du modèle.
+
+| Page | pageid | oldrevid | newrevid | Résumé |
+|---|---|---|---|---|
+| `Assembler` | 401 | 786 | **793** | Assembler — bascule vers le modèle (Procédé, External_classification) |
+| `Braser tendre` | 402 | 787 | **794** | Braser tendre — bascule vers le modèle (Procédé, Practice_domain, alignement affiné sur Q67131697) |
+| `Souder par points` | 403 | 788 | **795** | Souder par points — bascule vers le modèle |
+| `Mesurer une grandeur électrique` | 404 | 789 | **796** | Mesurer une grandeur électrique — bascule vers le modèle |
+| `Maintenir en position` | 405 | 790 | **797** | Maintenir en position — bascule vers le modèle |
+
+**`Braser tendre` change de valeur d'alignement**, conformément à la
+consigne : `https://www.wikidata.org/wiki/Q67131697` (« brasage tendre »)
+remplace `https://en.wikipedia.org/wiki/Soldering`, qui pointait le concept
+générique Q211387 (« brasage », couvrant tendre et fort). Motif consigné :
+on ancre au niveau le plus précis, parce que la généralisation se dérive par
+sous-classe de, et que la spécialisation ne se récupère pas d'une URL trop
+large. Un export OKW réclamant une URL Wikipédia se retrouve en remontant
+vers Q211387.
+
+Wikitexte final, exemple sur `Braser tendre` :
+
+```
+{{Functional item
+|Item_ref=002I
+|Part_of=Assembler
+|Item_description=L'apport fond, le métal de base non — c'est ce qui le sépare du soudage. Nommé au niveau où existe un référent externe stable.
+|Procédé=oui
+|Practice_domain=électronique, plomberie
+|External_classification=https://www.wikidata.org/wiki/Q67131697
+}}
+```
+
+### 6.4 Étape 4 — vérification du stockage, cinq pages purgées
+
+| Page | `External_classification` | `Practice_domain` | `_INST` | `_ERR*` |
+|---|---|---|---|---|
+| `Assembler` | Q1480529 | — | `Functional_item`, `Procédé` | aucune |
+| `Braser tendre` | Q67131697 | électronique, plomberie | `Functional_item`, `Procédé` | aucune |
+| `Souder par points` | Q2327972 | électronique, énergie | `Functional_item`, `Procédé` | aucune |
+| `Mesurer une grandeur électrique` | Q3859407 | électronique, électricité, énergie | `Functional_item`, `Procédé` | aucune |
+| `Maintenir en position` | Q2306980 | — | `Functional_item`, `Procédé` | aucune |
+
+`Practice_domain` est bien stockée en valeurs distinctes (`['électronique',
+'plomberie']`, etc.), aucun préfixe d'espace — confirme que le passage par
+`#arraymap` a fait le travail que `+sep=,` seul n'aurait pas fait sur une
+propriété Texte. `_INST` porte `Procédé#14##` sur les cinq pages : la
+catégorie est désormais posée par le modèle, plus par une ligne manuelle, et
+elle reste stockée côté SMW (pas seulement affichée).
+
+`[[Catégorie:Procédé]]` rend toujours **cinq** pages après la bascule
+(`list=categorymembers`) : `Assembler`, `Braser tendre`,
+`Maintenir en position`, `Mesurer une grandeur électrique`,
+`Souder par points`. Conforme à l'arbitrage 1.
+
+### 6.5 Étape 5 — deux amendements au fichier de tâche 1
+
+**Amendement au §3.** Le §3 du fichier de tâche 1 proposait la catégorie
+manuelle comme correctif au marqueur de branche du §2.2 du cadrage (présence
+de `Practice_domain`), au motif que `Maintenir en position` la mettait en
+défaut. Arbitrage 1 confirme et précise : **la catégorie marque
+l'appartenance au référentiel des procédés, pas la réalisabilité par un
+outil.** `Assembler` la porte légitimement alors qu'aucun outil ne le
+réalise directement — motif, feuille ou groupement n'est pas un état stable
+dans le temps : un nœud groupement d'aujourd'hui peut devenir un nœud
+partagé par un outil demain (l'inverse du raisonnement qui a produit
+`Assembler` lui-même, cf. tâche 1 §1). La catégorie ne doit donc pas
+distinguer ces deux rôles, elle marque seulement l'appartenance à l'arbre.
+
+**Amendement au §2.** Le §2 du fichier de tâche 1 justifiait le nom
+`Braser tendre` par un découpage de Wikipédia (« l'anglais sépare là où le
+français regroupe », `Soldering` vs `Brazing`). Le relevé Wikidata de la
+tâche 2 (§3.3) a montré que cet argument était approximatif : l'article
+anglais `Soldering` est rattaché à **Q211387**, le concept générique
+couvrant brasage tendre *et* fort — Wikidata ne sépare donc pas non plus au
+niveau de l'article. **Ce qui justifie réellement le nœud `Braser tendre`,
+c'est l'existence de `Q67131697`** comme élément Wikidata distinct et
+précisément nommé, indépendamment de la couverture Wikipédia. L'alignement
+externe de la page a été corrigé en conséquence à l'étape 3 (§6.3) : il
+pointe désormais Q67131697, pas l'article Wikipédia générique.
+
+### 6.6 Ce qui a échoué
+
+**Rien côté données.** Six écritures fonctionnelles (un modèle, cinq pages),
+toutes acceptées, aucune clé `_ERR*`. Une septième et une huitième écriture
+sur le modèle ont servi à mesurer puis restaurer un état de référence — pas
+un échec, une vérification transitoire consignée en §6.1.
+
+**Une hypothèse initiale erronée**, corrigée avant d'en tirer une fausse
+conclusion : le premier relevé du rendu de `Irriguer` sous le modèle
+non corrigé (trois paragraphes vides) a été comparé à tort à une
+reconstruction manuelle du modèle d'origine (qui n'en donnait qu'un) au lieu
+du modèle d'origine réellement transclus. La mesure directe sur `Irriguer`
+avec le contenu exact de la revid 318 a corrigé le chiffre de référence à
+deux, révélant que la comparaison initiale sous-comptait le rendu réel — pas
+que le correctif était superflu : sans lui, la page serait passée de deux à
+trois paragraphes vides, une régression visuelle réelle bien que mineure.
