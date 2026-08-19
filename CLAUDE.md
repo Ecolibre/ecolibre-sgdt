@@ -66,6 +66,10 @@ s'écrit dans `travaux/` et nulle part ailleurs.** Aucune copie ailleurs dans
 le dépôt. Les fichiers déposés depuis le téléphone y sont lisibles
 directement, sans étape intermédiaire.
 
+**Le rapport de fin de session affiché dans le terminal est rédigé en
+français, comme les fichiers de rapport eux-mêmes.** Cyril travaille en
+français et relaie ces messages dans des conversations en français.
+
 **Rien de secret n'y va** : le dépôt est public, la synchronisation
 Syncthing est automatique alors que le commit ne l'est pas, et Syncthing ne
 lit pas `.gitignore` — un fichier non versionné déposé dans `travaux/` est
