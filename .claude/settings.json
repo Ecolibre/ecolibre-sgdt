@@ -9,19 +9,21 @@
       "Read(//home/spheres/ecolibre-sgdt-prive/.cookies.txt)",
       "Edit(//home/spheres/ecolibre-sgdt-prive/.env)",
       "Edit(//home/spheres/ecolibre-sgdt-prive/.cookies.txt)",
-      "Bash(rm:*)",
       "Bash(sudo:*)",
       "Bash(ssh:*)",
       "Bash(mysql:*)",
       "Bash(mysqldump:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
       "Edit(./.env)",
       "Edit(./.env.*)",
-      "Edit(./.cookies.txt)"
+      "Edit(./.cookies.txt)",
+      "Read(./Serveur3/**)",
+      "Edit(./Serveur3/**)"
     ],
     "ask": [
-      "Bash(curl:*)",
-      "Bash(python3:*)",
-      "Bash(git push:*)"
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)"
     ],
     "allow": [
       "Bash(bin/wiki-get.sh:*)",
@@ -43,6 +45,9 @@
       "Bash(git log:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(git push:*)",
       "WebFetch(domain:wiki.ecolibre.org)"
     ]
   }
