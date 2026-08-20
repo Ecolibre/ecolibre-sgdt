@@ -21,7 +21,9 @@
     ],
     "ask": [
       "Bash(git reset --hard:*)",
-      "Bash(git clean:*)"
+      "Bash(git clean:*)",
+      "Bash(git checkout:*)",
+      "Bash(git restore:*)"
     ],
     "allow": [
       "Bash(bin/wiki-get.sh:*)",
@@ -29,6 +31,7 @@
       "Bash(bin/wiki-purge.sh:*)",
       "Bash(bin/wiki-api.sh:*)",
       "Bash(bin/wiki-login.sh:*)",
+      "Bash(bin/wiki-wait-jobs.sh:*)",
       "Bash(grep:*)",
       "Bash(ls:*)",
       "Bash(cat:*)",
@@ -46,6 +49,11 @@
       "Bash(curl:*)",
       "Bash(python3:*)",
       "Bash(git push:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(sed:*)",
+      "Bash(sort:*)",
       "WebFetch(domain:wiki.ecolibre.org)"
     ]
   }

@@ -361,6 +361,33 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   des permissions.
 - **Pousser en fin de session, systématiquement.** Un commit qui n'a pas
   quitté la machine ne protège pas de la machine.
+- **Écrire les commandes shell sous leur forme la plus simple.** Claude Code
+  soumet à confirmation toute commande dont il ne peut pas analyser la forme
+  à l'avance — boucles, substitutions `$(…)`, `<(…)`, accolades voisinant des
+  guillemets. Ces confirmations ne signalent aucun danger et ne peuvent être
+  levées par aucune permission : elles se suppriment en amont, par la façon
+  d'écrire. Quatre règles, constatées sur dix-sept confirmations analysées le
+  21 août 2026 :
+  - **Attente de la file de travaux** : appeler `bin/wiki-wait-jobs.sh`,
+    jamais une boucle `for` d'interrogation en ligne.
+  - **Écrire un fichier** : utiliser l'outil d'écriture de fichier, jamais
+    `cat > fichier << EOF`. Un contenu wikitexte fait voisiner `{{` et des
+    guillemets, ce qui déclenche systématiquement une confirmation.
+  - **Python** : écrire un fichier `.py` dans le scratchpad puis l'exécuter,
+    jamais `python3 - <<'PYEOF'` ni `python3 -c "…"` de plus d'une ligne.
+  - **Comparer une portion de fichier** : écrire l'extrait dans un fichier
+    temporaire, puis `diff` sur deux fichiers. Jamais `diff a <(sed …)`.
+  - Répéter deux fois la même construction refusée est le signe qu'il faut
+    en faire un script dans `bin/`, versionné et autorisé nommément.
+- **Un `curl` d'écriture hors des scripts `bin/` requiert l'accord explicite
+  de Cyril, à chaque fois.** Les refus posés par `wiki-api.sh` (`move` et les
+  autres actions d'écriture) et par `wiki-put.sh` (espace de noms
+  `MediaWiki:`) sont des garde-fous du script, pas du wiki : un `curl` direct
+  ne les rencontre jamais. Ils ne valent que tant que l'outillage passe par
+  les scripts. Une exception ponctuelle reste une exception — elle ne fonde
+  pas un usage, et ne se reconduit pas d'elle-même au cas suivant. Si un
+  besoin revient deux fois, il devient un script de `bin/`, pas une habitude.
+  Ajoutée le 21 août 2026.
 
 ## Ne jamais faire
 - Ne pas toucher au `composer.json` de MediaWiki (utiliser `composer.local.json`).
