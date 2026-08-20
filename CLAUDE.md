@@ -335,6 +335,18 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   réécrire. Constaté le 19 août 2026, seize jobs en attente
   (`action=query&meta=siteinfo&siprop=statistics`, clé `jobs`).
 
+## Garde-fous d'exécution (dépôt git)
+
+- **État propre avant toute opération destructive ou massive dans le
+  dépôt** — suppression, déplacement en nombre, réécriture d'un fichier
+  existant. Si `git status` montre des modifications non commitées,
+  commiter d'abord. Aucune permission de `.claude/settings.json` ne
+  vérifie cette condition : c'est elle qui rend vraie la garantie de
+  réversibilité par git. Ajoutée le 20 août 2026, après un tour de revue
+  des permissions.
+- **Pousser en fin de session, systématiquement.** Un commit qui n'a pas
+  quitté la machine ne protège pas de la machine.
+
 ## Ne jamais faire
 - Ne pas toucher au `composer.json` de MediaWiki (utiliser `composer.local.json`).
 - Ne pas commiter `.env` ni `.cookies.txt`.

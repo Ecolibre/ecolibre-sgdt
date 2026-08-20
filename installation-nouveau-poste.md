@@ -38,6 +38,35 @@ Claude. Un abonnement Pro, Max, Team ou Enterprise est nécessaire.
 Documentation officielle, si la commande ci-dessus a changé :
 <https://docs.claude.com/en/docs/claude-code/overview>
 
+### Permissions
+
+`.claude/settings.json` est **versionné** : un `git clone` du dépôt suffit à
+récupérer les permissions à jour sur un nouveau poste, rien à reconfigurer à
+la main. Seul `.claude/settings.local.json` (propre à une machine, non
+versionné, voir `.gitignore`) échappe à ça.
+
+| Règle | Motif | Depuis |
+|---|---|---|
+| `deny Read/Edit(./.env, ./.env.*, ./.cookies.txt)` et leurs équivalents dans le dépôt privé | Secrets de session wiki, jamais lus ni modifiés par l'outillage Claude Code | 12/08/2026 |
+| `deny Read/Edit(./Serveur3/**)` | Le dossier porte le mot de passe de la base, la clé secrète et la clé de version du wiki | 20/08/2026 |
+| `deny Bash(sudo/ssh/mysql/mysqldump:*)` | Actions système ou base de données hors périmètre de l'outillage wiki | 12/08/2026 |
+| `ask Bash(git reset --hard/git clean:*)` | Opérations qui écrasent ou suppriment du travail non commité — confirmation à chaque fois | 20/08/2026 |
+| `allow` sur les scripts `bin/wiki-*.sh`, les commandes de lecture usuelles (`grep`, `ls`, `cat`, `find`, `diff`, `jq`…) et `git status/diff/log/add/commit/push` | Usage quotidien sans confirmation répétée | 12/08/2026, complété le 20/08/2026 (`curl`, `python3`, `git push` déplacés d'`ask` vers `allow`) |
+
+Pas de règle `deny` sur un push forcé : `Bash(git push --force:*)` ne couvre
+que la forme où `--force` suit immédiatement `push` et rate
+`git push origin main --force` — une règle qui protège à moitié fait croire
+qu'elle protège. La protection réelle est posée côté GitHub, par une règle
+de branche sur `main`.
+
+**Ce que git n'archive pas**, et qui doit être reconstitué à chaque nouveau
+poste (voir aussi le paragraphe d'introduction et la section 4) :
+- `.env` et `.cookies.txt` (secrets de session) ;
+- `Serveur3/` (accès et clés du serveur mutualisé) ;
+- les fichiers non-markdown de `travaux/` (le dossier n'y versionne que le
+  `.md` — un fichier déposé depuis le téléphone dans un autre format reste
+  invisible à git).
+
 ## 3. Dépôt
 
 ```
