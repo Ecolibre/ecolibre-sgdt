@@ -59,6 +59,27 @@ que la forme où `--force` suit immédiatement `push` et rate
 qu'elle protège. La protection réelle est posée côté GitHub, par une règle
 de branche sur `main`.
 
+Ruleset « Protection de main », identifiant 21086289, portée Repository,
+statut actif depuis le 20 août 2026. Deux règles : `non_fast_forward`
+(poussées forcées refusées) et `deletion` (suppression de branche refusée).
+Aucune règle `pull_request` : le push direct sur `main` reste possible, et
+c'est voulu — l'exiger casserait la chaîne de travail avec Claude Code. Se
+consulte sur GitHub par Settings › Rules › Rulesets, ou en lecture par
+l'API :
+
+```
+curl -s https://api.github.com/repos/Ecolibre/ecolibre-sgdt/rules/branches/main
+```
+
+Vérifié le 20 août 2026 par un test réel : une tentative de push forcé est
+refusée avec l'erreur GH013.
+
+**Cette règle vit côté GitHub, pas dans le dépôt** : contrairement à
+`.claude/settings.json`, elle n'est pas restituée par un `git clone`. C'est
+la seule pièce de la configuration qu'un nouveau poste hérite sans rien
+avoir à faire — mais qu'une migration du dépôt vers un autre hébergement
+perdrait silencieusement.
+
 **Ce que git n'archive pas**, et qui doit être reconstitué à chaque nouveau
 poste (voir aussi le paragraphe d'introduction et la section 4) :
 - `.env` et `.cookies.txt` (secrets de session) ;
