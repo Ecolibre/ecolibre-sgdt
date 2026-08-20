@@ -52,6 +52,35 @@ versionné, voir `.gitignore`) échappe à ça.
 | `deny Bash(sudo/ssh/mysql/mysqldump:*)` | Actions système ou base de données hors périmètre de l'outillage wiki | 12/08/2026 |
 | `ask Bash(git reset --hard/git clean:*)` | Opérations qui écrasent ou suppriment du travail non commité — confirmation à chaque fois | 20/08/2026 |
 | `allow` sur les scripts `bin/wiki-*.sh`, les commandes de lecture usuelles (`grep`, `ls`, `cat`, `find`, `diff`, `jq`…) et `git status/diff/log/add/commit/push` | Usage quotidien sans confirmation répétée | 12/08/2026, complété le 20/08/2026 (`curl`, `python3`, `git push` déplacés d'`ask` vers `allow`) |
+| `allow Bash(bin/wiki-wait-jobs.sh:*)` | Attente de la file de travaux différés, appelée à chaque mesure — script versionné, donc toute modification passe par un diff | 21/08/2026 |
+| `allow Bash(mkdir/cp/mv/sed/sort:*)` | Utilitaires du travail courant. N'élargit pas le périmètre réel : `python3` est autorisé depuis le 20/08 et fait tout ce qu'ils font — mais rend la cible visible dans la commande au lieu de l'enfouir dans un programme | 21/08/2026 |
+| `ask Bash(git checkout/git restore:*)` | Écrasent le travail non commité au même titre que `git reset --hard` et `git clean` — omission comblée | 21/08/2026 |
+
+Les confirmations que Claude Code affiche ne viennent pas toutes de ce
+fichier. Une commande dont la forme ne peut pas être analysée à l'avance —
+boucle, substitution `$(…)` ou `<(…)`, accolade voisinant un guillemet —
+déclenche un contrôle qui s'applique **avant** la liste `allow`, et
+qu'aucune permission ne lève. Ces fenêtres n'offrent d'ailleurs pas
+l'option « ne plus me demander ». Sur dix-sept confirmations analysées le
+21 août 2026, dix-sept relevaient de ce mécanisme et zéro d'un défaut de
+permission. Le remède est dans `CLAUDE.md`, section « Garde-fous
+d'exécution (dépôt git) » : écrire les commandes sous leur forme la plus
+simple, et faire un script de ce qui se répète.
+
+Deux pièges du bouton « ne plus me demander », constatés le même jour : il
+enregistre la commande **avec ses arguments**, donc une règle qui ne
+couvrira pas l'appel suivant ; et sur `.claude/settings.json`, l'option
+« allow Claude to edit its own settings » autorise Claude Code à élargir
+ses propres droits hors de toute relecture — à ne jamais accepter.
+
+L'aperçu affiché avant une édition de `.claude/settings.json` s'est révélé
+tronqué à trois reprises le 21 août 2026, montrant un bloc `allow` amputé
+qui ne correspondait ni à l'état de départ ni à l'état visé. La
+vérification fiable est faite après écriture :
+
+```
+python3 -c "import json; d=json.load(open('.claude/settings.json'))['permissions']; print('deny', len(d['deny']), 'ask', len(d['ask']), 'allow', len(d['allow']))"
+```
 
 Pas de règle `deny` sur un push forcé : `Bash(git push --force:*)` ne couvre
 que la forme où `--force` suit immédiatement `push` et rate
