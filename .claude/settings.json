@@ -13,8 +13,6 @@
       "Bash(ssh:*)",
       "Bash(mysql:*)",
       "Bash(mysqldump:*)",
-      "Bash(git push --force:*)",
-      "Bash(git push -f:*)",
       "Edit(./.env)",
       "Edit(./.env.*)",
       "Edit(./.cookies.txt)",
