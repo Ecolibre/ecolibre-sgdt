@@ -379,6 +379,20 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
     temporaire, puis `diff` sur deux fichiers. Jamais `diff a <(sed …)`.
   - Répéter deux fois la même construction refusée est le signe qu'il faut
     en faire un script dans `bin/`, versionné et autorisé nommément.
+- **Ne pas conclure sur un aperçu — vérifier après coup par un compte.**
+  L'affichage tronque : le 21 août 2026, un aperçu d'écriture de
+  `.claude/settings.json` a montré à trois reprises un bloc `allow` amputé
+  de douze entrées qui ne correspondait à aucun état réel du fichier, et un
+  diff de `installation-nouveau-poste.md` a affiché un paragraphe existant
+  comme mutilé alors qu'il était intact. Une écriture refusée à tort coûte
+  un aller-retour ; une écriture validée à tort ne se voit pas. Donc :
+  après toute écriture sur `.claude/settings.json`, afficher les trois
+  comptes —
+  `python3 -c "import json; d=json.load(open('.claude/settings.json'))['permissions']; print('deny', len(d['deny']), 'ask', len(d['ask']), 'allow', len(d['allow']))"` ;
+  après tout commit, afficher `git show --stat <hash>` et vérifier que le
+  nombre de suppressions est celui attendu. Ces deux contrôles tiennent en
+  une ligne et ne dépendent d'aucun rendu. Les joindre au rapport, sans
+  qu'il soit besoin de les demander.
 - **Un `curl` d'écriture hors des scripts `bin/` requiert l'accord explicite
   de Cyril, à chaque fois.** Les refus posés par `wiki-api.sh` (`move` et les
   autres actions d'écriture) et par `wiki-put.sh` (espace de noms
