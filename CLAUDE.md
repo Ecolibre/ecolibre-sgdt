@@ -297,6 +297,21 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   `%20` dans la chaîne d'appel — contrairement à `wiki-get.sh`/`wiki-put.sh`,
   qui encodent eux-mêmes via `--data-urlencode`.
 
+- **Toute prévisualisation d'un contenu long (`action=parse&text=`,
+  `action=expandtemplates`) passe en POST, jamais en GET.** `bin/wiki-api.sh`
+  n'émet que du GET (`curl -G`, lecture seule stricte, voir son en-tête) : un
+  `text=` de la taille d'un modèle complet dépasse la longueur d'URL
+  acceptable et **la requête échoue silencieusement — réponse vide, aucune
+  erreur, aucun code de sortie curl distinctif**. Rien à voir avec le piège
+  d'encodage ci-dessus (celui-là produit un code de sortie 3 explicite).
+  Constaté le 20 août 2026 en testant le rendu de `Modèle:Referenced item`.
+  `action=parse` n'est pas une action d'écriture, mais `wiki-api.sh` ne sait
+  faire que du GET : pour un `text=` long, passer par un `curl -b
+  <chemin_des_cookies> --data-urlencode ...` direct, à la main, pour cette
+  requête précise — jamais en modifiant `wiki-api.sh` pour lui ajouter le
+  POST, ce qui élargirait sa surface au-delà de la lecture seule qu'il
+  garantit aujourd'hui.
+
 - **Lire l'état du wiki avant de raisonner, pas seulement avant d'écrire.**
   Une copie locale est une photo, pas un état — des modifications hors
   session sont possibles à tout moment (Cyril via le formulaire, un autre
