@@ -335,6 +335,20 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   `browsebysubject` **sur cette page**, pour vérifier qu'elle ne porte que
   `_MDAT` et `_SKEY`. Une page qui décrit le modèle de données peut le polluer.
 
+- **Les backticks ne protègent rien en wikitexte.** Un exemple de syntaxe
+  SMW écrit entre backticks s'exécute comme une vraie annotation ou une
+  vraie requête. Seul `<nowiki>` protège. Ce piège est passé deux fois
+  dans la session du 21 août 2026 (`LOC` dans `Attribut:Location site`,
+  puis trois fragments dans *Limites connues*). Le patron maison est
+  `<code><nowiki>…</nowiki></code>`.
+
+- **Deux contrôles distincts, qui ne se recouvrent pas.** `Erreurs de
+  traitement SMW` (`[[_ERRC::+]]`) voit les valeurs **rejetées** par SMW.
+  `browsebysubject` sans filtre sur une page voit les annotations
+  **acceptées à tort**. Une annotation fausse mais valide —
+  `Item_ref::+` — n'apparaît que dans le second. Aucun des deux ne
+  suffit seul.
+
 - **Une convention rédigée de mémoire ne fait pas foi.** La convention de
   nommage des 73 fichiers du lot 9 a été dictée dans une forme inexacte
   (tout en underscore) et corrigée en lisant les noms réellement en place.

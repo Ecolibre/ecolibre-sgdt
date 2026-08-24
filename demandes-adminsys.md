@@ -115,16 +115,25 @@ Par ordre d'urgence.
 - **Extension Page Exchange.**
 - **Répertoire de déploiement du vocabulaire.**
 - **Script de création de wiki.**
-- **`$smwgChangePropagationProtection` — en réserve, la demande n'est plus
-  bloquante.** Le verrou orphelin qui bloquait 15 pages `Attribut:` créées le
-  15 août 2026 n'empêche plus rien d'observable : les deux corrections de
-  données qu'il retenait sont faites — `en réserve` ajouté aux valeurs
-  autorisées d'`Attribut:Specimen_status`, et le retrait de la restriction
-  « sur le même terrain » sur `Attribut:Propagated_from`. Depuis le
-  17 août 2026, une douzaine d'écritures sur des pages `Attribut:` sont
-  passées sans refus. **Recours si le symptôme revient** :
+- **`$smwgChangePropagationProtection` — verrou structurel, pas un incident
+  ponctuel du 15 août.** Cette entrée décrivait jusqu'ici un verrou orphelin,
+  propre aux 15 pages `Attribut:` créées le 15 août 2026, et débloqué depuis.
+  Faux : constaté à nouveau le 21 août 2026 sur `Attribut:INSEE code`, créée
+  le jour même (lot 11, tâche 1) — trois tentatives de correction dans la
+  même session, trois refus `smw-change-propagation-protection` identiques.
+  **Le verrou frappe toute page de propriété pendant sa propre propagation
+  de changement : il se redéclenche à chaque création de propriété**, pas
+  seulement lors de l'incident du 15 août — donc sur ce lot et les suivants,
+  à chaque fois qu'une propriété est créée.
+  Bloque à ce jour, en plus d'`INSEE_code` : les cinq propriétés du lot 7
+  (`Edible_parts`, `Plant_habit`, `Propagation_method`, `Root_system`,
+  `Seed_treatment`), dont le `Property_range` est cassé pour une raison
+  distincte (plafond `Keyword` de 85 caractères — voir
+  `Limites connues du SGDT` et `Erreurs de traitement SMW` sur le wiki) et
+  attend une correction retenue par ce même verrou. **Demande à fuzzy** :
   `$smwgChangePropagationProtection = false` dans
-  `LocalSettings_ecolibre.php`.
+  `LocalSettings_ecolibre.php` — la protection empêche aujourd'hui une
+  correction légitime aussi souvent qu'un accident.
 
 ### 2.3 Infrastructure
 
