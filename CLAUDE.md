@@ -221,6 +221,16 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   ajoute un. Ne jamais replier une balise `[[ ]]` pour respecter une largeur
   de ligne, même quand le titre est long.
 
+  **Le pli peut venir de la mise en page d'un rapport, pas du texte.** Un lien
+  recopié depuis un document de `travaux/` — proposition, cadrage, note de
+  passation — arrive souvent replié par la largeur du document, et le pli
+  n'appartient alors pas au contenu : il appartient à l'affichage. Le remettre
+  sur une seule ligne au moment de la copie n'est pas une modification du
+  texte, c'est ce qui le préserve. Évité de justesse le 25 août 2026 sur
+  `Modèle:Physical facet plant/doc`, dont la consigne demandait de recopier un
+  texte « sans modification » : le lien vers `Catégorie:Item à facette
+  végétal` y était replié sur deux lignes.
+
 - **`+sep=` est par propriété et sa position compte.** Dans un `#set`,
   `|+sep=` s'applique à la propriété qui le précède immédiatement, pas au
   bloc entier. Le déplacer casse le découpage de la propriété concernée.
