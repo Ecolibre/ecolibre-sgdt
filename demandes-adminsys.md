@@ -115,25 +115,89 @@ Par ordre d'urgence.
 - **Extension Page Exchange.**
 - **Répertoire de déploiement du vocabulaire.**
 - **Script de création de wiki.**
-- **`$smwgChangePropagationProtection` — verrou structurel, pas un incident
-  ponctuel du 15 août.** Cette entrée décrivait jusqu'ici un verrou orphelin,
-  propre aux 15 pages `Attribut:` créées le 15 août 2026, et débloqué depuis.
-  Faux : constaté à nouveau le 21 août 2026 sur `Attribut:INSEE code`, créée
-  le jour même (lot 11, tâche 1) — trois tentatives de correction dans la
-  même session, trois refus `smw-change-propagation-protection` identiques.
-  **Le verrou frappe toute page de propriété pendant sa propre propagation
-  de changement : il se redéclenche à chaque création de propriété**, pas
-  seulement lors de l'incident du 15 août — donc sur ce lot et les suivants,
-  à chaque fois qu'une propriété est créée.
-  Bloque à ce jour, en plus d'`INSEE_code` : les cinq propriétés du lot 7
-  (`Edible_parts`, `Plant_habit`, `Propagation_method`, `Root_system`,
-  `Seed_treatment`), dont le `Property_range` est cassé pour une raison
-  distincte (plafond `Keyword` de 85 caractères — voir
-  `Limites connues du SGDT` et `Erreurs de traitement SMW` sur le wiki) et
-  attend une correction retenue par ce même verrou. **Demande à fuzzy** :
-  `$smwgChangePropagationProtection = false` dans
-  `LocalSettings_ecolibre.php` — la protection empêche aujourd'hui une
-  correction légitime aussi souvent qu'un accident.
+- **`$smwgChangePropagationProtection` — un verrou mesuré sur une seule
+  page, pas une règle générale.** Deux versions précédentes de cette
+  entrée ont chacune généralisé depuis un cas unique, sans le vérifier :
+  d'abord un incident ponctuel du 15 août, puis « le verrou se
+  redéclenche à chaque création de propriété ». **Ce que le mesuré dit
+  au 25 août 2026, et rien de plus** :
+  - **Éditer une page de propriété existante fonctionne : six cas, aucun
+    refus.** Les cinq propriétés du lot 7 (`Edible_parts`, `Plant_habit`,
+    `Propagation_method`, `Root_system`, `Seed_treatment`) et
+    `Attribut:Planting rank` sont toutes des pages du 15 août 2026 —
+    créées avec les 15 pages `Attribut:` de l'incident initial, pas le
+    21. `Property_range` corrigé sur les six le 25 août 2026, du premier
+    coup, sans aucun refus.
+  - **Une seule page reste bloquée : `Attribut:INSEE code`, depuis sa
+    création le 21 août 2026** (lot 11, tâche 1) — cinq refus
+    `smw-change-propagation-protection` identiques, répartis sur quatre
+    jours, jamais corrigée depuis.
+  - **L'anomalie n'est donc pas le verrou lui-même, mais qu'il ne se
+    lève pas sur cette page précise.** Un verrou temporaire à la création
+    d'une propriété, le temps que sa propagation se termine, est le
+    comportement documenté de SMW — cohérent avec les trois refus
+    essuyés juste après la création d'`INSEE_code`. **Mais aucun des six
+    cas mesurés ne teste une création** : les six sont des pages
+    existantes, éditées après coup. Si une création déclenche
+    normalement un verrou temporaire qui se lève de lui-même, ça reste
+    **non testé** — le seul cas de création disponible est justement
+    celui qui ne s'est jamais levé, ce qui ne permet pas de trancher.
+
+  **Demande à fuzzy** — deux pistes, pas une certitude sur laquelle
+  trancher depuis ce côté-ci :
+  1. Vérifier `$smwgChangePropagationProtection` dans
+     `LocalSettings_ecolibre.php` (valeur actuelle jamais lue
+     directement depuis ici).
+  2. **Vider la file de travaux — probablement suffisant à lever ce
+     verrou précis**, un verrou de propagation attendant par
+     construction qu'un job s'exécute. Note pour fuzzy : un vidage de
+     file n'avait *pas* suffi sur le verrou orphelin de la section 2.1
+     de cette page (`lot-9-tache0-rapport.md` §10, file déjà vide au
+     moment du blocage) — deux cas qui se ressemblent en surface, pas
+     nécessairement la même cause.
+
+- **`$smwgNamespacesWithSemanticLinks` — les espaces `Modèle` (10),
+  `Formulaire` (106) et `Module` (828) n'y sont pas.** À discuter avec fuzzy,
+  **pas à poser comme une évidence** : voir la réserve ci-dessous, qui peut
+  très bien conclure au statu quo.
+
+  **Le mesuré, le 25 août 2026.** Aucune page de ces trois espaces ne porte le
+  moindre fait SMW — `browsebysubject` rend vide sur `Modèle:Physical item`,
+  `Modèle:Lieu`, `Modèle:Documentation`, `Formulaire:Physical item/doc`. Et
+  `[[Object_description_FR::+]]` rend **0 page** sur tout le wiki, alors que
+  cinq pages `/doc` portent bien cette annotation dans leur wikitexte.
+
+  **Conséquence visible :** les 18 appels `#show` du
+  [Récapitulatif technique](https://wiki.ecolibre.org/wiki/R%C3%A9capitulatif_technique_du_Syst%C3%A8me_de_Gestion_de_Donn%C3%A9es_Techniques)
+  retombent tous sur leur `default=`, et la page affiche « Non documenté » /
+  « No description » partout depuis sa création.
+
+  **Deux causes distinctes, à ne pas confondre** — les 18 `#show` visent
+  9 pages `/doc`, à raison de deux appels (FR et EN) par page :
+
+  | Cause | Pages visées | Ce qui la corrigerait |
+  |---|---|---|
+  | Espace non sémantique | **5** — `Template:Functional item/doc`, `Pending translation/doc`, `Physical item/doc`, `Referenced item/doc`, `Module:Source/doc` | cette demande |
+  | **Page inexistante** | **4** — `Template:Documentation/doc`, `Template:MermaidLine/doc`, `Template:Organic item/doc`, `Module:Base36/doc` | créer les pages, sans rien demander à personne |
+
+  Activer les espaces ne réglerait donc que cinq cas sur neuf. Les quatre
+  autres relèvent d'une écriture ordinaire, à faire indépendamment.
+
+  > **Réserve, et elle est la raison d'être de cette entrée.** SMW désactive
+  > `NS_TEMPLATE` par défaut **à dessein** : une page de modèle deviendrait
+  > sujet de ses propres annotations, et tout `#set` écrit dans un modèle
+  > annoterait la page du modèle en plus des pages qui le transcluent. Les
+  > sous-pages `/doc` **partagent cet espace de noms** — on ne peut pas
+  > l'activer pour elles seules. Le gain (cinq descriptions affichées sur une
+  > page de documentation) est à mettre en balance avec ce risque, qui porte
+  > sur les quatre modèles d'items en service.
+  >
+  > **Piste alternative à soumettre en même temps :** déplacer les
+  > descriptions hors de l'espace `Modèle`, ou remplacer les `#show` du
+  > récapitulatif par du texte écrit à la main. Aucune des deux ne demande
+  > quoi que ce soit à l'adminsys.
+
+  Rien n'a été modifié ni demandé à ce jour : entrée de constat, ouverte.
 
 ### 2.3 Infrastructure
 

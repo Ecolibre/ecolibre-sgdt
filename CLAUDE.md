@@ -364,6 +364,21 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   réécrire. Constaté le 19 août 2026, seize jobs en attente
   (`action=query&meta=siteinfo&siprop=statistics`, clé `jobs`).
 
+- **Le 24 août 2026, dans un environnement Claude Code hébergé (cloud
+  Anthropic), le proxy sortant a refusé wiki.ecolibre.org (403 au
+  CONNECT).** Ni lecture ni écriture ; seul le travail sur les fichiers du
+  dépôt était possible. Symptôme trompeur : `wiki-api.sh` renvoie une
+  sortie vide avec un code de sortie 0, sans message. Une sortie vide ne
+  signifie donc pas toujours « aucun résultat » — elle peut signifier
+  « rien n'est sorti de la machine ».
+
+- **Un blocage déduit n'est pas un blocage constaté.** Le 21 août 2026,
+  une écriture refusée sur `Attribut:INSEE code` a fait conclure que les
+  cinq propriétés du lot 7 étaient sous le même verrou. Personne ne
+  l'avait testé. Le 25 août, les cinq se sont écrites du premier coup.
+  **Avant de déclarer une correction impossible, tenter l'écriture sur
+  un cas — le refus coûte moins cher que la dette.**
+
 ## Garde-fous d'exécution (dépôt git)
 
 - **État propre avant toute opération destructive ou massive dans le
