@@ -171,8 +171,24 @@ Même page, préexistante, seule en erreur depuis le 21 août.
 
 ### Dépôt propre et poussé
 
-Voir §5 — la vérification finale a lieu après le commit de ce rapport
-lui-même.
+Un **troisième commit** a été nécessaire : l'amendement de `CLAUDE.md` (§3)
+et ce rapport ont été écrits *après* les deux premiers, comme le voulait
+l'ordre des tâches.
+
+```
+940de79  [Lot 11] CLAUDE.md — d'où vient le pli d'un lien, et clôture du 25 août
+5e9ee2d  [Lot 11] CLAUDE.md et demandes-adminsys — leçons et espaces non sémantiques
+3aba12d  [Lot 11] Rapports — classe Organisation, Owned_by, Wanted_by, rang en segment
+```
+
+```
+git status --short  -> (vide)
+## main...origin/main   (aucun écart)
+origin/main -> 940de79
+HEAD        -> 940de79
+```
+
+**Dépôt propre, local et distant au même point.**
 
 ---
 
