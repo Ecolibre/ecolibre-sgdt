@@ -1,5 +1,60 @@
 # Lot 11 — cadrage : subdivision des lieux
 
+> **⚠️ Document d'origine du 17 août 2026. Plusieurs passages sont périmés —
+> ne pas l'exécuter tel quel. Lire l'encart ci-dessous avant tout le reste.**
+
+## État de ce document — 26 août 2026
+
+Ce cadrage n'a **pas** été réécrit, et ne le sera pas : il porte la trace de
+ce qui avait été décidé *avant* l'exécution, et c'est là sa valeur. Six
+décisions ont changé en cours de lot, une tâche s'est révélée sans objet, une
+autre reste ouverte. Le document ci-dessous décrit donc, sur ces points, un
+projet qui n'a pas eu lieu.
+
+**Où lire l'état à jour :**
+
+- `lot-11-tache7-cadrage.md` **§1** — les écarts, un par un, avec leur motif.
+- `lot-11-tache7-cadrage.md` **§2** — l'état réel de chaque tâche, 0 à 7.
+
+**Les six décisions qui ont changé :**
+
+| Décision d'origine | Ce qui a été fait |
+|---|---|
+| **1.4** — le titre porte la référence, `<Libellé> (ECL-NNNN)` ou `ECL-NNNN` seul | **abandonnée le 24 août.** Le titre est le **nom du lieu**, nu : `Butte de la tranchée`. La référence vit dans `Location_number`, affichée par le modèle. Le test de la tâche 0 a donné une réponse double, pas binaire, et l'arbitrage a été rendu autrement : un titre lisible vaut mieux qu'un titre stable, le renommage étant supportable (29 pages à purger, pas 82). |
+| **1.5** — banque distincte, **même préfixe `ECL`** produit par `{{Préfixe site}}`, « le verrou SMW … une propriété nouvelle est la seule voie ouverte » | **la banque distincte tient ; le motif et le préfixe sont faux.** Le préfixe est **`LOC`**, porté par une propriété `Location_site` et un `Modèle:Préfixe lieu`, ni l'une ni l'autre au cadrage — un lieu public n'appartient pas à une organisation. Et le verrou n'interdisait rien (voir §3 ci-dessous). |
+| **1.9** — le rang devient relatif à la planche ; sa description « ne peut pas être mise à jour (verrou SMW) » | **le rang est en mètres entiers depuis l'origine du lieu**, et depuis le 25 août c'est un **début de segment**, `Planting_rank_end` en donnant la fin facultative. Le rang ordinal (`A-1.5`) était rejeté par SMW. La description a été réécrite **deux fois** : aucun verrou sur cette page. |
+| **1.10 / tâche 4** — `Location_lineage` matérialise la fermeture transitive, « qui rend l'arbre interrogeable » | **la propriété existe, zéro page ne la porte.** Le patron `#show` → `#set` ne peut pas marcher pour une propriété de type Page : `#show` rend un lien wiki, les `[[` font échouer tout le `#set`. La voie de calcul (Lua ou script) **n'a jamais été arbitrée** — la question est intacte, pas réglée. |
+| **§2** — « le hameau lui-même n'est pas créé comme lieu intermédiaire dans ce lot » | **il l'a été.** `Le Buisson de Cerzat` est un lieu de type hameau, entre `Cerzat` et le terrain. Le renvoi du §6 a été consommé sans être signalé comme tel. |
+| **§3 / §0** — le verrou `smw-change-propagation-protection` « bloque toute modification d'une page `Attribut:` créée le 15 août » | **une seule page est verrouillée, `Attribut:INSEE code`.** Six écritures sur des pages `Attribut:` sont passées du premier coup le 25 août. Personne n'avait tenté : le cadrage a hérité d'un constat du 15 août et l'a généralisé. |
+
+**Passages périmés, à ne plus tenir pour vrais :**
+
+| Passage | Ce qui est faux |
+|---|---|
+| **§0**, livraisons | Le préfixe est `LOC`, pas `ECL`. `Location_lineage` ne rend rien interrogeable. La migration des 29 vers leurs planches n'a pas eu lieu. |
+| **§0**, exclusions | « aucune subdivision des lieux de Chilhac » : `Appartement de Chilhac` et `Atelier appartement` ont été créés. « aucune modification de page `Attribut:` existante — le verrou SMW l'interdit » : le verrou n'était pas général. |
+| **Décision 1.3** | La décision tient (un redécoupage au même niveau est un renommage). Son **motif** tombe : il commandait 1.4, abandonnée. Le renommage reste possible, et son coût est mesuré — voir la procédure en quatre étapes de `lot-11-tache7-cadrage.md` §3.2. |
+| **Décision 1.4** | Périmée en entier. |
+| **Décision 1.5**, motif et préfixe | Voir le tableau ci-dessus. La banque distincte, elle, est en place. |
+| **Décision 1.9**, verrou | Le verrou n'existait pas sur `Attribut:Planting rank`. |
+| **Décision 1.10** | Non réalisée. |
+| **§2**, l'arbre dessiné | N'est pas l'arbre en place. 13 lieux existent, les libellés diffèrent (`Butte de la tranchée`, `Extrémité de tranchée`, `Au pied du pylône électrique`, `Zone basse`, `Zone haute`), et deux lieux hors cadrage se sont ajoutés côté Chilhac. |
+| **§3**, état attendu | Le verrou est mal généralisé. **L'écart 26/29 n'existe pas** : vérifié terme à terme contre le TSV, 29 = 29. |
+| **§5**, arbitrage 1 | Tranché autrement : ni l'une ni l'autre des deux formes proposées. |
+| **§5**, arbitrage 2 | **Jamais tranché.** Reste à décider. |
+| **§6**, renvois au verrou | Les deux corrections dites bloquées ont été faites : la description de `Planting_rank` réécrite, `en réserve` accepté par `Specimen_status`. |
+
+**Ce qui reste ouvert :** la **tâche 6** — quelle plantation se trouve à quel
+lieu, et à quelle position. Ce n'est pas une dette technique : c'est un
+**travail de terrain de Cyril**, les positions restant à relever sur place. Et
+l'**arbitrage 2**, la voie de calcul du lignage.
+
+Ce qui a été fait hors de ce cadrage — la classe `Organisation`, `Owned_by`,
+`Wanted_by`, le segment de rang, la réparation d'*Avancement du jardin-forêt*
+— n'y figure évidemment pas : voir `lot-11-tache7-cadrage.md` §1.10 et §1.11.
+
+---
+
 **Rédigé le 17 août 2026.** À exécuter par Claude Code depuis `~/ecolibre-sgdt`.
 Prérequis de lecture : `CLAUDE.md`, `lot-9-amendement-1.md` (décisions 1.4 et
 1.13), `lot-9-tache6-proposition.md`, `lot-9-cloture.md`, et les pages wiki
