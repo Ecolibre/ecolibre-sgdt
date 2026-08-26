@@ -46,8 +46,46 @@ projet qui n'a pas eu lieu.
 
 **Ce qui reste ouvert :** la **tâche 6** — quelle plantation se trouve à quel
 lieu, et à quelle position. Ce n'est pas une dette technique : c'est un
-**travail de terrain de Cyril**, les positions restant à relever sur place. Et
-l'**arbitrage 2**, la voie de calcul du lignage.
+**travail de terrain de Cyril**, les positions restant à relever sur place.
+
+### Ce qui reste à décider — le lignage
+
+La tâche 4 n'a pas été tranchée, elle a été interrompue. Quatre points
+distincts, dont aucun n'est réglé, et le quatrième était ignoré jusqu'au
+27 août 2026.
+
+**1. La voie de calcul n'a jamais été arbitrée.** Le cadrage posait deux
+voies — un module Lua qui calcule à l'enregistrement, ou un script rejoué
+après chaque modification de l'arbre — et demandait de proposer sans trancher
+seul. Le test s'est arrêté avant d'y arriver. **C'est l'arbitrage 2 du §5, et
+il est intact.**
+
+**2. Le patron `#show` → `#set` est cassé pour une propriété de type Page, et
+doit être corrigé avant tout nouvel essai.** `#show` sur une propriété de type
+Page rend un **lien wiki**, pas la valeur brute ; concaténé dans le `#set`
+d'une autre propriété Page, les `[[` font échouer **tout le `#set`**. Et selon
+que la source porte ou non une valeur, la même construction produit tantôt
+cette erreur franche, tantôt **un fait faux sans aucun avertissement** — une
+cascade partiellement cassée peut se présenter comme fonctionnelle. Consigné
+sur le wiki, *Limites connues* n° 31. **Reprendre le test sans corriger le
+patron ne mesurerait rien.**
+
+**3. Le recalcul après déplacement d'un lieu dans l'arbre n'a jamais été
+abordé.** Déplacer un lieu invalide le lignage de **tous ses descendants**. Le
+cadrage l'annonçait comme « le piège à ne pas manquer » de la tâche 4 et
+demandait de dire, quelle que soit la voie retenue, comment le lignage est
+recalculé. La question n'a pas même été posée en exécution. Elle conditionne
+le choix entre les deux voies du point 1 : un script rejoué la traite
+trivialement, un calcul à l'enregistrement doit propager.
+
+**4. `Board_lineage`, cité comme précédent, n'existe pas sur ce wiki.**
+Vérifié le 27 août 2026 : `Attribut:Board lineage`, `Attribut:Board parent` et
+`Module:Board` sont **tous absents**, et aucune page ne porte ces propriétés.
+Le seul endroit du wiki qui les mentionne est *Limites connues* **n° 2**, qui
+les présente à tort comme un patron de résolution déjà en service côté
+physique. **Il n'y a donc aucun précédent fonctionnel à recopier** — le
+cadrage s'appuyait sur une référence qui n'a jamais existé ici. L'entrée n° 31
+le signale sur le wiki ; **l'entrée n° 2 reste à corriger.**
 
 Ce qui a été fait hors de ce cadrage — la classe `Organisation`, `Owned_by`,
 `Wanted_by`, le segment de rang, la réparation d'*Avancement du jardin-forêt*
