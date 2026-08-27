@@ -9,8 +9,11 @@ Scribunto/Lua, Semantic Result Formats.
   uniquement, hôte en dur ; réutilise la session de `wiki-login.sh` sans jamais
   manipuler d'identifiant)
 - `bin/wiki-put.sh "Page" fichier.txt "résumé" [--createonly]` — écrire une page ;
-  `--createonly` fait échouer l'appel si la page existe déjà (`articleexists`) au
-  lieu de l'écraser — à utiliser pour toute création
+  `--createonly` fait échouer l'appel — code de sortie non nul, `articleexists`
+  sur stderr — si la page existe déjà, au lieu de l'écraser ; à utiliser pour
+  toute création. (Le code de sortie n'était pas vérifié avant le 28 août 2026 :
+  l'API refusait bien l'écriture, mais le script sortait 0. Corrigé, commit
+  `0913ef8`.)
 - `bin/wiki-api.sh "chaîne de paramètres"` — exécuter n'importe quel appel de
   lecture de l'API MediaWiki en GET (`browsebysubject`, `siteinfo`, `allpages`,
   `backlinks`, `expandtemplates`, `intestactions`…) ; lecture seule stricte,
@@ -21,8 +24,9 @@ Scribunto/Lua, Semantic Result Formats.
   fait au lieu du JSON brut. `action=purge` exige une requête POST : hors du
   périmètre GET de ce script, voir `bin/wiki-purge.sh`.
 - `bin/wiki-purge.sh "Titre 1|Titre 2"` — purger une ou plusieurs pages
-  (POST + jeton CSRF, `forcelinkupdate=1` systématique). Aucun autre
-  paramètre, aucune autre action que purge.
+  (POST, `forcelinkupdate=1` systématique ; `action=purge` exige POST
+  mais pas de jeton CSRF). Aucun autre paramètre, aucune autre action
+  que purge.
 - `bin/wiki-upload.sh fichier.jpg` — téléverser un fichier local sous son nom
   de base (aucun renommage par le script) ; jamais `ignorewarnings`, jamais
   `bot=1` : un nom déjà pris fait échouer l'appel (`result` différent de
@@ -134,7 +138,10 @@ Ce que Cyril peut lancer seul, et ce qui relève de fuzzy : voir
    <action>`, jamais un numéro de lot : ne jamais réserver un numéro de lot
    pour une correction ponctuelle.
 3. **`createonly=1`** sur toute création de page. Si la page existe déjà, l'appel
-   doit échouer et remonter, jamais écraser.
+   doit échouer et remonter (code de sortie non nul), jamais écraser. Effectif
+   par le code de sortie depuis le 28 août 2026 seulement — avant, `wiki-put.sh`
+   affichait l'erreur `articleexists` mais sortait 0 ; un script d'orchestration
+   qui testait `$?` ne voyait pas le refus.
 4. **Aucune nouvelle référence Base36 ne doit être créée hors ligne** : le compteur
    est en production, toute création locale risque une collision.
 5. **Pages protégées — la vérification est nécessaire et insuffisante.**
