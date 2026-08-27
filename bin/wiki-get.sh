@@ -67,7 +67,7 @@ for m in d.get("query", {}).get("categorymembers", []):
     print(m["title"])
 print("___CMCONTINUE___" + d.get("continue", {}).get("cmcontinue", ""))
 ')
-    echo "$OUT" | grep -v '^___CMCONTINUE___'
+    echo "$OUT" | grep -v '^___CMCONTINUE___' || true
     NEXT=$(echo "$OUT" | grep '^___CMCONTINUE___' | sed 's/^___CMCONTINUE___//')
     [ -z "$NEXT" ] && break
     CMCONTINUE="$NEXT"

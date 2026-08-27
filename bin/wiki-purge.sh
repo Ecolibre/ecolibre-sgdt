@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Usage: bin/wiki-purge.sh "Titre 1|Titre 2"
-#   Purge une ou plusieurs pages (titres séparés par |), en POST avec jeton
-#   CSRF (action=purge exige POST sur ce wiki, voir CLAUDE.md/leçons de
-#   méthode). forcelinkupdate=1 est toujours ajouté. Aucun autre paramètre
-#   n'est accepté, aucune autre action que purge n'est exécutée.
+#   Purge une ou plusieurs pages (titres séparés par |), en POST (action=purge
+#   exige POST sur ce wiki, mais PAS de jeton CSRF — needstoken: None, vérifié
+#   via action=paraminfo). forcelinkupdate=1 est toujours ajouté. Aucun autre
+#   paramètre n'est accepté, aucune autre action que purge n'est exécutée.
 #
 # .env et .cookies.txt sont cherchés d'abord dans $SGDT_PRIVE (par défaut
 # ../ecolibre-sgdt-prive/, un répertoire voisin du dépôt, hors publication),
@@ -38,6 +38,8 @@ fi
 
 TITLES="$1"
 
+# action=purge n'exige pas de jeton. Ce bloc ne sert plus qu'à détecter une
+# session expirée (jeton anonyme '+\') avant de tenter la purge.
 CSRF=$(curl -s -b "$C" -c "$C" -G "$WIKI_API" \
   -d action=query -d meta=tokens -d format=json -d formatversion=2 \
   | python3 -c 'import sys,json;print(json.load(sys.stdin)["query"]["tokens"]["csrftoken"])')
@@ -50,6 +52,5 @@ curl -s -b "$C" -c "$C" "$WIKI_API" \
   --data-urlencode "action=purge" \
   --data-urlencode "titles=$TITLES" \
   --data-urlencode "forcelinkupdate=1" \
-  --data-urlencode "token=$CSRF" \
   -d format=json -d formatversion=2 \
   | python3 -m json.tool

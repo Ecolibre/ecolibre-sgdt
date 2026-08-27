@@ -54,11 +54,28 @@ fi
 EDIT_OPTS=(-d assert=user -d format=json -d formatversion=2)
 [ "$CREATEONLY" = 1 ] && EDIT_OPTS+=(-d createonly=1)
 
-curl -s -b "$C" -c "$C" "$WIKI_API" \
+curl -sS -b "$C" -c "$C" "$WIKI_API" \
   --data-urlencode "action=edit" \
   --data-urlencode "title=$PAGE" \
   --data-urlencode "text@$FILE" \
   --data-urlencode "summary=$SUMMARY" \
   --data-urlencode "token=$CSRF" \
   "${EDIT_OPTS[@]}" \
-  | python3 -m json.tool
+  | python3 -c '
+import sys, json
+raw = sys.stdin.read()
+try:
+    d = json.loads(raw)
+except json.JSONDecodeError:
+    sys.stderr.write("ERREUR: réponse non-JSON de l API (transport ?)\n")
+    sys.stdout.write(raw + "\n")
+    sys.exit(1)
+print(json.dumps(d, indent=4, ensure_ascii=False))
+if "error" in d:
+    e = d["error"]
+    sys.stderr.write("ERREUR API: " + e.get("code", "?") + " — " + e.get("info", "") + "\n")
+    sys.exit(1)
+if d.get("edit", {}).get("result") != "Success":
+    sys.stderr.write("ERREUR: édition non confirmée (result != Success)\n")
+    sys.exit(1)
+'

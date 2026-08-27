@@ -38,6 +38,9 @@ set -euo pipefail
 
 readonly WIKI_API="https://wiki.ecolibre.org/api.php"
 
+BODY_TMP="$(mktemp)"
+trap 'rm -f "$BODY_TMP"' EXIT
+
 readonly WRITE_ACTIONS=(
   edit delete move protect block unblock upload import patrol rollback
   undelete userrights emailuser createaccount changecontentmodel
@@ -103,7 +106,7 @@ else
   COOKIES=""
 fi
 
-CURL_OPTS=(-s -G)
+CURL_OPTS=(-sS -G)
 if [ -n "$COOKIES" ]; then
   CURL_OPTS+=(-b "$COOKIES")
 fi
@@ -120,7 +123,24 @@ case "&$PARAMS&" in
   *) EXTRA="${EXTRA}&formatversion=2" ;;
 esac
 
-RESPONSE=$(curl "${CURL_OPTS[@]}" "$WIKI_API" --data "${PARAMS}${EXTRA}")
+HTTP_CODE=$(curl "${CURL_OPTS[@]}" -w '%{http_code}' -o "$BODY_TMP" \
+  "$WIKI_API" --data "${PARAMS}${EXTRA}") || {
+  rc=$?
+  echo "ERREUR: curl a échoué (code $rc) — transport (hôte/proxy/DNS), ou URL mal formée." >&2
+  echo "       Rappel : wiki-api.sh n'encode pas la chaîne — espace => %20, & littéral => %26." >&2
+  exit 1
+}
+RESPONSE=$(cat "$BODY_TMP")
+if [ -z "$RESPONSE" ]; then
+  echo "ERREUR: réponse vide (HTTP ${HTTP_CODE:-?}). Ce n'est PAS « aucun résultat » —" >&2
+  echo "       rien n'est sorti de la machine (proxy, réseau, hôte down)." >&2
+  exit 1
+fi
+if [ "${HTTP_CODE:0:1}" != "2" ]; then
+  echo "ERREUR: HTTP $HTTP_CODE de l'API." >&2
+  printf '%s\n' "$RESPONSE" >&2
+  exit 1
+fi
 
 if [ "$FACTS_MODE" = 1 ]; then
   printf '%s' "$RESPONSE" | python3 -c '
@@ -135,8 +155,20 @@ for p in data:
     vals = [i.get("item") for i in p.get("dataitem", [])]
     print(p["property"], "->", vals)
 '
-elif PRETTY=$(printf '%s' "$RESPONSE" | python3 -m json.tool 2>/dev/null); then
-  echo "$PRETTY"
 else
-  printf '%s\n' "$RESPONSE"
+  printf '%s' "$RESPONSE" | python3 -c '
+import sys, json
+raw = sys.stdin.read()
+try:
+    d = json.loads(raw)
+except json.JSONDecodeError:
+    sys.stderr.write("ERREUR: réponse non-JSON de l API\n")
+    sys.stdout.write(raw + "\n")
+    sys.exit(1)
+print(json.dumps(d, indent=4, ensure_ascii=False))
+if isinstance(d, dict) and "error" in d:
+    e = d["error"]
+    sys.stderr.write("ERREUR API: " + e.get("code", "?") + " — " + e.get("info", "") + "\n")
+    sys.exit(1)
+'
 fi
