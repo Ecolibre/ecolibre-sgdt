@@ -148,9 +148,14 @@ import sys, json
 d = json.load(sys.stdin)
 if "error" in d:
     sys.exit("ERREUR: " + d["error"].get("info", "inconnue"))
-data = d.get("query", {}).get("data")
-if data is None:
-    sys.exit("ERREUR: pas de champ query.data dans la réponse (sujet inexistant, ou réponse inattendue)")
+q = d.get("query", {})
+data = q.get("data")
+if not data:
+    subj = q.get("subject", "?")
+    sys.exit("ERREUR: le sujet « " + subj + " » ne porte aucun fait SMW "
+             "(query.data vide ou absent). Causes possibles : sujet inexistant, "
+             "nom mal orthographié, espace non sémantique, ou écriture pas "
+             "encore propagée. À distinguer de « aucun fait à afficher ».")
 for p in data:
     vals = [i.get("item") for i in p.get("dataitem", [])]
     print(p["property"], "->", vals)
