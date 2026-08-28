@@ -115,8 +115,8 @@ Par ordre d'urgence.
 - **Extension Page Exchange.**
 - **Répertoire de déploiement du vocabulaire.**
 - **Script de création de wiki.**
-- **`$smwgChangePropagationProtection` — un verrou mesuré sur une seule
-  page, pas une règle générale.** Deux versions précédentes de cette
+- **`$smwgChangePropagationProtection` — un verrou mesuré sur trois
+  pages, pas une règle générale.** Deux versions précédentes de cette
   entrée ont chacune généralisé depuis un cas unique, sans le vérifier :
   d'abord un incident ponctuel du 15 août, puis « le verrou se
   redéclenche à chaque création de propriété ». **Ce que le mesuré dit
@@ -128,23 +128,43 @@ Par ordre d'urgence.
     créées avec les 15 pages `Attribut:` de l'incident initial, pas le
     21. `Property_range` corrigé sur les six le 25 août 2026, du premier
     coup, sans aucun refus.
-  - **Une seule page reste bloquée : `Attribut:INSEE code`, depuis sa
-    création le 21 août 2026** (lot 11, tâche 1) — cinq refus
-    `smw-change-propagation-protection` identiques, répartis sur quatre
-    jours, jamais corrigée depuis.
+  - **Trois pages restent bloquées, pas une seule** : `Attribut:INSEE
+    code`, depuis sa création le 21 août 2026 (lot 11, tâche 1) — cinq
+    refus `smw-change-propagation-protection` identiques, répartis sur
+    quatre jours, jamais corrigée depuis ; et depuis le 27 août 2026,
+    `Attribut:Casc parent` et `Attribut:Casc lineage`, toutes deux
+    blanchies la veille (26 août) en préparation de leur suppression.
+    Code d'erreur vérifié le 27 août par
+    `action=query&prop=info&inprop=protection&intestactions=edit&intestactionsdetail=full`
+    sur les deux : `smw-change-propagation-protection` dans les deux
+    cas, identique à celui d'`INSEE code`.
+  - **`protection: []` reste vide sur les trois, tout du long** — mesuré
+    à nouveau le 27 août sur les deux Casc. Ce verrou est **invisible à
+    `prop=info` seul**, quel que soit le nombre de pages concernées : il
+    ne se lit que par `intestactions`, jamais par le champ `protection`.
+  - **Les deux pages Casc sont à supprimer, pas à corriger.** Elles ne
+    portent plus de contenu utile (blanchies), et l'objectif n'est pas
+    de leur rendre un `Has type` mais de les faire disparaître. **Le
+    déblocage demandé sert donc la suppression, pas une réécriture** —
+    différent de la demande sur `INSEE code`, où le but reste de
+    corriger `Property_range` puis de garder la page.
   - **L'anomalie n'est donc pas le verrou lui-même, mais qu'il ne se
-    lève pas sur cette page précise.** Un verrou temporaire à la création
+    lève pas sur ces pages précises.** Un verrou temporaire à la création
     d'une propriété, le temps que sa propagation se termine, est le
     comportement documenté de SMW — cohérent avec les trois refus
     essuyés juste après la création d'`INSEE_code`. **Mais aucun des six
-    cas mesurés ne teste une création** : les six sont des pages
+    cas déjà mesurés ne teste une création** : les six sont des pages
     existantes, éditées après coup. Si une création déclenche
     normalement un verrou temporaire qui se lève de lui-même, ça reste
     **non testé** — le seul cas de création disponible est justement
     celui qui ne s'est jamais levé, ce qui ne permet pas de trancher.
+    Les deux Casc ajoutent un troisième déclencheur possible, distinct
+    d'une création : **un blanchiment retirant `Has type` avant
+    suppression**, qui semble avoir déclenché sa propre propagation,
+    elle aussi coincée.
 
   **Demande à fuzzy** — deux pistes, pas une certitude sur laquelle
-  trancher depuis ce côté-ci :
+  trancher depuis ce côté-ci, à appliquer aux trois pages :
   1. Vérifier `$smwgChangePropagationProtection` dans
      `LocalSettings_ecolibre.php` (valeur actuelle jamais lue
      directement depuis ici).
@@ -155,6 +175,9 @@ Par ordre d'urgence.
      de cette page (`lot-9-tache0-rapport.md` §10, file déjà vide au
      moment du blocage) — deux cas qui se ressemblent en surface, pas
      nécessairement la même cause.
+
+  Pour `Attribut:Casc parent` et `Attribut:Casc lineage`, le déblocage
+  demandé n'a qu'un seul usage prévu : les supprimer aussitôt débloquées.
 
 - **`$smwgNamespacesWithSemanticLinks` — les espaces `Modèle` (10),
   `Formulaire` (106) et `Module` (828) n'y sont pas.** À discuter avec fuzzy,
