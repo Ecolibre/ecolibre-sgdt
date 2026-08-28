@@ -396,6 +396,13 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   **Avant de déclarer une correction impossible, tenter l'écriture sur
   un cas — le refus coûte moins cher que la dette.**
 
+- **Une mesure qui contredit une page du wiki n'est pas terminée tant que
+  cette page n'est pas corrigée.** Le 28 août 2026, trois entrées de
+  *Limites connues* (n° 16, 24, 25) se sont révélées démenties par des
+  mesures du lot 11 lui-même, notées ailleurs et jamais reportées. **Après
+  toute mesure qui infirme quelque chose, chercher où cette chose est
+  écrite avant de passer à la suite.**
+
 ## Garde-fous d'exécution (dépôt git)
 
 - **État propre avant toute opération destructive ou massive dans le
