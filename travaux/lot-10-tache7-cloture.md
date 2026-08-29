@@ -416,3 +416,63 @@ Vérifications faites (détail dans le rapport terminal) :
 - Chaque lien GitHub contient le SHA du commit de ce rapport, jamais un nom
   de branche.
 - Liste des lots relue : trou unique au lot 7, signalé, non comblé.
+
+---
+
+## 8. Rectification du 29 août 2026 (même jour, session suivante)
+
+La page `Gestion des lots` avait été rédigée en partie d'après les trois
+affirmations fausses de la consigne de la tâche 7 (voir §3, points 4, 6, 7).
+Deux lots à venir en portaient la trace — `Navigation` et `Images` —
+formulés comme si `format=tree`/`format=outline` ne rendaient rien et comme
+si `Main_image` n'était câblée nulle part.
+
+**Vérifications refaites** (ne pas se fier au §3, le remesurer) :
+
+| Point | Mesure du 29 août 2026 | Verdict |
+|---|---|---|
+| `format=tree` sur `Catégorie:Functional item` | section « Hiérarchie (Format Arbre) » : **1113 caractères rendus**, arbre complet depuis « Assurer les besoins vitaux » | **fonctionne** |
+| `format=outline` | section « Arborescence textuelle » : **1145 caractères rendus**, liste complète (Assembler, Braser tendre inclus) | **fonctionne** |
+| bloc Mermaid | section « Visualisation … (Mermaid) » : **77 caractères** — le titre et la note seuls ; `<div class="ext-mermaid">` présent mais graphe non rendu (contenu généré malformé) | **cassé** |
+| `format=datatable` (« Tableau de bord ») | **0 caractère rendu** — hors périmètre, signalé pour mémoire | ne rend rien |
+| `Main_image` — `Modèle:Physical facet plant` | **2 occurrences** : ligne de stockage dans le `#set` (`Main_image={{#if:{{{Main_image|}}}|Fichier:{{{Main_image|}}}|}}`), ligne d'affichage `[[File:{{{Main_image|}}}|200px]]` avec repli `''non choisie''` | **câblée** |
+| `Main_image` — `Formulaire:Physical item/bloc facette végétal` | `{{{field|Main_image|input type=text|uploadable}}}` | **câblée** |
+| `Main_image` ailleurs | absente de `Modèle:Physical item`, `Formulaire:Physical item`, `Modèle:Organic facet plant`, `Modèle:Organic facet fitting`, `Modèle:Functional item` ; **aucun `Modèle:Physical facet fitting`/`raccord` n'existe** | non câblée hors facette végétal |
+| `Main_image` portée par une page | `[[Main_image::+]]` → **0** | portée par aucune page |
+| `CLAUDE.md` corrections n° 3 / n° 4 | n° 3 = « `Module:Base36` s'arrête au tiret » → **ouverte** ; n° 4 = « `+sep=,` sur `Part_of` de `Modèle:Referenced item` » → **fermée**, et `Modèle:Referenced item` porte bien `|Part_of={{{Part_of|}}}` puis `|+sep=,` | liste conforme au wiki |
+
+**Corrections appliquées à `Gestion des lots`** (rév. 1126, résumé
+`[Lot 10][Correctif] …`) :
+
+- Lot **Navigation** réécrit : `format=tree` et `format=outline` fonctionnent
+  et rendent déjà l'arbre fonctionnel complet ; le lot part d'une base
+  éprouvée ; reste à replier les blocs (`mw-collapsible`), les porter sur les
+  quatre modèles d'item, et **réparer le bloc Mermaid** ; `CategoryTree`
+  reste écarté.
+- Lot **Images** réécrit : `Main_image` est câblée dans la facette végétale
+  (`Modèle:Physical facet plant` — stockage, affichage 200 px, « non
+  choisie » ; champ `uploadable` dans le bloc de formulaire), portée par
+  aucune page ; le lot **étend ce mécanisme existant aux autres facettes**
+  plutôt que d'en créer un ; le reste inchangé (relation fichier → sujet,
+  fichier non rattaché, item sans image locale).
+- Lot **Corrections `Module:Base36`** : inchangé — il ne prétendait pas que
+  la liste de `CLAUDE.md` était en retard sur le wiki. Rien à corriger.
+- **Ligne de rectification datée** ajoutée en fin de section « Lots à venir »,
+  renvoyant au §3 de ce rapport. La correction est visible, pas masquée.
+
+**Ce rapport lui-même :** les trois affirmations fausses n'y figuraient déjà
+que dans le §3, chacune présentée puis rectifiée sur place (marquées `[écart
+consigne]`). Aucune ne subsistait ailleurs — ni au §2 (« ce qui a été
+fait »), ni au §4 (« ce qui reste ouvert »). Aucune correction sur place
+n'a donc été nécessaire dans le corps du rapport ; seule cette section 8 est
+ajoutée.
+
+**Vérifications post-correction :**
+
+- `browsebysubject` sur `Gestion des lots` : `_MDAT`, `_SKEY` seuls — aucune
+  propriété du modèle de données, la page reste statique.
+- Aucun `[[ ]]` littéral au rendu (seule exception voulue :
+  `<code><nowiki>[[SMW::off]]</nowiki></code>` cité en exemple du bug
+  Mermaid).
+- Les liens GitHub portent toujours le SHA `3a0e7af…`, jamais un nom de
+  branche.
