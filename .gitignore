@@ -21,3 +21,6 @@ travaux/*
 .stfolder/
 .stversions/
 *.sync-conflict-*
+
+# Échanges privés avec l adminsys — jamais publiés
+echange/
