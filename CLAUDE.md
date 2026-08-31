@@ -352,12 +352,26 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   `browsebysubject` **sur cette page**, pour vérifier qu'elle ne porte que
   `_MDAT` et `_SKEY`. Une page qui décrit le modèle de données peut le polluer.
 
-- **Les backticks ne protègent rien en wikitexte.** Un exemple de syntaxe
-  SMW écrit entre backticks s'exécute comme une vraie annotation ou une
-  vraie requête. Seul `<nowiki>` protège. Ce piège est passé deux fois
-  dans la session du 21 août 2026 (`LOC` dans `Attribut:Location site`,
-  puis trois fragments dans *Limites connues*). Le patron maison est
-  `<code><nowiki>…</nowiki></code>`.
+- **Les backticks ne protègent rien en wikitexte — ni `<code>`.** Un exemple
+  de syntaxe SMW ou de lien écrit entre backticks, ou entre balises `<code>`,
+  s'exécute comme une vraie annotation, une vraie requête ou un vrai lien.
+  Seul `<nowiki>` protège, y compris à l'intérieur de `<code>` : le patron
+  maison est `<code><nowiki>…</nowiki></code>`. Ce piège est passé trois
+  fois : deux dans la session du 21 août 2026 (`LOC` dans
+  `Attribut:Location site`, puis trois fragments dans *Limites connues*) ;
+  une troisième le 31 août 2026 sur *Récapitulatif technique du SGDT*, où
+  deux exemples entourés de `<code>` mais non échappés produisaient un vrai
+  lien de fichier brisé et un vrai lien de page — la page en portait la
+  catégorie de suivi des liens de fichiers brisés depuis la révision 1088,
+  des semaines avant qu'on le voie.
+
+  **Le contrôle qui attrape ce piège est l'examen des _catégories_ de la
+  page après écriture** (`prop=categories`), pas la relecture du texte : une
+  catégorie de suivi apparue sans qu'on l'ait posée — liens brisés, liens de
+  fichiers brisés — signale une syntaxe non échappée, invisible au wikitexte
+  et capable de vivre des semaines. Complète le contrôle `browsebysubject`
+  de la leçon précédente : celui-ci voit les annotations parasites, celui-là
+  les liens parasites.
 
 - **Deux contrôles distincts, qui ne se recouvrent pas.** `Erreurs de
   traitement SMW` (`[[_ERRC::+]]`) voit les valeurs **rejetées** par SMW.
@@ -402,6 +416,45 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   mesures du lot 11 lui-même, notées ailleurs et jamais reportées. **Après
   toute mesure qui infirme quelque chose, chercher où cette chose est
   écrite avant de passer à la suite.**
+
+- **`bin/wiki-wait-jobs.sh` annonce une panne qui n'existe pas.** Il a
+  signalé « FILE FIGEE » quatre fois pendant la session des 29-31 août 2026
+  — à 4, 9, 11 puis 13 travaux — alors que `runJobs.php` répondait « Job
+  queue is empty » côté serveur et que l'API annonçait zéro. Le nombre qu'il
+  lit vient de `action=query&meta=siteinfo&siprop=statistics`, clé `jobs`,
+  qui rend une **estimation plafonnée, pas un décompte** (déjà noté dans
+  *Limites connues*, et constaté à 100 travaux dans
+  `travaux/owned-by-execution.md` sans que le script change). **Une file
+  annoncée non vide n'est pas un diagnostic de panne** et ne justifie ni de
+  réécrire, ni d'attendre : le seul contrôle qui tranche est `runJobs.php`
+  côté serveur. Le libellé du script (« FILE FIGEE », « FILE NON VIDE ») est
+  à reprendre — dette d'outillage ouverte : un outil qui crie au loup finit
+  ignoré le jour où il a raison.
+
+- **Une mesure ne vaut que si elle mesure ce qu'on croit.** Quatre
+  affirmations fausses ont été écrites dans des consignes *validées* pendant
+  la session des 29-31 août 2026, toutes de la même cause :
+  - deux formats de requête (`format=tree`, `format=outline`) déclarés
+    inopérants parce qu'on avait cherché leur nom dans le HTML produit — un
+    format ne signe pas sa sortie. Ils rendaient un arbre complet.
+  - une propriété (`Main_image`) déclarée câblée nulle part après examen de
+    deux modèles sur les vingt-sept de l'espace `Modèle`. Elle l'était dans
+    un troisième.
+  - une numérotation de correction citée de mémoire alors que le fichier
+    était ouvrable.
+  - une traçabilité de rapports déclarée commencer six lots trop tard, parce
+    qu'un `ls` ne montrait que les fichiers nommés par lot, sans ouvrir les
+    rapports datés qui portent leur numéro en titre interne.
+
+  **Avant d'écrire une absence, dire par quelle mesure on l'a établie, et
+  vérifier que cette mesure pouvait la détecter.** Une absence se prouve plus
+  difficilement qu'une présence ; un contrôle par mot-clé dans une sortie ne
+  prouve rien.
+
+  **La contrepartie, et c'est elle qui a fonctionné :** ces quatre erreurs
+  ont toutes été rattrapées par la vérification *exigée dans la consigne
+  elle-même*, jamais par son auteur. Une consigne doit demander de vérifier
+  ce qu'elle affirme — y compris contre celui qui l'écrit.
 
 ## Garde-fous d'exécution (dépôt git)
 
