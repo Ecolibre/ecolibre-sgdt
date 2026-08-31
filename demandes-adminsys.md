@@ -57,12 +57,24 @@ Par ordre d'urgence.
 
 ### 2.2 Configuration
 
-- **Collation `uca-fr` — le tri du wiki est aujourd'hui binaire.** Constat du
-  17 août 2026 : le tri SMW se fait sur les points de code. `Égopode`
-  (`É` = U+00C9) tombe après `Yacon` (`Y` = U+0059), et `Hémérocalle` après
-  `Hysope`. Mesuré en prévisualisation sur `Le Buisson de Cerzat`, sans
-  écriture. **Conséquence : aucune vue du wiki ne peut reposer sur un tri
-  alphabétique** tant que ce réglage n'a pas changé.
+- **Collation `uca-fr` — FAIT, appliqué côté serveur les 18-19 août 2026.**
+  Le tri du wiki, jusque-là binaire, est désormais linguistique (`uca-fr`).
+  Le correctif « tri alphabétique » de `Modèle:Lieu` du 19 août 2026 en
+  découlait déjà. Vérifié le 29 août 2026 et revérifié le 31 : sur les 38
+  items référencés triés par ordre alphabétique, « Égopode Escuroux 2025 »
+  se classe 13ᵉ, entre « Crosnes du Japon Armand 2026 » et « Fer à souder
+  Quicko T12-942 » — le « É » est trié avec le « E ». L'interdit de tout tri
+  alphabétique qui pesait sur les lots 9 et 10 est levé. L'historique de la
+  demande est conservé ci-dessous : c'est lui qui explique pourquoi le
+  réglage est double (`$wgCategoryCollation` + `$smwgEntityCollation`) et
+  pourquoi l'ordre des scripts compte — à relire pour le wiki de l'Atelier
+  du Dôme.
+
+  Constat initial du 17 août 2026 : le tri SMW se faisait sur les points de
+  code. `Égopode` (`É` = U+00C9) tombait après `Yacon` (`Y` = U+0059), et
+  `Hémérocalle` après `Hysope`. Mesuré en prévisualisation sur `Le Buisson
+  de Cerzat`, sans écriture. **Conséquence, tant que le réglage n'avait pas
+  changé : aucune vue du wiki ne pouvait reposer sur un tri alphabétique.**
 
   > **Incident du 18 août 2026.** Cette demande, telle qu'elle était rédigée
   > jusqu'ici — deux commandes seulement, sans passage préalable par

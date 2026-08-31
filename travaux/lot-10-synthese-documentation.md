@@ -913,3 +913,159 @@ Rappel des contrôles à faire **après** les écritures, une fois le plan valid
    non — §7 point 5.
 
 **Aucune écriture wiki tant que ces points ne sont pas tranchés.**
+
+---
+
+## 9. Exécution — 31 août 2026
+
+Plan validé par Cyril, huit points de la section 8 tranchés (relais du
+31 août). Point d'arrêt levé. Session de lecture expirée relancée avant
+écriture (`bin/wiki-login.sh`).
+
+### 9.1 Décisions appliquées
+
+| # | Décision de Cyril | Traduction dans l'écriture |
+|---|---|---|
+| 1 | Étape 4 : option 2, **plus courte** — rien sur les lots 2/4 ni sur `diffs/` | Deux phrases dans « Lots livrés » : les rapports remontent au lot 1, nomenclature par session datée avant le lot 8, par tâche après. |
+| 2 | Entrée 41 : **contrainte levée**, citer la mesure | Entrée 41 rédigée « la contrainte de collation binaire est levée » ; mesure du 29 août (Égopode 13ᵉ/38 entre Crosnes du Japon et Fer à souder) revérifiée le 31 et citée en clair. |
+| 3 | Deux motifs techniques **séparés** | Motif 1 (`#ask` imbriqué) → `== Contraintes de rédaction des modèles ==` ; Motif 2 (chaînes inverses) → sous-section `=== Navigation par chaînes de propriétés inverses ===` en fin de `== Requêtes portées par les pages ==`. |
+| 4 | `Design_source` : **sous-section à elle** | `=== Design_source : le wiki ne porte pas les sources de conception ===`, juste après la sous-section des procédés. |
+| 5 | Intro de « Numérotation » : **retoucher** | « indépendante de la séquence Base 36 » remplacé par « Trois compteurs séparés … mais tous en Base 36 … ce qui diffère, c'est la séquence, pas l'encodage ». |
+| 6 | Renvoi `demandes-adminsys.md` : **explicite** | Le Récapitulatif écrit noir sur blanc : STEP, STL, ZIP, InstantCommons ne sont demandés nulle part ; seul le SVG a une demande (§2.2). |
+| 7 | Décompte des `#ask` par page : **ne rien ajouter** | Section `== Requêtes portées par les pages ==` inchangée hormis la nouvelle sous-section du motif 2. |
+| 8 | `demandes-adminsys.md` §2.2 : **corriger dans la même passe** | Entrée de collation marquée « FAIT, appliqué côté serveur les 18-19 août 2026 », mesure du 29/31 août citée, historique (incident du 18, double réglage, ordre des scripts) conservé intégralement. |
+
+### 9.2 Diffs appliqués — un par édition
+
+**Récapitulatif technique** (rev. 1088 → 1140, 29 128 → 35 679 octets, +6 551) :
+
+| Rev. | Résumé | Emplacement |
+|---|---|---|
+| 1129 | sous-section « Les procédés : un sous-ensemble marqué des items fonctionnels » | fin de `== Les quatre classes ==`, avant `== Facettes ==` |
+| 1130 | sous-section « Design_source : le wiki ne porte pas les sources de conception » | juste après 1129 |
+| 1131 | `Corresponds_to_organic` multivaluée | nouveau tiret dans `== Règles implicites ==`, après `Realizes_function` |
+| 1132 | nom d'item organique sans virgule | nouveau tiret dans `== Règles métier ==` |
+| 1133 | Numérotation : compteurs séparés / même encodage Base 36 + CWL premier détenteur partenaire | intro retouchée, 3ᵉ point étendu (CWL-0008…CWL-000B), 5ᵉ point ajouté (« Quatre points » → « Cinq points ») |
+| 1134 | Location_lineage : le lot 12 a tranché — cascade bornée, pas de lignée matérialisée | **passage périmé réécrit** (« Aucune voie de remplacement n'a été arbitrée » supprimé), remplacé par un texte plus long, avec `[[Lot 12 — Contenants et étiquetage]]` sur une seule ligne |
+| 1135 | Types de fichiers : STEP/STL/ZIP refusés, InstantCommons inactif, seul le SVG demandé | `=== Types de fichiers autorisés ===` |
+| 1136 | Motif 1 : `#ask` imbriqué appelé en `format=template` fonctionne, avec son propre `default` | 4ᵉ paragraphe de `== Contraintes de rédaction des modèles ==` |
+| 1137 | Motif 2 : sous-section « Navigation par chaînes de propriétés inverses » | fin de `== Requêtes portées par les pages ==` |
+| 1140 | `[Correctif]` — voir §9.4 | `== Contraintes de rédaction des modèles ==` |
+
+**Limites connues** (rev. → 1138, 29 734 → 34 895 octets, +5 161) : une seule
+édition, entrées **35 à 41** appendues à la liste numérotée (34 → 41 entrées).
+
+- 35 — index de recherche plein-texte partiel (`rebuildtextindex.php`, relève de Cyril).
+- 36 — bloc Mermaid de `Catégorie:Functional item` mort ; `format=tree`/`outline` de la même page rendent l'arbre (1175 / 1204 car.), **sous la réserve de parent unique de la n° 2**.
+- 37 — `Main_image` câblée dans la seule facette végétale, portée par aucune page.
+- 38 — `Manufacturer` et `Materials_worked` de type Page, liens rouges ; renvoi à la **n° 12** (pages de fournisseur nues).
+- 39 — `Assembler` et `Maintenir en position` sans `Practice_domain` : invisibles à tout tri **et tout filtre** par domaine ; renvoi à la **n° 18**.
+- 40 — le modèle ne distingue pas une référence retirée d'une référence jamais utilisée ; prolonge la **n° 11** (`000J`) ; traitement au lot de numérotation.
+- 41 — contrainte de collation binaire **levée** (`uca-fr` depuis les 18-19 août 2026) ; mesure citée ; renvoi à `demandes-adminsys.md` §2.2 mis à jour.
+
+**Gestion des lots** (rev. → 1139, 10 542 → 10 746 octets, +204) : une phrase
+de deux propositions dans `== Lots livrés ==`, après le paragraphe des
+permaliens.
+
+**`demandes-adminsys.md`** (dépôt) : §2.2, entrée de collation reformulée en
+« FAIT », mesure datée, historique conservé.
+
+### 9.3 Mesures refaites le 31 août 2026 (avant écriture)
+
+| Mesure | Résultat | Usage |
+|---|---|---|
+| `Catégorie:Procédé`, membres | 5 : Assembler, Braser tendre, Maintenir en position, Mesurer une grandeur électrique, Souder par points | sous-section procédés |
+| `[[Location_lineage::+]]` (liste) | vide | sous-section Location_lineage, entrée … |
+| `[[Main_image::+]]` (liste) | vide | entrée 37 |
+| `[[Category:Referenced item]]` trié alpha. | 38 résultats ; Égopode 13ᵉ (entre Crosnes du Japon 12ᵉ et Fer à souder 14ᵉ) ; Hémérocalle 22ᵉ (entre Helianthi 21ᵉ et Hysope 23ᵉ) | entrée 41, `demandes-adminsys.md` §2.2 |
+
+Piège confirmé au passage : `format=count` via `action=ask` rend `count: 0`
+avec le hash de résultat vide (`8abf92b9…`) — la vérification s'est faite en
+**liste**, pas en `count` (entrée n° 29 des Limites connues).
+
+### 9.4 Contradiction résolue en cours de route — `[Correctif]` rev. 1140
+
+`browsebysubject` sur le Récapitulatif après les neuf éditions rendait, en
+plus de `_MDAT`/`_SKEY`/`_INST:SGDT`/`_ASK`, l'appartenance à
+**`Catégorie:Pages avec des liens de fichiers brisés`**. Vérifié : elle était
+**déjà présente à la rev. 1088**, donc antérieure à cette session. Cause : la
+ligne d'exemple de `== Contraintes de rédaction des modèles ==` —
+`<code>[[a|b]]</code> et <code>[[File:x|150px]]</code>` — n'était pas dans
+`<nowiki>`. `<code>` ne protège rien : `[[File:x|150px]]` était rendu comme un
+vrai lien de fichier (brisé, `File:x` n'existe pas) et `[[a|b]]` comme un vrai
+lien vers la page « a ».
+
+Étape 3 de la consigne demande explicitement de corriger toute syntaxe
+échappée au `<nowiki>` trouvée en vérification. Édition `[Correctif]` (rev.
+1140) : les deux exemples passés en `<code><nowiki>…</nowiki></code>`. Après
+purge, la catégorie de suivi a disparu — le Récapitulatif ne porte plus que
+`Catégorie:SGDT`.
+
+### 9.5 État final des trois pages wiki
+
+`browsebysubject` (après purge, file de travaux vidée) :
+
+| Page | Propriétés portées | Verdict |
+|---|---|---|
+| Récapitulatif | `_MDAT`, `_SKEY`, `_INST → SGDT` (catégorie voulue), `_ASK` + sous-objets `_QUERY` (les ~18 `#ask` préexistants) | **propre** — aucune annotation `[[Propriété::valeur]]` parasite |
+| Limites connues | `_MDAT`, `_SKEY` seuls | **propre** |
+| Gestion des lots | `_MDAT`, `_SKEY` seuls | **propre** |
+
+Rendu HTML des trois pages passé au crible (`action=parse&prop=text`, chasse
+aux `[[`, `]]`, `{{`, `}}` littéraux hors `<pre>`) : les seuls crochets
+littéraux visibles sont (a) les exemples volontairement échappés en
+`<nowiki>` que j'ai ajoutés (`{{#mermaid:}}`, `[[Main_image::+]]`,
+`[[SMW::off]]`, `?-Realizes_function.…`), (b) des exemples préexistants déjà
+en `<nowiki>`, (c) les vidages de source de modèle via `#invoke:Source` dans
+`{{#tag:pre|…}}` (section « 2. Modèles de Structure »), non exécutés. Aucun
+littéral échappé au `<nowiki>` dans le texte que j'ai écrit.
+
+Tailles : les trois pages **grossissent** (+6 551, +5 161, +204 octets).
+Aucune diminution. Le seul passage existant réécrit — Location_lineage — est
+remplacé par un texte plus long, rien n'est supprimé ailleurs.
+
+### 9.6 Contradictions — résolues et subsistantes
+
+**Résolues :**
+
+1. **Récapitulatif, intro « Numérotation » vs. encodage Base 36.** « les items
+   physiques ont leur propre numérotation, indépendante de la séquence Base 36
+   des trois classes de conception » se lisait comme « l'inventaire n'est pas
+   en Base 36 ». Réécrit (décision 5) : trois compteurs séparés, même encodage
+   Base 36, « ce qui diffère, c'est la séquence, pas l'encodage ». Le
+   5ᵉ point de la liste le redit en clair. La formule « indépendante de la
+   séquence **de conception** » subsiste au tiret « Les items physiques ne
+   portent pas `Item_ref` » de `== Règles implicites ==` : elle est juste
+   (le compteur est bien séparé) et ne dit rien de l'encodage — laissée
+   telle quelle.
+2. **Récapitulatif, Location_lineage : « Aucune voie de remplacement n'a été
+   arbitrée ».** Démentie par le cadrage du lot 12. Passage réécrit (rev.
+   1134). Grep de contrôle : « arbitrée à ce jour » et « Aucune voie »
+   absents de la page finale.
+3. **`Catégorie:Pages avec des liens de fichiers brisés`** sur le
+   Récapitulatif — voir §9.4, corrigée rev. 1140 (préexistante, pas induite
+   par cette session).
+
+**Subsistantes (hors périmètre, signalées) :**
+
+- **Rapport de clôture du lot 10, §4 point 5 : renvoi « limite connue n° 9 »**
+  pour les pages de fournisseur nues, alors que c'est la **n° 12** dans la
+  numérotation en vigueur. L'entrée 38 pointe la n° 12 ; le rapport de
+  clôture n'est pas corrigé (c'est un document de `travaux/`, figé).
+- **`Attribut:Inventory_number`** dit « Identifiant Base 36 de 4 caractères »,
+  pas littéralement « 000A suit 0009 ». Le 5ᵉ point de « Numérotation » et
+  l'arbitrage §5 du rapport de clôture glosent la définition ; cohérent, mais
+  ce n'est pas une citation. Rien à corriger, à savoir.
+- **Décompte « Dix requêtes sont portées directement par des pages »**
+  (Récapitulatif, `== Requêtes portées par les pages ==`) : inchangé sur
+  décision de Cyril (point 7). Le lot 10 a ajouté des pages portant des
+  `#ask` (`Procédés et outils`, `Modèle:Procédés et outils/ligne`) ; le
+  chiffre « dix » et le tableau par page ne sont donc plus à jour, mais un
+  comptage tenu à la main se re-périmerait à la prochaine écriture.
+
+### 9.7 Vérifications de dépôt
+
+Après commit : `git show --stat <hash>` joint au rapport terminal.
+`demandes-adminsys.md` est le seul fichier du dépôt modifié par cette passe
+(hors ce rapport). `.gitignore` portait déjà une modification non commitée en
+début de session, étrangère à cette tâche — non touchée, non commitée ici.
