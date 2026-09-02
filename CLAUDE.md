@@ -154,6 +154,13 @@ Ce que Cyril peut lancer seul, et ce qui relève de fuzzy : voir
    Une écriture qui ne relève d'aucun lot en cours porte `[Correctif]
    <action>`, jamais un numéro de lot : ne jamais réserver un numéro de lot
    pour une correction ponctuelle.
+
+   **L'étiquette de lot ne se remplace jamais : un correctif écrit pendant
+   un lot porte les deux, dans l'ordre `[Lot N][Correctif]`.** La datation
+   d'un lot et l'inventaire de ce qu'il a touché se lisent tous deux dans
+   les résumés de modification : une écriture sans étiquette de lot en
+   sort. Constaté sur le lot 13, où quatorze écritures sur quatre-vingt-huit
+   sont devenues orphelines.
 3. **`createonly=1`** sur toute création de page. Si la page existe déjà, l'appel
    doit échouer et remonter (code de sortie non nul), jamais écraser. Effectif
    par le code de sortie depuis le 28 août 2026 seulement — avant, `wiki-put.sh`
