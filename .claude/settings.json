@@ -28,6 +28,7 @@
     "allow": [
       "Bash(bin/wiki-get.sh:*)",
       "Bash(bin/wiki-put.sh:*)",
+      "Bash(bin/wiki-move.sh:*)",
       "Bash(bin/wiki-purge.sh:*)",
       "Bash(bin/wiki-api.sh:*)",
       "Bash(bin/wiki-login.sh:*)",
