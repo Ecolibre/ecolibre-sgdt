@@ -20,6 +20,8 @@ et vérifier qu'un fait nouveau n'y figure pas déjà avant de l'écrire ailleur
 - `Notes en attente de rangement` — le sas des idées non rangées.
 - `Procédure de clôture d'un lot` — comment un lot passe de livré à clos.
 
+Et dans ce dépôt : `methode-de-travail.md` décrit le protocole entre les intervenants — qui décide quoi, dans quel ordre, sous quelle forme.
+
 ## Outils disponibles
 - `bin/wiki-login.sh` — ouvrir la session (à faire une fois par session de travail)
 - `bin/wiki-get.sh "Page"` — lire le wikitexte d'une page (lecture seule, GET
