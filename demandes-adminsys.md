@@ -140,10 +140,12 @@ Par ordre d'urgence.
     créées avec les 15 pages `Attribut:` de l'incident initial, pas le
     21. `Property_range` corrigé sur les six le 25 août 2026, du premier
     coup, sans aucun refus.
-  - **Trois pages restent bloquées, pas une seule** : `Attribut:INSEE
+  - **Trois pages sont restées bloquées, pas une seule — puis se sont
+    débloquées d'elles-mêmes, avant le 31 août 2026, revérifié le
+    2 septembre 2026** : `Attribut:INSEE
     code`, depuis sa création le 21 août 2026 (lot 11, tâche 1) — cinq
     refus `smw-change-propagation-protection` identiques, répartis sur
-    quatre jours, jamais corrigée depuis ; et depuis le 27 août 2026,
+    quatre jours ; et depuis le 27 août 2026,
     `Attribut:Casc parent` et `Attribut:Casc lineage`, toutes deux
     blanchies la veille (26 août) en préparation de leur suppression.
     Code d'erreur vérifié le 27 août par
