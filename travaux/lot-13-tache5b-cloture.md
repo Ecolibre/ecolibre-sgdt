@@ -402,3 +402,71 @@ pour toute écriture.
 et applique elle-même, dans son propre résumé de commit et dans son propre
 résumé d'édition wiki, la règle qu'elle vient de préciser — la première
 occasion de la suivre était la sienne, et elle ne l'a pas manquée.
+
+---
+
+## Tâche 5e — rendre la procédure de clôture lançable
+
+**Exécuté le :** 2 septembre 2026 (21h20-21h37 UTC), même session. Les deux
+pages relues par `wiki-get.sh` immédiatement avant écriture ; la non-dérive
+de `Procédure de clôture d'un lot` vérifiée en reconstruisant le texte
+d'origine à partir du texte édité (retrait programmatique des deux blocs
+insérés) et en le comparant à une relecture fraîche — zéro différence.
+
+### Étape 1 — Section « Où lancer cette procédure »
+
+Insérée entre le paragraphe d'introduction et `== 1. Relire les échanges du
+lot ==`, texte conforme mot pour mot, bloc `<pre>` inclus. Rien d'autre
+touché. Même édition que l'étape 2 (voir ci-dessous) : `oldrevid` 1245 →
+`newrevid` 1255, résumé `[Lot 13][Tâche 5e] Section « Où lancer cette
+procédure » ajoutée, et point sur les arbitrages restés dans le dépôt
+complété en section 3`.
+
+### Étape 2 — Complément à la section 3
+
+Paragraphe sur les arbitrages « à ne pas rejouer » du lot 10 ajouté à la
+fin de la section « 3. Ranger chaque trouvaille », après le paragraphe sur
+les idées écartées. Même édition que l'étape 1, pour la raison déjà
+appliquée à la tâche 5c : les deux corrections touchent la même page, dans
+le même mouvement, sous un même résumé qui nomme les deux.
+
+### Étape 3 — Point ouvert du lot 13 complété
+
+Sur `Lot 13 — Gestion des lots en classe sémantique`, la phrase sur le
+lancement de la procédure ajoutée à la fin du second paragraphe des
+points ouverts, sans rien remplacer. `oldrevid` 1251 → `newrevid` 1256,
+résumé `[Lot 13][Tâche 5e] Points ouverts — comment la procédure de
+clôture se lancera`.
+
+### Étape 4 — Les quatre contrôles
+
+**1. Le bloc `<pre>` n'a produit ni lien, ni modèle, ni annotation.**
+`action=parse&prop=text|links|templates|categories` sur la procédure :
+`links` ne retourne que les trois liens déjà présents avant cette tâche
+(`Gestion des lots`, `Limites connues...`, `Notes en attente de
+rangement`) ; `templates` est vide ; `categories` ne porte que
+`Page_de_suivi`, inchangée. Le HTML rendu montre le bloc `<pre>` reproduit
+tel quel, la seule transformation étant celle que MediaWiki applique à
+toute la page — l'espace insécable avant les deux-points français
+(`&#160;`) — pas une interprétation de wikitexte.
+
+**2. `browsebysubject` sur la procédure : aucune annotation.** `_INST`,
+`_MDAT`, `_SKEY` seulement.
+
+**3. Sections dans l'ordre attendu.** `grep "^=="` après écriture :
+« Où lancer cette procédure », puis les cinq sections numérotées 1 à 5,
+dans le même ordre qu'avant — une seule section ajoutée, à la bonne place,
+aucune renommée ni déplacée.
+
+**4. `Lot 13` sans annotation nouvelle.** `browsebysubject` : mêmes
+propriétés `Work_package_*` et mêmes clés soulignées qu'avant cette
+écriture, seul `_MDAT` a changé.
+
+### Écarts et surprises — Tâche 5e
+
+**Aucun.** Les trois écritures sont conformes mot pour mot à la consigne,
+et les quatre contrôles sont positifs sans réserve. Seule chose à noter
+pour la suite, pas un écart : cette tâche a doté la procédure du mécanisme
+qui permettra, à la première clôture réelle, de vérifier si elle est
+suivie telle qu'écrite — jusqu'ici, elle n'a été qu'éprouvée par extraits
+(tâche 5b, étape 2), jamais lancée en entier depuis une conversation.
