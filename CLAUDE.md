@@ -3,6 +3,23 @@
 Wiki : https://wiki.ecolibre.org — MediaWiki + Semantic MediaWiki, Page Forms,
 Scribunto/Lua, Semantic Result Formats.
 
+## Pages de référence sur le wiki
+
+Le wiki fait autorité, pas ce fichier. Lire ces pages à l'ouverture d'un lot,
+et vérifier qu'un fait nouveau n'y figure pas déjà avant de l'écrire ailleurs.
+
+- `Catégorie:Page de suivi` — la liste de ces pages et le rôle de chacune.
+  Point d'entrée.
+- `Gestion des lots` — l'index des lots, construit par requête. Ne jamais y
+  ajouter de ligne à la main.
+- `Limites connues du Système de Gestion de Données Techniques` — les faits
+  mesurés sur cette installation, les dettes et les limites assumées. Y
+  chercher avant de diagnostiquer.
+- `Récapitulatif technique du Système de Gestion de Données Techniques` —
+  l'état du modèle de données.
+- `Notes en attente de rangement` — le sas des idées non rangées.
+- `Procédure de clôture d'un lot` — comment un lot passe de livré à clos.
+
 ## Outils disponibles
 - `bin/wiki-login.sh` — ouvrir la session (à faire une fois par session de travail)
 - `bin/wiki-get.sh "Page"` — lire le wikitexte d'une page (lecture seule, GET
@@ -455,6 +472,13 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   ont toutes été rattrapées par la vérification *exigée dans la consigne
   elle-même*, jamais par son auteur. Une consigne doit demander de vérifier
   ce qu'elle affirme — y compris contre celui qui l'écrit.
+
+- **Le wikitexte fourni pour être collé ne s'enveloppe jamais.** Une ligne
+  logique tient sur une ligne physique, même longue. Un saut de ligne à
+  l'intérieur d'un élément de liste le coupe en deux au rendu, et un saut de
+  ligne à l'intérieur d'un lien le casse. Les paragraphes ordinaires y
+  survivent, les listes et les liens non. Incident du 12 août 2026,
+  reproduit le 1er septembre 2026 sur *Notes en attente de rangement*.
 
 ## Garde-fous d'exécution (dépôt git)
 
