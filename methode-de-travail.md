@@ -2,11 +2,11 @@
 
 Ce fichier décrit comment le projet se conduit, pas ce qu'il contient. Pour le SGDT lui-même, le wiki fait autorité : voir `Catégorie:Page de suivi`.
 
-Écrit au terme du lot 13, premier lot mené entièrement sous cette forme. Une règle qui n'a servi qu'une fois n'est pas encore une règle : à relire après deux lots de plus.
+Écrit au terme du lot 13, premier lot mené entièrement sous cette forme, puis corrigé sur quatre points d'après le retour de l'exécution. Une règle qui n'a servi qu'une fois n'est pas encore une règle : à relire après deux lots de plus.
 
 ## Qui fait quoi
 
-Trois intervenants, et un seul lien entre eux.
+Trois intervenants.
 
 **Cyril** décide. Il ne code pas et n'a pas l'intention d'apprendre. Il arbitre, relaie, et vérifie ce qu'il voit à l'écran.
 
@@ -21,12 +21,36 @@ Les deux Claude ne communiquent pas. Ils ne savent l'un de l'autre que ce que Cy
 1. L'architecte mesure l'état réel et propose.
 2. Cyril arbitre, point par point.
 3. L'architecte rédige une consigne complète, prête à coller.
-4. Cyril la colle à Claude Code.
-5. Claude Code exécute, vérifie, et écrit un rapport dans `travaux/`.
+4. Cyril la colle à l'exécuteur.
+5. L'exécuteur exécute, vérifie, et écrit un rapport dans `travaux/`.
 6. Cyril transmet le rapport.
 7. L'architecte vérifie lui-même, indépendamment du rapport.
 
-L'étape 7 n'est pas une formalité. Sur le lot 13, elle a rattrapé deux affirmations fausses déjà écrites sur le wiki.
+## Le canal direct
+
+Cyril peut interpeller l'exécuteur en cours d'exécution, hors consigne écrite : une question, une vérification, un arrêt. C'est un mode légitime, et il évite un aller-retour complet pour ce qui tient en trois réponses.
+
+Il a un angle mort. Ce qui se dit par ce canal n'atteint pas l'architecte, qui continue sur une base périmée sans le savoir. Une seule contrainte le comble : **toute question posée et toute réponse rendue par cette voie figurent dans le rapport**, y compris quand elles n'ont rien changé à l'exécution. Le canal est libre, sa trace ne l'est pas.
+
+Cas vécu : à la tâche 4 du lot 13, un arrêt demandé en cours d'écriture n'a pas été tracé. Deux échanges ont ensuite été dépensés à chercher l'origine d'un message dont personne ne se souvenait.
+
+## Ce qu'une consigne doit contenir
+
+Le contexte : d'où l'on part, ce que fait cette tâche, et pourquoi si ce n'est pas évident. Un paragraphe ou deux quand la tâche corrige quelque chose — expliquer d'où vient une erreur coûte moins cher que de la voir se reproduire.
+
+Les règles impératives propres à la tâche, y compris ce qu'il ne faut pas faire.
+
+Les étapes. Deux modes, et il faut savoir lequel on emploie.
+
+Le **texte fourni** : le contenu exact à écrire, mot pour mot. C'est le cas majoritaire, et le seul acceptable dès qu'on sait d'avance ce qu'il faut écrire. « Rédige un texte qui dit que » produit un texte inventé.
+
+Le **texte délégué** : quand l'architecte ne peut pas savoir d'avance quelle phrase il faudra ajuster — parce qu'elle dépend de l'état d'une page qu'il n'a pas relue mot pour mot. La consigne donne alors un critère d'acceptation explicite : « en ajustant la phrase pour qu'elle reste juste », « corrige la seule phrase fausse ». L'exécuteur formule, et **signale son choix dans le rapport**. Sans cette trace, un texte inventé passe pour une consigne suivie.
+
+Les vérifications, en nommant celle qui tranche. Une consigne qui demande dix contrôles sans dire lequel décide obtient dix « conforme ».
+
+Le rapport attendu, avec une section « Écarts et surprises ».
+
+Et l'instruction de n'afficher qu'une ligne dans le terminal : le chemin du fichier.
 
 ## Format des échanges
 
@@ -40,20 +64,6 @@ Une consigne corrigée est redonnée entière, prête à copier. Jamais de passa
 
 Quand Cyril travaille sur téléphone, les rapports doivent tenir en un seul bloc copiable.
 
-## Ce qu'une consigne doit contenir
-
-Le contexte, en trois lignes : d'où l'on part, ce que fait cette tâche.
-
-Les règles impératives propres à la tâche, y compris ce qu'il ne faut pas faire.
-
-Les étapes, avec le contenu exact à écrire quand il y en a. Pas de « rédige un texte qui dit que » : le texte est fourni, sinon il sera inventé.
-
-Les vérifications, en nommant celle qui tranche. Une consigne qui demande dix contrôles sans dire lequel décide obtient dix « conforme ».
-
-Le rapport attendu, avec une section « Écarts et surprises ».
-
-Et l'instruction de n'afficher qu'une ligne dans le terminal : le chemin du fichier.
-
 ## Les règles de vérification
 
 **Ne jamais s'appuyer sur un résumé, le sien compris.** Vérifier sur le wiki ou dans le dépôt avant d'affirmer, et dire d'où vient ce qu'on avance. C'est la règle la plus importante et la plus souvent enfreinte.
@@ -63,6 +73,16 @@ Et l'instruction de n'afficher qu'une ligne dans le terminal : le chemin du fich
 **Ne pas conclure une absence d'une mesure qui ne détecte pas l'absence.** Constater qu'aucune page n'existe ne prouve pas que la chose n'existe pas. Sur ce wiki, la négation d'une propriété se compile silencieusement en sa forme positive.
 
 **Signaler un écart plutôt que le lisser.** Quand une consigne annonce un résultat que la mesure dément, c'est la consigne qui a tort. Ne jamais modifier une donnée pour faire correspondre un compte attendu.
+
+**Exposer une incertitude plutôt que trancher pour faire propre.** Un rapport qui dit « je ne sais pas si cela contredit la phrase ou la confirme autrement » vaut mieux qu'un rapport qui choisit.
+
+## Ce qui rattrape les erreurs
+
+Aucune des étapes du cycle, prise seule.
+
+Sur le lot 13, une quinzaine d'affirmations fausses ont été écrites. Ce qui les a arrêtées, chaque fois, c'est que **trois regards mesurent la même chose sans qu'aucun s'appuie sur le compte rendu d'un autre**. L'architecte a rattrapé ses propres consignes en remesurant. L'exécuteur a démenti une entrée de registre par un chronométrage que personne n'avait demandé. Cyril a corrigé une méthode que l'architecte s'apprêtait à appliquer au mauvais endroit.
+
+Aucun des trois n'aurait suffi. Ce qui compte n'est pas la vigilance de l'un, c'est que les mesures soient indépendantes : une vérification qui relit le rapport au lieu de remesurer ne vérifie rien.
 
 ## Cadrages, pas instructions
 
@@ -78,7 +98,7 @@ Une idée écartée se consigne avec son motif et sa date. Sans le motif, elle r
 
 **`travaux/`** porte les rapports d'exécution, jamais le wiki : ils citent de la syntaxe que le wiki lirait comme de vraies annotations.
 
-**`CLAUDE.md`** porte les règles opératoires de Claude Code.
+**`CLAUDE.md`** porte les règles opératoires de l'exécuteur.
 
 **Ce fichier** porte le protocole. Il n'a de sens que pour l'outillage, d'où sa place dans le dépôt.
 
