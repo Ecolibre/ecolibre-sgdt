@@ -102,6 +102,8 @@ Une idée écartée se consigne avec son motif et sa date. Sans le motif, elle r
 
 **Ce fichier** porte le protocole. Il n'a de sens que pour l'outillage, d'où sa place dans le dépôt.
 
+**Deux pages du wiki portent le protocole lui-même** : `Procédure d'ouverture d'un lot` et `Procédure de clôture d'un lot`. Elles sont d'une autre nature que le reste du wiki — elles ne décrivent pas le SGDT, elles décrivent la conduite du travail, et un assistant les applique à lui-même. L'exécuteur n'y écrit jamais sans consigne explicite qui les nomme. Toute modification s'y voit dans l'historique de la page, et c'est là qu'il faut regarder si le comportement d'un assistant surprend.
+
 ## Limites de l'outillage, mesurées
 
 L'architecte ne peut pas lire l'horodatage des messages d'une conversation passée. Contournement : il demande « retrouve la date de l'échange qui commence par… » et Cyril la retrouve au Ctrl+F.
