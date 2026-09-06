@@ -43,13 +43,7 @@ for arg in "$@"; do
   [ "$arg" = "--createonly" ] && CREATEONLY=1
 done
 
-CSRF=$(curl -s -b "$C" -c "$C" -G "$WIKI_API" \
-  -d action=query -d meta=tokens -d format=json -d formatversion=2 \
-  | python3 -c 'import sys,json;print(json.load(sys.stdin)["query"]["tokens"]["csrftoken"])')
-
-if [ "$CSRF" = '+\' ]; then
-  echo "Session expirée : relance bin/wiki-login.sh"; exit 1
-fi
+CSRF=$("$DIR/bin/_wiki-csrf.sh" "$C") || exit 1
 
 EDIT_OPTS=(-d assert=user -d format=json -d formatversion=2)
 [ "$CREATEONLY" = 1 ] && EDIT_OPTS+=(-d createonly=1)

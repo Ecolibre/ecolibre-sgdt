@@ -38,15 +38,11 @@ fi
 
 TITLES="$1"
 
-# action=purge n'exige pas de jeton. Ce bloc ne sert plus qu'à détecter une
-# session expirée (jeton anonyme '+\') avant de tenter la purge.
-CSRF=$(curl -s -b "$C" -c "$C" -G "$WIKI_API" \
-  -d action=query -d meta=tokens -d format=json -d formatversion=2 \
-  | python3 -c 'import sys,json;print(json.load(sys.stdin)["query"]["tokens"]["csrftoken"])')
-
-if [ "$CSRF" = '+\' ]; then
-  echo "Session expirée : relance bin/wiki-login.sh"; exit 1
-fi
+# action=purge n'exige pas de jeton CSRF (needstoken: None). Cet appel au
+# helper ne sert donc qu'à vérifier la session AVANT la purge : il échoue
+# (code 3) si l'API est injoignable, (code 4) si la session a expiré. Le
+# jeton lui-même n'est pas réutilisé plus bas.
+"$DIR/bin/_wiki-csrf.sh" "$C" >/dev/null || exit 1
 
 curl -s -b "$C" -c "$C" "$WIKI_API" \
   --data-urlencode "action=purge" \

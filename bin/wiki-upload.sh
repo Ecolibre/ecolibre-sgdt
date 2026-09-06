@@ -43,13 +43,7 @@ FILENAME="$(basename "$FILE")"
 COMMENT="[Lot 9] Téléversement photos jardin-forêt"
 TEXT="Photo prise par Cyril Libert. Licence CC BY-SA 4.0, cohérente avec le wiki."
 
-CSRF=$(curl -s -b "$C" -c "$C" -G "$WIKI_API" \
-  -d action=query -d meta=tokens -d format=json -d formatversion=2 \
-  | python3 -c 'import sys,json;print(json.load(sys.stdin)["query"]["tokens"]["csrftoken"])')
-
-if [ "$CSRF" = '+\' ]; then
-  echo "Session expirée : relance bin/wiki-login.sh"; exit 1
-fi
+CSRF=$("$DIR/bin/_wiki-csrf.sh" "$C") || exit 1
 
 curl -s -b "$C" -c "$C" "$WIKI_API" \
   -F "action=upload" \
