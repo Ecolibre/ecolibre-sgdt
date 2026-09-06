@@ -33,6 +33,24 @@ Et dans ce dépôt : `methode-de-travail.md` décrit le protocole entre les inte
   toute création. (Le code de sortie n'était pas vérifié avant le 28 août 2026 :
   l'API refusait bien l'écriture, mais le script sortait 0. Corrigé, commit
   `0913ef8`.)
+- `bin/wiki-append.sh "Page" fichier.txt "résumé"` — ajouter un bloc **à la
+  fin** d'une page via `appendtext`, sans jamais lire ni renvoyer le corps
+  existant : la surface de corruption d'un ajout est nulle. **Périmètre
+  strict — réservé aux pages qui se terminent par la cible d'ajout** (liste
+  numérotée ouverte, journal). Le script refuse, avant toute écriture, si la
+  dernière ligne de contenu (hors commentaire HTML final) ne commence pas
+  par `# `, ou si une ligne vide sépare cette dernière entrée d'un
+  commentaire final (l'ajout couperait la liste au rendu). Le fichier
+  d'ajout doit commencer par exactement un saut de ligne puis `# ` et
+  contenir une seule ligne `# `. Contrôles après écriture : wikitexte
+  (l'ajout est la dernière entrée, +1) et rendu (pas de seconde liste
+  numérotée). Jamais `bot=1`, jamais `createonly` (`nocreate=1`, la page
+  doit exister). **N'aide en rien à corriger une entrée existante** :
+  reformuler ou compléter une entrée au milieu de la page reste une
+  réécriture complète par `wiki-put.sh`. *Limites connues du SGDT* a été
+  réorganisée le 6 septembre 2026 (provenance en tête, liste en fin de
+  page, commentaire garde-fou collé à la dernière entrée) pour rendre ce
+  script utilisable sur elle.
 - `bin/wiki-api.sh "chaîne de paramètres"` — exécuter n'importe quel appel de
   lecture de l'API MediaWiki en GET (`browsebysubject`, `siteinfo`, `allpages`,
   `backlinks`, `expandtemplates`, `intestactions`…) ; lecture seule stricte,
