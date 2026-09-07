@@ -144,4 +144,21 @@ portent les deux textes écrits.
 
 ## Preuve du push
 
-À compléter juste après le `git push` — voir la note en fin de fichier.
+`git push` : `9fffc7f..b2e7b9e  main -> main`, sans erreur.
+
+Sortie de `git log origin/main --oneline -3`, lue après le push — c'est elle
+qui fait preuve, et non l'absence d'erreur du `push` :
+```
+b2e7b9e [Lot 28][Tâche 3] Rapport — page publique créée, page du lot mise à jour
+9fffc7f [Lot 28][Tâche 2] Rapport — périmètre du registre, rangement des rapports
+f8c9e90 [Lot 28][Tâche 2] methode-de-travail.md — ce qui n'est pas poussé est invisible à l'architecte
+```
+Le commit du rapport de cette tâche (`b2e7b9e`) est bien sur `origin/main`.
+
+**Une nuance de procédure, à corriger dans les consignes suivantes.** L'ordre
+prescrit — commiter le rapport à l'étape 5, pousser et coller la sortie à
+l'étape 6 — rend la preuve du push impossible à placer dans le commit du
+rapport : au moment où `git log origin/main` est lisible, le rapport est déjà
+commité. Ce bloc a donc demandé un second commit, portant sur le même et
+unique fichier, poussé à son tour. C'est sans gravité, mais l'étape 6 gagnerait
+à le prévoir plutôt qu'à le laisser découvrir.
