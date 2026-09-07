@@ -111,3 +111,5 @@ L'architecte ne peut pas lire l'horodatage des messages d'une conversation pass�
 La recherche dans les conversations rend des extraits et des résumés générés, pas le texte. Elle ne vaut pas relecture, et un résumé retient des affirmations en perdant leur adresse et leur motif.
 
 **Conséquence directe : la clôture d'un lot se fait dans la conversation qui l'a mené**, seul endroit où le texte intégral est disponible. Voir la page `Procédure de clôture d'un lot`.
+
+**L'architecte ne voit du dépôt que ce qui y a été poussé.** Un rapport écrit mais non commité, ou commité mais non poussé, n'existe pas pour lui : il ne le lit pas, et une consigne peut lui donner en toute bonne foi un nom de fichier déjà pris. Mesuré le 7 septembre 2026 sur le lot 28 — la consigne demandait d'écrire `travaux/lot-28-tache1-ouverture.md`, nom d'un rapport du 4 septembre resté hors de git, que l'exécuteur a refusé d'écraser. C'est ce qui donne son poids à la règle de `CLAUDE.md` : pousser en fin de session, systématiquement.
