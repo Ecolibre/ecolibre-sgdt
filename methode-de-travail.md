@@ -40,6 +40,8 @@ Le contexte : d'où l'on part, ce que fait cette tâche, et pourquoi si ce n'est
 
 Les règles impératives propres à la tâche, y compris ce qu'il ne faut pas faire.
 
+L'étape d'état du dépôt distingue deux cas que `git status` affiche côte à côte. Une ligne `M`, `A`, `D` ou `R` signale un fichier suivi et modifié, qu'un commit peut emporter ou qu'une opération peut écraser : elle justifie un arrêt. Une ligne `??` signale un fichier non suivi, qu'aucun `git add` nommant des chemins explicites ne peut atteindre : elle ne justifie rien. Confondre les deux fait arrêter une tâche que rien ne menaçait.
+
 Les étapes. Deux modes, et il faut savoir lequel on emploie.
 
 Le **texte fourni** : le contenu exact à écrire, mot pour mot. C'est le cas majoritaire, et le seul acceptable dès qu'on sait d'avance ce qu'il faut écrire. « Rédige un texte qui dit que » produit un texte inventé.
@@ -75,6 +77,12 @@ Quand Cyril travaille sur téléphone, les rapports doivent tenir en un seul blo
 **Signaler un écart plutôt que le lisser.** Quand une consigne annonce un résultat que la mesure dément, c'est la consigne qui a tort. Ne jamais modifier une donnée pour faire correspondre un compte attendu.
 
 **Exposer une incertitude plutôt que trancher pour faire propre.** Un rapport qui dit « je ne sais pas si cela contredit la phrase ou la confirme autrement » vaut mieux qu'un rapport qui choisit.
+
+**Remesurer un chiffre avant de l'écrire dans une consigne**, y compris un chiffre qu'on vient soi-même de calculer. Sur le lot 28, quatre chiffres justes sont redevenus faux entre leur mesure et leur reprise : une date d'ouverture, un « hier », un compte de passages corrigés, une taille de fichier en octets. Aucun n'a atteint le wiki, parce que la consigne exigeait chaque fois une mesure avant écriture.
+
+**Vérifier les règles impératives de `CLAUDE.md` avant de faire fabriquer un nom.** Un titre de page, un nom de fichier, une valeur de propriété : ces règles disent ce que le modèle ne supporte pas, et l'architecte ne les a pas en tête. Sur le lot 28, un titre de lot à deux virgules a été écrit alors que la virgule est le délimiteur multi-valeurs et qu'aucune des 241 pages de l'espace principal n'en portait.
+
+**La preuve d'une poussée ne peut pas figurer dans le commit qu'elle prouve.** Au moment où `git log origin/main` devient lisible, le rapport est déjà commité : une consigne qui exige cette preuve dans le rapport force un second commit sur le même fichier. La consigne demande de pousser et de signaler un échec, rien de plus. C'est l'architecte qui vérifie, en interrogeant `origin/main` lui-même, et l'étape d'état de la tâche suivante qui confirme.
 
 ## Ce qui rattrape les erreurs
 
