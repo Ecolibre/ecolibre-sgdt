@@ -70,6 +70,8 @@ Quand Cyril travaille sur téléphone, les rapports doivent tenir en un seul blo
 
 **Ne jamais s'appuyer sur un résumé, le sien compris.** Vérifier sur le wiki ou dans le dépôt avant d'affirmer, et dire d'où vient ce qu'on avance. C'est la règle la plus importante et la plus souvent enfreinte.
 
+**Sa propre mesure d'hier est un résumé.** Un chiffre mesuré la semaine dernière et reporté d'une consigne à l'autre a exactement le même statut qu'une affirmation reprise d'un tiers. Trois erreurs du 10 septembre 2026 viennent de là : un compte d'entrées vieux de huit jours, un état de verrouillage périmé lu dans un document non mis à jour, et une absence conclue d'une recherche défaillante. Toute mesure reportée se refait, et un chiffre cité dans une consigne porte sa date.
+
 **Un `result: Success` ne prouve pas que la donnée est stockée.** Vérifier après écriture, par `browsebysubject`.
 
 **Ne pas conclure une absence d'une mesure qui ne détecte pas l'absence.** Constater qu'aucune page n'existe ne prouve pas que la chose n'existe pas. Sur ce wiki, la négation d'une propriété se compile silencieusement en sa forme positive.
@@ -91,6 +93,8 @@ Aucune des étapes du cycle, prise seule.
 Sur le lot 13, une quinzaine d'affirmations fausses ont été écrites. Ce qui les a arrêtées, chaque fois, c'est que **trois regards mesurent la même chose sans qu'aucun s'appuie sur le compte rendu d'un autre**. L'architecte a rattrapé ses propres consignes en remesurant. L'exécuteur a démenti une entrée de registre par un chronométrage que personne n'avait demandé. Cyril a corrigé une méthode que l'architecte s'apprêtait à appliquer au mauvais endroit.
 
 Aucun des trois n'aurait suffi. Ce qui compte n'est pas la vigilance de l'un, c'est que les mesures soient indépendantes : une vérification qui relit le rapport au lieu de remesurer ne vérifie rien.
+
+**Deux des règles de ce fichier viennent de l'exécuteur.** Le mode du texte délégué et le canal direct entre Cyril et l'exécuteur n'étaient pas décrits : c'est lui qui a signalé que le texte ne correspondait pas à ce qu'il vivait, et le protocole a été corrigé sur les deux points. Celui qui exécute voit des choses que celui qui rédige ne peut pas voir. C'est pourquoi chaque rapport porte une section « Écarts et surprises » : ce n'est pas une formalité de fin de document.
 
 ## Cadrages, pas instructions
 
