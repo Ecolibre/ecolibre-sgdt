@@ -188,3 +188,108 @@ travaux affichait 21 travaux figés au moment des vérifications finales ;
 conformément à la règle ajoutée le 10 septembre 2026, ce compteur n'a pas
 été pris pour un diagnostic de panne, et les faits ont été vérifiés
 directement par `browsebysubject` plutôt que par attente.
+
+# Tâche 2 : corriger la catégorisation parasite
+
+## État avant (étape 1)
+
+Relevé par `prop=categories` avant toute écriture :
+
+| Page | Catégories portées |
+|---|---|
+| Lot 3 | Catégorie:Lot, Catégorie:Physical item, Catégorie:Referenced item |
+| Lot 8 | Catégorie:Facette, Catégorie:Lot |
+| Lot 9 | Catégorie:Lieu, Catégorie:Lot |
+| Lot 11 | Catégorie:Lieu sans nom d'usage, Catégorie:Lot |
+| Lot 13 | Catégorie:Lot, Catégorie:Page de suivi |
+| Lot 27 | Catégorie:Lot (témoin, non affecté) |
+
+## Ce qui a été écrit
+
+1. `Modèle:Lot` : relu, confirmé dans l'état laissé par la tâche 1. Seule la
+   ligne « Sur le wiki » du bloc « Pages produites » modifiée —
+   `[[@@@@]]` → `[[:@@@@]]`. `diff` avant/après : une seule ligne touchée,
+   le bloc de stockage et ses cinq séparateurs intacts. Vérifié identique
+   par `bin/wiki-verify.sh` après écriture (revid 1346 → 1358).
+2. Purge avec `forcelinkupdate` des pages des lots 3, 8, 9, 11, 13
+   (`bin/wiki-purge.sh`, les cinq en un seul appel, `linkupdate: true` sur
+   chacune).
+3. `Limites connues du Système de Gestion de Données Techniques` : entrée
+   ajoutée par `bin/wiki-append.sh`, texte fourni collé tel quel. Le script
+   a confirmé 51 entrées avant, 52 après, l'ajout en dernière position.
+   `prop=categories` et `browsebysubject` relevés après coup (voir
+   vérifications) : les occurrences non protégées de `[[@@@@]]` et
+   `[[:@@@@]]` dans des balises `<code>`, malgré le risque documenté par
+   ailleurs sur cette page (leçon des backticks/`<code>` qui ne protègent
+   rien), n'ont produit ni lien réel ni catégorie de suivi parasite —
+   `@@@@` n'est simplement pas un titre de page qui déclenche un
+   comportement particulier sur ce wiki. Vérifié, pas supposé.
+
+Résumés : `[Lot 33][Tâche 2] …` sur les deux écritures.
+
+## État après (étapes 3-4)
+
+| Page | Catégories après purge |
+|---|---|
+| Lot 3 | Catégorie:Lot (seule) |
+| Lot 8 | Catégorie:Lot (seule) |
+| Lot 9 | Catégorie:Lot (seule) |
+| Lot 11 | Catégorie:Lot (seule) |
+| Lot 13 | Catégorie:Lot (seule) |
+
+Aucune catégorie parasite subsistante sur les cinq pages : rien à rapporter
+comme cas résistant à la purge.
+
+Membres relevés par `list=categorymembers` sur les six catégories touchées,
+après correction :
+
+| Catégorie | Membres | Page de lot restante ? |
+|---|---|---|
+| Physical item | 47 | non |
+| Referenced item | 39 | non |
+| Facette | 3 | non |
+| Lieu | 13 | non |
+| Lieu sans nom d'usage | 0 | non |
+| Page de suivi | **6** | non |
+
+`Catégorie:Page de suivi` compte exactement six membres (Gestion des lots,
+Limites connues, Notes en attente de rangement, Procédure d'ouverture d'un
+lot, Procédure de clôture d'un lot, Récapitulatif technique) — conforme à
+l'attente de la consigne. `Catégorie:Lot` compte 33 membres — conforme,
+inchangé par cette tâche.
+
+## Vérifications (étape 5)
+
+`action=parse` sur le lot 13 : les six pages produites s'affichent en liens
+résolus vers leurs cibles réelles (`/wiki/Catégorie:Lot`,
+`/wiki/Modèle:Lot`, etc.), chacune avec son nom complet y compris le
+préfixe `Catégorie:` dans le texte affiché — comportement attendu du
+deux-points, pas un défaut. `action=parse` sur le lot 27 : les deux pages
+produites toujours résolues ; la ligne « Rapports » de l'infobox et la
+section « Rapports » de la page rendent ensemble dix liens externes,
+correspondant aux cinq permaliens comptés deux fois (une fois par
+mécanisme d'affichage) — inchangé par cette tâche, vérifié pour mémoire.
+
+## Étape 7 — liste du lot 27
+
+Déjà correcte avant toute intervention, confirmé par la tâche 1 et
+reconfirmé ici par `action=parse` : la page du lot 13 porte `Procédure de
+clôture d'un lot` dans ses pages produites, celle du lot 27 ne la porte
+pas. Rien touché.
+
+## Écarts et surprises (tâche 2)
+
+Aucun écart entre l'attendu de la consigne et la mesure sur cette tâche :
+les six comptes de catégories, le compte de `Catégorie:Page de suivi` (6)
+et celui de `Catégorie:Lot` (33) correspondent tous exactement à ce que la
+consigne annonçait — la première fois de la session où un chiffre annoncé
+à l'avance résiste intégralement à la remesure.
+
+Un `<()`  de substitution de processus a été utilisé une fois par erreur
+pendant la vérification du diff avant écriture du modèle (contournement
+immédiat par deux fichiers temporaires et deux `diff` successifs, comme le
+prescrit `CLAUDE.md`) — sans conséquence, la commande n'a pas déclenché de
+confirmation, mais à ne pas reproduire.
+
+Rien d'autre à signaler : aucune permission refusée, aucun verrou de
+propagation, aucune session expirée.
