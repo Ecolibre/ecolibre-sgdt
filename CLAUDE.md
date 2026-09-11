@@ -521,21 +521,49 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
 - **Écrire les commandes shell sous leur forme la plus simple.** Claude Code
   soumet à confirmation toute commande dont il ne peut pas analyser la forme
   à l'avance — boucles, substitutions `$(…)`, `<(…)`, accolades voisinant des
-  guillemets. Ces confirmations ne signalent aucun danger et ne peuvent être
-  levées par aucune permission : elles se suppriment en amont, par la façon
-  d'écrire. Quatre règles, constatées sur dix-sept confirmations analysées le
-  21 août 2026 :
+  guillemets, `cd` suivi d'une redirection, commentaire `#` dans un programme
+  passé en ligne. Ces confirmations ne signalent aucun danger et ne peuvent
+  être levées par aucune permission : elles se suppriment en amont, par la
+  façon d'écrire.
+
+  **Le critère : simplifier tant que la commande reste lisible et que la
+  simplification supprime effectivement la confirmation.** Une boucle sur
+  trois appels identiques sans traitement est à dérouler ; une boucle sur
+  huit appels avec traitement en sortie est à garder — la dérouler donnerait
+  vingt-quatre lignes pour éviter une fenêtre, ce qui est plus lourd que le
+  mal. De même, une variable de chemin abrégeant un dossier de travail se
+  garde : l'écrire en toutes lettres seize fois nuit à la relecture sans
+  rien supprimer.
+
+  Cas particuliers vérifiés sur 89 confirmations analysées :
   - **Attente de la file de travaux** : appeler `bin/wiki-wait-jobs.sh`,
-    jamais une boucle `for` d'interrogation en ligne.
+    jamais une boucle d'interrogation en ligne. Le script est versionné,
+    plafonné, et détecte une file figée.
+  - **Vérification après écriture** : appeler `bin/wiki-verify.sh`.
+  - **Relevé d'avertissements SMW** : appeler `bin/wiki-warnings.sh`.
   - **Écrire un fichier** : utiliser l'outil d'écriture de fichier, jamais
-    `cat > fichier << EOF`. Un contenu wikitexte fait voisiner `{{` et des
-    guillemets, ce qui déclenche systématiquement une confirmation.
-  - **Python** : écrire un fichier `.py` dans le scratchpad puis l'exécuter,
-    jamais `python3 - <<'PYEOF'` ni `python3 -c "…"` de plus d'une ligne.
-  - **Comparer une portion de fichier** : écrire l'extrait dans un fichier
-    temporaire, puis `diff` sur deux fichiers. Jamais `diff a <(sed …)`.
+    `cat > fichier << EOF`. Cela vaut aussi pour un fichier `.py` destiné à
+    être exécuté ensuite — l'écrire par redirection déplace la confirmation
+    du programme vers la redirection au lieu de la supprimer.
+  - **Python d'une ou deux lignes** : en ligne, en acceptant la confirmation.
+    Au-delà, ou dès que le programme resservira : un fichier `.py`, écrit
+    avec l'outil d'écriture de fichier.
   - Répéter deux fois la même construction refusée est le signe qu'il faut
     en faire un script dans `bin/`, versionné et autorisé nommément.
+- **Toute boucle d'attente porte un plafond.** Nombre d'essais borné,
+  intervalle fixé, sortie garantie, et affichage de la progression à chaque
+  essai. Une boucle `until` ou `while` sans limite peut ne jamais rendre la
+  main et fige la session. Trois occurrences relevées entre le 21 août et le
+  11 septembre 2026, dont deux alors que `bin/wiki-wait-jobs.sh` existait
+  déjà et faisait exactement cela. Une attente qui n'aboutit pas est un
+  résultat à documenter, pas un obstacle à contourner par une attente plus
+  longue.
+- **Afficher le contenu d'un script du scratchpad avant de l'exécuter.**
+  Une fenêtre de confirmation qui n'affiche qu'un chemin ne permet pas de
+  décider. La règle d'écrire les programmes dans des fichiers plutôt qu'en
+  ligne a pour effet de sortir leur contenu du champ de vision de Cyril :
+  ce complément le remet. Le contenu va dans le même message que le
+  lancement, pas dans un tour séparé.
 - **Ne pas conclure sur un aperçu — vérifier après coup par un compte.**
   L'affichage tronque : le 21 août 2026, un aperçu d'écriture de
   `.claude/settings.json` a montré à trois reprises un bloc `allow` amputé

@@ -56,6 +56,11 @@
       "Bash(mv:*)",
       "Bash(sed:*)",
       "Bash(sort:*)",
+      "Bash(bin/wiki-verify.sh:*)",
+      "Bash(bin/wiki-warnings.sh:*)",
+      "Bash(echo:*)",
+      "Bash(date:*)",
+      "Bash(od:*)",
       "WebFetch(domain:wiki.ecolibre.org)"
     ]
   }
