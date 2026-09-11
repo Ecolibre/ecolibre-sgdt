@@ -72,6 +72,8 @@ Quand Cyril travaille sur téléphone, les rapports doivent tenir en un seul blo
 
 **Sa propre mesure d'hier est un résumé.** Un chiffre mesuré la semaine dernière et reporté d'une consigne à l'autre a exactement le même statut qu'une affirmation reprise d'un tiers. Trois erreurs du 10 septembre 2026 viennent de là : un compte d'entrées vieux de huit jours, un état de verrouillage périmé lu dans un document non mis à jour, et une absence conclue d'une recherche défaillante. Toute mesure reportée se refait, et un chiffre cité dans une consigne porte sa date.
 
+**Un relevé vide se vérifie sur la source.** Un filtre, une expression régulière, une requête peuvent manquer une occurrence pour une raison de forme et rendre un silence qu'on prend pour un fait. Le lot 8 a été déclaré absent d'un index où il figurait, parce que l'expression employée l'avait sauté. Avant de conclure qu'une chose n'est pas là, la chercher autrement, ou lire la source.
+
 **Un `result: Success` ne prouve pas que la donnée est stockée.** Vérifier après écriture, par `browsebysubject`.
 
 **Ne pas conclure une absence d'une mesure qui ne détecte pas l'absence.** Constater qu'aucune page n'existe ne prouve pas que la chose n'existe pas. Sur ce wiki, la négation d'une propriété se compile silencieusement en sa forme positive.
