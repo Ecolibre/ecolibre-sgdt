@@ -1,0 +1,35 @@
+{{Lot
+|Work_package_number=33
+|Work_package_status=clos
+|Work_package_summary=Lier chaque lot aux pages qu'il a produites sur le wiki, et permettre de remonter d'une page au lot qui l'a créée.
+|Work_package_opening_date=2026-09-10
+|Work_package_delivery_date=2026-09-11
+|Work_package_closure_date=2026-09-11
+|Work_package_closure_report=https://github.com/Ecolibre/ecolibre-sgdt/blob/d4bd8ce153e174f22db80ac4a0dc20b4934db357/travaux/lot-33-tache1-pages-produites.md
+}}
+
+== Objet ==
+
+Les pages de lot ne disent pas ce qu'elles ont produit. On sait où sont les rapports dans le dépôt, pas ce qui a été créé sur le wiki, et l'on ne peut pas davantage remonter d'une page à son lot d'origine. Les résumés de modification ne suffisent pas : quatorze écritures du lot 13 ne portent pas son étiquette, et ce défaut est irréparable, un résumé étant immuable.
+
+== Ce qui est déjà tranché ==
+
+'''Seules les pages durables entrent dans la liste.''' Les pages de structure — catégories, modèles, formulaires, modules — et les pages de référence de l'espace principal. Pas les pages de données produites en série : quarante plantations ou trente et une pages de lot se retrouvent par leur catégorie, et les lister rendrait la propriété illisible.
+
+'''Les propriétés n'y entrent pas non plus.''' Elles se retrouvent déjà par leur domaine déclaré. Le lot 13 en a créé dix ; les inscrire noierait ses quatre pages de structure.
+
+'''Un lot qui n'a rien produit de durable porte une liste vide, et c'est un fait, pas un manque.''' Un lot de correction modifie sans créer.
+
+== Points ouverts ==
+
+La requête inverse n'est pas affichée sur les pages produites : elles ne portent pas le modèle des lots, et y poser un bandeau serait invasif. Retrouver le lot d'origine depuis une page suppose donc une requête écrite à la main. À revoir si le besoin se confirme.
+
+Sept pages de structure ou de référence ne sont rattachées à aucun lot et ne peuvent pas l'être : `Modèle:Préfixe lieu`, `Formulaire:Lieu`, `Catégorie:Organisation`, `Modèle:Organisation`, `Ecolibre`, `Modèle:Physical facet plant/doc` et `Notes en attente de rangement` — cette dernière étant pourtant l'une des pages de référence que `CLAUDE.md` nomme. Toutes ont été créées entre le 20 août et le 1er septembre 2026 sous un résumé sans numéro de lot. Les résumés de modification étant immuables, le rattachement ne se reconstituera jamais par la mesure : il faudrait le décider à la main, ce qui serait une attribution et non un constat.
+
+Les lots 1, 2, 5 et 7 sont hors de portée de la méthode. Aucune écriture étiquetée à leur nom n'apparaît dans la fenêtre des modifications récentes, qui remonte au 26 juillet 2026. Trois explications restent indiscernables : exécution antérieure à la fenêtre, absence de production durable, ou écritures non étiquetées. Leur propriété a été laissée vide plutôt que renseignée à zéro, parce qu'une liste vide écrite affirmerait « mesuré : rien » là où la vérité est « non mesurable ».
+
+Ce lot ne porte lui-même aucune page produite, et c'est exact : sa page de lot est exclue par construction, la propriété qu'il a créée l'est par sa propre règle, et ses modifications du modèle et du formulaire sont des ajouts de champ, ni créations ni refontes.
+
+----
+
+Voir aussi la [[Gestion des lots]].

@@ -1,0 +1,84 @@
+{{Lot
+|Work_package_number=13
+|Work_package_status=clos
+|Work_package_summary=Transformer les pages de lot, aujourd'hui statiques, en une classe interrogeable, et fusionner la feuille de route dans la page d'index.
+|Work_package_opening_date=2026-09-01
+|Work_package_delivery_date=2026-09-02
+|Work_package_closure_date=2026-09-10
+|Work_package_closure_report=https://github.com/Ecolibre/ecolibre-sgdt/blob/15f0f94aeafae42f26cca426160d223d8b193e6e/travaux/lot-13-tache0-recon.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/15f0f94aeafae42f26cca426160d223d8b193e6e/travaux/lot-13-tache1-proprietes.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/15f0f94aeafae42f26cca426160d223d8b193e6e/travaux/lot-13-tache2-modele-formulaire.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/15f0f94aeafae42f26cca426160d223d8b193e6e/travaux/lot-13-tache3a-page-lot13.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/15f0f94aeafae42f26cca426160d223d8b193e6e/travaux/lot-13-tache3abis-date-livraison.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/15f0f94aeafae42f26cca426160d223d8b193e6e/travaux/lot-13-tache3b-lots-1-11.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/15f0f94aeafae42f26cca426160d223d8b193e6e/travaux/lot-13-tache3c-lot12-et-pages-courtes.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/15f0f94aeafae42f26cca426160d223d8b193e6e/travaux/lot-13-tache3d-lots-neufs.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/15f0f94aeafae42f26cca426160d223d8b193e6e/travaux/lot-13-tache4-index.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/15f0f94aeafae42f26cca426160d223d8b193e6e/travaux/lot-13-tache5a-consignation.md
+|Work_package_produces=Catégorie:Lot,Modèle:Lot,Formulaire:Lot,Catégorie:Page de suivi,Procédure de clôture d'un lot,Gestion des lots
+|Work_package_depends_on=
+|Work_package_overlaps=
+|Work_package_revises=
+}}
+
+== Objet ==
+
+Les pages de lot sont aujourd'hui écrites et tenues à la main, et l'index qui les recense l'est aussi. Rien n'y est interrogeable : savoir quels lots sont livrés, lesquels en bloquent un autre, ou combien de points ouverts subsistent, suppose de lire toutes les pages. Ce lot fait des lots une classe sémantique, avec ses propriétés, son modèle et son formulaire, pour que l'index se construise par requête.
+
+Il fusionne aussi la feuille de route dans la page d'index, qui portaient jusqu'ici deux vues concurrentes du même travail, et il donne une page à chaque lot, y compris à ceux qui n'en avaient pas.
+
+Il sert enfin de répétition générale, à faible risque, avant le suivi des tâches.
+
+== Ce qui est déjà tranché ==
+
+'''Une page par lot, sans exception.''' Une requête interroge des sujets : sans page, pas de sujet. Épargner dix pages aurait laissé deux sortes de lots, dont une hors de portée de l'index.
+
+'''Le numéro identifie, il n'ordonne pas.''' Tous les lots sont numérotés dès la création de leur page, y compris ceux qui ne sont pas ouverts. Un numéro n'est jamais réattribué : le lot 7, cadré et jamais exécuté, laisse le sien occupé à vie. L'ordre chronologique se lit sur les dates.
+
+'''Deux dates, deux sens.''' L'ouverture est celle du texte de démarrage du lot. La clôture est celle où la relecture a établi que tout est consigné, y compris ce qui reste à faire. Pour les lots antérieurs au dixième, la date de première écriture sur le wiki tient lieu de repère, faute de mieux.
+
+'''Livré et clos ne sont pas synonymes.''' Un lot livré a vu son travail fait ; un lot clos a vu sa relecture faite. Les douze lots antérieurs ouvrent tous en « livré » et aucun en « clos », parce qu'aucun n'a encore été relu selon cette procédure : le compteur décroîtra au lieu de partir faux. La distinction tient aussi à une raison technique — sur cette installation la détection par l'absence est cassée, la négation d'une propriété se compilant silencieusement en sa forme positive. Un lot livré sans rapport de clôture ne peut donc se trouver que si son état le dit.
+
+'''Un lot est une unité de travail cadrée du projet, qu'elle touche le wiki, le serveur ou l'outillage.''' La définition antérieure, restreinte aux modifications du modèle de données, laissait sans place les travaux d'infrastructure dont d'autres lots dépendent.
+
+'''Trois relations, pas une.''' Dépendre, recouper et réviser ont trois usages distincts : calculer ce qu'on peut ouvrir, avertir un lecteur, signaler un arbitrage périmé. Les confondre reproduirait le défaut de <code>Part_of</code>, qui porte aujourd'hui indistinctement la composition et la spécialisation. Le nom générique <code>Depends_on</code> est laissé libre délibérément : dans une fédération, les noms non qualifiés sont la ressource rare et doivent rester aux relations vraiment générales.
+
+'''L'objet du lot a une source unique.''' La phrase d'objet est une propriété ; le modèle l'affiche en tête de page et l'index la lit par requête. Les pages portaient jusqu'ici trois formulations concurrentes de la même chose.
+
+== Périmètre ==
+
+'''Dedans :'''
+* la classe, ses neuf propriétés, son modèle et son formulaire ;
+* une page numérotée pour chacun des vingt-quatre lots recensés ;
+* la fusion de la feuille de route dans la page d'index, redirection conservée ;
+* l'index reconstruit en requêtes ;
+* la procédure de clôture d'un lot, écrite et éprouvée sur le lot 10.
+
+'''Dehors :'''
+* le kanban, qui aura son lot ; ce lot-ci ne conçoit pas pour lui, mais ne lui ferme aucune porte ;
+* le tri par urgence et importance, qui va au lot priorisation ;
+* les points ouverts comme sujets interrogeables, qui supposent des sous-objets, donc le kanban ;
+* le renommage rétroactif des propriétés par domaine de facette, qui a son lot.
+
+== Point de départ ==
+
+Mesuré avant toute écriture, le 1er septembre 2026 :
+* neuf pages de lot existaient, dont une seule numérotée ;
+* les lots 1 à 12 avaient tous au moins un rapport nommé à leur numéro, sauf le septième, qui n'a jamais touché le wiki ;
+* l'historique des modifications récentes remonte au 25 juillet 2026 et porte le numéro de lot en résumé, ce qui date les lots 1 à 12 sans relire aucune conversation ; il est plus court que l'historique réel du wiki, ouvert le 23 mars 2026 ;
+* sept des neuf phrases d'objet dépassaient quatre-vingt-cinq caractères et huit sur neuf contenaient une virgule, ce qui exclut le type Keyword et impose de placer la phrase d'objet avant les propriétés multivaluées dans le bloc de stockage.
+
+== Risques connus ==
+
+Le séparateur multivalué se rattache à la propriété qui précède dans un bloc de stockage. Quatre propriétés de cette classe sont multivaluées et la phrase d'objet contient des virgules : elle est placée avant elles, jamais après.
+
+Huit pages doivent être renommées pour recevoir leur numéro. Les renommages passent avant toute annotation de relation, faute de quoi les relations pointeraient des titres appelés à changer — et une redirection est porteuse de données sur ce wiki.
+
+Une page de propriété doit être complète à sa première écriture : un verrou de propagation intermittent empêche de la compléter en deux fois.
+
+Les pages de ce lot citent des noms techniques. Les balises de code ne protègent rien en wikitexte, seul nowiki protège : une page qui cite de la syntaxe sans l'échapper se met à porter de vrais faits.
+
+== Points ouverts ==
+
+Quatorze des quatre-vingt-huit écritures de ce lot portent `[Correctif]` sans étiquette de lot et ne lui sont donc pas rattachables : sept pages de lot, trois pages liant vers la feuille de route, deux pages de bac à sable. Les résumés de modification étant immuables, l'inventaire de ce que ce lot a touché ne peut pas se reconstituer par cette voie ; il se lit dans les rapports du dossier `travaux`. La règle a été complétée pour les lots suivants.
+
+La section « À venir » de l'index n'a pas d'ordre revendiqué. Le tri par urgence et importance est l'objet du lot 23.
+
+Les points ouverts d'un lot ne sont pas interrogeables : ce sont des sections de texte, repérables par leur titre normalisé mais pas dénombrables par requête. Les rendre interrogeables suppose des sous-objets, donc le lot 32.
+
+Deux dates restent inexpliquées. Le lot 5 était annoncé livré le 28 juillet 2026 alors que sa dernière écriture est du 27 à 23h45 ; le lot 6 était annoncé exécuté jusqu'au 12 août alors que ses écritures s'arrêtent le 10. Les dates mesurées ont été retenues dans les deux cas.
+
+----
+
+Voir aussi la [[Gestion des lots]] et les [[Limites connues du Système de Gestion de Données Techniques]].

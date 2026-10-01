@@ -1,0 +1,36 @@
+{{Lot
+|Work_package_number=27
+|Work_package_status=clos
+|Work_package_summary=Écrire comment le projet se conduit : le protocole entre les intervenants, et la chaîne par laquelle une décision arrive sur le wiki.
+|Work_package_opening_date=2026-09-02
+|Work_package_delivery_date=2026-09-10
+|Work_package_closure_date=2026-09-10
+|Work_package_closure_report=https://github.com/Ecolibre/ecolibre-sgdt/blob/0327650d31c90fbc1e0967ea3dcd454f71dfff79/travaux/lot-27-tache1-ouverture.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/0327650d31c90fbc1e0967ea3dcd454f71dfff79/travaux/lot-27-tache2-protocole.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/0327650d31c90fbc1e0967ea3dcd454f71dfff79/travaux/lot-27-tache4-procedure-ouverture.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/0327650d31c90fbc1e0967ea3dcd454f71dfff79/travaux/lot-27-tache6-durcissement-ouverture.md,https://github.com/Ecolibre/ecolibre-sgdt/blob/0327650d31c90fbc1e0967ea3dcd454f71dfff79/travaux/lot-27-tache7-page-publique.md
+|Work_package_produces=Procédure d'ouverture d'un lot,Comment ce wiki est tenu
+}}
+
+== Objet ==
+
+Rien n'écrit aujourd'hui comment ce projet se mène. Le protocole de travail — qui décide quoi, dans quel ordre, sous quelle forme — ne vit que dans la mémoire d'un assistant, c'est-à-dire dans un résumé, précisément le support dont la règle de méthode du projet dit de se méfier. Et l'outillage — le dépôt, les scripts, le compte robot, le chemin par lequel une décision devient une écriture sur le wiki — n'est décrit nulle part pour qui n'y participe pas.
+
+Ce lot produit deux textes, qui décrivent la même chaîne vue de deux côtés. L'un est privé et va dans le dépôt : le protocole entre les intervenants. L'autre est public et va sur le wiki : l'outillage du projet, lisible par un partenaire qui voudrait s'y joindre.
+
+== Ce qui est déjà tranché ==
+
+'''Le wiki fait autorité, le dépôt y renvoie.''' Un contributeur sans dépôt et sans assistant doit pouvoir tout comprendre depuis le wiki. Le dépôt ne porte que ce qui n'a de sens que pour l'outillage.
+
+'''Un seul lot pour les deux textes.''' Ils décrivent la même chaîne et se contrediraient s'ils étaient écrits séparément.
+
+== Points ouverts ==
+
+Le protocole a servi sur trois lots : le treizième, qui l'a produit, le vingt-huitième, mené du 6 au 9 septembre 2026 de bout en bout dans une autre conversation par un assistant sans contexte partagé, et le vingt-quatrième depuis le 10 septembre. Il a tenu dans les trois cas, et le vingt-huitième est allé jusqu'à une clôture complète.
+
+Ce n'est pas encore assez pour le tenir pour validé. Trois lots menés en dix jours par la même personne ne disent rien de ce qui se passera avec un contributeur qui n'a pas écrit ces règles, ni sur un lot dont l'objet n'est pas le wiki lui-même. À relire quand l'une de ces deux conditions aura été rencontrée.
+
+== Dépendances ==
+
+Rien en amont.
+
+----
+
+Voir aussi la [[Gestion des lots]].

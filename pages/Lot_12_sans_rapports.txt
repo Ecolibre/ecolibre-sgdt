@@ -1,0 +1,84 @@
+{{Lot
+|Work_package_number=12
+|Work_package_status=cadré
+|Work_package_summary=Séparer contenir de composer, inventorier les contenants, et rendre décidable par la base ce qui repose aujourd'hui sur la mémoire.
+|Work_package_opening_date=2026-08-30
+|Work_package_overlaps=Lot 17 — Arbre fonctionnel
+}}
+
+== Objet ==
+
+Séparer contenir de composer, deux relations que <code>Part_of</code> porte aujourd'hui indistinctement. Inventorier les contenants comme des objets à part entière. Et rendre décidable par la base ce qui repose aujourd'hui sur la mémoire : quelle référence peut être recyclée, quel objet a été étiqueté, quel objet n'existe plus.
+
+Le besoin d'usage est simple : retrouver un objet vite. Le lieu dit vers quelle adresse se déplacer, le contenant dit où chercher une fois sur place.
+
+== Ce qui est déjà tranché ==
+
+* '''La frontière est mobilier contre immobilier. Ce qui ne se déplace pas est un lieu, ce qui se déplace et contient est un item physique.''' Reprise du lot 11, qui l'avait publiée sur <code>Catégorie:Lieu</code>.
+* '''Une pile posée au sol n'est pas un objet, c'est la disposition de plusieurs objets, et elle ne réalise aucune fonction.''' Un contenant est une étagère, un casier, un plateau à roulettes — de vrais objets, avec dimensions, fonction et fabricant éventuel. Le cas de la pile disparaît par là.
+* '''Un contenant a droit à la chaîne complète : fonction, organique, référencé, exemplaire.''' L'invariant tient sans exception aujourd'hui — 47 items physiques, 47 avec <code>Instance_of</code>. Le casser pour épargner trois pages laisserait deux sortes d'items physiques, dont une hors de portée des requêtes par la chaîne.
+* '''Les contenants se regroupent par taille, pas par provenance. Un seul référencé pour quarante cartons identiques, et <code>Supplier</code> passe en multivalué pour dire les endroits où s'en procurer.''' Le patron est éprouvé depuis le passage de <code>Corresponds_to_organic</code> en multivalué au lot 10.
+* '''Un item porte <code>Located_at</code> ou <code>Contained_in</code>, jamais les deux.''' Porter les deux dupliquerait le lieu, et un contenant mobile rendrait la copie fausse au premier déménagement — sans prévenir.
+* '''Le lieu se calcule par cascade bornée à quatre niveaux, pas par lignée matérialisée.''' Motif : Semantic Scribunto est absente, Lua ne peut pas interroger SMW, donc la cascade s'écrit en wikitexte et dix niveaux produiraient un modèle illisible. Et une valeur calculée à l'affichage ne peut pas se désynchroniser, contrairement à une lignée stockée. Le lot 11 a déjà payé le prix d'un patron trop subtil : <code>#show</code> vers <code>#set</code> rendait des faits faux en silence sur une propriété de type Page.
+* '''Le plafond ne limite pas la réalité, il limite la résolution automatique.''' Un objet sous six emboîtements ne se retrouve pas non plus dans la vraie vie ; que le wiki cesse d'afficher son lieu est le bon signal.
+* '''Le dépassement se détecte par la présence, jamais par l'absence.''' Une négation du type propriété deux-points deux-points point d'exclamation plus se compile silencieusement en sa forme positive et ne rend jamais zéro. La page de contrôle cherchera donc ce qui existe au cinquième saut de contenance.
+* '''Le rang dans un contenant est une propriété distincte de <code>Planting_rank</code>.''' Celui-ci compte en mètres depuis une origine, subdivisible, par incréments de dix pour insérer sans renuméroter. Un rang de pile est l'inverse : glisser une caisse au milieu décale physiquement toutes celles du dessus. Entiers consécutifs, et surtout pas d'incréments de dix, qui mentiraient sur la réalité.
+* '''Un objet qui n'existe plus garde sa page et sa référence.''' Détruit, perdu ou cédé, il change d'état, il ne disparaît pas. Sa référence reste occupée à vie.
+* '''Une référence n'est recyclable que si sa page n'a jamais existé ou est supprimée comme erreur de saisie, et qu'aucune étiquette n'a été imprimée. Dès qu'un objet réel l'a portée, elle est brûlée.''' Cette règle rend le recyclage décidable sans mémoire humaine, et elle règle le cas des créations en masse à annuler.
+* '''L'étiquette d'un contenant dérive, et c'est assumé.''' Elle liste un contenu qui change ; le wiki porte la vérité, l'étiquette est une copie. SMW ne sait pas comparer deux dates portées par deux sujets différents, donc aucun mécanisme ne surveillera cette péremption. La page du contenant affichera son contenu réel à côté de la date d'étiquette, et l'œil tranchera.
+* '''La règle de contenance se documente sur <code>Catégorie:Physical item</code>.''' Elle vit aujourd'hui sur <code>Catégorie:Lieu</code>, qui devient faux dès la séparation ; et <code>Catégorie:Physical item</code> fait 652 caractères sans un mot sur les contenants, alors que c'est là qu'on va chercher.
+
+== Dépendances ==
+
+Rien ne bloque en amont. La fenêtre est ouverte maintenant et se referme d'elle-même : <code>Part_of</code> n'est porté par aucun item, ni physique ni référencé, donc la séparation ne coûte aucune reprise. Dès qu'une première caisse existera, il faudra relire chaque occurrence pour deviner laquelle des deux relations son auteur voulait dire.
+
+Le lot <code>Module:Base36</code> attend celui-ci : sa distinction entre référence retirée et référence jamais utilisée a besoin de l'état de cycle de vie et de la date d'étiquette définis ici.
+
+Une dépendance douce vers le lot arbre fonctionnel : un contenant réalise une fonction de rangement qui n'existe pas encore dans l'arbre, et créer cette fonction touche une structure que ce lot-là va remanier.
+
+== Périmètre ==
+
+'''Dedans :'''
+* la relation de contenance ;
+* les contenants comme items physiques ;
+* la cascade de lieu et sa page de contrôle ;
+* le rang ;
+* la date d'étiquette ;
+* l'état de cycle de vie ;
+* <code>Supplier</code> multivalué ;
+* la correction des deux pages de définition.
+
+'''Dehors :'''
+* le format matériel des étiquettes, codes-barres et QR compris ;
+* les images de contenants, qui vont au lot images ;
+* la détection des doublons de <code>Module:Base36</code>, qui va à son lot ;
+* les dimensions des contenants, qui appellent des propriétés de grandeur et relèvent du chantier grandeurs et unités — un contenant se crée ici sans ses cotes.
+
+== Point de départ ==
+
+Vérifier sur le wiki vivant, avant toute écriture :
+
+* que rien ne porte encore <code>Part_of</code>, ni parmi les items physiques ni parmi les référencés — c'est la condition de la fenêtre à coût nul ;
+* qu'une chaîne de propriétés à cinq sauts fonctionne sur cette installation. Trois sauts sont prouvés, cinq ne le sont pas, et toute la page de contrôle en dépend ;
+* l'état de <code>Catégorie:Lieu</code> et de <code>Catégorie:Physical item</code>, et le texte exact de la règle de contenance publiée ;
+* <code>Modèle:Physical item</code> et son formulaire, transclus par 47 pages ;
+* l'arbre fonctionnel, pour y trouver où loger une fonction de rangement.
+
+== Risques connus ==
+
+* <code>Modèle:Physical item</code> est transclus par 47 pages : toute modification demande un tableau de non-régression, comme au lot 10.
+* Le verrou intermittent sur les pages <code>Attribut:</code> — chaque page de propriété complète à sa première écriture, jamais en deux fois.
+* <code>Property_range</code> est de type Keyword, plafond 85 caractères, au-delà duquel le rejet est silencieux et l'API répond quand même Success.
+* En SMW, le séparateur multivalué se rattache à la propriété qui précède. Une insertion mal placée dans un bloc de stockage casse la propriété d'à côté sur les 47 pages d'un coup, et ça ne se voit qu'à la requête suivante.
+* La cascade à quatre niveaux produit un bloc de wikitexte imbriqué. C'est le point où ce lot peut devenir illisible ; il vaut mieux qu'il soit long et plat qu'astucieux.
+
+== Points ouverts ==
+
+* Le nom de la propriété de rang, et sa description, qui devra renvoyer à <code>Planting_rank</code> pour qu'on ne les confonde pas.
+* Le vocabulaire des états de cycle de vie, et sa forme grammaticale — la même question que pour <code>Procurement_route</code>, où les participes passés l'ont emporté.
+* Si la date d'étiquette d'un contenant est la même propriété que celle d'un objet ordinaire, ou une seconde : un contenant porte une étiquette qui décrit autre chose que lui.
+* Sous quelle branche de l'arbre fonctionnel se range la fonction de rangement. Stocker l'eau non potable existe déjà, donc les fonctions de stockage ont une place ; laquelle exactement se lit sur l'arbre vivant.
+
+----
+
+Voir aussi la [[Gestion des lots]] et les [[Limites connues du Système de Gestion de Données Techniques]].

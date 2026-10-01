@@ -1,0 +1,2 @@
+
+# '''Une donnée affichée par un modèle ne se recopie pas en prose sur la même page.''' Les pages de lot clos ont porté leurs permaliens de rapport à deux endroits : la propriété, rendue par le modèle, et une section rédigée à la main. Les deux divergent dès qu'un rapport s'ajoute, et rien ne signale laquelle fait foi. La règle vaut partout : si une donnée est portée par une propriété, la page ne la réécrit pas — elle la laisse s'afficher. Constaté le 11 septembre 2026, duplication introduite par la consigne qui demandait les deux.
