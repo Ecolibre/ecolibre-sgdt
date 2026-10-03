@@ -31,7 +31,7 @@ conversation de l'architecte.
 
 ## Pages de référence sur le wiki
 
-Le wiki fait autorité, pas ce fichier. Lire ces pages avant ta première
+Le wiki fait autorité, pas ce fichier. Lire ces pages avant la première
 écriture dans un lot, et vérifier qu'un fait nouveau n'y figure pas déjà avant
 de l'écrire ailleurs.
 

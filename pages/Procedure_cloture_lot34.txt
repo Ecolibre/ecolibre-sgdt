@@ -1,0 +1,84 @@
+Un lot est '''livré''' quand son travail est fait. Il n'est '''clos''' qu'après cette procédure, qui vérifie que rien de ce qui a été dit ou trouvé pendant son exécution ne reste hors du wiki. Un lot peut rester livré et non clos pendant des mois : c'est une dette, et elle se voit sur [[Gestion des lots]]. Le pendant de cette page est la [[Procédure d'ouverture d'un lot]], qui se lance à l'ouverture du lot.
+
+La procédure a deux moitiés : l'une se lit, l'autre se cherche mécaniquement. Aucune des deux ne remplace l'autre.
+
+== Où lancer cette procédure ==
+
+Dans la conversation qui a mené le lot, et nulle part ailleurs. Le texte intégral des échanges y est présent. Ailleurs, on ne dispose que d'extraits et de résumés générés : un résumé retient des affirmations en perdant leur adresse et leur motif, et une recherche dans les conversations rend ce que le hasard des mots-clés fait remonter, pas ce qu'une lecture trouve.
+
+Un lot mené sur plusieurs conversations se clôt en autant de passages. Une conversation qui a porté plusieurs lots se traite lot par lot.
+
+Texte à coller au début de la conversation concernée, en remplaçant le numéro :
+
+<pre>
+Pour une conversation claude.ai du projet Wiki Ecolibre data.
+Si tu es Claude Code, ne lance aucune commande : réponds seulement que ce
+message est destiné à une conversation claude.ai.
+
+Clôture du lot N. Lis ce message en entier avant de répondre.
+
+Cette conversation a mené le lot N du SGDT. Il est livré, pas clos : il
+reste à vérifier que rien de ce qui s'est dit ici ne demeure hors du wiki.
+
+Récupère d'abord la procédure, qui fait autorité :
+
+curl -s -G "https://wiki.ecolibre.org/api.php" --data-urlencode "action=parse" --data-urlencode "page=Procédure de clôture d'un lot" --data-urlencode "prop=wikitext" --data-urlencode "format=json"
+
+N'utilise pas l'outil de récupération de pages web pour ce wiki : il sert
+des versions en cache et refuse les adresses non déjà citées. curl et
+l'API, toujours.
+
+Applique ensuite les étapes 1 à 4 au seul lot N. L'étape 1 porte sur le
+texte de cette conversation, que tu as sous les yeux. Ne t'appuie sur aucun
+résumé, ni le tien, ni celui de l'interface : une recherche dans les
+conversations rend des extraits, elle ne vaut pas relecture.
+
+Vérifie chaque affirmation contre le wiki ou le dépôt avant de l'écrire, et
+dis d'où vient ce que tu avances.
+
+Ne rédige aucune consigne d'écriture avant que j'aie arbitré. Rends-moi
+d'abord une liste : chaque trouvaille en un point numéroté, avec son
+contexte, ta question et ta suggestion. Je réponds point par point.
+</pre>
+
+== 1. Relire les échanges du lot ==
+
+Cette moitié ne s'automatise pas. Il s'agit de relire les conversations pendant lesquelles le lot a été mené, et d'en extraire ce qui n'a jamais été écrit ailleurs : un arbitrage rendu en passant, un motif de refus, une idée notée puis abandonnée.
+
+Un arbitrage qui ne vit que dans une conversation est perdu. Plusieurs règles du SGDT ont failli l'être ainsi, et l'une d'elles a circulé pendant des semaines sous une formulation trop forte parce que personne n'avait consigné son motif.
+
+== 2. Cribler les rapports du lot ==
+
+Cette moitié se cherche. Dans le dossier `travaux` du dépôt, sur les fichiers du lot, chercher les formules qui annoncent un report :
+
+à ne pas oublier, le jour où, à reprendre, plus tard, à trancher, non tranché, reste ouvert, porte à ne pas fermer, sans être un préalable, à revoir, on verra, pour l'instant.
+
+Ces tournures marquent ce que l'auteur savait devoir revenir. La liste n'est pas close : y ajouter les formules rencontrées.
+
+== 3. Ranger chaque trouvaille ==
+
+Un '''fait mesuré sur l'installation''' va dans les [[Limites connues du Système de Gestion de Données Techniques|Limites connues]], à la suite, jamais en renumérotant.
+
+Un '''travail à faire''' va dans les points ouverts du lot concerné. S'il n'appartient à aucun lot, il en devient un : créer sa page, lui attribuer le numéro suivant.
+
+Une '''idée qu'on ne sait pas encore où ranger''' va dans les [[Notes en attente de rangement]].
+
+Un '''arbitrage rendu''' va dans la section « Ce qui est déjà tranché » du lot, '''avec son motif'''. Sans le motif, la question se reposera à la première occasion et sera retranchée autrement.
+
+Une '''idée écartée''' va dans « Ce qui est écarté, et pourquoi », avec sa raison et sa date. Une idée écartée sans motif revient.
+
+Un arbitrage peut vivre dans un document du dépôt sans figurer sur la page du lot. C'est le cas du dixième, dont le cadrage porte sept décisions « à ne pas rejouer » qu'aucune page du wiki ne mentionne. Le raisonnement peut rester dans le dépôt ; la décision, non. Vérifier que chaque arbitrage d'un document de cadrage a son énoncé et son motif, en une phrase, sur la page du lot, avec le permalien pour le détail. Sans cela, un contributeur qui n'a pas le dépôt rejouera une question déjà tranchée.
+
+== 4. Vérifier les points ouverts déclarés ==
+
+Reprendre un à un les points ouverts inscrits à la livraison et vérifier leur état '''sur le wiki''', pas dans les rapports. Certains se ferment sans que personne l'écrive : deux des huit points du lot 10 étaient fermés depuis des semaines quand on les a vérifiés.
+
+Attention au sens de ce qu'on mesure. Constater qu'une page existe ne prouve pas qu'un objet est catalogué ; constater qu'aucune page n'existe ne prouve pas que l'objet n'existe pas. Une absence ne se conclut jamais d'une mesure qui ne détecte pas l'absence — et sur ce wiki, la négation d'une propriété se compile silencieusement en sa forme positive.
+
+Pour savoir ce qu'un lot a réellement touché et quand, interroger les résumés de modification plutôt que la mémoire : `list=recentchanges` avec `rcprop=timestamp|comment|title`, en paginant par `rccontinue`, puis filtrer sur l'étiquette du lot. C'est ainsi que les douze premiers lots ont été datés. Deux limites : la fenêtre des modifications récentes est plus courte que l'historique du wiki, et une écriture sans étiquette de lot en sort — quatorze écritures du lot 13 sont dans ce cas.
+
+== 5. Clore ==
+
+Renseigner la date de clôture, passer l'état à '''clos''', et vérifier que [[Gestion des lots]] a suivi. Si l'index n'a pas bougé, purger la page : le rendu ne se rafraîchit pas toujours quand la donnée change ailleurs.
+
+[[Catégorie:Page de suivi]]

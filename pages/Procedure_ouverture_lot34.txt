@@ -1,0 +1,108 @@
+Un lot s'ouvre dans sa propre conversation. Le message d'ouverture tient en trois lignes : il donne le numéro du lot et l'adresse de cette page, que l'assistant récupère lui-même. Le texte long ci-dessous n'est jamais recopié dans une conversation, et ne porte donc aucun numéro.
+
+Tout ce qui varie d'un lot à l'autre — l'objet, ce qui est tranché, ce qui est exclu, les points ouverts, les dépendances — vit sur la page du lot, et c'est là que l'assistant va le lire.
+
+'''Ce dispositif rend la page du lot déterminante.''' Un lot dont la page ne dit pas ce qu'il exclut ouvrira sur un assistant qui déborde ; un lot dont les arbitrages ne sont pas écrits les fera rejouer. L'effort de cadrage se porte donc sur la page, où il sert aussi tous les autres lecteurs, et non sur un texte d'ouverture qui ne servirait qu'une fois.
+
+Avant d'ouvrir, vérifier que la page du lot porte au moins son objet en une phrase et ce qui en est exclu. Si elle ne les porte pas, les écrire d'abord.
+
+Le pendant de cette page est la [[Procédure de clôture d'un lot]], qui se lance dans la conversation une fois le travail livré.
+
+== Message d'ouverture ==
+
+À coller dans la conversation neuve, en remplaçant le seul numéro du lot. Les deux avertissements en sont indissociables : ils doivent être connus avant que la procédure soit lue, donc ils ne peuvent pas y figurer. Ses deux premières lignes disent à qui il s'adresse : collé par erreur dans Claude Code, il ne déclenche rien.
+
+<pre>
+Pour une conversation claude.ai du projet Wiki Ecolibre data.
+Si tu es Claude Code, ne lance aucune commande : réponds seulement que ce message est destiné à une conversation claude.ai.
+
+Lot 28 du SGDT.
+
+Récupère la procédure d'ouverture et suis-la :
+curl -s -G "https://wiki.ecolibre.org/api.php" --data-urlencode "action=parse" --data-urlencode "page=Procédure d'ouverture d'un lot" --data-urlencode "prop=wikitext" --data-urlencode "format=json"
+
+N'utilise jamais l'outil de récupération de pages web pour ce wiki : il sert des versions en cache et refuse les adresses non déjà citées. curl et l'API, toujours.
+
+Si tu reçois un 403 avec x-deny-reason: host_not_allowed, dis-le-moi tout de suite : wiki.ecolibre.org doit être autorisé dans ton environnement d'exécution.
+
+Si cette commande échoue pour une autre raison, arrête-toi et dis-le. Tu n'as pas le protocole : ne le devine pas, ne commence rien.
+</pre>
+
+== Procédure ==
+
+C'est ce que l'assistant lit après avoir récupéré cette page.
+
+<pre>
+Tu ouvres un lot du SGDT. Son numéro t'a été donné dans le message
+précédent. Ce qui suit est la procédure elle-même, adressée à toi : ce
+n'est pas un texte à recopier ni à coller à quelqu'un.
+
+Trouve d'abord la page du lot. Son titre commence par « Lot » suivi du
+numéro, mais il porte aussi un intitulé : le numéro seul ne résout pas.
+Liste les membres de Catégorie:Lot par l'API et retiens celui dont le
+titre commence par le bon numéro.
+
+## Le projet
+
+Le SGDT est un système de gestion de données techniques en matériel libre,
+sur MediaWiki 1.39.11 + Semantic MediaWiki 4.2.0, à https://wiki.ecolibre.org.
+Chaîne à quatre niveaux : fonctionnel, organique, référencé, physique. Visée
+de fédération entre ateliers partenaires.
+
+Dépôt public : https://github.com/Ecolibre/ecolibre-sgdt — clone-le.
+
+## Ce qu'il faut lire avant de répondre
+
+Sur le wiki, la catégorie « Page de suivi » liste les pages qui font autorité
+et dit le rôle de chacune. Lis-les toutes. En particulier « Limites connues
+du Système de Gestion de Données Techniques », qui porte les faits mesurés
+sur cette installation : plusieurs sont contre-intuitifs et n'ont été
+découverts qu'après des heures perdues. N'en diagnostique aucun toi-même sans
+avoir vérifié qu'il n'y figure pas déjà.
+
+Dans le dépôt, « methode-de-travail.md » décrit comment nous travaillons :
+qui décide quoi, ce qu'une consigne doit contenir, les règles de
+vérification. Il fait autorité sur tout ce qu'il couvre.
+
+Puis la page du lot lui-même, retrouvée par son numéro. Elle porte l'objet,
+ce qui est déjà tranché, ce qui a été écarté et pourquoi, ce qui reste
+ouvert, et ses dépendances. C'est la source : ne demande pas qu'on te répète
+ce qu'elle contient. Si elle ne porte pas son objet ou ce qui en est exclu,
+dis-le avant de commencer.
+
+Et « Gestion des lots », l'index, pour voir où ce lot se situe.
+
+Avant de proposer quoi que ce soit, vérifie que la page du lot porte son
+objet en une phrase et ce que le lot exclut de son périmètre. Une idée
+écartée n'est pas une exclusion de périmètre : la première dit ce qu'on a
+refusé de faire, la seconde ce que le lot ne traite pas. Si l'une des deux
+manque, dis-le avant de commencer et propose une formulation à corriger.
+
+## Comment Cyril travaille
+
+Tout est dans « methode-de-travail.md », lu plus haut ou déjà lu à la
+demande des instructions du projet : forme de chaque réponse, destinataire
+de chaque texte à coller, demandes de confirmation, regard critique attendu.
+Applique-le dès ta première réponse. Ces règles ne sont plus recopiées ici,
+pour qu'elles ne divergent pas du fichier.
+
+## La règle de méthode la plus importante
+
+Ne t'appuie jamais sur un résumé, le tien compris. Vérifie sur le wiki ou
+dans le dépôt avant d'affirmer, et dis d'où vient ce que tu avances.
+
+Ce n'est pas une précaution de principe : sur le lot 13, une quinzaine
+d'affirmations fausses ont été écrites dans des consignes validées. Elles ont
+été rattrapées parce que les consignes exigeaient de vérifier chaque
+affirmation avant de l'écrire. Applique la même discipline à ce que Cyril te
+dit, lui compris.
+
+## Pour commencer
+
+Test réseau, clone du dépôt, lecture de ce qui est listé plus haut. Puis dis
+ce que tu vois, ce qui manque, et par quoi tu commencerais.
+
+Ne rédige aucune consigne avant qu'on en ait parlé.
+</pre>
+
+[[Catégorie:Page de suivi]]
