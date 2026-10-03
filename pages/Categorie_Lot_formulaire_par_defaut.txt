@@ -1,0 +1,23 @@
+== Définition ==
+
+Un lot est une unité de travail cadrée du projet SGDT, qu'elle touche le wiki, le serveur ou l'outillage. Ce n'est pas une classe de la chaîne fonctionnel → organique → référencé → physique : c'est une entité d'organisation du travail, à part.
+
+Chaque lot porte un numéro qui l'identifie sans l'ordonner, un état, son objet en une phrase, ses dates d'ouverture et de clôture, ses relations avec d'autres lots, et les permaliens de ses rapports.
+
+'''Le numéro identifie, il n'ordonne pas.''' Il est attribué à la création de la page, et n'est jamais réattribué — un lot abandonné laisse son numéro vide à vie. L'ordre chronologique se lit sur les dates, jamais sur les numéros.
+
+== Structure d'une page de lot ==
+
+Les titres de section admis, dans cet ordre, chacun facultatif : `Objet` (seulement s'il déplie vraiment la phrase d'objet), `Ce qui est déjà tranché`, `Ce qui est écarté, et pourquoi`, `Dépendances`, `Périmètre`, `Point de départ`, `Risques connus`, `Points ouverts`, `Rapports`. Une page courte n'en porte qu'un ou deux, une page longue les porte tous. `Points ouverts` doit porter ce titre exact partout : c'est par lui qu'un lot futur les récoltera.
+
+== Trois états sur les six ne sont pas des synonymes ==
+
+'''livré''' signifie que le travail est fait, sans que la relecture de clôture ait eu lieu ; la date de livraison le dit. '''clos''' signifie que tout ce qui devait être consigné l'a été, y compris ce qui reste à faire ; la date de clôture le dit. Un lot peut rester livré et non clos pendant des mois. '''abandonné''' signifie qu'il a été décidé de ne pas faire ce lot ; son numéro reste occupé.
+
+Cette catégorie est posée automatiquement par [[:Modèle:Lot|Modèle:Lot]]. Elle ne doit jamais être posée à la main.
+
+L'index des lots est sur [[Gestion des lots]].
+
+{{#default_form:Lot}}
+
+[[Catégorie:SGDT]]

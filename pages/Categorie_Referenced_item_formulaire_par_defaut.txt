@@ -1,0 +1,17 @@
+== Définition ==
+
+Un moyen identifié de se procurer un item organique : un fournisseur, une
+référence fabricant, ou un plan publié à fabriquer soi-même. Le niveau de
+maturité qualifie ce moyen d'approvisionnement.
+
+Cette catégorie est posée automatiquement par [[:Modèle:Referenced item|Modèle:Referenced item]]. Elle
+ne doit jamais être ajoutée à la main : elle vaut appartenance à la classe, pas
+navigation.
+
+== Position dans la chaîne ==
+
+Organic item → '''Referenced item''' → Physical item
+
+{{#default_form:Referenced item}}
+
+[[Catégorie:Item SGDT]]

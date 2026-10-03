@@ -1,0 +1,638 @@
+'''Version française :''' Cette page constitue l'épine dorsale technique du [[Système de Gestion de Données Techniques]]. Elle répertorie toutes les propriétés sémantiques, les modèles et les formulaires.
+
+''English version: This page is the technical backbone of the [[System for Technical Data Management]]. It lists all semantic properties, templates, and forms.''
+
+Voir aussi les [[Limites connues du Système de Gestion de Données Techniques]] et le [[Registre des facettes]].
+
+== 1. Propriétés Sémantiques (Semantic Properties) ==
+Ce tableau liste les "champs de données" utilisés sur l'ensemble du wiki. Les noms sont en anglais pour assurer la compatibilité internationale, mais les descriptions sont fournies dans les deux langues.
+
+''This table lists the "data fields" used across the wiki. Names are in English for international compatibility, but descriptions are provided in both languages.''
+
+{{#ask: [[Has type::+]]
+ |?Has type=Type de donnée / Data Type
+ |?Property_description_FR=Description (FR)
+ |?Property_description_EN=Description (EN)
+ |?Imported from=Vocabulaire externe
+ |?Property_cardinality=Cardinalité
+ |?Property_domain=Domaine
+ |?Property_range=Portée
+ |format=table
+ |limit=200
+ |sort=Has type
+}}
+
+== Les quatre classes ==
+
+Les catégories d'items ne servent pas à la navigation : elles valent
+appartenance à une classe et deviendront des <code>rdf:type</code> à l'export.
+Elles sont posées exclusivement par les modèles et ne doivent jamais être
+ajoutées à la main.
+
+Elles forment une chaîne de quatre niveaux, du besoin à l'objet posé sur le
+terrain.
+
+{| class="wikitable"
+! Classe !! Rôle dans la chaîne !! Posée par !! Lien vers le niveau suivant !! Effectif
+|-
+| [[:Category:Functional item|Functional item]] || la fonction à assurer || [[:Modèle:Functional item|Modèle:Functional item]] || <code>Realizes_function</code> (depuis l'organique) || {{#ask: [[Category:Functional item]] |format=count}}
+|-
+| [[:Category:Organic item|Organic item]] || le type d'objet qui réalise la fonction || [[:Modèle:Organic item|Modèle:Organic item]] || <code>Corresponds_to_organic</code> (depuis le référencé) || {{#ask: [[Category:Organic item]] |format=count}}
+|-
+| [[:Category:Referenced item|Referenced item]] || le moyen de se procurer l'objet || [[:Modèle:Referenced item|Modèle:Referenced item]] || <code>Instance_of</code> (depuis le physique) || {{#ask: [[Category:Referenced item]] |format=count}}
+|-
+| [[:Category:Physical item|Physical item]] || l'exemplaire présent sur un site || [[:Modèle:Physical item|Modèle:Physical item]] || terminus || {{#ask: [[Category:Physical item]] |format=count}}
+|}
+
+La définition complète de chaque classe figure sur sa page de catégorie.
+
+Deux autres catégories tiennent le même genre d'effectif vivant, hors de
+cette chaîne :
+
+{| class="wikitable"
+! Catégorie !! Effectif
+|-
+| [[:Category:Lieu|Category:Lieu]] || {{#ask: [[Category:Lieu]] |format=count}}
+|-
+| [[:Category:Organisation|Category:Organisation]] || {{#ask: [[Category:Organisation]] |format=count}}
+|}
+
+=== Les lieux sont hors de la chaîne ===
+
+<code>Category:Lieu</code> n'est pas un cinquième niveau : c'est un ensemble
+d'items physiques — un terrain, une parcelle, une pièce — que les autres
+items physiques désignent par <code>Located_at</code>. Un lieu ne réalise pas
+de fonction et n'a pas de référencé au-dessus de lui.
+
+Le choix d'en faire des items plutôt qu'une propriété texte est ce qui
+permettra aux planches de culture de s'insérer '''entre''' le lieu et la
+plantation, sans toucher au modèle de la plantation — ce qu'une valeur texte
+n'aurait pas permis (décision du lot 9, 13 août 2026).
+
+<code>Located_at</code> (« se trouve à », vers un lieu) et
+<code>physical_parent</code> (« installé dans », vers l'objet englobant) sont
+deux propriétés distinctes, à ne pas confondre : une pompe est
+<code>Located_at</code> un lieu et <code>physical_parent</code> un châssis.
+
+Le découplage entre le troisième et le deuxième niveau est le ressort du
+modèle : le niveau de maturité qualifie une '''voie d'approvisionnement''', pas
+un objet. Un fournisseur peut devenir obsolète pendant que l'item organique et
+les exemplaires en service restent parfaitement valides.
+
+Les effectifs sont calculés en direct et ne peuvent pas se périmer.
+
+=== Organisation est hors de la chaîne, comme les lieux ===
+
+<code>Category:Organisation</code> n'est pas non plus un cinquième niveau :
+comme les lieux, c'est une entité posée en dehors de la chaîne fonctionnel →
+organique → référencé → physique — ici une entité d'appartenance, et non de
+localisation. Elle ne descend d'aucune des quatre classes de conception et
+n'en a aucune comme parente.
+
+Contrairement aux lieux, qui se relient à la chaîne par
+<code>Located_at</code>, Organisation n'a aujourd'hui '''aucune propriété qui
+la relie directement''' : elle n'est atteinte que par l'appartenance
+(<code>Owned_by</code>) ou le souhait (<code>Wanted_by</code>), portés par
+l'item et non par elle (voir ci-dessous).
+
+La catégorie est posée automatiquement par <code>Modèle:Organisation</code>,
+jamais à la main — même règle que pour les quatre classes et pour les
+lieux : elle vaut appartenance à la classe, pas navigation.
+
+=== Appartenance et souhait : portés par l'item, pas par le lieu ===
+
+<code>Owned_by</code> (sur Physical item, cardinalité unique) et
+<code>Wanted_by</code> (sur Organic item et Referenced item, cardinalité
+multiple) relient un item à un acteur — aujourd'hui toujours une
+Organisation, mais la portée documentée reste « un acteur » pour ne pas
+fermer la porte à une future classe Personne.
+
+Les deux propriétés sont portées par l'item, jamais par le lieu, pour une
+raison mesurée : <code>Located_at</code> ne remonte pas l'arbre des lieux
+(voir <code>Location_lineage</code> ci-dessous), donc une jointure posée sur
+un lieu ne retrouverait pas les exemplaires situés plusieurs niveaux en
+dessous de lui. Seconde raison, indépendante : un exemplaire peut changer de
+lieu sans changer de propriétaire — les deux faits n'évoluent pas ensemble.
+
+<code>Wanted_by</code> ne porte jamais sur un exemplaire : elle vise ce qui
+n'est pas encore là (une espèce en général sur un item organique, une
+provenance précise sur un item référencé), et n'a délibérément aucune
+auto-extinction — un souhait reste affiché même après que l'espèce est
+devenue présente ailleurs.
+
+=== Location_lineage : déclarée, vide, et pourquoi ===
+
+<code>Location_lineage</code> (portée multiple, domaine
+<code>Category:Lieu</code>) est déclarée depuis le 21 août 2026 pour porter
+l'ensemble des lieux ancêtres d'un lieu, lui-même inclus — la fermeture
+réflexo-transitive de l'arbre des lieux, pensée pour qu'une requête puisse
+remonter directement d'un exemplaire à n'importe quel ancêtre de son lieu
+sans traverser <code>Located_at</code> à la main, niveau par niveau.
+
+'''Elle ne porte aujourd'hui aucune valeur, sur aucune page.''' Le patron
+envisagé pour la remplir automatiquement échoue pour toute propriété de
+type Page — voir [[Limites connues du Système de Gestion de Données Techniques]], entrée n° 31, pour le mécanisme de cet échec.
+
+Le cadrage du lot 12 ([[Lot 12 — Contenants et étiquetage]]) a depuis tranché
+le principe : le lieu se calcule par '''cascade bornée à quatre niveaux''',
+écrite en wikitexte et évaluée à l'affichage, plutôt que par une lignée
+matérialisée. Deux motifs. D'abord, Semantic Scribunto est absente de
+l'installation — Lua (Scribunto) ne peut donc pas interroger Semantic
+MediaWiki —, la cascade ne peut pas s'écrire en module, et dix niveaux en
+wikitexte produiraient un modèle illisible. Ensuite, une valeur calculée à
+l'affichage ne peut pas se désynchroniser, contrairement à une lignée
+stockée — même leçon que l'échec <code>#show</code> → <code>#set</code>
+rappelé ci-dessus.
+
+Le lot 12 est '''cadré, non exécuté''' : <code>Location_lineage</code> reste
+sans porteur ; le besoin qu'elle portait est repris par la cascade.
+
+En attendant, remonter l'arbre d'un lieu se fait par lecture répétée de
+<code>Located_at</code>, un niveau à la fois — c'est ce qui explique, entre
+autres, pourquoi <code>Owned_by</code> et <code>Wanted_by</code> sont
+portées par l'item plutôt que par le lieu (voir ci-dessus).
+
+=== Numérotation : trois banques de références ===
+
+Les trois classes de conception partagent une séquence ; les items physiques
+ont la leur ; les lieux ont la leur. '''Trois compteurs séparés''', donc, et
+non un seul — mais tous en Base 36 sur quatre caractères : ce qui diffère
+d'une banque à l'autre, c'est la séquence, pas l'encodage. Il y a ainsi
+'''trois banques de références''' (items physiques : décision du lot 9,
+13 août 2026 ; lieux : lot 11, 24 août 2026) :
+
+{| class="wikitable"
+! Banque !! Sujets !! Propriété !! Valeur stockée !! Affichage
+|-
+| conception || items fonctionnels, organiques, référencés || <code>Item_ref</code> || <code>000R</code> || <code>000R</code>
+|-
+| inventaire || items physiques || <code>Inventory_number</code> || <code>0003</code> || <code>ECL-0003</code>
+|-
+| lieux || lieux || <code>Location_number</code> || <code>0007</code> || <code>LOC-0007</code>
+|}
+
+Cinq points qui en découlent, à ne pas défaire :
+
+* '''La valeur stockée est non préfixée.''' <code>ECL</code> est produit à
+  l'affichage par le modèle, à partir d'une constante de site ;
+  <code>ECL-0003</code> apparaît partout à l'écran, jamais en base. Motif :
+  <code>Module:Base36</code> utilise <code>clean:match("[%w]+")</code>, qui
+  s'arrête au tiret — une valeur préfixée en base serait silencieusement mal
+  lue.
+* '''Les trois banques sont trois propriétés différentes''', donc un
+  <code>0003</code> physique, un <code>0003</code> fonctionnel et un
+  <code>0003</code> de lieu ne se confondent pas, malgré des valeurs
+  identiques.
+* '''<code>ECL</code> désigne le wiki producteur''', pas une classe d'items.
+  Un partenaire qui duplique le dispositif change une constante, pas N pages.
+  Les codes sont enregistrés dans le [[Registre des préfixes de site]].
+  Premier cas réel : <code>CWL</code> (CWL Optéos), quatre exemplaires
+  <code>CWL-0008</code> à <code>CWL-000B</code> inventoriés au lot 10 ; la
+  banque inventaire est désormais à deux détenteurs en service.
+* '''Les trois banques suivent le même encodage Base 36''' (<code>Module:Base36</code>),
+  quatre caractères : <code>000A</code> suit <code>0009</code>, <code>0010</code>
+  suit <code>000Z</code>. Conforme à <code>Attribut:Inventory_number</code>
+  (« Identifiant Base 36 de 4 caractères ») et à <code>Attribut:Location_number</code>.
+  Seule la séquence est propre à chaque banque.
+* '''<code>LOC</code> n'est pas le code d'une organisation''', à la différence
+  d'<code>ECL</code> — et c'est le motif même de la troisième banque. Un lieu
+  public, une commune, un hameau, un terrain, '''n'appartient à personne''' :
+  lui faire porter le préfixe d'un propriétaire serait faux.
+  <code>LOC</code> identifie les lieux publiés sur ce wiki, et rien d'autre.
+  Il est produit par <code>Modèle:Préfixe lieu</code> et porté par la
+  propriété <code>Location_site</code>, distincte de
+  <code>Inventory_site</code>.
+
+=== Les procédés : un sous-ensemble marqué des items fonctionnels ===
+
+Cinq items fonctionnels portent <code>Catégorie:Procédé</code> :
+<code>Assembler</code>, <code>Braser tendre</code>, <code>Souder par points</code>,
+<code>Mesurer une grandeur électrique</code> et <code>Maintenir en position</code>.
+Un procédé '''est''' un item fonctionnel — pas une classe à part, pas une
+facette : un sous-ensemble marqué de la première classe, comme les lieux et
+les organisations sont des ensembles posés à côté de la même population (voir
+ci-dessus). Chacun est aligné sur une entité Wikidata par
+<code>External_classification</code> et porte sa ligne de motif en
+<code>Item_description</code>.
+
+Le marqueur <code>Catégorie:Procédé</code> est '''posé par le champ de
+formulaire <code>Procédé</code>, valeur <code>oui</code>''', dans
+<code>Modèle:Functional item</code> — jamais ajouté à la main, même règle que
+les catégories de classe.
+
+<code>Practice_domain</code> (type Texte, cardinalité multiple, domaine
+<code>Functional item</code>, aucune valeur imposée) '''qualifie le procédé,
+jamais l'outil''' : son domaine est <code>Functional_item</code>, pas
+<code>Referenced_item</code> (arbitrage du lot 10). Les valeurs portées
+débordent l'électronique — plomberie, électricité, énergie.
+
+Vue procédé → exemplaires disponibles : [[Procédés et outils]]. Parcours
+« ajouter un outil » : [[Guide de saisie]].
+
+=== Design_source : le wiki ne porte pas les sources de conception ===
+
+Cinq propriétés décrivent l'outil, '''toutes portées par l'item référencé'''
+(domaine <code>Referenced item</code>) et non par une classe « outil » qui
+n'existe pas : <code>Procurement_route</code> (Texte, unique),
+<code>Power_rating</code> (Nombre, unique, unité W), <code>Max_thickness</code>
+(Nombre, unique, unité mm), <code>Materials_worked</code> (Page, multiple),
+<code>Measured_quantities</code> (Texte, multiple).
+
+<code>Design_source</code> (type URL, unique, domaine <code>Referenced item</code>)
+porte une URL permanente vers les fichiers de conception, '''figée sur un
+commit''', jamais sur une branche.
+
+'''Règle de partage entre le wiki et le dépôt de conception :''' le wiki porte
+les rendus PNG et les plans PDF ; les sources STEP, STL et les formats natifs
+vivent dans un dépôt versionné, référencées en permalien par
+<code>Design_source</code>. Cette règle recoupe la sous-section « Types de
+fichiers autorisés » ci-dessous : STEP et STL ne sont de toute façon pas
+téléversables sur le wiki.
+
+<code>Design_source</code> est vide sur tous les items aujourd'hui : le dépôt
+de conception n'existe pas encore, seul le réceptacle est posé.
+
+== Facettes ==
+
+Un second axe, perpendiculaire aux quatre classes ci-dessus, décrit la nature
+de l'objet indépendamment de son niveau de conception : c'est la facette. Un
+mamelon fileté est un raccord ; un argousier est un végétal — cette
+information ne dépend pas de savoir si l'objet est encore une fonction, un
+principe organique, une référence ou un exemplaire physique.
+
+Liste plate, pas d'arbre : un item porte zéro, une ou plusieurs facettes
+(introduites au lot 8). Un bidon fileté peut être à la fois un contenant et
+un raccord ; forcer une partition unique reproduirait, en plus petit, le
+problème déjà résolu pour les procédés techniques par <code>Practice_domain</code>.
+
+Chaque facette est un couple (facette, classe) : un bloc de propriétés porté
+par un modèle dédié (ex. <code>Modèle:Organic facet plant</code>), appelé en
+plus du modèle de classe sur la page de l'item, et un bloc de formulaire
+correspondant transclus dans le formulaire de la classe. Le mécanisme retenu
+(lot 8, amendement 1) est une section de modèle multi-instance à zéro ou une
+instance (<code>multiple</code>, <code>minimum instances=0</code>,
+<code>maximum instances=1</code>) plutôt qu'un champ de sélection : conçu
+pour, et vérifié par test réel du formulaire (Cyril, 11 août 2026), qu'aucun
+appel de modèle n'est écrit tant que l'instance n'a pas été ajoutée. La
+propriété <code>Item_facet</code>
+n'est pas un champ de saisie ; elle est émise par chaque modèle de facette.
+
+Liste complète, périmètre et propriétés de chaque facette : voir le
+[[Registre des facettes]].
+
+=== Une même facette peut vivre à plusieurs niveaux ===
+
+La facette végétale est portée à '''deux''' niveaux depuis le lot 9 : par
+<code>Modèle:Organic facet plant</code> sur l'espèce, et par
+<code>Modèle:Physical facet plant</code> sur l'exemplaire planté. Les deux
+modèles émettent le '''même''' <code>Item_facet::Facette végétal</code> et la
+'''même''' catégorie de facette — c'est bien une seule facette, vue à deux
+niveaux, pas deux facettes homonymes. La répartition suit la règle générale
+des classes : l'organique porte ce qui est commun à tous les plants de cette
+plante, le physique ce qui est propre à ce plant-là (<code>Planting_date</code>,
+<code>Specimen_status</code>, <code>Planting_rank</code>,
+<code>Planted_count</code>, <code>Propagated_from</code>).
+
+'''Conséquence directe, et règle à tenir : toute requête portant sur une
+facette porte aussi un filtre de classe.''' Ce sont les catégories de classe
+(<code>Category:Physical item</code>, <code>Category:Organic item</code>) qui
+séparent les deux populations, puisque <code>Item_facet</code> ne les
+distingue pas. Sans ce filtre, une fiche d'espèce et une plantation remontent
+dans le même tableau, sans que rien ne le signale.
+
+=== La maille d'une plantation ===
+
+Une plantation — un item physique à facette végétale — est identifiée par le
+triplet '''espèce × lieu × date'''. Deux pieds de la même espèce plantés le
+même jour au même endroit forment '''une''' plantation, dont
+<code>Planted_count</code> donne le nombre ; la même espèce plantée au même
+endroit à une autre date en forme une '''seconde'''. C'est ce qui explique
+que <code>Poireau perpétuel — Le Buisson de Cerzat</code> existe en deux
+items (<code>ECL-0032</code> et <code>ECL-0033</code>) : deux mises en terre à
+deux dates, pas un doublon.
+
+<code>Planting_rank</code> et <code>Planting_rank_end</code> bornent la
+position d'une plantation sur son lieu, en mètres depuis l'origine de
+celui-ci — décimales admises, séparateur virgule (la convention « mètres
+entiers » du lot 11 est tombée le 6 septembre 2026, le terrain se mesurant
+au décimètre) : <code>Planting_rank</code> marque le début ;
+<code>Planting_rank_end</code>, facultative, marque la fin pour une
+plantation en ligne ou en bande — laissée vide, la plantation est
+ponctuelle. Une position occupe un seul champ ; une plage en occupe deux,
+jamais deux nombres dans le même champ. Aucune contrainte n'assure que la
+fin suive le début, et les deux propriétés restent volontairement
+orthogonales à <code>Planted_count</code>, qui compte les pieds sans en dire
+la disposition.
+
+Une plantation issue de la division ou du bouturage d'une autre pointe vers
+elle par <code>Propagated_from</code>, qui garde la filiation lisible quand
+les deux vivent à des endroits différents.
+
+== Contraintes de rédaction des modèles ==
+
+Une table en syntaxe wiki (<code>{|</code>/<code>|}</code>/<code>|-</code>/
+<code>!</code>/<code>|</code>) ne peut pas figurer dans l'argument d'un
+<code>{{#if:}}</code> : ses caractères <code>|</code> sont pris pour des
+séparateurs d'arguments par le préprocesseur, ce qui corrompt tout le bloc.
+Les liens <code><nowiki>[[a|b]]</nowiki></code> et
+<code><nowiki>[[File:x|150px]]</nowiki></code>, eux, passent sans problème — le
+crochet double protège leur <code>|</code> interne. Pour un tableau
+d'affichage conditionnel : sortir le tableau du <code>{{#if:}}</code> plutôt
+que l'y imbriquer ; <code>#set</code> et la catégorisation, eux, peuvent y
+rester.
+
+Un champ de formulaire <code>checkboxes</code> doit conserver
+<code>list|delimiter=,</code> en plus de <code>input type=checkboxes</code>
+et <code>values=</code>, pour que les cases cochées soient jointes en une
+chaîne délimitée par virgule plutôt que stockées comme un tableau interne
+au widget (Page Forms, <code>PF_FormPrinter.php</code>).
+
+Un lien interne <code>[[...]]</code> ne peut pas être coupé par un retour à
+la ligne : le titre doit tenir sur une seule ligne du wikicode, quelle que
+soit sa longueur. Aucune erreur d'API à l'écriture, mais le lien retombe
+absent de <code>pagelinks</code> et donc de <code>list=backlinks</code>.
+
+Un <code>#ask</code> imbriqué dans un modèle appelé en <code>format=template</code>
+par un <code>#ask</code> extérieur fonctionne sur cette installation (prouvé en
+bac à sable le 29 août 2026, puis mis en production dans [[Procédés et outils]]).
+La sous-requête porte son propre <code>|default=</code>, donc chaque ligne du
+tableau extérieur affiche son propre message d'absence plutôt qu'un repli
+unique pour toute la colonne.
+
+== Lire le tableau des propriétés ==
+
+Trois colonnes décrivent le schéma plutôt que le contenu :
+
+* '''Cardinalité''' — <code>single</code> ou <code>multiple</code>, nombre de valeurs admises.
+* '''Domaine''' — la ou les classes auxquelles la propriété s'applique.
+* '''Portée''' — la classe visée, ou la nature de la valeur littérale attendue.
+
+Ces trois colonnes préfigurent un schéma SHACL, où elles deviendront
+respectivement <code>sh:maxCount</code>, <code>sh:targetClass</code> et
+<code>sh:datatype</code> ou <code>sh:class</code>.
+
+Convention d'écriture, à tenir : le domaine s'écrit sous la forme
+<code>Category:Nom</code>, la portée sous la forme <code>Nom</code> seul.
+
+Onze lignes ont ces trois colonnes vides : les propriétés de description, les
+propriétés importées et les propriétés de schéma elles-mêmes ne décrivent pas
+le modèle métier. La case vide est une information, pas un oubli.
+
+<code>Property_domain</code>, <code>Property_range</code> et
+<code>Property_cardinality</code> sont des conventions du projet, pas des
+mécanismes lus par Semantic MediaWiki : le moteur ne les interprète pas et
+ne propage rien sur leur base (établi le 11 août 2026, en écartant une
+hypothèse explorée pendant une investigation de verrou d'écriture — voir
+[[Limites connues du Système de Gestion de Données Techniques]]).
+
+Formule retenue pour <code>Property_range</code> quand une propriété porte
+des <code>Allows value</code> : <code>énumération fermée</code>,
+littéralement (voir <code>Life_cycle</code>, <code>Foliage_persistence</code>,
+<code>Pollination_requirement</code>, <code>Forest_garden_layer</code>).
+
+== Vocabulaires externes importés ==
+
+Quatre vocabulaires sont déclarés via le mécanisme d'import de Semantic
+MediaWiki. Chaque page <code>MediaWiki:Smw import <nom></code> porte en première
+ligne l'URI de base du vocabulaire, puis la liste des termes autorisés.
+
+L'URI de base est l'''espace de noms de l'ontologie'', et non l'adresse de son
+document de spécification : SMW concatène le terme directement à cette URI. Une
+adresse de spécification produirait des URI syntaxiquement valides et
+sémantiquement muettes.
+
+{| class="wikitable"
+! Vocabulaire !! URI de base !! Attributs qui en dérivent
+|-
+| foaf || <code>http://xmlns.com/foaf/0.1/</code> || <code>Foaf:name</code>, <code>Foaf:homepage</code>, <code>Foaf:knows</code>
+|-
+| owl || <code>http://www.w3.org/2002/07/owl#</code> || <code>Owl:differentFrom</code>
+|-
+| schema.org (v14.0) || <code>https://schema.org/</code> || aucun
+|-
+| skos || <code>http://www.w3.org/2004/02/skos/core#</code> || aucun
+|}
+
+Les quatre attributs dérivés ne sont utilisés nulle part à ce jour : ils
+préparent la modélisation des personnes et des organisations.
+
+L'espace de noms <code>MediaWiki:</code> exige le droit
+<code>editinterface</code>. Ces pages ne sont modifiables ni par un compte
+ordinaire, ni par un compte robot.
+
+Les URI de owl et de skos ont été corrigées le 25 juillet 2026 ; elles
+pointaient jusque-là vers les documents de spécification.
+
+== Règles métier ==
+
+Ces contraintes sont énoncées dans les info-bulles des formulaires. Elles sont
+reprises ici parce qu'une contrainte qui ne vit que dans une aide de saisie
+n'est pas opposable.
+
+* Le titre d'un item fonctionnel est un '''verbe à l'infinitif'''.
+* Une référence est un identifiant '''Base 36 de quatre caractères''', en majuscules.
+* Un nom de tableau kanban '''ne contient pas de virgule'''.
+* Un nom d'item référencé '''ne contient pas de virgule''' — depuis le 25 juillet 2026, la virgule sert de séparateur de valeurs pour <code>Part_of</code> dans <code>Modèle:Referenced item</code>.
+* Un nom d'item fonctionnel '''ne contient pas de virgule''' — depuis que <code>Realizes_function</code> est multivaluée, la virgule y sert de séparateur de valeurs.
+* Un nom d'item organique '''ne contient pas de virgule''' — depuis que <code>Corresponds_to_organic</code> est multivaluée (lot 10), la virgule y sert de séparateur de valeurs pour l'item référencé qui le pointe.
+
+== Règles implicites ==
+
+Ces règles ne sont lisibles qu'en lisant le code des modèles et des modules.
+Les consigner ici est le seul moyen qu'elles survivent à leur auteur.
+
+* La '''séquence Base 36 est partagée''' entre les items fonctionnels, organiques et référencés : le calcul du numéro suivant interroge les trois catégories ensemble. Ce filtre est '''recopié à l'identique dans les trois formulaires''' — modifier l'un sans les autres ferait diverger les séquences sans que rien ne le signale.
+* Les items physiques '''ne portent pas <code>Item_ref</code>''' : ils ont leur propre numérotation d'inventaire, préfixée par un code de site, indépendante de la séquence de conception.
+* <code>Template:Item numbering audit</code> interroge <code><nowiki>[[Item_ref::+]]</nowiki></code> '''sans aucun filtre de catégorie''' : la détection des trous porte sur tout le wiki, pas sur une classe.
+* <code>Realizes_function</code> est multivaluée : un item organique peut réaliser plusieurs fonctions.
+* <code>Corresponds_to_organic</code> est multivaluée depuis le lot 10 : un item référencé — un modèle du commerce — peut implémenter plusieurs solutions organiques à la fois, comme une station qui soude par points ''et'' brase à l'étain. La multivaluation est portée par un <code>+sep=,</code> et un <code>#arraymap</code> dans <code>Modèle:Referenced item</code>.
+* Le module de numérotation '''détecte les trous de séquence, mais pas les doublons'''.
+* <code>Part_of</code> est déclarée <code>multiple</code>, mais n'est réellement multivaluée que '''pour les items référencés''' — où elle sert de nomenclature, une même référence pouvant entrer dans plusieurs ensembles. Aux trois autres niveaux elle est alimentée par une liste déroulante à valeur unique. Semantic MediaWiki attache la cardinalité à la propriété et non au couple classe-propriété : seul un schéma SHACL saura exprimer la nuance.
+* Les '''libellés de formulaire sont en français''', les '''noms de propriétés et de catégories en anglais'''. C'est une convention, pas une contrainte technique.
+* Cette page apparaît dans les transclusions des quatre modèles d'items, parce qu'elle en affiche le code source via <code>#invoke:Source</code>. Ce n'est '''pas''' une instance de classe, et tout recensement doit l'écarter.
+
+== Requêtes portées par les pages ==
+
+Le comportement du système ne réside pas seulement dans les modèles. Dix
+requêtes sont portées directement par des pages.
+
+{| class="wikitable"
+! Page !! Nombre !! Formats employés
+|-
+| Cette page || 1 || tableau des propriétés (<code><nowiki>[[Has type::+]]</nowiki></code>)
+|-
+| [[:Category:Functional item|Category:Functional item]] || 5 || <code>tree</code>, graphe Mermaid via <code>template</code>, <code>outline</code>, <code>table</code>, <code>datatable</code>
+|-
+| [[:Category:Organic item|Category:Organic item]] || 4 || <code>tree</code>, <code>outline</code>, <code>table</code>, <code>datatable</code>
+|}
+
+Les catégories des items référencés et physiques ne portent aucune requête.
+
+=== Navigation par chaînes de propriétés inverses ===
+
+Semantic MediaWiki enchaîne les chaînes de propriétés '''inverses''' et les
+mélange aux directes. Une seule impression de colonne —
+<code><nowiki>?-Realizes_function.-Corresponds_to_organic.-Instance_of</nowiki></code> —
+descend du procédé jusqu'à l'exemplaire physique, et l'on peut prolonger la
+chaîne par une propriété directe (<code>.Inventory_number</code>,
+<code>.Located_at</code>). Aucune propriété matérialisée n'est nécessaire pour
+la navigation descendante : c'est déjà l'idiome d'[[Avancement du jardin-forêt]]
+et de [[Procédés et outils]].
+
+== Configuration hors wiki ==
+
+=== Socle logiciel ===
+
+MediaWiki 1.39.11, langue <code>fr</code>. Semantic MediaWiki 4.2.0, Semantic
+Result Formats 4.2.1, Page Forms 5.8.1, Mermaid 6.0.2, Scribunto.
+
+Extensions ayant un effet sur les droits ou permettant des modifications en
+masse, à connaître avant toute automatisation : '''Lockdown''', '''Nuke''',
+'''Replace Text''', '''UserMerge'''.
+
+=== Espaces de noms ===
+
+102 <code>Attribut</code>, 106 <code>Formulaire</code>, 108 <code>Concept</code>,
+828 <code>Module</code>.
+
+=== Types de fichiers autorisés ===
+
+png, gif, jpg, jpeg, webp, pdf, doc, docx, odt, xls, xlsx, ods, ppt, pptx, odp,
+tiff, bmp, ico (18 extensions, relevé <code>siteinfo/fileextensions</code> du
+30 août 2026).
+
+'''Quatre formats utiles à un système de données techniques sont refusés au
+téléversement :''' SVG (dessins vectoriels) ; STEP et STL (sources de
+conception — d'où la règle <code>Design_source</code> : ces fichiers vivent
+dans un dépôt git, pas sur le wiki) ; ZIP (archives).
+
+'''InstantCommons est inactif :''' aucun dépôt de fichiers partagé, tout média
+doit être téléversé localement (test <code>File:Example.jpg</code> →
+<code>missing</code>, <code>imagerepository</code> vide).
+
+Une seule de ces contraintes fait l'objet d'une demande adminsys : le SVG
+(<code>demandes-adminsys.md</code> §2.2, avec sa réserve de sécurité — un SVG
+peut porter du script). STEP, STL, ZIP et InstantCommons ne sont demandés
+nulle part à ce jour.
+
+=== Suivi des dépendances de requêtes ===
+
+<code>$smwgEnabledQueryDependencyLinksStore</code> est activé depuis le
+26 juillet 2026. Une page contenant un <code>#ask</code> se rafraîchit
+automatiquement quand les données qu'elle interroge changent, sans purge
+manuelle. C'est un prérequis du kanban.
+
+Deux limites : les requêtes à conditions génériques utilisant <code>~</code> ne
+sont pas suivies, et la file de travaux doit tourner pour que les
+rafraîchissements s'appliquent.
+
+=== Droits ===
+
+Aucune protection n'est posée page par page. Le contrôle d'accès s'exerce par
+groupe et par espace de noms, via les droits d'utilisateur et l'extension
+Lockdown. Une interrogation des protections ne permet donc '''pas''' de prévoir
+si une écriture sera acceptée : un refus doit être traité comme un résultat
+normal.
+
+=== Ce qui reste à documenter ===
+
+Relevés dans <code>LocalSettings.php</code>, non exposés par l'API :
+<code>$wgNamespacePermissionLockdown</code>, <code>$wgGroupPermissions</code>,
+et les autres réglages <code>$smwg*</code>.
+
+== 2. Modèles de Structure (Templates) ==
+Les modèles définissent comment les données sont stockées en base de données (`#set`) et comment elles sont affichées sur les pages.
+
+''Templates define how data is stored in the database (#set) and how it is displayed on the page.''
+
+=== [[Template:Functional item]] ===
+'''Description (FR) :''' {{#show: Template:Functional item/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Functional item/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Functional item}}}}
+
+=== [[Template:Organic item]] ===
+'''Description (FR) :''' {{#show: Template:Organic item/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Organic item/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Organic item}}}}
+
+=== [[Template:Referenced item]] ===
+'''Description (FR) :''' {{#show: Template:Referenced item/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Referenced item/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Referenced item}}}}
+
+=== [[Template:Physical item]] ===
+'''Description (FR) :''' {{#show: Template:Physical item/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Physical item/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Physical item}}}}
+
+Les modèles de facette ne sont pas listés ici : voir le
+[[Registre des facettes]], qui en recense actuellement {{#ask: [[Category:Facette]] |format=count}}.
+
+== 3. Formulaires de Saisie (Forms) ==
+Les formulaires permettent aux utilisateurs de saisir des données sans toucher au Wikicode. Les étiquettes (labels) sont en français pour les utilisateurs actuels.
+
+''Forms allow users to enter data without touching the Wikicode. Labels are in French for current users.''
+
+'''Toute classe dont les pages se saisissent par formulaire déclare ce formulaire sur sa page de catégorie''', par <code><nowiki>{{#default_form:Nom du formulaire}}</nowiki></code>. Sans cette déclaration, ses pages n'ont pas l'onglet « Modifier avec formulaire », et l'action <code><nowiki>formedit</nowiki></code> fait choisir parmi tous les formulaires du wiki. Elle se pose dès la création de la classe : Physical item, Referenced item, Lieu et Lot, créées sans elle, ne l'ont reçue que le 3 octobre 2026.
+
+=== [[Form:Functional item]] ===
+'''Documentation (FR) :''' [[Form:Functional item/doc]]
+{{#tag:pre|{{#invoke:Source|get|Form:Functional item}}}}
+
+=== [[Form:Organic item]] ===
+'''Documentation (FR) :''' [[Form:Organic item/doc]]
+{{#tag:pre|{{#invoke:Source|get|Form:Organic item}}}}
+
+=== [[Form:Referenced item]] ===
+'''Documentation (FR) :''' [[Form:Referenced item/doc]]
+{{#tag:pre|{{#invoke:Source|get|Form:Referenced item}}}}
+
+=== [[Form:Physical item]] ===
+'''Documentation (FR) :''' [[Form:Physical item/doc]]
+{{#tag:pre|{{#invoke:Source|get|Form:Physical item}}}}
+
+== 4. Modules Lua (Scribunto) ==
+Les modules Lua gèrent la logique complexe et les fonctions avancées du wiki. Contrairement aux modèles classiques, ils utilisent le langage de programmation Lua.
+
+''Lua modules handle complex logic and advanced wiki functions. Unlike standard templates, they use the Lua programming language.''
+
+=== [[Module:Source]] ===
+'''Description (FR) :''' {{#show: Module:Source/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Module:Source/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Module:Source}}}}
+
+=== [[Module:Base36]] ===
+'''Description (FR) :''' {{#show: Module:Base36/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Module:Base36/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Module:Base36}}}}
+
+== Audit de la numérotation des Items : [[Template:Item numbering audit]]==
+{{#tag:pre|{{#invoke:Source|get|Template:Item numbering audit}}}}
+
+== 5. Modèles auxiliaires ==
+=== Encart d'ajout d'items ===
+==== [[Template : New functional item]] ====
+{{#tag:pre|{{#invoke:Source|get|Template:New functional item}}}}
+==== [[Template : New organic item]] ====
+{{#tag:pre|{{#invoke:Source|get|Template:New organic item}}}}
+==== [[Template : New referenced item]] ====
+{{#tag:pre|{{#invoke:Source|get|Template:New referenced item}}}}
+==== [[Template : New physical item]] ====
+{{#tag:pre|{{#invoke:Source|get|Template:New physical item}}}}
+=== [[Template:Pending translation]] ===
+'''Description (FR) :''' {{#show: Template:Pending translation/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Pending translation/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Pending translation}}}}
+
+=== [[Template:Documentation]] ===
+'''Description (FR) :''' {{#show: Template:Documentation/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:Documentation/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:Documentation}}}}
+
+=== [[Template:MermaidLine]] ===
+'''Description (FR) :''' {{#show: Template:MermaidLine/doc |?Object_description_FR |default=Non documenté}}
+''Description (EN):'' {{#show: Template:MermaidLine/doc |?Object_description_EN |default=No description}}
+{{#tag:pre|{{#invoke:Source|get|Template:MermaidLine}}}}
+
+[[Catégorie : SGDT]]
+[[Catégorie:Page de suivi]]

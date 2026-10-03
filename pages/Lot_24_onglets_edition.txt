@@ -1,0 +1,34 @@
+{{Lot
+|Work_package_number=24
+|Work_package_status=ouvert
+|Work_package_summary=Rassembler les opérations d'administration que Cyril peut mener seul sur la configuration du site et les scripts de maintenance.
+|Work_package_opening_date=2026-09-10
+}}
+
+== Objet ==
+
+Ce lot naît d'un changement de gouvernance : les droits sur la configuration du site passent de Benjamin à Cyril. Des travaux qui étaient jusqu'ici des demandes déposées et attendues deviennent des tâches exécutables, à condition d'être éprouvées d'abord sur le miroir local.
+
+== Points ouverts ==
+
+La déclaration de licence est faite depuis le 10 septembre 2026 : CC BY-SA 4.0, posée dans la configuration du site. Elle a été appliquée sans miroir local, celui-ci n'existant pas : la règle d'éprouver d'abord y a été remplacée par une copie horodatée du fichier et un contrôle de syntaxe préalable. Ce substitut couvre l'erreur de syntaxe, pas un effet de bord fonctionnel ; il ne vaut que pour un réglage dont on sait qu'il n'affecte que l'affichage. Une sauvegarde horodatée du fichier de configuration subsiste sur le serveur et devra être retirée un jour. Le critère qui a permis de s'en passer, et qui vaut pour les fois suivantes : un réglage dont on peut démontrer qu'il n'affecte que l'affichage se pose avec une copie horodatée et un contrôle de syntaxe préalable ; tout ce dont on ne peut pas le démontrer attend le miroir local. Sans ce critère, la règle serait contournée à chaque fois sans qu'on sache si c'était légitime.
+
+Le wiki a rendu une erreur 503 sur un appel d'API sur cinq le 10 septembre 2026, sans lien avec cette modification. Symptôme non expliqué, à signaler à l'hébergeur : sur un serveur partagé, la cause peut être extérieure au site.
+
+Faire du formulaire l'onglet de modification principal partout où une page se saisit par formulaire, l'édition du wikicode restant accessible en second onglet : c'est la cible posée le 12 août 2026. Deux obstacles, relevés le 3 octobre 2026. Le réglage <code><nowiki>$wgPageFormsRenameEditTabs</nowiki></code>, qui fait du formulaire l'onglet principal, lui donne le libellé « Modifier », que porte déjà l'éditeur visuel. Et la configuration du site réserve l'onglet du wikicode aux administrateurs sur toute page dotée d'un formulaire par défaut, par le droit <code><nowiki>viewedittab</nowiki></code> : un contributeur ordinaire ne le voit pas. La part du chantier qui ne relevait pas de la configuration est faite : les catégories Physical item, Referenced item, Lot et Lieu déclarent leur formulaire depuis le 3 octobre 2026, par un correctif hors lot.
+
+Lancer l'optimisation des tables de Semantic MediaWiki.
+
+Élucider les deux entités signalées non valides.
+
+Activer InstantCommons, qui rendrait le lot 15 plus utile sans le conditionner. Aucune demande n'avait été déposée à ce jour.
+
+Le verrou de propagation de changement bloque l'écriture d'une page pendant un temps qui se compte en jours. Les quinze pages touchées les 15 et 16 août 2026 étaient toutes rouvertes avant le 31 août, sans intervention. Deux pages du lot 13 sont bloquées depuis le 2 septembre 2026. Désactiver le réglage supprimerait l'attente, mais ce n'est pas un incident : ni le vidage de la file, ni la purge, ni la reconstruction ciblée ne l'accélèrent, et le temps suffit. À traiter comme un confort, pas comme une urgence.
+
+== Dépendances ==
+
+Rien en amont, mais tout changement de configuration se vérifie d'abord sur le miroir local du lot 22. L'incident du 18 août 2026, qui a mis le wiki hors service pour tout le monde faute d'une étape omise, est le motif de cette règle.
+
+----
+
+Voir aussi la [[Gestion des lots]].

@@ -1,0 +1,358 @@
+== Définition ==
+
+Une entité physique stable — terrain, bâtiment, pièce — qui héberge zéro, un
+ou plusieurs items physiques. Un lieu n'a ni fonction à remplir, ni solution
+qui la remplit, ni route d'approvisionnement, ni niveau de maturité : ce n'est
+pas une cinquième classe de la chaîne fonctionnel → organique → référencé →
+physique, c'est une entité de localisation, à part.
+
+Un lieu peut avoir un lieu parent unique (`Located_in`), à la différence de
+`Part_of` qui est multivaluée sur les classes de conception. Un item physique
+s'y rattache par `Located_at`, jamais par `Part_of` : un plant n'est pas un
+composant de son terrain, il s'y trouve.
+
+'''`Located_at` et `physical_parent` ne se confondent pas''', alors que la
+classe physique porte les deux : `physical_parent` (champ du formulaire
+physique, alimente `Part_of`) dit « installé dans » et pointe vers un autre
+item physique — une pompe dans une machine. `Located_at` dit « se trouve à »
+et pointe vers un lieu — la machine sur son site. Un item physique peut
+renseigner l'un, l'autre, les deux, ou aucun ; jamais l'un à la place de
+l'autre.
+
+Cette catégorie est posée automatiquement par [[:Modèle:Lieu|Modèle:Lieu]].
+Elle ne doit jamais être ajoutée à la main : elle vaut appartenance à la
+classe, pas navigation.
+
+=== Lieu, ou item physique ? ===
+
+La question se pose vraiment : une planche de culture, un coin d'atelier, un
+pied de pylône — lieu ou objet ?
+
+'''Le critère : un item physique est quelque part, un lieu est un quelque
+part.''' Si la question « où est-ce ? » a pour réponse la chose elle-même,
+c'est un lieu.
+
+Une planche de culture ne se trouve pas « sur » autre chose que le terrain qui
+la contient : elle '''est''' l'endroit. C'est un lieu. Une caisse posée sur
+cette planche, en revanche, se trouve à un endroit et pourrait se trouver
+ailleurs demain : c'est un item physique, même si elle contient d'autres
+choses.
+
+'''Le cas mobile-et-contenant — une conserve, une caisse, un camion — reste un
+item physique.''' Il se rattache à un lieu par
+<code><nowiki>Located_at</nowiki></code>, et ce qu'il contient se rattache à
+lui par <code><nowiki>Part_of</nowiki></code>. Attention au sens :
+'''<code><nowiki>Part_of</nowiki></code> va de la partie vers le tout''' — ce
+sont les objets contenus qui portent la propriété et désignent le contenant,
+jamais le contenant qui énumère son contenu. Une caisse ne déclare pas ce
+qu'elle contient ; chaque objet déclare la caisse. La fiche de la caisse
+retrouve ensuite son contenu par une requête inverse.
+
+'''La règle « ce qui a une adresse postale est un lieu » ne fonctionne
+pas''', et il vaut mieux savoir pourquoi que la redécouvrir : elle ne
+discrimine rien (deux lieux distincts partagent souvent une adresse), la
+plupart des lieux n'en ont pas, et surtout un item physique doit pointer vers
+un item référencé dont il est l'exemplaire — or une planche de culture n'est
+l'instance d'aucun modèle d'origine. La faire entrer par la classe physique
+est un cul-de-sac, pas seulement une inélégance.
+
+== Position dans le modèle ==
+
+Hors chaîne. Ne descend d'aucune des quatre classes de conception et n'en a
+aucune comme parente ; seul [[Attribut:Located at|Located_at]] relie un item
+physique à un lieu.
+
+{{#default_form:Lieu}}
+
+== L'arbre des lieux ==
+
+=== La profondeur n'est pas bornée, et les niveaux n'ont pas de nom ===
+
+Un lieu a au plus un parent, par <code><nowiki>Located_in</nowiki></code>. La
+propriété est réflexive — un lieu pointe vers un lieu — et cela suffit à toute
+profondeur : '''rien dans le modèle ne dit combien de niveaux il y a, ni
+comment ils s'appellent.'''
+
+« Zone », « planche », « parcelle », « secteur » sont des mots d'usage. Ce ne
+sont ni des classes, ni des propriétés, ni des valeurs imposées : rien
+n'enregistre qu'une zone serait au-dessus d'une planche. '''Deux branches
+n'ont pas à avoir la même profondeur''' — une commune peut porter directement
+un jardin, comme elle peut porter un hameau qui porte un terrain qui porte une
+zone qui porte une butte.
+
+Conséquence pratique : ne pas chercher « le bon niveau » dans une nomenclature
+qui n'existe pas. Créer le lieu dont on a besoin, et le rattacher à celui qui
+le contient.
+
+=== Un redécoupage au même niveau est un renommage, pas un enfantement ===
+
+Quand un lieu se subdivise dans les faits, la tentation est d'en faire des
+enfants. C'est souvent faux.
+
+Exemple. Un terrain est partagé en une zone basse et une zone haute. Le jour
+où une seconde tranchée apparaît au milieu, il en faut trois : basse,
+intermédiaire, haute — '''les trois au même niveau''', les trois enfants du
+terrain. Ce n'est pas une subdivision de la zone haute : c'est un redécoupage.
+L'opération est donc un '''renommage''' de ce qui existe, plus une création —
+et le renommage a une procédure, voir plus bas.
+
+Le test, quand le doute se présente : le lieu existant '''contient'''-il le
+nouveau, ou lui '''cède'''-il du terrain ? Contenir donne un enfant. Céder
+donne un redécoupage.
+
+=== Le rattachement ne remonte pas l'arbre ===
+
+Un item physique est rattaché à '''un seul lieu''' : celui qui le porte
+directement. Une fiche de lieu affiche ses enfants directs, et les items
+directement rattachés à lui — '''elle n'agrège pas ce que portent ses
+descendants.'''
+
+Un plant rattaché au terrain n'apparaîtra donc pas dans la fiche de la butte,
+et un plant rattaché à la butte n'apparaîtra pas dans celle du terrain.
+'''Choisir le niveau de finesse est une décision de saisie''', pas un détail
+de forme : c'est ce niveau-là, et lui seul, qui répondra plus tard à la
+question « qu'y a-t-il ici ? ».
+
+'''La règle : rattacher un item au lieu le plus fin qui existe déjà et qui a
+un sens.''' Si ce lieu manque et qu'on en aura besoin, le créer maintenant
+plutôt que rattacher au parent en attendant : un rattachement trop haut ne se
+corrige ensuite que page par page.
+
+=== Où se fait le rattachement ===
+
+'''<code><nowiki>Located_at</nowiki></code> se renseigne sur la fiche de
+l'item, pas sur celle du lieu.''' Une page de lieu ne liste pas ce qu'elle
+porte : elle l'affiche par une requête, et ce sont les items qui la
+désignent. Rien ne se saisit ici pour rattacher quoi que ce soit.
+
+Pour une plantation, '''la position se saisit dans la même passe que le
+premier rattachement''' — lieu et position ensemble, pas en deux temps. La
+convention est décrite plus bas.
+
+== Nommer un lieu ==
+
+'''Le titre de la page est le nom du lieu''', et c'est par lui qu'on le
+désigne partout ailleurs. Il mérite donc d'être choisi une fois pour toutes,
+avant la création.
+
+'''Un titre est global au wiki entier, jamais relatif à son parent.'''
+MediaWiki n'a pas d'espace de noms par branche : « Zone basse » n'est pas
+« la zone basse de ce terrain-ci », c'est un titre unique pour tout le wiki.
+Le lieu parent ne fait pas partie du titre et ne désambiguïse rien.
+
+'''D'où la règle : qualifier dès qu'un nom est positionnel ou générique.'''
+Un nom positionnel — zone basse, zone haute, coin nord, allée du fond —
+convient à tous les sites du monde, donc entrera en collision au deuxième
+site documenté. « Zone basse du Buisson » n'a pas ce défaut. Un nom déjà
+qualifié géographiquement n'a rien à corriger.
+
+'''Et la collision ne se présentera pas comme une collision.''' La création
+échouera sur un <code><nowiki>articleexists</nowiki></code> — « cette page
+existe déjà » — ce qui ressemble à une bonne nouvelle. La tentation sera de
+réutiliser la page trouvée, qui décrit un tout autre endroit, et d'y
+raccrocher des items qui ne s'y trouvent pas. '''Devant un
+<code><nowiki>articleexists</nowiki></code> sur un nom de lieu, la première
+chose à faire est de regarder où se trouve le lieu déjà enregistré''' — pas de
+réutiliser sa page.
+
+'''Aucune virgule dans un titre de lieu.''' La virgule est le délimiteur
+multi-valeurs partout dans le modèle : un titre qui en contient casse le
+découpage partout où il est cité.
+
+Une fois le nom choisi, le lieu se crée par [[Formulaire:Lieu]], qui attribue
+sa référence et demande son lieu parent.
+
+== Champs ==
+
+`Place_name` ne recopie pas le titre de la page : elle sert uniquement aux
+lieux dont le nom d'usage diffère du titre (abréviation, nom local, alias).
+Laissée vide, la page affiche le titre par défaut — inutile de la dupliquer
+quand les deux coïncident.
+
+{| class="wikitable"
+! Champ !! Ce qu'il porte
+|-
+| <code><nowiki>Located_in</nowiki></code> || Le lieu parent, '''unique''' et facultatif : une commune n'en a pas. Ne jamais y mettre autre chose qu'un lieu.
+|-
+| <code><nowiki>Location_number</nowiki></code> || La référence du lieu, valeur '''non préfixée''' sur quatre caractères. Attribuée par [[Formulaire:Lieu|le formulaire]], jamais saisie à la main : le compteur est en production et une valeur inventée risque un doublon silencieux.
+|-
+| <code><nowiki>Location_site</nowiki></code> || Le préfixe d'affichage, <code><nowiki>LOC</nowiki></code>. La fiche compose les deux et affiche <code><nowiki>LOC-0007</nowiki></code>. Voir plus bas.
+|-
+| <code><nowiki>Location_type</nowiki></code> || La nature du lieu, en texte libre. Facultatif. Voir plus bas.
+|-
+| <code><nowiki>INSEE_code</nowiki></code> || Les communes seulement. Voir plus bas.
+|-
+| <code><nowiki>Postal_address</nowiki></code>, <code><nowiki>Latitude</nowiki></code>, <code><nowiki>Longitude</nowiki></code> || Facultatifs, et sans effet sur l'arbre : ce sont des descriptions, pas des rattachements.
+|}
+
+=== Le préfixe LOC ===
+
+'''<code><nowiki>LOC</nowiki></code> n'est pas le code d'une organisation.'''
+Les items physiques portent un préfixe qui dit à qui ils appartiennent ; les
+lieux, non — une commune, un hameau, un terrain public ne sont les biens de
+personne. <code><nowiki>LOC</nowiki></code> identifie les lieux publiés sur ce
+wiki, et rien d'autre. Les préfixes en usage sont tenus dans
+[[Registre des préfixes de site]].
+
+Les lieux ont leur '''propre banque''' de références, distincte de celles des
+items : <code><nowiki>LOC-0001</nowiki></code> et une référence d'item portant
+le même numéro ne se contredisent pas, elles ne comptent pas la même chose.
+
+=== Location_type : à valeurs libres, et à laisser ouvert ===
+
+<code><nowiki>Location_type</nowiki></code> est '''descriptive''' : elle dit
+la nature d'un lieu là où le modèle ne distingue rien — une planche préparée
+et un pied de pylône ne sont pas la même chose, alors que l'arbre les traite
+pareil.
+
+'''Elle n'encode pas le niveau dans l'arbre.''' C'est
+<code><nowiki>Located_in</nowiki></code> qui porte la hiérarchie, et deux
+lieux de même type peuvent se trouver à des profondeurs différentes.
+
+'''Aucune liste de valeurs n'est fermée, et il ne faut pas en fermer une
+maintenant.''' Le vocabulaire est laissé à émerger sur plusieurs dizaines de
+lieux avant d'être consolidé : figer quelques valeurs tirées de quelques cas
+reproduirait en petit la nomenclature rigide que ce système évite. Le champ
+peut donc rester vide — « non renseigné » est une réponse valide, pas un
+oubli.
+
+=== INSEE_code : un identifiant recopié, pas une assertion ===
+
+Réservé aux communes. '''C'est un littéral de jointure''' — un identifiant
+externe recopié pour permettre un rapprochement — et '''non''' une
+affirmation que cette page serait la commune. La page est le lieu tel qu'on le
+documente ici ; elle ne prétend rien sur l'entité administrative.
+
+De type Texte et non Nombre : un code INSEE peut commencer par un zéro et
+contenir une lettre (Corse, <code><nowiki>2A</nowiki></code> /
+<code><nowiki>2B</nowiki></code>).
+
+'''Le code postal n'identifie pas une commune''' — deux communes voisines en
+partagent couramment un. Il reste un élément d'adresse, dans
+<code><nowiki>Postal_address</nowiki></code>.
+
+== L'origine d'un lieu, et la position des plantations ==
+
+'''Un lieu a une origine : le point d'où l'on compte.''' Un bout de butte, un
+coin de planche, l'entrée d'une allée.
+
+'''Cette origine n'est enregistrée nulle part.''' Elle relève de la
+convention locale, tenue par qui connaît le terrain. Le wiki ne la connaît pas
+et ne peut donc rien vérifier à son sujet.
+
+La position d'une plantation, <code><nowiki>Planting_rank</nowiki></code>, se
+compte en '''mètres entiers depuis l'origine du lieu qui la porte'''. C'est un
+début de segment ; <code><nowiki>Planting_rank_end</nowiki></code> en donne la
+fin, facultative. La convention complète est décrite dans [[:Modèle:Physical facet plant/doc|la documentation de la facette végétale]].
+
+Deux conséquences, et la seconde est un piège :
+
+'''1. Les positions ne sont pas comparables d'un lieu à l'autre.''' « 3 » sur
+une butte et « 3 » sur une autre ne désignent rien de commun. Trier ou
+comparer des positions à travers plusieurs lieux n'a pas de sens.
+
+'''2. Déplacer une plantation d'un lieu à un autre change son origine, donc
+invalide sa position.''' Le rang doit être ressaisi — ou vidé — dans la même
+édition que le changement de <code><nowiki>Located_at</nowiki></code>.
+
+'''Rien ne signalera l'oubli.''' Un rang devenu faux reste un nombre
+parfaitement valide : aucune erreur n'apparaît, aucune requête ne le détecte,
+la fiche l'affiche comme si de rien n'était. C'est un contrôle humain, à faire
+au moment du déplacement et pas après.
+
+== Renommer un lieu ==
+
+'''Le titre d'un lieu est recopié dans les données.''' Chaque page qui pointe
+vers ce lieu écrit ce titre en toutes lettres dans son wikitexte. Le renommage
+met à jour la valeur stockée par Semantic MediaWiki (voir l'étape 3), mais
+'''pas''' ce wikitexte : les pages annotantes continuent de nommer l'ancien
+titre, et c'est la redirection laissée en place qui fait tenir l'ensemble. Une
+redirection est ici '''porteuse de données''', pas seulement un confort de
+navigation.
+
+Cinq étapes, dans cet ordre.
+
+=== 1. Renommer la page, en laissant la redirection ===
+
+C'est le comportement par défaut de MediaWiki : ne pas décocher la case.
+
+=== 2. Recenser ce qui pointe vers ce lieu, propriété par propriété ===
+
+'''C'est l'étape qu'on oublie, et l'oublier laisse un affichage périmé
+derrière soi.''' <code><nowiki>Located_at</nowiki></code> n'est pas la seule
+propriété qui désigne un lieu, et les propriétés en jeu ne vivent pas sur les
+mêmes pages : les items physiques, les pages de fichier, les lieux enfants.
+En recenser une seule laisse toutes les autres avec des liens et des tableaux
+qui nomment encore l'ancien titre, sans le moindre signal.
+
+'''La méthode, plutôt qu'une liste qui vieillira :'''
+
+# Ouvrir [[Spécial:Types/Page]] pour obtenir les propriétés de '''type Page''' — ce sont les seules qui peuvent désigner un lieu. Une propriété de type Texte recopie une chaîne et ne suit rien.
+# Pour chacune, poser une requête inverse qui demande les pages pointant vers ce lieu, de la forme <code><nowiki>{{#ask: [[Nom_de_la_propriété::Nom du lieu]] |limit=500}}</nowiki></code>. Une propriété qui ne rend rien ne concerne pas ce lieu.
+# Réunir toutes les pages ainsi trouvées. C'est la liste à purger.
+
+Refaire ce recensement '''à chaque renommage'''. Une propriété nouvelle peut
+avoir été créée depuis la dernière fois, et elle n'aura prévenu personne.
+
+Au moment où ces lignes sont écrites, trois propriétés de type Page visent des
+lieux : [[Attribut:Located at|Located_at]] depuis les items physiques,
+[[Attribut:Image location|Image_location]] depuis les pages de fichier, et
+[[Attribut:Located in|Located_in]] depuis les lieux enfants. '''Cette
+énumération est un exemple, pas la liste de référence''' : c'est la requête
+qui fait foi.
+
+=== 3. Purger toutes les pages recensées ===
+
+'''Le renommage seul, redirection laissée, fait déjà basculer la valeur
+stockée vers le nouveau titre''' — par la propagation de changement de
+Semantic MediaWiki, sans reparse des pages annotantes (mesuré en production le
+28 août 2026, voir [[Limites connues du Système de Gestion de Données Techniques|Limites connues du SGDT]] n° 34). '''La purge ne sert pas à cette bascule.''' Elle
+rafraîchit le cache de page et les liens indexés —
+<code><nowiki>pagelinks</nowiki></code>, donc
+<code><nowiki>list=backlinks</nowiki></code> et les tableaux
+<code><nowiki>#ask</nowiki></code> déjà rendus sur d'autres pages — qui restent
+sur l'ancien titre tant que la page porteuse n'est pas reparsée. Sans la purge,
+le stockage est juste mais l'affichage peut mentir pendant un délai indéterminé.
+
+'''Ordre de grandeur : pour un lieu chargé, cela se compte en dizaines de
+pages, toutes propriétés confondues.''' Un déplacement réel a déjà montré le
+piège : le comptage n'avait porté que sur
+<code><nowiki>Located_at</nowiki></code>, et plusieurs dizaines de pages de
+fichier — ainsi que le lieu enfant — sont restées liées à l'ancien titre
+(backlinks, tableaux, cache), sans que rien ne le signale. '''Le nombre
+d'items physiques n'est jamais le nombre de pages à purger.'''
+
+=== 4. Contrôler ===
+
+Contrôler sur deux ou trois pages de chaque famille — un item, un fichier, un
+lieu enfant — en lisant les faits '''réellement stockés'''
+(<code><nowiki>action=browsebysubject</nowiki></code>), pas en regardant la
+fiche. L'affichage suit la redirection et paraîtra correct dans tous les cas :
+il ne prouve rien.
+
+'''Ne pas attendre zéro d'une requête inverse sur l'ancien titre.''' Tant que
+la redirection est en place, Semantic MediaWiki normalise la condition vers sa
+cible avant de compiler : <code><nowiki>[[Located_at::ancien titre]]</nowiki></code>
+rend exactement le même résultat, et le même
+<code><nowiki>meta.hash</nowiki></code>, que
+<code><nowiki>[[Located_at::nouveau titre]]</nowiki></code>. L'ancien titre
+reste une porte d'entrée valide vers les données. Le seul contrôle qui a du
+sens est positif : lire le littéral stocké et vérifier qu'il porte le nouveau
+titre.
+
+=== 5. Ne pas supprimer la redirection ===
+
+Le renommage ne touche pas le wikitexte des pages qui visaient le lieu : elles
+portent toujours l'ancien titre en toutes lettres. Supprimer la redirection
+ferait retomber leur valeur stockée sur cet ancien titre — c'est-à-dire sur une
+page qui n'existe plus (entrée n° 26 des [[Limites connues du Système de Gestion de Données Techniques|Limites connues du SGDT]]). Les liens et les requêtes cesseraient de résoudre, sans aucun message.
+
+Pour se passer de la redirection, il faut d'abord réécrire le wikitexte de
+toutes les pages recensées à l'étape 2 pour qu'elles portent le nouveau titre.
+C'est un lot à part entière, pas une étape de renommage. Tant que ce n'est pas
+fait, la redirection est une donnée.
+
+Le comportement de fond, qui vaut pour toutes les propriétés pointant vers une
+page et pas seulement pour les lieux, est consigné dans [[Limites connues du Système de Gestion de Données Techniques|Limites connues du SGDT]].
+
+[[Catégorie:SGDT]]
