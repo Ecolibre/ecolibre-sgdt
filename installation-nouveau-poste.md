@@ -52,10 +52,14 @@ versionné, voir `.gitignore`) échappe à ça.
 | `deny Bash(sudo/ssh/mysql/mysqldump:*)` | Actions système ou base de données hors périmètre de l'outillage wiki | 12/08/2026 |
 | `ask Bash(git reset --hard/git clean:*)` | Opérations qui écrasent ou suppriment du travail non commité — confirmation à chaque fois | 20/08/2026 |
 | `allow` sur les scripts `bin/wiki-*.sh`, les commandes de lecture usuelles (`grep`, `ls`, `cat`, `find`, `diff`, `jq`…) et `git status/diff/log/add/commit/push` | Usage quotidien sans confirmation répétée | 12/08/2026, complété le 20/08/2026 (`curl`, `python3`, `git push` déplacés d'`ask` vers `allow`) |
+| `allow WebFetch(domain:wiki.ecolibre.org)` | Lecture du wiki par l'outil web | 12/08/2026 |
 | `allow Bash(bin/wiki-wait-jobs.sh:*)` | Attente de la file de travaux différés, appelée à chaque mesure — script versionné, donc toute modification passe par un diff | 21/08/2026 |
 | `allow Bash(mkdir/cp/mv/sed/sort:*)` | Utilitaires du travail courant. N'élargit pas le périmètre réel : `python3` est autorisé depuis le 20/08 et fait tout ce qu'ils font — mais rend la cible visible dans la commande au lieu de l'enfouir dans un programme | 21/08/2026 |
 | `ask Bash(git checkout/git restore:*)` | Écrasent le travail non commité au même titre que `git reset --hard` et `git clean` — omission comblée | 21/08/2026 |
 | `allow Bash(bin/wiki-move.sh:*)` | Renommage de page avec redirection : besoin de `curl` direct apparu deux fois (lot 13, tâche 3a), devenu script versionné | 02/09/2026 |
+| `allow Bash(bin/wiki-append.sh:*)` | Ajout en fin de page par `appendtext`, sans lire ni renvoyer le corps existant — script versionné | 06/09/2026 |
+| `allow Bash(bin/wiki-verify.sh:*)`, `allow Bash(bin/wiki-warnings.sh:*)` | Vérification après écriture et relevé d'avertissements SMW — besoins apparus respectivement huit et deux fois, devenus scripts versionnés | 11/09/2026 |
+| `allow Bash(echo/date/od:*)` | Utilitaires d'affichage : n'écrivent aucun fichier, ne joignent aucun réseau. `echo` seul avait provoqué 17 confirmations sur 89 analysées | 11/09/2026 |
 | `deny Read(//home/spheres/.ssh/**)` | Clés SSH du poste — complète `deny Bash(ssh:*)`. Promue depuis l'ancien fichier local | 03/10/2026 |
 | `allow Bash(awk:*)` | Contrôle de fichiers tabulés (colonnes d'un TSV). Même portée que `sed`, déjà autorisé | 03/10/2026 |
 | `allow Bash(git fetch:*)`, `allow Bash(git check-ignore:*)` | Lecture seule : état du distant, vérification du `.gitignore` | 03/10/2026 |
@@ -75,7 +79,11 @@ protections écrites :
 - une règle suivant la variable `$SCRATCH` autorisait un script n'importe où
   elle pointerait ;
 - une autre rendait permanente l'exception `duplicate-archive`, que
-  `CLAUDE.md` réserve au cas par cas.
+  `CLAUDE.md` réserve au cas par cas ;
+- la copie périmée du dépôt privé contenait `Read(//home/spheres/**)`, soit
+  le répertoire personnel entier en lecture — inerte car ce fichier n'était
+  pas lu, mais signalant ce que le bouton « ne plus me demander » peut
+  écrire.
 
 Le fichier a été vidé le jour même. Toute règle nécessaire est proposée pour
 `settings.json`, avec son motif, puis documentée dans ce tableau.
