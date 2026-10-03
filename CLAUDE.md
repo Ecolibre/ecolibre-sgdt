@@ -558,9 +558,19 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   trois appels identiques sans traitement est à dérouler ; une boucle sur
   huit appels avec traitement en sortie est à garder — la dérouler donnerait
   vingt-quatre lignes pour éviter une fenêtre, ce qui est plus lourd que le
-  mal. De même, une variable de chemin abrégeant un dossier de travail se
-  garde : l'écrire en toutes lettres seize fois nuit à la relecture sans
-  rien supprimer.
+  mal.
+
+  **Pas de variable de chemin.** Écrire le chemin du scratchpad en toutes
+  lettres dans chaque commande, jamais par une variable abrégée du type
+  `S=/tmp/…`. Une variable dans une redirection ou un argument déclenche un
+  contrôle de forme à elle seule : sur les confirmations relevées entre le
+  11 septembre et le 3 octobre 2026, c'est devenu la première cause, devant
+  toutes les autres réunies. La consigne précédente, qui recommandait de
+  garder la variable pour la lisibilité, était une erreur d'arbitrage :
+  elle échangeait quelques lignes de lecture contre une fenêtre par commande.
+  Quand le chemin complet rend la commande illisible, la bonne réponse est de
+  s'y placer par `cd` une fois et de travailler en chemins relatifs, pas de
+  l'abréger par une variable.
 
   Cas particuliers vérifiés sur 89 confirmations analysées :
   - **Attente de la file de travaux** : appeler `bin/wiki-wait-jobs.sh`,
