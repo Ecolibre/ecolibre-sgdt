@@ -1,0 +1,76 @@
+{{Lot
+|Work_package_number=21
+|Work_package_status=ouvert
+|Work_package_summary=Faire des grandeurs physiques et de leurs unités des pages porteuses d'attributs, et décider comment une valeur mesurée s'attache à un item.
+|Work_package_opening_date=2026-10-02
+|Work_package_overlaps=Lot 12 — Contenants et étiquetage,Lot 26 — Renommage des propriétés par domaine,Lot 31 — Qualification des données et confiance entre pairs
+|Work_package_revises=Lot 9 — Exemplaires plantés du jardin-forêt,Lot 10 — Procédés et outils
+}}
+
+== Ce qui est déjà tranché ==
+
+'''Trois modes d'affirmation d'une valeur.''' Une valeur scalaire pour le cas simple, un sous-objet de spécification pour ce qu'annonce un fabricant, un sous-objet de mesure pour ce qu'on a constaté soi-même. Les trois ne disent pas la même chose et ne se remplacent pas.
+
+'''Les grandeurs et les unités sont des pages, pas des chaînes.''' Une page porte des libellés par langue et se joint entre partenaires sur son identité, là où une chaîne ne se joint que sur elle-même. Cet arbitrage révise celui du [[Lot 10 — Procédés et outils|lot 10]], qui avait typé en texte les grandeurs que mesure un instrument, au motif qu'une grandeur ne porterait jamais de données propres ([https://github.com/Ecolibre/ecolibre-sgdt/blob/5f91eddf8f366a5e3dadcef11f94c6e27192617c/travaux/lot-10-tache3-proposition.md proposition de la tâche 3 du lot 10], section 4). Ce motif est tombé : une grandeur est nommée en plusieurs points du modèle, pas seulement par un instrument.
+
+'''Une seule construction pour les valeurs qui n'ont de sens que dans un contexte, conçue dans ce lot.''' Le [[Lot 9 — Exemplaires plantés du jardin-forêt|lot 9]] a relevé que la réception, la récolte, la présence et l'assertion sourcée ont la même forme, une valeur rapportée à son contexte, et en a tiré la règle « quatre besoins, une seule construction » : le jour où l'un serait traité, les quatre devraient l'être ([https://github.com/Ecolibre/ecolibre-sgdt/blob/c73d88a5931d1ceec88964029c97f6774f21ce6b/travaux/lot-9-amendement-1.md amendement 1 du lot 9]). Le motif tient : ne pas laisser naître deux mécanismes concurrents pour le même problème. La conclusion va au-delà, et son appui était faux : elle tenait ce motif pour déjà employé sur ce wiki, ce que dément l'entrée 2 des [[Limites connues du Système de Gestion de Données Techniques|Limites connues]]. Règle reformulée le 4 octobre 2026 : ce lot conçoit la construction une fois, en la confrontant aux besoins des autres — nomenclature et réception du [[Lot 7 — Nomenclature quantifiée et entité réception|lot 7]], récolte, présence, qualification du [[Lot 31 — Qualification des données et confiance entre pairs|lot 31]], orifice de raccord de l'entrée 10 des Limites connues —, et ne la déploie que pour la spécification et la mesure. Les autres la réemploient au lieu d'en inventer une.
+
+'''La page à libellés par langue est conçue ici pour deux lots.''' Le [[Lot 19 — Vocabulaire et multilingue|lot 19]] a besoin du même motif pour les vocabulaires ouverts ; ce lot le conçoit pour servir aux deux, afin de ne pas résoudre deux fois le même problème, différemment.
+
+'''Les tolérances entrent dès ce lot.''' Elles sont un aspect essentiel de la conception mécanique.
+
+'''Les valeurs se normalisent à l'écriture, vers un socle commun d'unités.''' Le modèle doit pouvoir comparer un débit en mètres cubes par seconde et un débit en litres par heure : sans cela, un partenaire qui publierait des mètres cubes par heure là où Ecolibre écrit des litres par heure ne serait pas comparable. Les unités admises sont appelées à former un socle commun à la fédération, décidé collectivement ; un wiki partenaire peut employer temporairement une unité nouvelle avant qu'elle ne le rejoigne, après concertation.
+
+'''Les propriétés existantes changent sur place.''' On ne crée pas de propriétés neuves pour déprécier les anciennes. Rien n'est urgent : quand une écriture est bloquée, on attend que le verrou se lève plutôt que de le contourner par un doublon — il se lève de lui-même, en quelques jours (entrée 14 des Limites connues).
+
+== Ce qui est écarté, et pourquoi ==
+
+'''Traiter dans ce lot les quatre besoins du lot 9.''' Écarté le 4 octobre 2026. Le motif de la règle, un seul mécanisme, est satisfait par une construction conçue une fois et réemployée ; la déployer ici pour les quatre ferait de ce lot celui de la réception, de la récolte, de la présence et de la qualification à la fois.
+
+== Ce qui est exclu du périmètre ==
+
+'''Les autres usages du sous-objet.''' Nomenclature et réception (lot 7), récolte, présence : le lot conçoit la construction commune, il ne la déploie que pour la spécification et la mesure.
+
+'''La qualification d'une valeur.''' Ce que vaut sa source et la confiance qu'on lui accorde relèvent du lot 31. Le sous-objet de mesure leur laisse la place sans les définir.
+
+'''Les caractéristiques qualitatives.''' Vitesse de croissance, besoin en eau, exposition : ce sont des vocabulaires ouverts, qui relèvent du lot 19.
+
+'''Les positions.''' Rang de plantation, latitude, longitude : ce sont des repérages sur un lieu, pas des caractéristiques d'un objet.
+
+'''Les points de fonctionnement.''' Un débit à une hauteur donnée, par exemple : gardés pour plus tard, le modèle restant d'abord simple.
+
+'''Le renommage des propriétés existantes.''' Il relève du [[Lot 26 — Renommage des propriétés par domaine|lot 26]].
+
+'''Les caractéristiques nouvelles.''' Le lot pose le mécanisme et y fait passer les propriétés existantes ; les nouvelles se créent ensuite, au besoin, selon ce mécanisme. Cela vaut pour les cotes des contenants, que le [[Lot 12 — Contenants et étiquetage|lot 12]] renvoie ici, et pour le débit maximal des pompes, qu'attend le lot 7.
+
+== Points ouverts ==
+
+Le choix de l'unité principale d'une grandeur est une décision collective, pas une décision technique : elle engage tous les ateliers partenaires. Tant qu'aucun partenaire n'existe, Ecolibre choisit à titre provisoire : chaque choix est daté et se rouvre au premier partenaire, à la manière de la version datée et provisoire du [[Lot 28 — Échange de données avec un partenaire|lot 28]]. On regarde d'abord ce qui se fait ailleurs : si un consensus scientifique ou une norme ISO désigne une unité privilégiée pour une grandeur, c'est à elle qu'on se fie.
+
+== Point de départ ==
+
+Les hypothèses ci-dessous viennent du travail préparatoire d'août 2026. Elles reposent sur la documentation de Semantic MediaWiki, jamais sur une mesure de cette installation : elles ne passent dans « Ce qui est déjà tranché » qu'une fois vérifiées en bac à sable, avant toute écriture sur le modèle de données.
+
+* Le mode scalaire porté par le type Quantity de Semantic MediaWiki, et le type Temperature pour les températures, au lieu de la convention actuelle : type Number, unité écrite dans la portée de la propriété. Si la mesure le confirme, ce lot révise aussi un arbitrage du [[Lot 8 — Facettes de type d'item|lot 8]].
+* La spécification et la mesure toujours en sous-objet. Ce seraient les premiers du wiki : aucune page ne porte de sous-objet, relevé du 4 octobre 2026.
+* La forme d'une caractéristique, scalaire ou sous-objet, déclarée une fois par grandeur, niveau et mode, jamais choisie à la saisie : sinon une requête devrait chercher à deux endroits sans savoir lequel.
+* L'unité sortie de la portée des propriétés et remplacée par un lien vers la page de grandeur, la portée ne gardant que le range formel.
+* La page d'unité portant un code UCUM et une équivalence vers QUDT, sans rien importer.
+* Le type Record jugé inapte aux tolérances, sur la seule foi de la documentation.
+* Le séparateur décimal. L'entrée 20 des Limites connues établit que la locale française rejette le point ; or la virgule sépare aussi les valeurs multiples, et les descriptions des propriétés de diamètre nominal et secondaire prescrivent le point. L'une des deux affirmations est fausse.
+* Les unités privilégiées : vérifier ce que désignent réellement le Système international d'unités et la série ISO 80000.
+
+L'existant à reprendre est minime : une poignée de valeurs hors positions, relevé du 4 octobre 2026. Une quarantaine de grandeurs sont visées à terme.
+
+== Risques connus ==
+
+* Changer le type d'une propriété qui porte déjà des données déclenche la propagation de changement de Semantic MediaWiki, qui peut verrouiller la page de propriété plusieurs jours (entrée 14 des Limites connues). Ce n'est pas un incident : consigner ce qui n'a pas pu s'écrire, et y revenir.
+* Une page de propriété d'essai se supprime directement, jamais après avoir été vidée : le blanchiment la verrouille (entrée 33 des Limites connues).
+
+== Dépendances ==
+
+Rien en amont. Le [[Lot 7 — Nomenclature quantifiée et entité réception|lot 7]] en dépend, une nomenclature quantifiée ayant besoin d'unités normalisées.
+
+----
+
+Voir aussi la [[Gestion des lots]].
