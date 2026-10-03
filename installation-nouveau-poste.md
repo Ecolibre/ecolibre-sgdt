@@ -58,8 +58,8 @@ versionné, voir `.gitignore`) échappe à ça.
 | `ask Bash(git checkout/git restore:*)` | Écrasent le travail non commité au même titre que `git reset --hard` et `git clean` — omission comblée | 21/08/2026 |
 | `allow Bash(bin/wiki-move.sh:*)` | Renommage de page avec redirection : besoin de `curl` direct apparu deux fois (lot 13, tâche 3a), devenu script versionné | 02/09/2026 |
 | `allow Bash(bin/wiki-append.sh:*)` | Ajout en fin de page par `appendtext`, sans lire ni renvoyer le corps existant — script versionné | 06/09/2026 |
-| `allow Bash(bin/wiki-verify.sh:*)`, `allow Bash(bin/wiki-warnings.sh:*)` | Vérification après écriture et relevé d'avertissements SMW — besoins apparus respectivement huit et deux fois, devenus scripts versionnés | 11/09/2026 |
-| `allow Bash(echo/date/od:*)` | Utilitaires d'affichage : n'écrivent aucun fichier, ne joignent aucun réseau. `echo` seul avait provoqué 17 confirmations sur 89 analysées | 11/09/2026 |
+| `allow Bash(bin/wiki-verify.sh:*)`, `allow Bash(bin/wiki-warnings.sh:*)` | Vérification après écriture et relevé d'avertissements SMW — besoins récurrents (respectivement 8 et 2 occurrences relevées dans l'analyse des confirmations Claude Code, conversation claude.ai du 21/08 au 03/10/2026), devenus scripts versionnés | 11/09/2026 |
+| `allow Bash(echo/date/od:*)` | Utilitaires d'affichage : n'écrivent aucun fichier, ne joignent aucun réseau. `echo` seul avait provoqué 17 des 89 confirmations analysées à cette date (même analyse) | 11/09/2026 |
 | `deny Read(//home/spheres/.ssh/**)` | Clés SSH du poste — complète `deny Bash(ssh:*)`. Promue depuis l'ancien fichier local | 03/10/2026 |
 | `allow Bash(awk:*)` | Contrôle de fichiers tabulés (colonnes d'un TSV). Même portée que `sed`, déjà autorisé | 03/10/2026 |
 | `allow Bash(git fetch:*)`, `allow Bash(git check-ignore:*)` | Lecture seule : état du distant, vérification du `.gitignore` | 03/10/2026 |
@@ -72,7 +72,8 @@ local : celui-ci n'est pas versionné, et ses règles échappent à la relecture
 par diff, à ce tableau et à l'archive distante. C'est là que le bouton « ne
 plus me demander » les écrit. L'inventaire du 3 octobre 2026 y a trouvé 75
 règles accumulées à l'insu de Cyril, dont trois contournaient des
-protections écrites :
+protections écrites ; la copie périmée du dépôt privé en ajoutait une
+quatrième :
 - `Read(//proc/**)` donnait accès aux variables d'environnement des
   processus, donc au mot de passe du compte bot chargé par
   `set -a; source .env`, malgré le `deny Read(./.env)` ;
