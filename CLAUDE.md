@@ -574,7 +574,11 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   courant persiste d'une commande à l'autre dans Claude Code, et les appels
   `bin/wiki-*.sh` qui suivent, relatifs à la racine du dépôt, ne se
   résoudraient plus. Un `cd` reste admis seul, dans une commande à part sans
-  redirection, pour un travail qui ne fait aucun appel à `bin/`.
+  redirection, pour un travail qui ne fait aucun appel à `bin/` — à condition
+  de revenir à la racine du dépôt par un `cd` seul dès la fin de ce travail.
+  Un répertoire courant laissé ailleurs fait échouer le premier appel `bin/`
+  qui suit, éventuellement bien plus tard et sans rapport apparent avec la
+  cause.
 
   Cas particuliers vérifiés sur 89 confirmations analysées :
   - **Attente de la file de travaux** : appeler `bin/wiki-wait-jobs.sh`,
