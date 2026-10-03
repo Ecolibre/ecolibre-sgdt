@@ -55,6 +55,30 @@ versionné, voir `.gitignore`) échappe à ça.
 | `allow Bash(bin/wiki-wait-jobs.sh:*)` | Attente de la file de travaux différés, appelée à chaque mesure — script versionné, donc toute modification passe par un diff | 21/08/2026 |
 | `allow Bash(mkdir/cp/mv/sed/sort:*)` | Utilitaires du travail courant. N'élargit pas le périmètre réel : `python3` est autorisé depuis le 20/08 et fait tout ce qu'ils font — mais rend la cible visible dans la commande au lieu de l'enfouir dans un programme | 21/08/2026 |
 | `ask Bash(git checkout/git restore:*)` | Écrasent le travail non commité au même titre que `git reset --hard` et `git clean` — omission comblée | 21/08/2026 |
+| `allow Bash(bin/wiki-move.sh:*)` | Renommage de page avec redirection : besoin de `curl` direct apparu deux fois (lot 13, tâche 3a), devenu script versionné | 02/09/2026 |
+| `deny Read(//home/spheres/.ssh/**)` | Clés SSH du poste — complète `deny Bash(ssh:*)`. Promue depuis l'ancien fichier local | 03/10/2026 |
+| `allow Bash(awk:*)` | Contrôle de fichiers tabulés (colonnes d'un TSV). Même portée que `sed`, déjà autorisé | 03/10/2026 |
+| `allow Bash(git fetch:*)`, `allow Bash(git check-ignore:*)` | Lecture seule : état du distant, vérification du `.gitignore` | 03/10/2026 |
+| `allow WebFetch(domain:www.mediawiki.org)`, `allow WebFetch(domain:www.wikidata.org)` | Documentation MediaWiki ; données de référence (codes INSEE, taxons) | 03/10/2026 |
+| `allow WebSearch` | Recherche de documentation | 03/10/2026 |
+
+**`.claude/settings.local.json` doit rester vide** (`allow` et `deny` vides).
+Les permissions vont dans `.claude/settings.json`, jamais dans le fichier
+local : celui-ci n'est pas versionné, et ses règles échappent à la relecture
+par diff, à ce tableau et à l'archive distante. C'est là que le bouton « ne
+plus me demander » les écrit. L'inventaire du 3 octobre 2026 y a trouvé 75
+règles accumulées à l'insu de Cyril, dont trois contournaient des
+protections écrites :
+- `Read(//proc/**)` donnait accès aux variables d'environnement des
+  processus, donc au mot de passe du compte bot chargé par
+  `set -a; source .env`, malgré le `deny Read(./.env)` ;
+- une règle suivant la variable `$SCRATCH` autorisait un script n'importe où
+  elle pointerait ;
+- une autre rendait permanente l'exception `duplicate-archive`, que
+  `CLAUDE.md` réserve au cas par cas.
+
+Le fichier a été vidé le jour même. Toute règle nécessaire est proposée pour
+`settings.json`, avec son motif, puis documentée dans ce tableau.
 
 Les confirmations que Claude Code affiche ne viennent pas toutes de ce
 fichier. Une commande dont la forme ne peut pas être analysée à l'avance —

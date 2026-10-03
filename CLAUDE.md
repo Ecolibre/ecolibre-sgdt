@@ -614,6 +614,22 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   pas un usage, et ne se reconduit pas d'elle-même au cas suivant. Si un
   besoin revient deux fois, il devient un script de `bin/`, pas une habitude.
   Ajoutée le 21 août 2026.
+- **Les permissions vont dans `.claude/settings.json`, jamais dans
+  `.claude/settings.local.json`.** Le fichier local n'est pas versionné : ses
+  règles échappent à la relecture par diff, à la documentation dans
+  `installation-nouveau-poste.md`, et à l'archive distante. L'inventaire du
+  3 octobre 2026 y a trouvé 75 règles accumulées à l'insu de Cyril, dont
+  trois contournaient des protections écrites : `Read(//proc/**)` donnait
+  accès aux variables d'environnement des processus, donc au mot de passe du
+  compte bot chargé par `set -a; source .env` malgré le `deny Read(./.env)` ;
+  une règle suivant la variable `$SCRATCH` autorisait un script n'importe où
+  elle pointerait ; une autre rendait permanente une exception que ce fichier
+  réserve au cas par cas. Le fichier local doit rester vide. Toute règle
+  nécessaire est proposée pour `settings.json`, avec son motif, et documentée.
+- **Ne jamais proposer d'ajouter à `allow` une règle qui désigne un chemin
+  variable, un fichier hors du dépôt, ou un répertoire entier.** Une règle
+  d'`allow` nomme un exécutable du dépôt ou une commande, jamais un chemin
+  qu'une variable peut déplacer.
 
 ## Ne jamais faire
 - Ne pas toucher au `composer.json` de MediaWiki (utiliser `composer.local.json`).

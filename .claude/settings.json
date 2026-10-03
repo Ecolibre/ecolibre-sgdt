@@ -17,7 +17,8 @@
       "Edit(./.env.*)",
       "Edit(./.cookies.txt)",
       "Read(./Serveur3/**)",
-      "Edit(./Serveur3/**)"
+      "Edit(./Serveur3/**)",
+      "Read(//home/spheres/.ssh/**)"
     ],
     "ask": [
       "Bash(git reset --hard:*)",
@@ -61,7 +62,13 @@
       "Bash(echo:*)",
       "Bash(date:*)",
       "Bash(od:*)",
-      "WebFetch(domain:wiki.ecolibre.org)"
+      "WebFetch(domain:wiki.ecolibre.org)",
+      "Bash(awk:*)",
+      "Bash(git fetch:*)",
+      "Bash(git check-ignore:*)",
+      "WebFetch(domain:www.mediawiki.org)",
+      "WebFetch(domain:www.wikidata.org)",
+      "WebSearch"
     ]
   }
 }
