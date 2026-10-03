@@ -568,9 +568,13 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   toutes les autres réunies. La consigne précédente, qui recommandait de
   garder la variable pour la lisibilité, était une erreur d'arbitrage :
   elle échangeait quelques lignes de lecture contre une fenêtre par commande.
-  Quand le chemin complet rend la commande illisible, la bonne réponse est de
-  s'y placer par `cd` une fois et de travailler en chemins relatifs, pas de
-  l'abréger par une variable.
+  Quand le chemin complet rend la commande illisible, écrire un script dans
+  le scratchpad avec le chemin en dur et l'appeler, plutôt que d'abréger par
+  une variable. Ne pas se placer dans le scratchpad par `cd` : le répertoire
+  courant persiste d'une commande à l'autre dans Claude Code, et les appels
+  `bin/wiki-*.sh` qui suivent, relatifs à la racine du dépôt, ne se
+  résoudraient plus. Un `cd` reste admis seul, dans une commande à part sans
+  redirection, pour un travail qui ne fait aucun appel à `bin/`.
 
   Cas particuliers vérifiés sur 89 confirmations analysées :
   - **Attente de la file de travaux** : appeler `bin/wiki-wait-jobs.sh`,
