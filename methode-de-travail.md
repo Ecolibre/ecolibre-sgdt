@@ -4,6 +4,8 @@ Ce fichier décrit comment le projet se conduit, pas ce qu'il contient. Pour le 
 
 Écrit au terme du lot 13, premier lot mené entièrement sous cette forme, puis corrigé sur quatre points d'après le retour de l'exécution. Une règle qui n'a servi qu'une fois n'est pas encore une règle : à relire après deux lots de plus.
 
+Révisé par le lot 34, en octobre 2026 : forme de chaque réponse, destinataire de chaque texte à coller, demandes de confirmation. Depuis, toute conversation du projet claude.ai « Wiki Ecolibre data » lit ce fichier avant sa première réponse et l'applique : c'est ce que demande le texte d'amorçage des instructions du projet, recopié dans « Où vit quoi ».
+
 ## Qui fait quoi
 
 Trois intervenants.
@@ -54,17 +56,45 @@ Le rapport attendu, avec une section « Écarts et surprises ».
 
 Et l'instruction de n'afficher qu'une ligne dans le terminal : le chemin du fichier.
 
+Enfin, sa première ligne nomme son destinataire, et elle annonce les demandes de confirmation qu'elle peut déclencher, avec la réponse à leur donner : voir les deux sections qui suivent « Format des échanges ».
+
 ## Format des échanges
 
-Chaque nouveau sujet est un point numéroté, dans cet ordre : le contexte ou le problème, puis la question, puis la suggestion de l'architecte. Le numéro est annoncé avant que le sujet soit développé, parce que Cyril lit au fil et répond en cours de route.
+Chaque réponse de l'architecte est faite de points numérotés. Chaque point suit cet ordre : le contexte ou le problème, puis la question, puis la suggestion. Le numéro est annoncé avant que le point soit développé, parce que Cyril lit au fil et répond en cours de route. Le but est qu'il puisse répondre « point N : ok » sans retaper un raisonnement identique à la recommandation.
 
-Le but est qu'il puisse répondre « point N : ok, go » sans retaper un raisonnement identique à la recommandation.
+La numérotation court sur toute la conversation : chaque réponse reprend au numéro suivant. Un numéro désigne ainsi un seul point, y compris à la clôture, qui doit retrouver chaque arbitrage dans le fil. Un point resté sans réponse garde son numéro.
+
+Chaque réponse s'ouvre sur une ligne d'état : les points acquis depuis la réponse précédente, ceux en cours, ceux encore ouverts. Le 3 octobre 2026, des points acceptés sans accusé de réception ont paru laissés de côté.
+
+Une simple étape reste un point court : le contexte en une ligne, l'action demandée pour question, le texte à coller pour suggestion. Une information qui n'appelle aucune décision n'est pas un point : elle va dans le contexte du point qu'elle éclaire.
+
+Chaque étape dit à Cyril exactement quoi faire : quel texte coller, où, et quoi faire du retour. Un seul texte à coller à la fois, contenant tout ce dont son destinataire a besoin.
+
+Un vrai regard critique est attendu : si une approche est mauvaise, le dire, d'où qu'elle vienne.
 
 Une consigne à la fois. Jamais de consigne tant qu'un arbitrage reste ouvert : les réponses obligeraient à la réécrire, et le quota est une ressource.
 
 Une consigne corrigée est redonnée entière, prête à copier. Jamais de passage à remplacer.
 
 Quand Cyril travaille sur téléphone, les rapports doivent tenir en un seul bloc copiable.
+
+## Le destinataire de chaque texte
+
+Tout texte à coller commence par son destinataire, sur sa première ligne : « Pour Claude Code. » ou « Pour une conversation claude.ai du projet Wiki Ecolibre data. ». C'est aussi le repère de Cyril au moment de coller : sur le téléphone, la session de l'exécuteur et les conversations se côtoient dans la même application.
+
+Une conversation qui reçoit un texte commençant par « Pour Claude Code. » le signale avant toute chose : Cyril s'est probablement trompé de fenêtre. `CLAUDE.md` porte la règle symétrique pour l'exécuteur.
+
+Cas vécu : le 2 octobre 2026, le message d'ouverture du lot 21 a été collé dans la session de l'exécuteur. Ni le message ni la procédure ne disaient à qui ils s'adressaient, et aucune autorisation n'aurait empêché une écriture. L'exécuteur s'est arrêté par jugement, pas par un garde-fou.
+
+## Les demandes de confirmation
+
+Claude Code demande une confirmation avant certaines commandes. Dans le terminal, il propose trois réponses : « 1. Yes » autorise une seule fois ; « 2. … » autorise davantage, pour la session ou pour toujours, et dans ce second cas inscrit une règle permanente dans `.claude/settings.local.json`, fichier que git ne suit pas ; « 3. No » refuse.
+
+Toute consigne qui peut déclencher des confirmations les annonce dans son texte même, et dit à Cyril quelle réponse donner. Par défaut, « 1. Yes ». Une autorisation permanente seulement sur décision explicite, avec son motif dans la consigne. Le 3 octobre 2026, une consigne qui disait « accepte les demandes de lecture » sans nommer le bouton a fait inscrire trois règles permanentes, dont une ouvrait sans confirmation la lecture des identifiants de Claude Code.
+
+Une confirmation se juge avec la consigne qui l'a déclenchée. Conforme à ce que la consigne annonce, elle se valide comme annoncé, sans consultation. Imprévue, Cyril n'y répond pas et la montre à la conversation qui a rédigé la consigne. Hors consigne — canal direct, installation d'un poste —, la conversation qui relit les confirmations reçoit aussi la demande d'origine.
+
+Un aperçu ne se juge pas seul. Le 3 octobre 2026, l'aperçu d'un retrait, dont les couleurs avaient disparu au copier-coller, a été lu comme un ajout par une conversation qui n'avait pas la consigne. Le contrôle qui fait foi est la vérification après coup, que chaque consigne exige.
 
 ## Les règles de vérification
 
@@ -112,13 +142,23 @@ Une idée écartée se consigne avec son motif et sa date. Sans le motif, elle r
 
 **`travaux/`** porte les rapports d'exécution, jamais le wiki : ils citent de la syntaxe que le wiki lirait comme de vraies annotations.
 
-**`CLAUDE.md`** porte les règles opératoires de l'exécuteur.
+**`CLAUDE.md`** porte les règles opératoires de l'exécuteur, à commencer par son rôle.
 
-**Ce fichier** porte le protocole. Il n'a de sens que pour l'outillage, d'où sa place dans le dépôt.
+**Ce fichier** porte le protocole, et il est le seul à porter les règles de travail des conversations : la procédure d'ouverture y renvoie au lieu de les recopier. Il n'a de sens que pour l'outillage, d'où sa place dans le dépôt.
+
+**Les instructions du projet claude.ai « Wiki Ecolibre data »** ne portent aucune règle, seulement ce texte d'amorçage, recopié ici pour qu'il ne soit pas invisible. Il ne change que si l'adresse de ce fichier ou le rôle de l'architecte change, et toute modification se fait ici d'abord.
+
+~~~
+Tu es l'architecte décrit dans methode-de-travail.md, à la racine du dépôt Ecolibre/ecolibre-sgdt.
+Avant ta première réponse, quelle qu'elle soit, récupère ce fichier par curl et applique-le : https://raw.githubusercontent.com/Ecolibre/ecolibre-sgdt/main/methode-de-travail.md
+Si la commande échoue, dis-le et arrête-toi : sans ce fichier, tu n'as pas les règles.
+~~~
 
 **Deux pages du wiki portent le protocole lui-même** : `Procédure d'ouverture d'un lot` et `Procédure de clôture d'un lot`. Elles sont d'une autre nature que le reste du wiki — elles ne décrivent pas le SGDT, elles décrivent la conduite du travail, et un assistant les applique à lui-même. L'exécuteur n'y écrit jamais sans consigne explicite qui les nomme. Toute modification s'y voit dans l'historique de la page, et c'est là qu'il faut regarder si le comportement d'un assistant surprend.
 
 ## Limites de l'outillage, mesurées
+
+L'outil de récupération de pages web de la conversation sert des versions en cache et refuse les adresses qui ne sont pas déjà apparues dans la conversation. Le wiki se lit donc par curl et l'API (`https://wiki.ecolibre.org/api.php`), toujours, et le dépôt se clone. Un 403 portant `x-deny-reason: host_not_allowed` signifie que le domaine n'est pas autorisé dans l'environnement d'exécution de la conversation : le dire à Cyril tout de suite.
 
 L'architecte ne peut pas lire l'horodatage des messages d'une conversation passée. Contournement : il demande « retrouve la date de l'échange qui commence par… » et Cyril la retrouve au Ctrl+F.
 
