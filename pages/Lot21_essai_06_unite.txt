@@ -1,0 +1,2 @@
+[[Has type::Page]]
+[[Property_description_FR::Propriété d'essai du lot 21 : lien d'une valeur vers sa page d'unité. À supprimer après la mesure.]]

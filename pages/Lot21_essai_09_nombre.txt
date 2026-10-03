@@ -1,0 +1,2 @@
+[[Has type::Number]]
+[[Property_description_FR::Propriété d'essai du lot 21 : nombres décimaux et séparateur de valeurs multiples. À supprimer après la mesure.]]

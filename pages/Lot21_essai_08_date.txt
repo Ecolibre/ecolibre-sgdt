@@ -1,0 +1,2 @@
+[[Has type::Date]]
+[[Property_description_FR::Propriété d'essai du lot 21 : date d'une mesure. À supprimer après la mesure.]]

@@ -1,0 +1,64 @@
+Page d'essai du lot 21 : un item, ses valeurs scalaires, ses sous-objets et les requêtes qui les lisent. À supprimer après la mesure.
+
+{{#set:
+|Test lot21 débit=800 L/h
+|Test lot21 température=-15 °C
+}}
+{{#subobject:spec
+|Test lot21 débit=800 L/h
+|Test lot21 débit min=750 L/h
+|Test lot21 débit max=0,0216 ML/j
+|Test lot21 unité=Utilisateur:Cywil/Bac à sable/Lot21 litre par heure
+}}
+{{#subobject:mesure
+|Test lot21 débit=0,000215 m³/s
+|Test lot21 température=12,5 °C
+|Test lot21 date=2026-10-04
+|Test lot21 unité=Utilisateur:Cywil/Bac à sable/Lot21 litre par heure
+}}
+{{#subobject:rejets
+|Test lot21 débit=800
+|Test lot21 débit min=0.9 m³/h
+|Test lot21 débit max=800 L/min
+}}
+{{#subobject:sep-virgule
+|Test lot21 nombre=26,9, 33,7
+|+sep=,
+}}
+{{#subobject:sep-pointvirgule
+|Test lot21 nombre=26,9; 33,7
+|+sep=;
+}}
+{{#subobject:point-decimal
+|Test lot21 nombre=26.9
+}}
+
+== Q1 ==
+{{#ask: [[Test lot21 débit::+]] |?Test lot21 débit |?Test lot21 débit#m³/s |?Test lot21 débit#m³/h |format=table |mainlabel=Sujet |limit=20 |default=AUCUN RÉSULTAT}}
+
+== Q2 ==
+{{#ask: [[Test lot21 débit::>780 L/h]] |format=list |limit=20 |default=AUCUN RÉSULTAT}}
+
+== Q3 ==
+{{#ask: [[Test lot21 débit::>800 L/h]] |format=list |limit=20 |default=AUCUN RÉSULTAT}}
+
+== Q4 ==
+{{#ask: [[Test lot21 débit::>0,2 m³/h]] |format=list |limit=20 |default=AUCUN RÉSULTAT}}
+
+== Q5 ==
+{{#ask: [[Has subobject.Test lot21 débit min::<760 L/h]] |format=list |limit=20 |default=AUCUN RÉSULTAT}}
+
+== Q6 ==
+{{#ask: [[Test lot21 unité.Test lot21 grandeur::Utilisateur:Cywil/Bac à sable/Lot21 débit volumique]] |?Test lot21 débit |format=table |mainlabel=Sujet |limit=20 |default=AUCUN RÉSULTAT}}
+
+== Q7 ==
+{{#ask: [[Has subobject.Test lot21 unité.Test lot21 grandeur::Utilisateur:Cywil/Bac à sable/Lot21 débit volumique]] |format=list |limit=20 |default=AUCUN RÉSULTAT}}
+
+== Q8 ==
+{{#ask: [[Test lot21 température::+]] |?Test lot21 température |?Test lot21 température#K |format=table |mainlabel=Sujet |limit=20 |default=AUCUN RÉSULTAT}}
+
+== Q9 ==
+{{#ask: [[Test lot21 nombre::+]] |?Test lot21 nombre |format=table |mainlabel=Sujet |limit=20 |default=AUCUN RÉSULTAT}}
+
+== Q10 ==
+{{#ask: [[Test lot21 débit max::+]] |?Test lot21 débit max |?Test lot21 débit max#ML/j |?Test lot21 débit max#L/h |format=table |mainlabel=Sujet |limit=20 |default=AUCUN RÉSULTAT}}

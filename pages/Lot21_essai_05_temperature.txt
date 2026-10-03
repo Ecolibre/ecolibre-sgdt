@@ -1,0 +1,3 @@
+[[Has type::Temperature]]
+[[Display units::°C]]
+[[Property_description_FR::Propriété d'essai du lot 21 : une température. À supprimer après la mesure.]]

@@ -1,0 +1,4 @@
+[[Has type::Quantity]]
+{{Test lot21 unités débit}}
+[[Corresponds to::86,4 ML/j]]
+[[Property_description_FR::Propriété d'essai du lot 21 : borne haute d'un débit spécifié, mêmes unités par le même modèle, plus une unité à facteur décimal déclarée en propre. À supprimer après la mesure.]]

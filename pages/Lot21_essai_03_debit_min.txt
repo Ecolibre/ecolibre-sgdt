@@ -1,0 +1,3 @@
+[[Has type::Quantity]]
+{{Test lot21 unités débit}}
+[[Property_description_FR::Propriété d'essai du lot 21 : borne basse d'un débit spécifié, mêmes unités par le même modèle. À supprimer après la mesure.]]

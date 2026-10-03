@@ -1,0 +1,5 @@
+Page d'essai du lot 21 : une unité, rattachée à sa grandeur. À supprimer après la mesure.
+
+{{#set:
+|Test lot21 grandeur=Utilisateur:Cywil/Bac à sable/Lot21 débit volumique
+}}
