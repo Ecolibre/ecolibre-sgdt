@@ -1,0 +1,2 @@
+
+# '''Les comparateurs des requêtes ne sont pas stricts.''' Une condition « supérieur à » est compilée en « supérieur ou égal à », et « inférieur à » en « inférieur ou égal à » : une requête sur un débit supérieur à 800 L/h retient aussi les valeurs égales à 800 L/h. Constaté le 4 octobre 2026 en bac à sable (lot 21, tâche 2), dans la condition stockée des requêtes. Un seuil qu'on veut exclure doit donc être écrit juste au-delà.
