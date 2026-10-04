@@ -1,0 +1,90 @@
+{{Lot
+|Work_package_number=34
+|Work_package_status=clos
+|Work_package_summary=Faire appliquer les règles de travail dans chaque conversation et chaque session d'exécution, empêcher qu'un texte soit exécuté par le mauvais destinataire, et encadrer les demandes de confirmation de l'assistant qui exécute.
+|Work_package_opening_date=2026-10-03
+|Work_package_delivery_date=2026-10-03
+|Work_package_closure_date=2026-10-04
+|Work_package_closure_report=https://github.com/Ecolibre/ecolibre-sgdt/blob/03e07e97a41082bb01ca06b61de8952df39ddcfe/travaux/lot-34-cloture.md
+|Work_package_revises=Lot 27 — Conduite du projet
+}}
+
+== Objet ==
+
+Le 2 octobre 2026, le message d'ouverture du lot 21 a été collé dans la session de l'assistant qui exécute, au lieu d'une conversation avec l'assistant qui rédige les consignes. Ni le message ni la procédure ne disent à qui ils s'adressent : l'exécuteur a tout lu, puis s'est arrêté de lui-même en relevant la confusion de rôle. Rien n'a été écrit. Mais ce qui l'a retenu est son jugement, pas un garde-fou : aucune autorisation ne l'aurait arrêté.
+
+Le même incident a montré un second défaut. Les règles de forme des échanges ne sont lues que par une conversation qui ouvre ou clôt un lot ; une conversation menée hors de ce cadre ne les connaît pas. Et les trois textes qui les portent — methode-de-travail.md dans le dépôt, la procédure d'ouverture et le message de clôture — se recopient en partie et divergent déjà.
+
+Le lot a été élargi le 3 octobre aux demandes de confirmation de l'assistant qui exécute. Une consigne qui ne disait pas quelle réponse leur donner a fait inscrire des autorisations permanentes non voulues, et un aperçu jugé sans la consigne qui l'avait déclenché a été lu à contresens.
+
+== Ce qui est exclu ==
+
+Le modèle de données et le contenu du wiki.
+
+Les scripts du dépôt et les règles d'autorisation de l'assistant qui exécute : ce lot ne traite que la façon de répondre à une demande de confirmation. L'inventaire de ces règles a été fait le 3 octobre 2026, hors lot, par un correctif : [https://github.com/Ecolibre/ecolibre-sgdt/commit/54a58410e123c4c050a0ef96417de832e2ee0142 commit 54a5841].
+
+Le reste du protocole de travail, qui ne change pas.
+
+== Ce qui est déjà tranché ==
+
+'''Les règles de travail des conversations vivent en un seul endroit : methode-de-travail.md, dans le dépôt.''' Les instructions du projet claude.ai ne portent qu'un texte d'amorçage de trois phrases, sur le modèle du message d'ouverture : il fait lire ce fichier avant la première réponse, et demande de s'arrêter si la lecture échoue. Une règle modifiée s'applique dès sa publication, sans recopie à la main, à cinq minutes près : GitHub sert le fichier avec ce délai de cache. Motif : chaque copie d'une règle finit par diverger, et la procédure d'ouverture en donnait déjà l'exemple.
+
+'''La section « Comment Cyril travaille » de la procédure d'ouverture devient un renvoi vers ce fichier''', qui en reprend le contenu : rôles, forme des réponses, lecture du wiki par l'API, textes à coller, regard critique attendu, refus de s'appuyer sur un résumé.
+
+'''Chaque réponse est faite de points numérotés''' — contexte, question, suggestion — et non plus chaque nouveau sujet. La numérotation court sur toute la conversation, pour qu'un numéro désigne un seul point, y compris à la clôture, qui doit retrouver chaque arbitrage dans le fil. Une simple étape reste un point court ; une information qui n'appelle aucune décision va dans le contexte du point qu'elle éclaire.
+
+'''Chaque réponse s'ouvre sur une ligne d'état''' : points acquis, en cours, ouverts. Motif : le 3 octobre, des points acceptés sans accusé de réception ont paru laissés de côté.
+
+'''CLAUDE.md, le fichier de consignes de l'assistant qui exécute, dit son rôle.''' Il ne le disait nulle part, et lui demandait même de lire les pages de référence « à l'ouverture d'un lot ». Ses questions à Cyril suivent la même forme que celles de la conversation, repérées par des lettres pour ne pas se confondre avec ses numéros.
+
+'''Tout texte à coller commence par son destinataire.''' Les messages d'ouverture et de clôture s'adressent à une conversation et disent à l'assistant qui exécute de ne rien lancer ; CLAUDE.md lui interdit d'exécuter un texte qui ne lui est pas adressé ; une conversation qui reçoit un texte destiné à l'exécuteur le signale. Motif : aucune autorisation ne rattrape l'erreur, et les deux assistants se côtoient désormais dans la même application sur le téléphone. Le garde-fou se teste en rejouant l'erreur, dans les deux sens.
+
+'''Toute consigne qui peut déclencher une demande de confirmation dit quelle réponse lui donner''' : par défaut, l'autorisation pour une seule fois ; une autorisation permanente seulement sur décision explicite, motivée dans la consigne. Motif : une consigne qui ne nommait pas le bouton a fait inscrire trois autorisations permanentes, dont une trop large. Précisé le 3 octobre 2026 par le correctif sur les autorisations : une autorisation permanente ne se donne jamais par ce bouton, elle se propose pour le fichier versionné, avec son motif.
+
+'''Une confirmation se juge avec la consigne qui l'a déclenchée.''' Conforme à ce que la consigne annonce, elle se valide comme annoncé ; imprévue, elle se montre à la conversation qui a rédigé la consigne ; hors consigne, la conversation qui relit les confirmations reçoit aussi la demande d'origine. Motif : un aperçu dont les couleurs avaient disparu au copier-coller a été lu à l'envers par une conversation qui n'avait pas la consigne. Le contrôle qui fait foi reste la vérification après coup, que chaque consigne exige.
+
+'''Un lot plutôt qu'un correctif.''' Les pages de procédure se lisent par leur historique, et seule une étiquette de lot rend cet historique lisible.
+
+'''Les fichiers de règles l'emportent sur les mémoires automatiques.''' methode-de-travail.md l'emporte sur la mémoire de claude.ai, CLAUDE.md sur celle de l'assistant qui exécute. Motif : l'une et l'autre retiennent d'elles-mêmes des copies des règles, hors de tout contrôle, et les garderaient après un changement du fichier. Arbitré à la clôture, le 4 octobre 2026.
+
+'''Le fichier local d'autorisations se vérifie au début et à la fin de chaque tâche.''' Il doit rester vide depuis le correctif du 3 octobre 2026, et toute règle qui y apparaît est citée dans le rapport. Motif : pendant ce lot, ce relevé a prouvé à chaque tâche qu'aucune autorisation permanente n'avait été ajoutée, là où l'aperçu et l'annonce ne prouvaient rien. Arbitré à la clôture, le 4 octobre 2026.
+
+'''Un garde-fou s'éprouve en rejouant l'erreur d'origine, dans une session ou une conversation neuve.''' Motif : une conversation qui sait qu'on la teste s'y prépare, et sa réussite ne prouve rien. Arbitré à la clôture, le 4 octobre 2026.
+
+== Ce qui est écarté, et pourquoi ==
+
+'''Recopier les règles dans les instructions du projet claude.ai, avec un fichier maître versionné''' — écarté le 3 octobre 2026 : deux copies de plus des mêmes règles, qui auraient divergé comme les précédentes.
+
+'''Les instructions générales du compte''' — écarté le 3 octobre 2026 : elles s'appliqueraient à toutes les conversations, y compris celles sans rapport avec le SGDT.
+
+'''La mémoire automatique de l'assistant''' — écarté le 3 octobre 2026 : rien ne garantit ce qu'elle retient ni quand elle est relue.
+
+'''Faire citer methode-de-travail.md par le message de clôture''' — écarté le 3 octobre 2026 : une clôture se fait dans la conversation qui a mené le lot, et celle-ci a déjà lu le fichier.
+
+'''Garder une partie des autorisations ajoutées pendant la vérification de l'incident''' — écarté le 3 octobre 2026 : elles ne servaient qu'à cette vérification.
+
+'''Faire annoncer par l'assistant qui exécute les confirmations imprévues''' — écarté le 4 octobre 2026 : il ne peut pas savoir d'avance quelle commande en demandera une. La vérification se fait après coup, par le relevé du fichier local.
+
+'''Éprouver le message d'ouverture seul, dans une session lancée hors du dépôt''' — écarté le 4 octobre 2026 : le message dit en toutes lettres de ne rien lancer, et l'essai demandait de lancer l'assistant hors du dépôt pour un gain faible. Ce cas reste non éprouvé.
+
+'''Un lot à part pour l'inventaire des autorisations''' — écarté le 4 octobre 2026 : l'inventaire avait été fait la veille, par correctif.
+
+== Points ouverts ==
+
+Aucun à la clôture.
+
+Le texte d'amorçage a été éprouvé le 3 octobre 2026 : une conversation neuve du projet a lu methode-de-travail.md avant sa première réponse, dans la version publiée, et en a appliqué la forme.
+
+Le garde-fou a été éprouvé ensuite, dans les deux sens : l'ancien message d'ouverture, collé dans une session neuve de l'assistant qui exécute, a été refusé en une ligne, sans aucune commande ; un texte destiné à l'exécuteur, collé dans une conversation neuve, a été signalé d'emblée.
+
+La relecture de ces règles après deux lots relève de la règle générale que pose methode-de-travail.md.
+
+== Dépendances ==
+
+Révise un arbitrage du [[Lot 27 — Conduite du projet]] : la règle de forme des échanges, qui valait pour chaque nouveau sujet et vaut désormais pour chaque réponse, et la section de la procédure d'ouverture qui la recopiait.
+
+Rien en amont.
+
+----
+
+Voir aussi la [[Gestion des lots]].
