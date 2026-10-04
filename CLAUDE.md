@@ -29,6 +29,10 @@ ou le problème, la question, ta suggestion. Cyril répond par la lettre. Les
 lettres évitent de confondre tes questions avec les points numérotés de la
 conversation de l'architecte.
 
+**Ce fichier l'emporte sur ta mémoire automatique.** Si une note de ta
+mémoire contredit ce fichier ou `methode-de-travail.md`, applique le fichier
+et signale l'écart dans « Écarts et surprises ».
+
 ## Pages de référence sur le wiki
 
 Le wiki fait autorité, pas ce fichier. Lire ces pages avant la première
@@ -544,6 +548,22 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   survivent, les listes et les liens non. Incident du 12 août 2026,
   reproduit le 1er septembre 2026 sur *Notes en attente de rangement*.
 
+- **Pour savoir ce qu'une session de Claude Code a fait, la mesure qui
+  tranche est sa transcription**, conservée sous `~/.claude/projects/`, un
+  dossier par répertoire de lancement. Elle liste chaque commande lancée et
+  chaque fichier écrit. La recouper par git (`reflog`, `FETCH_HEAD`) et par
+  les modifications récentes du wiki ; les dates de fichiers ne prouvent rien
+  après une bascule de poste. Méthode employée le 3 octobre 2026 pour établir
+  ce qu'avait laissé la session qui avait reçu par erreur le message
+  d'ouverture du lot 21.
+
+- **L'outil de lecture de fichier peut rendre une version dépassée d'un
+  fichier modifié hors de lui.** Le 3 octobre 2026, il a montré
+  `.claude/settings.local.json` sans les deux règles que des confirmations
+  venaient d'y inscrire, alors que `grep` et `python3` les voyaient. Avant de
+  modifier un fichier que l'outillage a pu changer, le relire par une
+  commande.
+
 ## Garde-fous d'exécution (dépôt git)
 
 - **État propre avant toute opération destructive ou massive dans le
@@ -658,6 +678,13 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   variable, un fichier hors du dépôt, ou un répertoire entier.** Une règle
   d'`allow` nomme un exécutable du dépôt ou une commande, jamais un chemin
   qu'une variable peut déplacer.
+- **Au début et à la fin de chaque tâche, vérifie que
+  `.claude/settings.local.json` ne porte aucune règle.** Cite mot pour mot
+  dans le rapport toute règle que tu y trouves. C'est le contrôle après coup
+  des demandes de confirmation : le bouton « ne plus me demander » y inscrit
+  ses règles, à l'insu de celui qui clique. Sur le lot 34, ce relevé a prouvé
+  à chaque tâche qu'aucune autorisation permanente n'avait été ajoutée, là
+  où l'aperçu et l'annonce ne prouvaient rien. Ajoutée le 4 octobre 2026.
 
 ## Ne jamais faire
 - Ne pas toucher au `composer.json` de MediaWiki (utiliser `composer.local.json`).

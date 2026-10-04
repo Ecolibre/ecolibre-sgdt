@@ -90,11 +90,11 @@ Cas vécu : le 2 octobre 2026, le message d'ouverture du lot 21 a été collé d
 
 Claude Code demande une confirmation avant certaines commandes. Dans le terminal, il propose trois réponses : « 1. Yes » autorise une seule fois ; « 2. … » autorise davantage, pour la session ou pour toujours, et dans ce second cas inscrit une règle permanente dans `.claude/settings.local.json`, fichier que git ne suit pas ; « 3. No » refuse.
 
-Toute consigne qui peut déclencher des confirmations les annonce dans son texte même, et dit à Cyril quelle réponse donner. Par défaut, « 1. Yes ». Une autorisation permanente seulement sur décision explicite, avec son motif dans la consigne. Le 3 octobre 2026, une consigne qui disait « accepte les demandes de lecture » sans nommer le bouton a fait inscrire trois règles permanentes, dont une ouvrait sans confirmation la lecture des identifiants de Claude Code.
+Toute consigne qui peut déclencher des confirmations les annonce dans son texte même, et dit à Cyril quelle réponse donner. Par défaut, « 1. Yes ». Jamais « 2. » pour une autorisation permanente : une règle nécessaire se propose pour `.claude/settings.json`, avec son motif, et le fichier local reste vide, comme le veut `CLAUDE.md`. Le 3 octobre 2026, une consigne qui disait « accepte les demandes de lecture » sans nommer le bouton a fait inscrire trois règles permanentes, dont une ouvrait sans confirmation la lecture des identifiants de Claude Code.
 
 Une confirmation se juge avec la consigne qui l'a déclenchée. Conforme à ce que la consigne annonce, elle se valide comme annoncé, sans consultation. Imprévue, Cyril n'y répond pas et la montre à la conversation qui a rédigé la consigne. Hors consigne — canal direct, installation d'un poste —, la conversation qui relit les confirmations reçoit aussi la demande d'origine.
 
-Un aperçu ne se juge pas seul. Le 3 octobre 2026, l'aperçu d'un retrait, dont les couleurs avaient disparu au copier-coller, a été lu comme un ajout par une conversation qui n'avait pas la consigne. Le contrôle qui fait foi est la vérification après coup, que chaque consigne exige.
+Un aperçu ne se juge pas seul. Le 3 octobre 2026, l'aperçu d'un retrait, dont les couleurs avaient disparu au copier-coller, a été lu comme un ajout par une conversation qui n'avait pas la consigne. Le contrôle qui fait foi est la vérification après coup, que chaque consigne exige. Pour les confirmations, c'est le relevé que l'exécuteur fait au début et à la fin de chaque tâche : `.claude/settings.local.json` ne doit porter aucune règle, et toute règle qui y apparaît est citée dans le rapport.
 
 ## Les règles de vérification
 
@@ -117,6 +117,8 @@ Un aperçu ne se juge pas seul. Le 3 octobre 2026, l'aperçu d'un retrait, dont 
 **Vérifier les règles impératives de `CLAUDE.md` avant de faire fabriquer un nom.** Un titre de page, un nom de fichier, une valeur de propriété : ces règles disent ce que le modèle ne supporte pas, et l'architecte ne les a pas en tête. Sur le lot 28, un titre de lot à deux virgules a été écrit alors que la virgule est le délimiteur multi-valeurs et qu'aucune des 241 pages de l'espace principal n'en portait.
 
 **La preuve d'une poussée ne peut pas figurer dans le commit qu'elle prouve.** Au moment où `git log origin/main` devient lisible, le rapport est déjà commité : une consigne qui exige cette preuve dans le rapport force un second commit sur le même fichier. La consigne demande de pousser et de signaler un échec, rien de plus. C'est l'architecte qui vérifie, en interrogeant `origin/main` lui-même, et l'étape d'état de la tâche suivante qui confirme.
+
+**Un garde-fou s'éprouve en rejouant l'erreur d'origine**, dans une session ou une conversation neuve, qui ignore qu'on la teste. Une conversation qui le sait s'y prépare, et sa réussite ne prouve rien. Le garde-fou du lot 34 a été éprouvé ainsi, dans les deux sens : l'ancien message d'ouverture, collé dans une session neuve de l'exécuteur, a été refusé en une ligne, sans aucune commande ; un texte destiné à l'exécuteur, collé dans une conversation neuve, a été signalé d'emblée.
 
 ## Ce qui rattrape les erreurs
 
@@ -154,11 +156,17 @@ Avant ta première réponse, quelle qu'elle soit, récupère ce fichier par curl
 Si la commande échoue, dis-le et arrête-toi : sans ce fichier, tu n'as pas les règles.
 ~~~
 
+**La mémoire de claude.ai** n'est pas un support des règles. Elle retient d'elle-même ce qui se dit en conversation, et peut garder une règle sous une forme que ce fichier a modifiée depuis. En cas d'écart, ce fichier l'emporte.
+
 **Deux pages du wiki portent le protocole lui-même** : `Procédure d'ouverture d'un lot` et `Procédure de clôture d'un lot`. Elles sont d'une autre nature que le reste du wiki — elles ne décrivent pas le SGDT, elles décrivent la conduite du travail, et un assistant les applique à lui-même. L'exécuteur n'y écrit jamais sans consigne explicite qui les nomme. Toute modification s'y voit dans l'historique de la page, et c'est là qu'il faut regarder si le comportement d'un assistant surprend.
 
 ## Limites de l'outillage, mesurées
 
 L'outil de récupération de pages web de la conversation sert des versions en cache et refuse les adresses qui ne sont pas déjà apparues dans la conversation. Le wiki se lit donc par curl et l'API (`https://wiki.ecolibre.org/api.php`), toujours, et le dépôt se clone. Un 403 portant `x-deny-reason: host_not_allowed` signifie que le domaine n'est pas autorisé dans l'environnement d'exécution de la conversation : le dire à Cyril tout de suite.
+
+GitHub sert l'adresse brute de ce fichier avec cinq minutes de cache (`cache-control: max-age=300`, mesuré le 3 octobre 2026). Pendant les cinq minutes qui suivent une poussée, une conversation neuve peut encore lire l'ancienne version : une règle modifiée s'applique à ce délai près.
+
+Les instructions du projet claude.ai se présentent à la conversation comme le début de son premier message, avant ce que Cyril y écrit. Une conversation qui voit le texte d'amorçage en tête de ce message n'en conclut pas que Cyril l'a collé lui-même.
 
 L'architecte ne peut pas lire l'horodatage des messages d'une conversation passée. Contournement : il demande « retrouve la date de l'échange qui commence par… » et Cyril la retrouve au Ctrl+F.
 
