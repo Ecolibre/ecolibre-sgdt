@@ -1,0 +1,3 @@
+[[Has type::Quantity]]
+{{Test lot21b unités débit}}
+[[Property_description_FR::Propriété d'essai du lot 21 : un débit, dont les unités sont déclarées par un modèle transclus. Ne pas supprimer sans consigne.]]

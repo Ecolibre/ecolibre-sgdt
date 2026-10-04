@@ -1,0 +1,4 @@
+<noinclude>Modèle d'essai du lot 21 : déclarations d'unités partagées par les propriétés d'essai de débit. Ne pas supprimer sans consigne.</noinclude><includeonly>[[Corresponds to::1 m³/s, m3/s]]
+[[Corresponds to::3600 m³/h, m3/h]]
+[[Corresponds to::3600000 L/h, l/h]]
+[[Display units::L/h, m³/h, m³/s]]</includeonly>

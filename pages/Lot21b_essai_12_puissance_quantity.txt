@@ -1,0 +1,5 @@
+[[Has type::Quantity]]
+[[Corresponds to::1 W, watt]]
+[[Corresponds to::0,001 kW, kilowatt]]
+[[Display units::W, kW]]
+[[Property_description_FR::Propriété d'essai du lot 21 : passée du type Number au type Quantity alors qu'elle portait déjà une valeur, pour mesurer le verrou de propagation et le devenir de la valeur. Ne pas supprimer sans consigne.]]

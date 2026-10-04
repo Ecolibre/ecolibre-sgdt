@@ -1,0 +1,2 @@
+[[Has type::Number]]
+[[Property_description_FR::Propriété d'essai du lot 21 : créée en type Number pour mesurer ce que produit un changement de type vers Quantity sur une propriété qui porte déjà une valeur. Ne pas supprimer sans consigne.]]

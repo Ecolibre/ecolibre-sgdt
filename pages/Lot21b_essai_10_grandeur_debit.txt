@@ -1,0 +1,6 @@
+Page d'essai du lot 21 : une grandeur et ses libellés par langue. Ne pas supprimer sans consigne.
+
+{{#set:
+|Test lot21b libellé=débit volumique@fr;volumetric flow rate@en
+|+sep=;
+}}

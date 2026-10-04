@@ -1,0 +1,1 @@
+Catégorie d'essai du lot 21 : sert à mesurer si un filtre de classe écarte les sous-objets d'un résultat de requête. Ne pas supprimer sans consigne.
