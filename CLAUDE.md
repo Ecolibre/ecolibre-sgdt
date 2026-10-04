@@ -438,11 +438,21 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
 
   **Le contrôle qui attrape ce piège est l'examen des _catégories_ de la
   page après écriture** (`prop=categories`), pas la relecture du texte : une
-  catégorie de suivi apparue sans qu'on l'ait posée — liens brisés, liens de
-  fichiers brisés — signale une syntaxe non échappée, invisible au wikitexte
-  et capable de vivre des semaines. Complète le contrôle `browsebysubject`
-  de la leçon précédente : celui-ci voit les annotations parasites, celui-là
-  les liens parasites.
+  catégorie de suivi apparue sans qu'on l'ait posée, comme celle des liens
+  de fichiers brisés, signale une syntaxe non échappée, invisible au
+  wikitexte et capable de vivre des semaines. Complète le contrôle
+  `browsebysubject` de la leçon précédente : celui-ci voit les annotations
+  parasites, celui-là les liens parasites.
+
+  **Ce contrôle ne suffit pas : examiner aussi les _liens_ de la page**
+  (`prop=links`), et n'en trouver aucun vers une page inexistante. Un lien
+  vers une page ordinaire inexistante ne pose aucune catégorie de suivi :
+  seuls les liens de fichiers brisés en posent une. Constaté le 4 octobre
+  2026 : deux exemples dans une balise `<code>` sans `<nowiki>`, l'un dans
+  l'entrée 52 des *Limites connues*, l'autre dans le *Récapitulatif
+  technique*, créaient des liens vers des pages inexistantes (« @@@@ » et
+  « ... ») sans qu'aucune catégorie le signale. La liste des pages demandées
+  du wiki (`list=querypage&qppage=Wantedpages`) les a révélés.
 
 - **Deux contrôles distincts, qui ne se recouvrent pas.** `Erreurs de
   traitement SMW` (`[[_ERRC::+]]`) voit les valeurs **rejetées** par SMW.
