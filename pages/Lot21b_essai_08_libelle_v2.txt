@@ -1,0 +1,3 @@
+[[Has type::Monolingual text]]
+[[Property_description_FR::Propriété d'essai du lot 21 : libellé d'une grandeur dans une langue, pour mesurer le type Monolingual text. Ne pas supprimer sans consigne.]]
+<!-- Réécrite à la tâche 7 pour forcer une analyse neuve. -->

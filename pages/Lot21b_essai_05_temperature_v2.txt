@@ -1,0 +1,4 @@
+[[Has type::Temperature]]
+[[Display units::°C, K, °F]]
+[[Property_description_FR::Propriété d'essai du lot 21 : une température absolue, pour mesurer les unités reconnues nativement par le type Temperature. Ne pas supprimer sans consigne.]]
+<!-- Réécrite à la tâche 7 pour forcer une analyse neuve. -->

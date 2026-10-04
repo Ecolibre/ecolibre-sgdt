@@ -1,0 +1,56 @@
+Page d'essai du lot 21 : un item porteur d'une catégorie de classe, ses valeurs scalaires, ses sous-objets et les requêtes qui les lisent. Réécrite une seconde fois à la tâche 7. Ne pas supprimer sans consigne.
+
+{{#set:
+|Test lot21b débit=800 L/h
+|Test lot21b puissance=96
+|Test lot21b température=-15 °C
+|Test lot21b tolérance temp=2 °C
+|Test lot21b écart température=2 °C
+}}
+{{#subobject:spec
+|Test lot21b débit=750 L/h
+}}
+{{#subobject:fahrenheit
+|Test lot21b température=50 °F
+}}
+{{#subobject:saisie-point
+|Test lot21b débit={{Test lot21b valeur|nombre=0.9|unité=m³/h}}
+}}
+{{#subobject:saisie-virgule
+|Test lot21b débit={{Test lot21b valeur|nombre=0,9|unité=m³/h}}
+}}
+{{#subobject:saisie-douteux
+|Test lot21b débit={{Test lot21b valeur|nombre=1.2.3|unité=m³/h}}
+}}
+{{#subobject:saisie-sans-unite
+|Test lot21b débit={{Test lot21b valeur|nombre=800|unité=}}
+}}
+
+== R1 ==
+{{#ask: [[Test lot21b débit::+]] |?Test lot21b débit |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R2 ==
+{{#ask: [[Catégorie:Test lot21b classe]] [[Test lot21b débit::+]] |?Test lot21b débit |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R3 ==
+{{#ask: [[Catégorie:Test lot21b classe]] |format=list |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R4 ==
+{{#ask: [[Test lot21b température::+]] |?Test lot21b température |?Test lot21b température#K |?Test lot21b température#°F |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R5 ==
+{{#ask: [[Test lot21b tolérance temp::+]] |?Test lot21b tolérance temp |?Test lot21b tolérance temp#K |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R6 ==
+{{#ask: [[Test lot21b écart température::+]] |?Test lot21b écart température |?Test lot21b écart température#K |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R7 ==
+{{#ask: [[Test lot21b libellé::+]] |?Test lot21b libellé |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R8 ==
+{{#ask: [[Test lot21b libellé::débit volumique@fr]] |format=list |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R9 ==
+{{#ask: [[Test lot21b puissance::+]] |?Test lot21b puissance |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+[[Catégorie:Test lot21b classe]]
