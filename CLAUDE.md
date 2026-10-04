@@ -31,7 +31,10 @@ conversation de l'architecte.
 
 **Ce fichier l'emporte sur ta mémoire automatique.** Si une note de ta
 mémoire contredit ce fichier ou `methode-de-travail.md`, applique le fichier
-et signale l'écart dans « Écarts et surprises ».
+et signale l'écart dans « Écarts et surprises ». Ta mémoire automatique reste
+vide : ce qui mérite d'être retenu va dans ce fichier ou dans un rapport. Elle
+a été vidée le 4 octobre 2026 : ses sept notes, de juillet, étaient périmées
+ou déjà portées par le wiki.
 
 ## Pages de référence sur le wiki
 
