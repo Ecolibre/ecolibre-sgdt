@@ -89,6 +89,14 @@ quatrième :
 Le fichier a été vidé le jour même. Toute règle nécessaire est proposée pour
 `settings.json`, avec son motif, puis documentée dans ce tableau.
 
+**La mémoire automatique de Claude Code est désactivée** par la clé
+`"autoMemoryEnabled": false` de `.claude/settings.json`, depuis le 4 octobre
+2026 (documentation : https://code.claude.com/docs/en/memory). Motif : elle
+retient d'elle-même des notes que personne ne relit et les charge à chaque
+session, alors que les règles vivent dans `CLAUDE.md` et
+`methode-de-travail.md`, versionnés. Ses sept notes de juillet, périmées ou
+déjà portées par le wiki, ont été supprimées le même jour.
+
 Les confirmations que Claude Code affiche ne viennent pas toutes de ce
 fichier. Une commande dont la forme ne peut pas être analysée à l'avance —
 boucle, substitution `$(…)` ou `<(…)`, accolade voisinant un guillemet —

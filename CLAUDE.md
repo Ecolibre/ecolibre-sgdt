@@ -34,7 +34,8 @@ mémoire contredit ce fichier ou `methode-de-travail.md`, applique le fichier
 et signale l'écart dans « Écarts et surprises ». Ta mémoire automatique reste
 vide : ce qui mérite d'être retenu va dans ce fichier ou dans un rapport. Elle
 a été vidée le 4 octobre 2026 : ses sept notes, de juillet, étaient périmées
-ou déjà portées par le wiki.
+ou déjà portées par le wiki. Depuis le 4 octobre 2026, elle est aussi
+désactivée par réglage, dans `.claude/settings.json`.
 
 ## Pages de référence sur le wiki
 
