@@ -142,6 +142,12 @@ s'écrit dans `travaux/` et nulle part ailleurs.** Aucune copie ailleurs dans
 le dépôt. Les fichiers déposés depuis le téléphone y sont lisibles
 directement, sans étape intermédiaire.
 
+**Ni la skill docs ni un connecteur de documents ne remplacent `travaux/`.**
+Les skills et les connecteurs synchronisés depuis le compte claude.ai, Claude
+Docs ou Google Drive par exemple, sont présents dans chaque session ; un
+rapport ou un document destiné à une conversation s'écrit pourtant toujours
+ici, en markdown.
+
 **Le rapport de fin de session affiché dans le terminal est rédigé en
 français, comme les fichiers de rapport eux-mêmes.** Cyril travaille en
 français et relaie ces messages dans des conversations en français.
@@ -667,8 +673,10 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   besoin revient deux fois, il devient un script de `bin/`, pas une habitude.
   Ajoutée le 21 août 2026.
 - **Les permissions vont dans `.claude/settings.json`, jamais dans
-  `.claude/settings.local.json`.** Le fichier local n'est pas versionné : ses
-  règles échappent à la relecture par diff, à la documentation dans
+  `.claude/settings.local.json`, ni dans la configuration personnelle de
+  Claude Code (`~/.claude/settings.json`, `~/.claude.json`).** Le fichier
+  local n'est pas versionné : ses règles échappent à la relecture par diff,
+  à la documentation dans
   `installation-nouveau-poste.md`, et à l'archive distante. L'inventaire du
   3 octobre 2026 y a trouvé 75 règles accumulées à l'insu de Cyril, dont
   trois contournaient des protections écrites : `Read(//proc/**)` donnait
@@ -678,6 +686,8 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   elle pointerait ; une autre rendait permanente une exception que ce fichier
   réserve au cas par cas. Le fichier local doit rester vide. Toute règle
   nécessaire est proposée pour `settings.json`, avec son motif, et documentée.
+  L'inventaire du 4 octobre 2026 n'a trouvé dans cette configuration
+  personnelle ni autorisation, ni hook, ni serveur MCP.
 - **Ne jamais proposer d'ajouter à `allow` une règle qui désigne un chemin
   variable, un fichier hors du dépôt, ou un répertoire entier.** Une règle
   d'`allow` nomme un exécutable du dépôt ou une commande, jamais un chemin

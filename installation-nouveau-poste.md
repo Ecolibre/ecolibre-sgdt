@@ -97,6 +97,15 @@ session, alors que les règles vivent dans `CLAUDE.md` et
 `methode-de-travail.md`, versionnés. Ses sept notes de juillet, périmées ou
 déjà portées par le wiki, ont été supprimées le même jour.
 
+**La configuration personnelle de Claude Code ne porte aucune autorisation.**
+Constat du 4 octobre 2026 : `~/.claude/CLAUDE.md` n'existe pas ;
+`~/.claude/settings.json` ne porte que la mémoire désactivée et des réglages
+d'affichage et de notification ; `~/.claude.json` n'enregistre aucune
+autorisation pour ce projet et ne déclare aucun serveur MCP. Les skills de
+`~/.claude/skills/synced/` et les connecteurs (Claude Docs, Google Drive,
+Gmail) viennent du compte claude.ai, qui les resynchronise : ils se gèrent
+depuis le compte, pas sur le poste.
+
 Les confirmations que Claude Code affiche ne viennent pas toutes de ce
 fichier. Une commande dont la forme ne peut pas être analysée à l'avance —
 boucle, substitution `$(…)` ou `<(…)`, accolade voisinant un guillemet —
