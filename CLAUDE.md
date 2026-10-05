@@ -275,6 +275,11 @@ Ce que Cyril peut lancer seul, et ce qui relève de fuzzy : voir
   badfilename de MediaWiki (espace parasite) — vérifier les noms avant de
   téléverser, pas après.
 - Page bac à sable pour les essais : `Utilisateur:Cywil/Bac à sable`.
+- **Barrière avant d'employer une propriété neuve.** Aucune page employant une propriété nouvellement créée ne se crée avant que cette propriété ait franchi deux volets, mesurés dans le même tour :
+  1. le type résolu à l'exécution est le bon. Le lire dans `query.printrequests[].typeid` d'un `action=ask` portant sur cette propriété, pour l'entrée dont le label n'est pas vide ; l'entrée au label vide est la colonne du sujet et vaut toujours `_wpg` ;
+  2. une écriture sur la page de propriété est acceptée, `nochange` compris.
+
+  Le fait `_TYPE` porté par la page de propriété ne vaut pas barrière. Mesuré le 4 octobre 2026, lots 21 tâches 6 à 8 : six propriétés portaient le bon `_TYPE` tout en étant résolues en `_wpg` et verrouillées par `smw-change-propagation-protection`, file de travaux à 0 et `_CHGPRO` absent. Les valeurs des pages qui les employaient sont tombées en type Page, et rien n'a pu les en sortir. Créer les propriétés une par une, jamais en rafale.
 
 ## Corrections sur les modèles — liste unique et numérotation de référence
 
@@ -573,6 +578,7 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   venaient d'y inscrire, alors que `grep` et `python3` les voyaient. Avant de
   modifier un fichier que l'outillage a pu changer, le relire par une
   commande.
+- `sleep` au premier plan est bloqué par l'environnement Claude Code, avec le message « Blocked: sleep 60 followed by… ». Pour une pause fixe, lancer `sleep` en arrière-plan et attendre sa notification de fin. Pour attendre la file de travaux, `bin/wiki-wait-jobs.sh`. Mesuré le 4 octobre 2026, lot 21 tâche 8.
 
 ## Garde-fous d'exécution (dépôt git)
 

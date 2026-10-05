@@ -1,0 +1,3 @@
+[[Has type::Temperature]]
+[[Display units::°C, K]]
+[[Property_description_FR::Propriété d'essai du lot 21 : un écart de température porté par le type Temperature, pour mesurer si le décalage d'origine lui est appliqué à tort. Ne pas supprimer sans consigne.]]

@@ -250,3 +250,30 @@ Par ordre d'urgence.
 - **Politique de sauvegarde.**
 - **Rotation du mot de passe de `mediawiki_ecolibre_prod`**, exposé en
   juillet 2026.
+- **Six propriétés d'essai verrouillées par
+  `smw-change-propagation-protection` après une création en rafale —
+  constat du 4 octobre 2026.** Les six pages `Attribut:Test lot21b débit`,
+  `Attribut:Test lot21b puissance`, `Attribut:Test lot21b température`,
+  `Attribut:Test lot21b tolérance temp`, `Attribut:Test lot21b écart
+  température` et `Attribut:Test lot21b libellé` refusent toute écriture
+  avec `smw-change-propagation-protection`.
+
+  **Le mesuré, le 4 octobre 2026.** File de travaux à 0 ; aucun `_CHGPRO`
+  sur aucune des six ; aucune protection MediaWiki, le champ `protection`
+  est vide comme sur une propriété saine ; le type résolu à l'exécution
+  vaut `_wpg` sur les six, alors que leur fait `_TYPE` porte `_qty`, `_tem`
+  ou `_mlt_rec` ; une propriété créée seule le même jour à 23:44 UTC
+  (`Attribut:Test lot21c débit`) fonctionne normalement.
+
+  **Circonstance.** Les six ont été créées le 4 octobre 2026 à 22:24 UTC,
+  dans une rafale de onze pages en treize secondes.
+
+  **Demande à fuzzy.** Dans quel état de propagation ces six propriétés
+  sont-elles, et comment lève-t-on ce verrou ? L'enjeu dépasse ces pages
+  d'essai : si une rafale de créations peut verrouiller durablement des
+  propriétés, cela guette la production.
+
+  **Urgence : aucune.** Rien ne dépend de ces six pages, qui restent en
+  place comme témoins. À envoyer groupée avec la prochaine demande.
+
+  Rien n'a été demandé à ce jour : entrée de constat, ouverte.

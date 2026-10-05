@@ -1,0 +1,5 @@
+[[Has type::Quantity]]
+[[Corresponds to::1 °C, degré Celsius]]
+[[Corresponds to::1 K, kelvin]]
+[[Display units::°C, K]]
+[[Property_description_FR::Propriété d'essai du lot 21 : un écart de température porté par le type Quantity, où le kelvin et le degré Celsius ont le même facteur et aucun décalage. Ne pas supprimer sans consigne.]]

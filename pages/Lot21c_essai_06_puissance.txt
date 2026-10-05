@@ -1,0 +1,2 @@
+[[Has type::Number]]
+[[Property_description_FR::Propriété d'essai du lot 21 : créée en type Number pour qu'une mesure ultérieure parte d'une valeur réellement stockée en nombre. Ne pas supprimer sans consigne.]]

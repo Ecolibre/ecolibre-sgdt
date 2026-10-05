@@ -1,0 +1,56 @@
+Page d'essai du lot 21 : un item porteur d'une catégorie de classe, ses valeurs scalaires, ses sous-objets et les requêtes qui les lisent. Ne pas supprimer sans consigne.
+
+{{#set:
+|Test lot21c débit=800 L/h
+|Test lot21c puissance=96
+|Test lot21c température=-15 °C
+|Test lot21c tolérance temp=2 °C
+|Test lot21c écart température=2 °C
+}}
+{{#subobject:spec
+|Test lot21c débit=750 L/h
+}}
+{{#subobject:fahrenheit
+|Test lot21c température=50 °F
+}}
+{{#subobject:saisie-point
+|Test lot21c débit={{Test lot21c valeur|nombre=0.9|unité=m³/h}}
+}}
+{{#subobject:saisie-virgule
+|Test lot21c débit={{Test lot21c valeur|nombre=0,9|unité=m³/h}}
+}}
+{{#subobject:saisie-douteux
+|Test lot21c débit={{Test lot21c valeur|nombre=1.2.3|unité=m³/h}}
+}}
+{{#subobject:saisie-sans-unite
+|Test lot21c débit={{Test lot21c valeur|nombre=800|unité=}}
+}}
+
+== R1 ==
+{{#ask: [[Test lot21c débit::+]] |?Test lot21c débit |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R2 ==
+{{#ask: [[Catégorie:Test lot21c classe]] [[Test lot21c débit::+]] |?Test lot21c débit |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R3 ==
+{{#ask: [[Catégorie:Test lot21c classe]] |format=list |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R4 ==
+{{#ask: [[Test lot21c température::+]] |?Test lot21c température |?Test lot21c température#K |?Test lot21c température#°F |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R5 ==
+{{#ask: [[Test lot21c tolérance temp::+]] |?Test lot21c tolérance temp |?Test lot21c tolérance temp#K |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R6 ==
+{{#ask: [[Test lot21c écart température::+]] |?Test lot21c écart température |?Test lot21c écart température#K |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R7 ==
+{{#ask: [[Test lot21c libellé::+]] |?Test lot21c libellé |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R8 ==
+{{#ask: [[Test lot21c libellé::débit volumique@fr]] |format=list |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R9 ==
+{{#ask: [[Test lot21c puissance::+]] |?Test lot21c puissance |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+[[Catégorie:Test lot21c classe]]
