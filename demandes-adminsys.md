@@ -193,6 +193,55 @@ Par ordre d'urgence.
   Pour `Attribut:Casc parent` et `Attribut:Casc lineage`, le déblocage
   demandé n'a qu'un seul usage prévu : les supprimer aussitôt débloquées.
 
+- **Sept propriétés d'essai figées sur le type par défaut et verrouillées
+  en écriture - constat des 4 et 5 octobre 2026.** Les six pages
+  `Attribut:Test lot21b débit`, `puissance`, `température`, `tolérance
+  temp`, `écart température` et `libellé`, plus `Attribut:Test lot21c
+  température`, refusent toute écriture avec
+  `smw-change-propagation-protection` et sont résolues en `_wpg` à
+  l'exécution, alors que leur fait `_TYPE` porte le bon type.
+
+  **Le mesuré, les 4 et 5 octobre 2026.** File de travaux à 0 ; aucun
+  `_CHGPRO` ; `protection` vide, le verrou ne se lit que par
+  `intestactions` ; le type résolu, lu dans `query.printrequests[].typeid`
+  d'un `action=ask`, vaut `_wpg` sur les sept, contre `_num` sur le témoin
+  `Max thickness` et `_qty` sur `Attribut:Test lot21c débit`, saine. Les
+  pages qui employaient ces propriétés ont stocké toutes leurs valeurs en
+  type Page ; ni purge, ni réécriture, ni vidage de la file de travaux ne
+  les en a sorties.
+
+  **Ce que la circonstance ne dit pas.** Ce n'est pas la rafale de
+  créations : huit propriétés créées en rafale le 4 octobre vers 00 h 00
+  ont toutes fonctionné, et `Test lot21c température`, créée seule le
+  5 octobre à 12 h 03, est figée. La seule différence visible avec
+  `Test lot21c débit`, saine, est le moment de la première requête nommant
+  la propriété : environ 85 secondes après la création, `_CHGPRO` déjà
+  disparu, contre 32 secondes, `_CHGPRO` encore présent. Hypothèse non
+  établie : demander le type d'une propriété avant la fin de sa
+  propagation le fige sur la valeur par défaut.
+
+  **À rapprocher de l'entrée `$smwgChangePropagationProtection`
+  ci-dessus.** Les trois pages verrouillées d'août 2026 s'étaient
+  débloquées d'elles-mêmes au bout de plusieurs jours. Ici, aucun dégel
+  après quatorze heures sur les six premières. Le verrou d'écriture et le
+  type résolu faux sont deux symptômes distincts : rien ne dit que le
+  second se répare quand le premier tombe. À revérifier dans quelques
+  jours, par `intestactions` et par le `typeid`, sans rien écrire.
+
+  **Ce qu'on aimerait savoir.** Où le type résolu d'une propriété est-il
+  mis en cache, et comment le vide-t-on ? Comment lève-t-on ce verrou ?
+  L'enjeu dépasse ces pages d'essai : la production créera des dizaines de
+  propriétés, et un nom brûlé n'est pas acceptable pour une propriété
+  réelle du modèle.
+
+  **Contournement en attendant.** Une propriété figée est perdue : on
+  l'abandonne et on recrée sous un autre nom, en n'émettant aucune requête
+  la nommant tant que `_CHGPRO` n'a pas disparu. Règle inscrite dans
+  `CLAUDE.md`.
+
+  En attente de la migration Scaleway. À tenter d'abord par nous-mêmes
+  côté serveur. Rien n'a été demandé à fuzzy.
+
 - **`$smwgNamespacesWithSemanticLinks` — les espaces `Modèle` (10),
   `Formulaire` (106) et `Module` (828) n'y sont pas.** À discuter avec fuzzy,
   **pas à poser comme une évidence** : voir la réserve ci-dessous, qui peut
@@ -250,30 +299,3 @@ Par ordre d'urgence.
 - **Politique de sauvegarde.**
 - **Rotation du mot de passe de `mediawiki_ecolibre_prod`**, exposé en
   juillet 2026.
-- **Six propriétés d'essai verrouillées par
-  `smw-change-propagation-protection` après une création en rafale —
-  constat du 4 octobre 2026.** Les six pages `Attribut:Test lot21b débit`,
-  `Attribut:Test lot21b puissance`, `Attribut:Test lot21b température`,
-  `Attribut:Test lot21b tolérance temp`, `Attribut:Test lot21b écart
-  température` et `Attribut:Test lot21b libellé` refusent toute écriture
-  avec `smw-change-propagation-protection`.
-
-  **Le mesuré, le 4 octobre 2026.** File de travaux à 0 ; aucun `_CHGPRO`
-  sur aucune des six ; aucune protection MediaWiki, le champ `protection`
-  est vide comme sur une propriété saine ; le type résolu à l'exécution
-  vaut `_wpg` sur les six, alors que leur fait `_TYPE` porte `_qty`, `_tem`
-  ou `_mlt_rec` ; une propriété créée seule le même jour à 23:44 UTC
-  (`Attribut:Test lot21c débit`) fonctionne normalement.
-
-  **Circonstance.** Les six ont été créées le 4 octobre 2026 à 22:24 UTC,
-  dans une rafale de onze pages en treize secondes.
-
-  **Demande à fuzzy.** Dans quel état de propagation ces six propriétés
-  sont-elles, et comment lève-t-on ce verrou ? L'enjeu dépasse ces pages
-  d'essai : si une rafale de créations peut verrouiller durablement des
-  propriétés, cela guette la production.
-
-  **Urgence : aucune.** Rien ne dépend de ces six pages, qui restent en
-  place comme témoins. À envoyer groupée avec la prochaine demande.
-
-  Rien n'a été demandé à ce jour : entrée de constat, ouverte.
