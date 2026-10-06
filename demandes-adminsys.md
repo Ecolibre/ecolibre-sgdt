@@ -193,8 +193,8 @@ Par ordre d'urgence.
   Pour `Attribut:Casc parent` et `Attribut:Casc lineage`, le déblocage
   demandé n'a qu'un seul usage prévu : les supprimer aussitôt débloquées.
 
-- **Sept propriétés d'essai figées sur le type par défaut et verrouillées
-  en écriture - constat des 4 et 5 octobre 2026.** Les six pages
+- **Quinze propriétés d'essai verrouillées en écriture, dont sept figées
+  sur le type par défaut - constat des 4 au 6 octobre 2026.** Les six pages
   `Attribut:Test lot21b débit`, `puissance`, `température`, `tolérance
   temp`, `écart température` et `libellé`, plus `Attribut:Test lot21c
   température`, refusent toute écriture avec
@@ -220,13 +220,17 @@ Par ordre d'urgence.
   établie : demander le type d'une propriété avant la fin de sa
   propagation le fige sur la valeur par défaut.
 
-  **À rapprocher de l'entrée `$smwgChangePropagationProtection`
-  ci-dessus.** Les trois pages verrouillées d'août 2026 s'étaient
-  débloquées d'elles-mêmes au bout de plusieurs jours. Ici, aucun dégel
-  après quatorze heures sur les six premières. Le verrou d'écriture et le
-  type résolu faux sont deux symptômes distincts : rien ne dit que le
-  second se répare quand le premier tombe. À revérifier dans quelques
-  jours, par `intestactions` et par le `typeid`, sans rien écrire.
+  **À rapprocher de l'entrée `$smwgChangePropagationProtection` ci-dessus.**
+  Les trois pages verrouillées d'août 2026 s'étaient débloquées d'elles-mêmes au
+  bout de plusieurs jours. Ici, aucun dégel : sur dix-sept pages de propriété
+  d'essai créées entre le 4 et le 6 octobre 2026, quinze sont verrouillées, les
+  plus anciennes depuis trente-sept heures au 6 octobre. Deux faits mesurés
+  depuis : toute écriture qui modifie le type d'une propriété la verrouille en
+  moins de trois minutes, y compris sur une page qui était libre ; et le verrou
+  n'empêche ni le stockage ni la requête, seulement la modification de la page de
+  propriété. Verrou et type résolu faux sont donc deux symptômes distincts, qui
+  ne vont pas toujours ensemble : sept pages ont les deux, huit n'ont que le
+  verrou.
 
   **Ce qu'on aimerait savoir.** Où le type résolu d'une propriété est-il
   mis en cache, et comment le vide-t-on ? Comment lève-t-on ce verrou ?
@@ -234,10 +238,12 @@ Par ordre d'urgence.
   propriétés, et un nom brûlé n'est pas acceptable pour une propriété
   réelle du modèle.
 
-  **Contournement en attendant.** Une propriété figée est perdue : on
-  l'abandonne et on recrée sous un autre nom, en n'émettant aucune requête
-  la nommant tant que `_CHGPRO` n'a pas disparu. Règle inscrite dans
-  `CLAUDE.md`.
+  **Contournement en attendant.** Une propriété au type résolu faux est perdue :
+  on l'abandonne et on recrée sous un autre nom. Une propriété seulement
+  verrouillée reste utilisable telle quelle. Mais sa déclaration est figée : une
+  page de propriété doit être écrite une seule fois, dans sa forme définitive,
+  type, conversions, unités d'affichage et description comprises. Règles
+  inscrites dans `CLAUDE.md`.
 
   En attente de la migration Scaleway. À tenter d'abord par nous-mêmes
   côté serveur. Rien n'a été demandé à fuzzy.

@@ -1,0 +1,98 @@
+{{Lot
+|Work_package_number=21
+|Work_package_status=ouvert
+|Work_package_summary=Faire des grandeurs physiques et de leurs unités des pages porteuses d'attributs, et décider comment une valeur mesurée s'attache à un item.
+|Work_package_opening_date=2026-10-02
+|Work_package_closure_report=https://github.com/Ecolibre/ecolibre-sgdt/blob/90b0a66d221e2a791ab1194136048f786983c630/travaux/lot-21-tache2-mesure.md
+|Work_package_overlaps=Lot 12 — Contenants et étiquetage,Lot 26 — Renommage des propriétés par domaine,Lot 31 — Qualification des données et confiance entre pairs
+|Work_package_revises=Lot 8 — Facettes de type d'item,Lot 9 — Exemplaires plantés du jardin-forêt,Lot 10 — Procédés et outils
+}}
+
+== Ce qui est déjà tranché ==
+
+'''Trois modes d'affirmation d'une valeur.''' Une valeur scalaire pour le cas simple, un sous-objet de spécification pour ce qu'annonce un fabricant, un sous-objet de mesure pour ce qu'on a constaté soi-même. Les trois ne disent pas la même chose et ne se remplacent pas.
+
+'''Les grandeurs et les unités sont des pages, pas des chaînes.''' Une page porte des libellés par langue et se joint entre partenaires sur son identité, là où une chaîne ne se joint que sur elle-même. Cet arbitrage révise celui du [[Lot 10 — Procédés et outils|lot 10]], qui avait typé en texte les grandeurs que mesure un instrument, au motif qu'une grandeur ne porterait jamais de données propres ([https://github.com/Ecolibre/ecolibre-sgdt/blob/5f91eddf8f366a5e3dadcef11f94c6e27192617c/travaux/lot-10-tache3-proposition.md proposition de la tâche 3 du lot 10], section 4). Ce motif est tombé : une grandeur est nommée en plusieurs points du modèle, pas seulement par un instrument.
+
+'''Une seule construction pour les valeurs qui n'ont de sens que dans un contexte, conçue dans ce lot.''' Le [[Lot 9 — Exemplaires plantés du jardin-forêt|lot 9]] a relevé que la réception, la récolte, la présence et l'assertion sourcée ont la même forme, une valeur rapportée à son contexte, et en a tiré la règle « quatre besoins, une seule construction » : le jour où l'un serait traité, les quatre devraient l'être ([https://github.com/Ecolibre/ecolibre-sgdt/blob/c73d88a5931d1ceec88964029c97f6774f21ce6b/travaux/lot-9-amendement-1.md amendement 1 du lot 9]). Le motif tient : ne pas laisser naître deux mécanismes concurrents pour le même problème. La conclusion va au-delà, et son appui était faux : elle tenait ce motif pour déjà employé sur ce wiki, ce que dément l'entrée 2 des [[Limites connues du Système de Gestion de Données Techniques|Limites connues]]. Règle reformulée le 4 octobre 2026 : ce lot conçoit la construction une fois, en la confrontant aux besoins des autres — nomenclature et réception du [[Lot 7 — Nomenclature quantifiée et entité réception|lot 7]], récolte, présence, qualification du [[Lot 31 — Qualification des données et confiance entre pairs|lot 31]], orifice de raccord de l'entrée 10 des Limites connues —, et ne la déploie que pour la spécification et la mesure. Les autres la réemploient au lieu d'en inventer une.
+
+'''La page à libellés par langue est conçue ici pour deux lots.''' Le [[Lot 19 — Vocabulaire et multilingue|lot 19]] a besoin du même motif pour les vocabulaires ouverts ; ce lot le conçoit pour servir aux deux, afin de ne pas résoudre deux fois le même problème, différemment.
+
+'''Les tolérances entrent dès ce lot.''' Elles sont un aspect essentiel de la conception mécanique.
+
+'''Les valeurs se normalisent à l'écriture, vers un socle commun d'unités.''' Le modèle doit pouvoir comparer un débit en mètres cubes par seconde et un débit en litres par heure : sans cela, un partenaire qui publierait des mètres cubes par heure là où Ecolibre écrit des litres par heure ne serait pas comparable. Les unités admises sont appelées à former un socle commun à la fédération, décidé collectivement ; un wiki partenaire peut employer temporairement une unité nouvelle avant qu'elle ne le rejoigne, après concertation.
+
+'''Les propriétés existantes changent sur place.''' On ne crée pas de propriétés neuves pour déprécier les anciennes. Rien n'est urgent, mais la règle d'attente posée le 4 octobre 2026 ne tient plus : mesuré du 4 au 6 octobre 2026, aucun des quinze verrous observés ne s'est levé, et toute écriture modifiant le type d'une propriété la verrouille aussitôt (entrée 62 des Limites connues). Une page de propriété doit donc être écrite une seule fois, dans sa forme définitive, unités comprises : la correction d'une description et le changement de type d'une même propriété n'en font qu'une. Un verrou n'empêche d'ailleurs ni le stockage ni la requête (entrée 63) ; il n'empêche que de revenir sur la déclaration.
+
+'''L'unité principale d'une grandeur est son unité SI cohérente.''' Décision provisoire du 4 octobre 2026, datée, à rouvrir au premier partenaire. Le Bureau international des poids et mesures pose qu'une grandeur n'a qu'une seule unité SI, et le SI est le seul système d'unités convenu à l'échelle mondiale : c'est le consensus auquel ce lot avait choisi de se fier. Pour une température, c'est le kelvin. Le degré Celsius est bien une unité SI, mais le kelvin en est l'unité de base, et c'est en kelvins que le type Temperature stocke, le degré Celsius restant l'unité de saisie et d'affichage. Corrigé le 6 octobre 2026 : la rédaction du 4 octobre désignait le degré Celsius, ce que la mesure dément. Les unités d'usage — litre par heure, millimètre — restent admises à la saisie et à l'affichage, converties à l'écriture. Les grandeurs hors du SI se traitent au cas par cas.
+
+'''Le mode scalaire est porté par le type Quantity, et les températures par le type Temperature.''' Mesuré en bac à sable le 4 octobre 2026 (rapport lié en tête de page). En locale française, la virgule décimale est acceptée, dans les valeurs comme dans les facteurs de conversion. La valeur est stockée dans l'unité principale ; elle s'affiche par défaut dans la première unité d'affichage déclarée chez Quantity et dans la dernière chez Temperature (entrée 61 des Limites connues), et sur demande dans toute autre unité déclarée : saisies en litres par heure, en mètres cubes par seconde et en mégalitres par jour, les trois valeurs d'essai se sont relues exactes en litres par heure. Les requêtes comparent d'une unité à l'autre. Cet arbitrage révise la convention du [[Lot 8 — Facettes de type d'item|lot 8]] — type Number, unité écrite dans la portée de la propriété — ([https://github.com/Ecolibre/ecolibre-sgdt/blob/c73d88a5931d1ceec88964029c97f6774f21ce6b/travaux/lot-8-amendement-1.md amendement 1 du lot 8], section 6).
+
+'''Toute unité convertible par un coefficient peut être acceptée, à condition d'être déclarée.''' Une valeur saisie dans une unité dont la conversion n'est pas déclarée n'est pas stockée, et une erreur la signale : le système ne devine jamais un coefficient. Déclarer l'unité, avec son coefficient vers l'unité principale, suffit pour qu'elle soit acceptée et convertie, qu'elle appartienne au SI ou non. Règle posée le 4 octobre 2026 : les documents techniques à reprendre emploient beaucoup d'unités hors du SI, et chacune doit pouvoir s'y ramener. Deux exceptions à la règle du coefficient : les températures, dont le décalage d'origine relève du type Temperature, et les grandeurs logarithmiques comme le décibel, qui n'ont pas de coefficient.
+
+'''Les déclarations d'unités se partagent par un modèle transclus.''' Mesuré le 4 octobre 2026 : trois propriétés appelant le même modèle portent les mêmes unités, et une propriété peut en déclarer une en propre en plus.
+
+'''La spécification et la mesure sont portées par des sous-objets.''' Mesuré le 4 octobre 2026 : les sous-objets sont stockés, et une requête les traverse jusqu'à trois sauts, de l'item jusqu'à la page de grandeur en passant par le sous-objet et l'unité.
+
+'''Un mode se vise par le filtre de classe.''' Mesuré le 5 octobre 2026 : une requête sur une propriété rend la page et ses sous-objets mêlés, mais la même requête portant en plus la catégorie de la classe ne rend que la page. Les sous-objets ne portent pas <code>_INST</code>, seul le sujet principal le porte. Les deux autres pistes envisagées — une propriété distincte par mode, un marqueur de mode porté par le sous-objet — sont donc inutiles.
+
+'''Une unité manquante est rendue impossible par la forme de la saisie, pas par un contrôle.''' Mesuré le 5 octobre 2026 : un champ pour le nombre et une liste pour l'unité, assemblés par un modèle, produisent une annotation valide ; le nombre passe par <code>Module:Nombre</code>, qui remplace le point décimal par la virgule dans le seul cas non ambigu, si bien que « 0.9 » et « 0,9 » donnent la même valeur stockée. Si l'unité est vide, le modèle ne rend rien et aucune annotation n'est écrite : le sous-objet d'essai correspondant n'existe pas. Si le nombre est douteux, « 1.2.3 » par exemple, la valeur est refusée visiblement et recensée dans les erreurs de traitement. Ce point ouvert est clos.
+
+'''Les libellés par langue sont portés par le type Monolingual text.''' Mesuré le 5 octobre 2026 : chaque libellé est stocké dans un sous-objet conteneur portant son texte et son code de langue, et une requête de la forme <code>débit volumique@fr</code> trouve la page. L'affichage rend les deux langues avec leur code. L'affichage filtré sur une seule langue n'a pas été mesuré. C'est le motif que réemploiera le [[Lot 19 — Vocabulaire et multilingue|lot 19]].
+
+'''Une tolérance de température n'emploie pas le type Temperature.''' Mesuré le 5 octobre 2026 : ce type applique le décalage d'origine à un écart comme à une valeur absolue, et une tolérance de 2 °C y est stockée 275,15 sans la moindre erreur (entrée 60 des Limites connues). Une température absolue emploie Temperature, qui gère aussi le degré Fahrenheit nativement ; un écart, une tolérance ou une plage emploie Quantity avec le degré Celsius et le kelvin au facteur 1.
+
+'''L'ordre des unités d'affichage s'écrit à l'envers selon le type.''' Chez Quantity, la première unité déclarée s'affiche ; chez Temperature, la dernière (entrée 61 des Limites connues). Une température absolue qui doit s'afficher en degrés Celsius se déclare donc <code>Display units::K, °C</code>. Les deux règles étant inverses, la page de grandeur devra porter les déclarations toutes faites, à recopier : personne ne retiendra une règle inversée.
+
+== Ce qui est écarté, et pourquoi ==
+
+'''Traiter dans ce lot les quatre besoins du lot 9.''' Écarté le 4 octobre 2026. Le motif de la règle, un seul mécanisme, est satisfait par une construction conçue une fois et réemployée ; la déployer ici pour les quatre ferait de ce lot celui de la réception, de la récolte, de la présence et de la qualification à la fois.
+
+'''Le type Record pour les tolérances.''' Écarté le 4 octobre 2026 : inutile, puisque le sous-objet porte ensemble l'unité, la tolérance et la requête.
+
+== Ce qui est exclu du périmètre ==
+
+'''Les autres usages du sous-objet.''' Nomenclature et réception (lot 7), récolte, présence : le lot conçoit la construction commune, il ne la déploie que pour la spécification et la mesure.
+
+'''La qualification d'une valeur.''' Ce que vaut sa source et la confiance qu'on lui accorde relèvent du lot 31. Le sous-objet de mesure leur laisse la place sans les définir.
+
+'''Les caractéristiques qualitatives.''' Vitesse de croissance, besoin en eau, exposition : ce sont des vocabulaires ouverts, qui relèvent du lot 19.
+
+'''Les positions.''' Rang de plantation, latitude, longitude : ce sont des repérages sur un lieu, pas des caractéristiques d'un objet.
+
+'''Les points de fonctionnement.''' Un débit à une hauteur donnée, par exemple : gardés pour plus tard, le modèle restant d'abord simple.
+
+'''Le renommage des propriétés existantes.''' Il relève du [[Lot 26 — Renommage des propriétés par domaine|lot 26]].
+
+'''Les caractéristiques nouvelles.''' Le lot pose le mécanisme et y fait passer les propriétés existantes ; les nouvelles se créent ensuite, au besoin, selon ce mécanisme. Cela vaut pour les cotes des contenants, que le [[Lot 12 — Contenants et étiquetage|lot 12]] renvoie ici, et pour le débit maximal des pompes, qu'attend le lot 7.
+
+== Points ouverts ==
+
+Le choix de l'unité principale reste une décision collective, qui engage tous les ateliers partenaires : celui du 4 octobre 2026, l'unité SI cohérente, est provisoire et se rouvre au premier partenaire.
+
+Les descriptions des propriétés de diamètre nominal et secondaire prescrivent le point décimal, que l'installation rejette, et le diamètre secondaire sépare ses valeurs par la virgule, qui découpe une virgule décimale (entrée 57 des Limites connues). Aucune valeur n'en dépend aujourd'hui. Ces deux pages sont libres au 6 octobre 2026 et doivent le rester : les corriger maintenant les verrouillerait et interdirait ensuite le changement de type (entrée 62). La correction de la description et la migration du type s'écrivent donc ensemble, en une seule écriture par propriété.
+
+== Point de départ ==
+
+Trois hypothèses du travail préparatoire d'août 2026 restent à trancher pendant la conception ; la mesure du 4 octobre 2026 ne les touchait pas.
+
+* La forme d'une caractéristique, scalaire ou sous-objet, déclarée une fois par grandeur, niveau et mode, jamais choisie à la saisie : sinon une requête devrait chercher à deux endroits sans savoir lequel.
+* L'unité sortie de la portée des propriétés et remplacée par un lien vers la page de grandeur, la portée ne gardant que le range formel.
+* La page d'unité portant un code UCUM et une équivalence vers QUDT, sans rien importer.
+
+L'existant à reprendre est minime : une poignée de valeurs hors positions, relevé du 4 octobre 2026. Une quarantaine de grandeurs sont visées à terme.
+
+== Risques connus ==
+
+* Changer le type d'une propriété qui porte déjà une valeur fonctionne, et verrouille la page ensuite. Mesuré le 6 octobre 2026 : le passage de Temperature à Quantity a été accepté sur une propriété libre, la valeur stockée est passée de 275,15 à 2 en moins de trois minutes sans qu'il faille réécrire la page porteuse, et la page de propriété était verrouillée dans le même temps (entrée 62 des Limites connues). Le risque n'est donc pas de ne pas pouvoir migrer, mais de ne plus pouvoir revenir sur la déclaration.
+* La valeur recalculée l'est à partir de la saisie portée par la page de l'item. Une valeur saisie sans unité, comme les nombres nus que portent aujourd'hui les propriétés de production, n'a pas été mesurée dans ce cas. '''Ordre à suivre à la migration : écrire d'abord l'unité sur les pages porteuses, puis seulement changer le type de la propriété.'''
+* Une page de propriété d'essai se supprime directement, jamais après avoir été vidée : le blanchiment la verrouille (entrée 33 des Limites connues).
+* Ajouter une unité à une grandeur modifie une déclaration partagée par toutes ses propriétés, qui se réanalysent alors : l'effet sur le verrou de propagation n'est pas mesuré.
+
+== Dépendances ==
+
+Rien en amont. Le [[Lot 7 — Nomenclature quantifiée et entité réception|lot 7]] en dépend, une nomenclature quantifiée ayant besoin d'unités normalisées.
+
+----
+
+Voir aussi la [[Gestion des lots]].
