@@ -42,7 +42,7 @@ Le contexte : d'où l'on part, ce que fait cette tâche, et pourquoi si ce n'est
 
 Les règles impératives propres à la tâche, y compris ce qu'il ne faut pas faire.
 
-L'étape d'état du dépôt distingue deux cas que `git status` affiche côte à côte. Une ligne `M`, `A`, `D` ou `R` signale un fichier suivi et modifié, qu'un commit peut emporter ou qu'une opération peut écraser : elle justifie un arrêt. Une ligne `??` signale un fichier non suivi, qu'aucun `git add` nommant des chemins explicites ne peut atteindre : elle ne justifie rien. Confondre les deux fait arrêter une tâche que rien ne menaçait.
+L'étape d'état du dépôt distingue deux cas que `git status` affiche côte à côte. La sortie `--porcelain` porte deux colonnes, l'index puis l'arbre de travail : un fichier modifié mais non indexé sort avec une espace en premier caractère. Une ligne dont l'un des deux premiers caractères est `M`, `A`, `D` ou `R` signale donc un fichier suivi et modifié, qu'un commit peut emporter ou qu'une opération peut écraser : elle justifie un arrêt. Une ligne commençant par `??` signale un fichier non suivi, qu'aucun `git add` nommant des chemins explicites ne peut atteindre : elle ne justifie rien. Confondre les deux fait arrêter une tâche que rien ne menaçait. Une consigne qui écrit « une ligne commençant par `M` » fait manquer exactement le cas qu'elle veut attraper : constaté le 5 octobre 2026.
 
 Les étapes. Deux modes, et il faut savoir lequel on emploie.
 
@@ -102,7 +102,7 @@ Un aperçu ne se juge pas seul. Le 3 octobre 2026, l'aperçu d'un retrait, dont 
 
 **Sa propre mesure d'hier est un résumé.** Un chiffre mesuré la semaine dernière et reporté d'une consigne à l'autre a exactement le même statut qu'une affirmation reprise d'un tiers. Trois erreurs du 10 septembre 2026 viennent de là : un compte d'entrées vieux de huit jours, un état de verrouillage périmé lu dans un document non mis à jour, et une absence conclue d'une recherche défaillante. Toute mesure reportée se refait, et un chiffre cité dans une consigne porte sa date.
 
-**Un relevé vide se vérifie sur la source.** Un filtre, une expression régulière, une requête peuvent manquer une occurrence pour une raison de forme et rendre un silence qu'on prend pour un fait. Le lot 8 a été déclaré absent d'un index où il figurait, parce que l'expression employée l'avait sauté. Avant de conclure qu'une chose n'est pas là, la chercher autrement, ou lire la source.
+**Un relevé vide se vérifie sur la source.** Un filtre, une expression régulière, une requête peuvent manquer une occurrence pour une raison de forme et rendre un silence qu'on prend pour un fait. Le lot 8 a été déclaré absent d'un index où il figurait, parce que l'expression employée l'avait sauté. Avant de conclure qu'une chose n'est pas là, la chercher autrement, ou lire la source. Dans du code, un motif ne vaut que s'il couvre les formes d'écriture du langage visé : chercher `action=edit` dans du PHP qui construit `"action" => "edit"` rend une absence fausse. Constaté le 5 octobre 2026 sur le module `interop` de Communecter, où seule la lecture du fichier a montré l'écriture.
 
 **Un `result: Success` ne prouve pas que la donnée est stockée.** Vérifier après écriture, par `browsebysubject`.
 
