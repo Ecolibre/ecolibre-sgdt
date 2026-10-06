@@ -752,3 +752,327 @@ Propriétés choisies dans les `#set` de `Modèle:Exemple de mise en œuvre et p
 | 24 | 2026-10-06T20:13:05+02:00 | 200 | 47 | `https://wiki.tripleperformance.fr/api.php?action=ask&query=%5B%5BA%20une%20caract%C3%A9ristique%3A%3A%2B%5D%5D%7Cformat%3Dcount&format=json` |
 | 25 | 2026-10-06T20:13:07+02:00 | 200 | 47 | `https://wiki.tripleperformance.fr/api.php?action=ask&query=%5B%5BEst%20dans%20l%27exploitation%3A%3A%2B%5D%5D%7Cformat%3Dcount&format=json` |
 | 26 | 2026-10-06T20:13:09+02:00 | 200 | 48 | `https://wiki.tripleperformance.fr/api.php?action=ask&query=%5B%5BA%20comme%20agriculteur%3A%3A%2B%5D%5D%7Cformat%3Dcount&format=json` |
+
+
+# Passe B, complément
+
+Relevé du 6 octobre 2026, en lecture seule stricte, par Claude Code. Mêmes règles de politesse que la passe précédente (une requête à la fois, 2 s d'attente avant chacune, même `User-Agent`), budget de 15 tenu par un compteur distinct. **Requêtes émises : 10 sur 15.** Toutes en GET, anonymes.
+
+## Complément 1 — Faits de « Autonomie fourragère et dérobées » (smwbrowse)
+
+- Requête n° 1, 2026-10-06T23:02:20+02:00, HTTP 200, 9692 octets : `https://wiki.tripleperformance.fr/api.php?action=smwbrowse&browse=subject&params=%7B%22subject%22%3A%22Autonomie%20fourrag%C3%A8re%20et%20d%C3%A9rob%C3%A9es%22%2C%22ns%22%3A0%7D&format=json`
+
+Sujet : `Autonomie_fourragère_et_dérobées#0##`. Sérialiseur : `SMW\Serializers\SemanticDataSerializer`, version 2. 27 entrées de faits, 2 sous-objets. Format : `propriété [direction] -> (type de dataitem, valeur)`.
+
+```
+A_des_coordonnées_GPS [direct] -> (7) 46.732164,5.233823
+A_un_mot-clé [direct] -> (9) Polyculture-élevage#0## ; (9) Biodiversité#0##
+A_un_objectif [direct] -> (9) Sol_et_fertilisation#0##
+A_un_type_de_page [direct] -> (2) Retour d'expérience
+A_une_photo [direct] -> (9) Image_Autonomie_fourrag_re_et_d_rob_es.jpg#6##
+A_une_production [direct] -> (9) Grandes_cultures#0##
+Est_dans_le_département [direct] -> (9) Saône-et-Loire_(département)#0##
+Evoque [direct] -> (9) Récolter_des_associations_céréale(s)-protéagineux_à_un_stade_immature#0## ; (9) Cultiver_des_espèces_étouffantes#0## ; (9) Implanter_des_légumineuses_en_interculture#0## ; (9) Cultiver_des_espèces_diversifiées_dans_la_rotation#0## ; (9) Herse_rotative#0## ; (9) Semoir_à_céréale#0## ; (9) Sous-soleuse#0## ; (9) Associer_des_cultures_avec_des_espèces_annuelles#0## ; (9) Implanter_des_couverts_végétaux_valorisables_(cultures_dérobées_ou_double-cultures)#0##
+Import_GECO_le [direct] -> (6) 1/2021/5/18
+URL_Geco [direct] -> (5) https://geco.ecophytopic.fr/geco/Concept/Autonomie_Fourragere_Et_Derobees
+_ASK [direct] -> (9) Autonomie_fourragère_et_dérobées#0##_QUERY9a2fd2c1b5df1f0693861785212e708c ; (9) Autonomie_fourragère_et_dérobées#0##_QUERYfcefd63bfe9c8b153313fa4b0840fff7
+_INST [direct] -> (9) Articles_issus_de_GECO#14## ; (9) Retours_d'expérience#14##
+_MDAT [direct] -> (6) 1/2024/12/16/17/36/38/0
+_SKEY [direct] -> (2) Autonomie fourragère et dérobées
+___CUSER [direct] -> (9) fr>Unknown_user#2##
+___EUSER [direct] -> (9) Bertrand_Gorge#2## ; (9) Astrid_Robette#2##
+___NREV [direct] -> (1) 26
+___PAGEID [direct] -> (1) 127
+___PAGEIMG [direct] -> (9) Image_Autonomie_fourrag_re_et_d_rob_es.jpg#6##
+___PAGELGTH [direct] -> (1) 2709
+___VIEWS [direct] -> (1) 1495
+__wikisearch_external_links [direct] -> (2) https://geco.ecophytopic.fr/geco/Concept/Autonomie_Fourragere_Et_Derobees?utm_source=TriplePerformance&utm_medium=referral ; (2) http://geco.ecophytopic.fr/documents/20182/21720/pdf_Autonomie_fourrag_re_et_d_rob_es_1.pdf
+__wikisearch_image_alt_texts [direct] -> (2) Logo Geco
+__wikisearch_image_links [direct] -> (2) Image_Autonomie_fourrag_re_et_d_rob_es.jpg ; (2) Geco_logo.png
+__wikisearch_internal_links [direct] -> (2) Saône-et-Loire (département) ; (2) Cultiver des espèces étouffantes ; (2) Implanter des légumineuses en interculture ; (2) Cultiver des espèces diversifiées dans la rotation ; (2) Herse rotative ; (2) Semoir à céréale ; (2) Décompacteur ; (2) Maïs ; (2) Méteil ; (2) Pois ; (2) Blé ; (2) Moha ; (2) Soja ; (2) Colza ; (2) Vesce ; (2) Trèfle ; (2) Orge ; (2) Tournesol ; (2) Polyculture-élevage ; (2) Cultures ; (2) Cultures dérobées ; (2) Ray grass ; (2) Légumineuses ; (2) Autonomie ; (2) Implanter des cultures dérobées ou une double-culture ; (2) Fourniture de nutriments ; (2) Associer des cultures avec des espèces annuelles ; (2) Catégorie:Orge ; (2) Catégorie:Cultures ; (2) Catégorie:Trèfle ; (2) Catégorie:Vesce ; (2) Catégorie:Pois ; (2) Catégorie:Soja ; (2) Search ; (2) Grandes cultures ; (2) Prairies ; (2) Biodiversité ; (2) Récolter des associations céréale(s)-protéagineux à un stade immature
+__wikisearch_parsed_text [direct] -> (2) Retours d'expérience 
+      Polyculture-élevage   Biodiversité    
+    Saône-et-Loire   
+ 
+  
+ 
+                                     Grandes cultures  
+ 
+ 
+    Prairie multi-spécifique avec trèfle violet fleuri Crédit : DELABY Luc       
+ Cet article est issu de la base GECO. Cliquez ici pour accéder à la page d’origine :    
+  Témoignage de M. Vincent LAURAIN, agriculteur en Saône-et-Loire 
+ Fiche témoignage 
+  
+Présentation de l'exploitation en polyculture-élevage  :
+ 
+ 2 associés en GAEC 
+ 164 ha de cultures  : blé , orge , colza , tournesol , maïs , soja , méteil (blé, orge , vesce , pois ) 
+ 80 vaches laitières 
+ Zéro pâturage 
+ Les cultures ont vocation à nourrir le troupeau de vaches laitières et à produire des récoltes vendues à la coopérative 
+ Cultures dérobées mises en place depuis 2011, méteil depuis 2014 
+ 
+Le GAEC a arrêté le pâturage depuis 2012 à cause des contraintes parcellaires (très peu de prairies proches des bâtiments), de la volonté d'augmenter le cheptel et de conserver un maximum de cultures de ventes.
+  
+La solution mise en place est la culture de dérobées en intercultures courtes (mélange moha - trèfle ) et longues (mélange ray grass - trèfle , graminées- légumineuses ) et de méteil (blé-orge- vesce - pois ). Le méteil permet de réduire la part de maïs et de tourteaux de soja dans l'alimentation du troupeau et ainsi de gagner en autonomie protéique.
+  
+La fiche témoignage présente les itinéraires techniques appliqués à ces cultures d'association ainsi que leurs intérêts technico-économiques, agronomiques et environnementaux .
+ 
+ Annexes 
+  Leviers évoqués dans ce système 
+ 
+ 
+  Associer des cultures avec des espèces annuelles 
+ Cultiver des espèces diversifiées dans la rotation 
+ Cultiver des espèces étouffantes 
+ Implanter des cultures dérobées ou une double-culture 
+ Implanter des légumineuses en interculture 
+ Récolter des associations céréale(s)-protéagineux à un stade immature  
+  Contribue à 
+ 
+ 
+  Fourniture de nutriments  
+  Materiel évoqué 
+ 
+ 
+  Décompacteur 
+ Herse rotative 
+ Semoir à céréale
+A_un_mot-clé [inverse] -> (9) Ferme_de_Lavaud#0##
+SOUS-OBJET Autonomie_fourragère_et_dérobées#0##_QUERY9a2fd2c1b5df1f0693861785212e708c
+    _ASKDE -> (1) 0
+    _ASKFO -> (2) list
+    _ASKSI -> (1) 1
+    _ASKST -> (2) [[:Saône-et-Loire (département)]]
+    _SKEY -> (2) Autonomie fourragère et dérobées# QUERY9a2fd2c1b5df1f0693861785212e708c
+SOUS-OBJET Autonomie_fourragère_et_dérobées#0##_QUERYfcefd63bfe9c8b153313fa4b0840fff7
+    _ASKDE -> (1) 0
+    _ASKFO -> (2) list
+    _ASKSI -> (1) 1
+    _ASKST -> (2) [[:Grandes cultures]]
+    _SKEY -> (2) Autonomie fourragère et dérobées# QUERYfcefd63bfe9c8b153313fa4b0840fff7
+```
+
+## Complément 2 — Usage des propriétés (smwbrowse, browse=property)
+
+- Requête n° 2, 2026-10-06T23:02:39+02:00, HTTP 200, 15371 octets : `https://wiki.tripleperformance.fr/api.php?action=smwbrowse&browse=property&params=%7B%22search%22%3A%22%22%2C%22limit%22%3A200%7D&format=json`
+
+`meta` : `{"type": "property", "limit": 200, "count": 195, "queryTime": 0.01409}` ; `query-continue-offset` : 200 ; `version` : 1.
+
+**La réponse ne donne pas de nombre d'usages** : chaque entrée ne porte que les champs ['key', 'label']. Pas de contournement. La réponse liste 195 entrées (contre 151 pages dans l'espace 102 à l'étape 2 de la passe B). La suite annoncée par `query-continue-offset` n'a pas été suivie.
+
+Entrées rendues :
+
+A comme agriculteur | A comme modèle ESR | A comme photo d'agriculteur | A des coordonnées | A des coordonnées GPS | A des pépins | A des termes SEO | A des transcriptions | A la une | A un ISBN | A un JSON de système | A un UTH | A un auteur | A un avatar | A un cahier des charges | A un chef lieu | A un classement définitif | A un climat | A un code couleur | A un code de formation | A un code postal | A un complément d'adresse | A un coût | A un email | A un fichier d'icone de caractéristique | A un financement | A un glyph | A un intervenant | A un label | A un libellé d'image | A un lien forum | A un mot-clé | A un nom | A un nom complet | A un nom latin | A un nombre de pages | A un numéro de département | A un objectif | A un objectif Agrilismat | A un pH de sol | A un rendement moyen | A un résumé | A un site | A un sol | A un store | A un telephone | A un titre | A un titre court | A un type de matériel | A un type de page | A un type de production | A un type de sol | A un usage | A une SAU | A une URL | A une URL de vidéo | A une caractéristique | A une carte Transitool | A une carte de france | A une chambre d'agriculture | A une couleur | A une culture | A une culture principale | A une date de mise en ligne | A une date de mise en œuvre | A une description | A une description de la caractéristique | A une description du sol | A une description rapide | A une durée | A une ferme | A une fréquence de sol | A une galerie photo | A une icone | A une icône de portail | A une image | A une modalité | A une origine | A une page Agrinovateur | A une page de caractéristique | A une pertinence | A une photo | A une priorité d'affichage | A une production | A une présentation rapide | A une résistance | A une résistance au black-rot | A une résistance au botrytis | A une résistance au mildiou | A une résistance à l'oidium | A une saveur | A une source d'icone | Adresse | Valeur possible | Aptitudes de production | Attachment link | Auteur de la page | Besoins en eau | Biographie | Change propagation | Contributeur | Correspond à | Coût moyen | Date de création | Croissance | Créateur de la page | Date d'introduction | Date de débourrement | Date de l'événement | Date de maturation | Description | Description de la page | Description de la pratique | Description du bioagresseur | Display precision of | Display title of | Unités de mesure | Disposition | Doit être affiché par défaut | Durée | Durée test | Débourrement | Défavorise | Développement | Enracinement | URI équivalente | Est complémentaire | Est dans l'exploitation | Est dans la liste A France Agrimer | Est dans la liste France Agrimer | Est dans la région | Est dans le département | Est dans le portail | Est dans le projet | Est de type | Est incompatible | Est incompatible avec | Est produit dans le cadre du programme | Est produit par | Est un intervenant de | Est un élément de profil | Evoque | Exposition | External links | Fait partie de | Fait partie de la chambre régionale | Fait partie du top 30 | Famille | Favorise | Feuillage | Financement via Agrilismat possible | Floraison | Forme | Fréquence | A le champ | A une valeur incorrecte pour | Possède une requête | Possède un sous-objet | A le type | Identifiant de page | Identification en grandes cultures | Identification en viticulture | Image alt texts | Image de page | Image links | Import GECO le | Importé de | Informe sur | Internal links | Est une nouvelle page | Language code | Le dernier contributeur est | Longueur de la page | Maturation | Date de modification | Mois d'intérêt de la page | NBSoil theme | Nombre de révisions | Nombre de vues de la page | Nuisance potentielle | Ombrage | Origine de l'espèce | PH | Page construite en partenariat avec | Parsed text | Pertinence Gässler | Port | Preferred property label | Has processing error | Has processing error text | Has property description | Fournit le service | Profondeur de la requête | Format de requête | Query parameters
+
+## Complément 3 — Vocabulaire de deux propriétés
+
+### A un cahier des charges
+
+- Requête n° 3, 2026-10-06T23:02:51+02:00, HTTP 200, 119167 octets : `https://wiki.tripleperformance.fr/api.php?action=ask&query=%5B%5BA%20un%20cahier%20des%20charges%3A%3A%2B%5D%5D%7C%3FA%20un%20cahier%20des%20charges%7Climit%3D500&format=json`
+
+Pages : 235 ; suite : None ; valeurs au total : 285 ; **valeurs distinctes : 36** ; forme des valeurs : {'page': 285}.
+
+| Valeur | Effectif |
+|---|---|
+| Agriculture Biologique | 175 |
+| Haute valeur environnementale | 25 |
+| Biodynamie (Certification Demeter) | 13 |
+| Label Rouge | 10 |
+| Agriculture de conservation des sols (ACS) | 9 |
+| Conventionnel | 6 |
+| Système irrigué | 5 |
+| Méthanisation agricole | 4 |
+| Au cœur des sols | 4 |
+| Label Haie | 3 |
+| Zéro Résidus Pesticides | 3 |
+| Label Bas Carbone | 2 |
+| Vergers Ecoresponsables | 2 |
+| BEE FRIENDLY | 2 |
+| IGP Collines Rhodaniennes | 1 |
+| AOP Saint-Joseph | 1 |
+| IGP Baronet Limousin | 1 |
+| Agriculture conventionnelle | 1 |
+| GlobalGap | 1 |
+| IFS Food | 1 |
+
+Toutes les valeurs distinctes :
+
+Agriculture Biologique (175) | Haute valeur environnementale (25) | Biodynamie (Certification Demeter) (13) | Label Rouge (10) | Agriculture de conservation des sols (ACS) (9) | Conventionnel (6) | Système irrigué (5) | Méthanisation agricole (4) | Au cœur des sols (4) | Label Haie (3) | Zéro Résidus Pesticides (3) | Label Bas Carbone (2) | Vergers Ecoresponsables (2) | BEE FRIENDLY (2) | IGP Collines Rhodaniennes (1) | AOP Saint-Joseph (1) | IGP Baronet Limousin (1) | Agriculture conventionnelle (1) | GlobalGap (1) | IFS Food (1) | AOP (1) | Nature et Progrès (1) | Labour (1) | Techniques culturales simplifiées (TCS) (1) | Wildfarmed (1) | AOP fromagères (1) | Certification "Agriculture régénérative" (Regenacterre) (1) | France Passion (1) | Lait de pâturage (1) | Valeurs Parc (1) | Terre de Progrès (1) | Demain La Terre (1) | GRASP (1) | Semis direct (1) | Limousin Junior (1) | Blason Prestige (1)
+
+### A une caractéristique
+
+- Requête n° 4, 2026-10-06T23:02:58+02:00, HTTP 200, 123522 octets : `https://wiki.tripleperformance.fr/api.php?action=ask&query=%5B%5BA%20une%20caract%C3%A9ristique%3A%3A%2B%5D%5D%7C%3FA%20une%20caract%C3%A9ristique%7Climit%3D500&format=json`
+
+Pages : 203 ; suite : None ; valeurs au total : 336 ; **valeurs distinctes : 65** ; forme des valeurs : {'page': 336}.
+
+| Valeur | Effectif |
+|---|---|
+| Activité biologique des sols | 52 |
+| Système irrigué | 35 |
+| Agriculture de conservation des sols (ACS) | 20 |
+| Système non irrigué | 18 |
+| Non labour | 14 |
+| Labour | 12 |
+| Techniques culturales simplifiées (TCS) | 12 |
+| Agroécologie | 12 |
+| Agroforesterie | 12 |
+| Élevage bovin lait | 11 |
+| Semis direct sous couvert végétal | 11 |
+| Semis direct | 10 |
+| Agriculture Biologique | 9 |
+| Couverts végétaux | 7 |
+| Méthanisation agricole | 5 |
+| Pâturage tournant | 5 |
+| Agriculture régénérative | 5 |
+| Maraîchage bio-intensif | 4 |
+| Gestion de la fertilité en viticulture | 4 |
+| Conventionnel | 4 |
+
+Toutes les valeurs distinctes :
+
+Activité biologique des sols (52) | Système irrigué (35) | Agriculture de conservation des sols (ACS) (20) | Système non irrigué (18) | Non labour (14) | Labour (12) | Techniques culturales simplifiées (TCS) (12) | Agroécologie (12) | Agroforesterie (12) | Élevage bovin lait (11) | Semis direct sous couvert végétal (11) | Semis direct (10) | Agriculture Biologique (9) | Couverts végétaux (7) | Méthanisation agricole (5) | Pâturage tournant (5) | Agriculture régénérative (5) | Maraîchage bio-intensif (4) | Gestion de la fertilité en viticulture (4) | Conventionnel (4) | Labour occasionnel (4) | Démarrer en maraîchage sol vivant (4) | Matière organique (4) | Agriculture raisonnée (4) | Arboriculture (4) | Élevage ovin viande (4) | Permaculture (3) | Agrivoltaïsme (3) | Zone vulnérable (2) | Protection Biologique Intégrée (PBI) (2) | Entreprise de travaux agricoles (ETA) (2) | Gestion de la fertilité en maraîchage (2) | Rotation prairie/légumes (2) | Culture sous abri (2) | Hydrologie régénérative (2) | Zone Natura 2000 (1) | AOP Cognac (1) | Circuits courts (1) | Vendre ses produits à la ferme (1) | Agriculture Durable (1) | Qualité de sol 1 (Sq1) - Test bêche VESS (1) | HVE 3 (1) | Haute valeur environnementale (1) | Vergers Ecoresponsables (1) | Biodynamie (Certification Demeter) (1) | Structure:Réseau Ferme Dephy Pêche 66 (1) | Association de culture (1) | Poulailler mobile (1) | Bioremédiation (1) | Implanter un couvert avant ou pendant la récolte : efficacité, coût et témoignages (1) | Culture Intermédiaire à Valorisation Énergétique (CIVE) (1) | GIEE zéro désherbage (1) | Élevage porcin (1) | Au cœur des sols (1) | Label Haie (1) | Label Rouge (1) | Régénération des sols (1) | Fertilité physique des sols en grandes cultures (1) | Fertilité chimique des sols en grandes cultures (1) | Fertilité biologique des sols en grandes cultures (1) | Agriculture Biologique de Conservation (1) | Ferme pilote de l'association Terrasolis (1) | AOP Cantal (1) | Traction animale (1) | Aviculture (1)
+
+## Complément 4a — Provenance : agriculteur et exploitation
+
+- Requête n° 5, 2026-10-06T23:03:15+02:00, HTTP 200, 15145 octets : `https://wiki.tripleperformance.fr/api.php?action=ask&query=%5B%5BA%20comme%20agriculteur%3A%3A%2B%5D%5D%7C%3FA%20comme%20agriculteur%7C%3FEst%20dans%20l%27exploitation%7Climit%3D20&format=json`
+
+Types résolus (`printrequests`) : `(sujet)` = `_wpg`, `A comme agriculteur` = `_wpg`, `Est dans l'exploitation` = `_wpg`. Suite annoncée : offset 20 (non suivie).
+
+| Page source | A comme agriculteur | Est dans l'exploitation |
+|---|---|---|
+| 10 ans de conservation des sols en terres difficiles en Sologne, retour d'expérience d'Hélène Leduc | Utilisateur:Hélène Leduc (ns 2, existe : oui) | (vide) |
+| 10 ans de couverts végétaux permanents spontanés agriculture biologique | Utilisateur:Jean-François Gross (ns 2, existe : oui) | Ferme Gross et Fils (ns 0, existe : non) |
+| 10 ans de réductions du travail du sol en bio, par Philippe Betton | Utilisateur:Philippe Betton (ns 2, existe : oui) | (vide) |
+| 10 ans de semis-direct au Cambodge, par Stéphane Boulakia (Septembre 2013) | Utilisateur:Stéphane Boulakia (ns 2, existe : oui) | (vide) |
+| 100 Ha de Maïs de 5m en Semis-Direct - Christian ABADIE | Utilisateur:Christian Abadie (ns 2, existe : oui) | (vide) |
+| 12 Ans d’agroforesterie pour des terres fertiles en Alsace, Roland Wendling | Utilisateur:Roland Wendling (ns 2, existe : oui) | (vide) |
+| 14 ANS D'ESSAIS : L’azote disponible peut-il être un facteur limitant en ACS | Utilisateur:Vincent Vaccari (ns 2, existe : oui) | (vide) |
+| 15 ans d'ACS à la ferme de Saint Lubin | Utilisateur:Frédéric Rémy (ns 2, existe : oui) | Ferme de Saint Lubin (ns 0, existe : non) |
+| 18 ans de Semis Direct au Finistère, Erwan Caradec | Utilisateur:Erwan Caradec (ns 2, existe : oui) | (vide) |
+| 1800 HECTARES CULTIVÉS AU CHILI, RETOUR D'EXPÉRIENCE, Felipe Montesinos | Utilisateur:Felipe Montesinos (ns 2, existe : oui) | (vide) |
+| 1ha de luzerne, l'autonomie en MO ? - Portrait de Ferme MSV : Ferme du Hingair (56) - 2023 | Utilisateur:Germain Maheo (ns 2, existe : oui) | (vide) |
+| 20 ans de non-labour en polyculture élevage bio, par Patrice Lefeuvre | Utilisateur:Patrice Lefeuvre (ns 2, existe : oui) | (vide) |
+| 2018 - Visite du Jardin de Manspach - Vignes & Fraises - 14/22 - Fabrice Meyer | Utilisateur:Fabrice Meyer (ns 2, existe : oui) | (vide) |
+| 21ème Festival du Non-Labour et Semis-Direct (NLSD) | Utilisateur:Franck Baechler (ns 2, existe : oui), Utilisateur:Vincent Rigal (ns 2, existe : oui), Utilisateur:Jérôme Labreuche (ns 2, existe : oui), Utilisateur:Raphaël Jendy (ns 2, existe : oui), Utilisateur:Éric Schmidt (ns 2, existe : oui), Utilisateur:Stéphane Launay (ns 2, existe : oui), Utilisateur:Gilles Sauzet (ns 2, existe : oui), Utilisateur:York Bayer (ns 2, existe : oui), Utilisateur:Michaël Geloen (ns 2, existe : oui) | (vide) |
+| 240 Ha de pommes et poires en sol vivant & bio, par Pascal Pineau | Utilisateur:Pascal Pineau (ns 2, existe : oui) | (vide) |
+| 25 ans de semis direct dans le Gers, retour d'expérience de Christian Abadie | Utilisateur:Christian Abadie (ns 2, existe : oui) | (vide) |
+| 2ème édition des Assises de l'Agro-écologie : la Vigne en Provence dans un contexte hydrique tendu | Utilisateur:Simon Ricard (ns 2, existe : oui), Utilisateur:Philippe Brel (ns 2, existe : oui), Utilisateur:Laurence Hugou (ns 2, existe : oui), Utilisateur:Philippe Rosselo (ns 2, existe : oui), Utilisateur:Justine Malaterre (ns 2, existe : oui), Utilisateur:Bruno Pèbre (ns 2, existe : oui), Utilisateur:Angel Garcia Bamala (ns 2, existe : oui), Utilisateur:Constance Cunty (ns 2, existe : oui), Utilisateur:Marc Gelly (ns 2, existe : oui) | (vide) |
+| 30 ans de travail au service des sols vivants, par Claude & Lydia Bourguignon | Utilisateur:Claude Bourguignon (ns 2, existe : oui), Utilisateur:Lydia Bourguignon (ns 2, existe : oui) | (vide) |
+| 30 pays visités pour partager le meilleur de l'innovation agricole - Guillaume Tant | Utilisateur:Guillaume Tant (ns 2, existe : oui) | (vide) |
+| 360 hectares en bio sans labour en république Tchèque, Sébastien Hanssens | Utilisateur:Sébastien Hanssens (ns 2, existe : oui) | (vide) |
+
+## Complément 4b — Une page de Catégorie:Contributeurs
+
+- Requête n° 6, 2026-10-06T23:03:23+02:00, HTTP 200, 3225 octets : `https://wiki.tripleperformance.fr/api.php?action=query&list=categorymembers&cmtitle=Cat%C3%A9gorie:Contributeurs&cmtype=page&cmlimit=50&format=json&formatversion=2`
+- Requête n° 7, 2026-10-06T23:03:29+02:00, HTTP 200, 242 octets : `https://wiki.tripleperformance.fr/api.php?action=query&prop=revisions&rvprop=content&rvslots=main&titles=Utilisateur:Alain%20Canet&format=json&formatversion=2`
+- Requête n° 8, 2026-10-06T23:03:35+02:00, HTTP 200, 2325 octets : `https://wiki.tripleperformance.fr/api.php?action=query&prop=revisions&rvprop=content&rvslots=main&titles=Mod%C3%A8le:Contributeur&format=json&formatversion=2`
+
+Tirage : 50 premiers membres (pages), indice tiré par `random.SystemRandom().randrange(1, 50)` (indice 0 exclu). Indice obtenu : 19.
+
+**Page choisie : `Utilisateur:Alain Canet`.** Wikitexte intégral :
+
+```
+{{Contributeur
+| Nom = Alain Canet
+}}
+```
+
+Modèle principal : **`Modèle:Contributeur`**, 64 lignes. Wikitexte intégral :
+
+```
+<includeonly>{{#if: {{{Nom|}}} | {{#Set: A un nom={{{Nom}}} }} }}{{#if: {{{Photo|}}} | {{#set: A une photo={{ForceImage|{{{Photo}}} }} }}[[{{ForceImage|{{#setmainimage:{{{Photo}}} }} }}|300px|class=user-avatar-200 float-md-right float-none mw-25 ml-2]] }}
+{{#if: {{{Biographie|}}} | {{#Set: Biographie={{{Biographie}}} }}{{{Biographie}}} }}
+
+{{#if: {{{URL|}}} | {{#Set: A une URL={{{URL}}} }}{{{URL}}} }}
+{{Clear}}
+== A contribué aux pages suivantes == 
+{{Portail store debut | Titre = <nowiki> </nowiki>}}
+{{#ask: [[:+]][[Auteur de la page::{{FULLPAGENAME}}]][[A un type de page::+]] OR [[:+]][[Contributeur::{{FULLPAGENAME}}]][[A un type de page::+]]
+| ? = titre
+| ?Page Image#- = vignette
+| ?A un type de page = type de page
+| limit = 70
+| format = plainlist
+| named args = yes
+| template = Page card very small
+}}
+{{Portail store fin}}
+
+{{#ask: [[File:+]][[Auteur de la page::{{FULLPAGENAME}}]] OR [[File:+]][[Contributeur::{{FULLPAGENAME}}]]
+| format = gallery
+| intro=Œuvres de l'auteur
+}}
+
+== Est intervenu dans le cadre des pages suivantes == 
+{{Portail store debut | Titre = <nowiki> </nowiki>}}
+{{#ask: [[:+]][[A comme agriculteur::{{FULLPAGENAME}}]][[A un type de page::+]] OR [[:+]][[A un auteur::{{FULLPAGENAME}}]][[A un type de page::+]]
+| ? = titre
+| ?Page Image#- = vignette
+| ?A un type de page = type de page
+| limit = 70
+| format = plainlist
+| named args = yes
+| template = Page card very small
+}}
+{{Portail store fin}}
+
+== Intervient dans le cadre des formations suivantes == 
+{{Portail store debut | Titre = <nowiki> </nowiki>}}
+{{#ask: [[Formation:+]][[A comme agriculteur::{{FULLPAGENAME}}]]
+| ? = titre
+| ?Page Image#- = vignette
+| ?A un type de page = type de page
+| limit = 70
+| format = plainlist
+| named args = yes
+| template = Page card very small
+}}
+{{Portail store fin}}
+
+{{#set: A un type de page = {{Translation for person}} }}
+[[Category:Contributeurs]]
+</includeonly>
+<noinclude>
+<templatedata>
+{
+	"params": {
+		"Nom": {},
+		"Photo": {},
+		"Biographie": {},
+		"URL": {}
+	}
+}
+</templatedata>
+</noinclude>
+```
+
+## Complément 4c — Propriétés décrivant la personne
+
+Propriétés posées par `#set` dans `Modèle:Contributeur` : `A un nom`, `A une photo`, `Biographie`, `A une URL`, `A un type de page`. Le modèle interroge en outre `Auteur de la page`, `Contributeur`, `A comme agriculteur`, `A un auteur` et `A un type de page` dans ses `#ask`, sans les poser sur la page de la personne.
+
+**Le modèle ne pose aucune propriété d'organisation, d'affiliation, de structure ou de domaine de compétence.** Aucun comptage effectué, aucune requête émise pour cette étape.
+
+## Complément 5 — Volume de modèles et de formulaires
+
+- Requête n° 9, 2026-10-06T23:03:43+02:00, HTTP 200, 33197 octets : `https://wiki.tripleperformance.fr/api.php?action=query&list=allpages&apnamespace=10&aplimit=500&format=json&formatversion=2`
+- Requête n° 10, 2026-10-06T23:03:45+02:00, HTTP 200, 923 octets : `https://wiki.tripleperformance.fr/api.php?action=query&list=allpages&apnamespace=106&aplimit=500&format=json&formatversion=2`
+
+- Modèles (espace 10) : **493** pages ; suite annoncée : non.
+- Formulaires (espace 106) : **14** pages ; suite annoncée : non.
+
+## Journal complet des requêtes du complément
+
+| N° | Horodatage | HTTP | Octets | Adresse |
+|---|---|---|---|---|
+| 1 | 2026-10-06T23:02:20+02:00 | 200 | 9692 | `https://wiki.tripleperformance.fr/api.php?action=smwbrowse&browse=subject&params=%7B%22subject%22%3A%22Autonomie%20fourrag%C3%A8re%20et%20d%C3%A9rob%C3%A9es%22%2C%22ns%22%3A0%7D&format=json` |
+| 2 | 2026-10-06T23:02:39+02:00 | 200 | 15371 | `https://wiki.tripleperformance.fr/api.php?action=smwbrowse&browse=property&params=%7B%22search%22%3A%22%22%2C%22limit%22%3A200%7D&format=json` |
+| 3 | 2026-10-06T23:02:51+02:00 | 200 | 119167 | `https://wiki.tripleperformance.fr/api.php?action=ask&query=%5B%5BA%20un%20cahier%20des%20charges%3A%3A%2B%5D%5D%7C%3FA%20un%20cahier%20des%20charges%7Climit%3D500&format=json` |
+| 4 | 2026-10-06T23:02:58+02:00 | 200 | 123522 | `https://wiki.tripleperformance.fr/api.php?action=ask&query=%5B%5BA%20une%20caract%C3%A9ristique%3A%3A%2B%5D%5D%7C%3FA%20une%20caract%C3%A9ristique%7Climit%3D500&format=json` |
+| 5 | 2026-10-06T23:03:15+02:00 | 200 | 15145 | `https://wiki.tripleperformance.fr/api.php?action=ask&query=%5B%5BA%20comme%20agriculteur%3A%3A%2B%5D%5D%7C%3FA%20comme%20agriculteur%7C%3FEst%20dans%20l%27exploitation%7Climit%3D20&format=json` |
+| 6 | 2026-10-06T23:03:23+02:00 | 200 | 3225 | `https://wiki.tripleperformance.fr/api.php?action=query&list=categorymembers&cmtitle=Cat%C3%A9gorie:Contributeurs&cmtype=page&cmlimit=50&format=json&formatversion=2` |
+| 7 | 2026-10-06T23:03:29+02:00 | 200 | 242 | `https://wiki.tripleperformance.fr/api.php?action=query&prop=revisions&rvprop=content&rvslots=main&titles=Utilisateur:Alain%20Canet&format=json&formatversion=2` |
+| 8 | 2026-10-06T23:03:35+02:00 | 200 | 2325 | `https://wiki.tripleperformance.fr/api.php?action=query&prop=revisions&rvprop=content&rvslots=main&titles=Mod%C3%A8le:Contributeur&format=json&formatversion=2` |
+| 9 | 2026-10-06T23:03:43+02:00 | 200 | 33197 | `https://wiki.tripleperformance.fr/api.php?action=query&list=allpages&apnamespace=10&aplimit=500&format=json&formatversion=2` |
+| 10 | 2026-10-06T23:03:45+02:00 | 200 | 923 | `https://wiki.tripleperformance.fr/api.php?action=query&list=allpages&apnamespace=106&aplimit=500&format=json&formatversion=2` |
