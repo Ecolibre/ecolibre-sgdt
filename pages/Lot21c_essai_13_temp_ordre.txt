@@ -1,0 +1,3 @@
+[[Has type::Temperature]]
+[[Display units::K, °C]]
+[[Property_description_FR::Propriété d'essai du lot 21 : une température absolue dont les unités d'affichage sont déclarées dans l'ordre inverse, pour savoir si c'est la première ou la dernière unité de la liste qui s'affiche par défaut. Ne pas supprimer sans consigne.]]

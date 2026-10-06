@@ -1,0 +1,8 @@
+Page d'essai du lot 21 : une seule température, pour lire l'unité qui s'affiche par défaut quand les unités d'affichage sont déclarées dans l'ordre K puis °C. Ne pas supprimer sans consigne.
+
+{{#set:
+|Test lot21c temp ordre=-15 °C
+}}
+
+== A1 ==
+{{#ask: [[Test lot21c temp ordre::+]] |?Test lot21c temp ordre |?Test lot21c temp ordre#K |?Test lot21c temp ordre#°C |format=table |mainlabel=Sujet |limit=10 |default=AUCUN RÉSULTAT}}

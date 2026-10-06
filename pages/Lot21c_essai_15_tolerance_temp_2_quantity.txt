@@ -1,0 +1,5 @@
+[[Has type::Quantity]]
+[[Corresponds to::1 °C, degré Celsius]]
+[[Corresponds to::1 K, kelvin]]
+[[Display units::°C, K]]
+[[Property_description_FR::Propriété d'essai du lot 21 : passée du type Temperature au type Quantity alors qu'elle portait déjà une valeur, pour mesurer ce que devient cette valeur et si la page de propriété se verrouille ensuite. Ne pas supprimer sans consigne.]]
