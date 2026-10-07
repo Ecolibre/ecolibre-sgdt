@@ -219,10 +219,16 @@ Pistes écartées, avec leur motif :
   établi. Mesure que le code de Triple Performance est intégralement public.
 - 6 et 7 octobre 2026 : mesures sur le wiki vivant par api.php, passe B, 36 requêtes en
   deux séries, menées par Claude Code. Un appel de la première série, browsebysubject,
-  était erroné : cet appel a été retiré de Semantic MediaWiki à la version 3, le bon
-  nom est smwbrowse. Corrigé dans la seconde série.
+  a échoué : ce module a été déprécié par Semantic MediaWiki à la version 3.0.0 et
+  supprimé à la version 7.0.0, et Triple Performance tourne en 7.2.0. Remplacé par
+  smwbrowse dans la seconde série. Il fonctionne encore sur wiki.ecolibre.org, qui est
+  en 4.2.0.
 - 7 octobre 2026 : rédaction du présent rapport, exploration close.
 - 7 octobre 2026 : trois corrections apportées au rapport, signalées par Claude Code à
   la relecture des relevés : une addition de valeurs distinctes qui ignorait leur
   intersection, un échantillon alphabétique décrit comme tiré au sort, et une cause non
   mesurée donnée à l'écart entre 151 et 195 propriétés.
+- 7 octobre 2026 : quatrième correction, signalée par Claude Code : la version de
+  suppression de browsebysubject était fausse dans le journal. Mesurée dans les notes de
+  version de Semantic MediaWiki : dépréciation en 3.0.0, suppression en 7.0.0. A cette
+  occasion, l'outillage du dépôt a été migré de browsebysubject vers smwbrowse.

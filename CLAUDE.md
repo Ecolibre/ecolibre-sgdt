@@ -87,13 +87,16 @@ Et dans ce dépôt : `methode-de-travail.md` décrit le protocole entre les inte
   page, commentaire garde-fou collé à la dernière entrée) pour rendre ce
   script utilisable sur elle.
 - `bin/wiki-api.sh "chaîne de paramètres"` — exécuter n'importe quel appel de
-  lecture de l'API MediaWiki en GET (`browsebysubject`, `siteinfo`, `allpages`,
+  lecture de l'API MediaWiki en GET (`smwbrowse`, `siteinfo`, `allpages`,
   `backlinks`, `expandtemplates`, `intestactions`…) ; lecture seule stricte,
   refuse les actions d'écriture connues du cœur MediaWiki et des extensions
   locales (`pfautoedit`, `sfautoedit`, `smwtask`), et tout paramètre `action=`
   dupliqué. `--facts "subject=...&ns=..."` : raccourci pour
-  `action=browsebysubject`, affiche une ligne `propriété -> [valeurs]` par
-  fait au lieu du JSON brut. `action=purge` exige une requête POST : hors du
+  `action=smwbrowse&browse=subject`, affiche une ligne `propriété -> [valeurs]`
+  par fait au lieu du JSON brut. Il appelait `action=browsebysubject` jusqu'au
+  7 octobre 2026 : ce module est déprécié par Semantic MediaWiki depuis la
+  3.0.0 et supprimé en 7.0.0 ; il fonctionne encore ici, en 4.2.0, mais ne
+  doit plus être employé. `action=purge` exige une requête POST : hors du
   périmètre GET de ce script, voir `bin/wiki-purge.sh`.
 - `bin/wiki-purge.sh "Titre 1|Titre 2"` — purger une ou plusieurs pages
   (POST, `forcelinkupdate=1` systématique ; `action=purge` exige POST
@@ -367,7 +370,7 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   périmé. Relancer `bin/wiki-login.sh` avant d'écrire.
 
 - **Comment vérifier un fait SMW réellement stocké.** `bin/wiki-get.sh` ne
-  gère pas `action=browsebysubject`, et la lecture du wikitexte ne montre pas
+  gère pas `action=smwbrowse`, et la lecture du wikitexte ne montre pas
   ce qui est stocké. C'est `bin/wiki-api.sh` qui s'en charge, avec son
   raccourci dédié :
   ```
@@ -376,8 +379,12 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   Une ligne `propriété -> [valeurs]` par fait. Pour le JSON brut — utile quand
   on veut la sérialisation exacte plutôt que l'affichage :
   ```
-  bin/wiki-api.sh "action=browsebysubject&subject=NOM_DE_PAGE&format=json&formatversion=2"
+  bin/wiki-api.sh "action=smwbrowse&browse=subject&params=%7B%22subject%22:%22NOM_DE_PAGE%22,%22ns%22:0%7D&format=json&formatversion=2"
   ```
+  `ns:0` convient aussi pour une page d'un autre espace de noms : le titre
+  complet, préfixe compris (`Attribut:…`), suffit à la résoudre. Le bloc
+  `query` est celui que rendait `browsebysubject` ; `smwbrowse` y ajoute un
+  bloc `meta`.
   Rappel du piège d'encodage : `bin/wiki-api.sh` ne réencode pas sa chaîne de
   paramètres, donc `%20` pour les espaces et `%26` pour un `&` dans un titre.
   Un seul `dataitem` contenant le séparateur = découpage non appliqué.
@@ -387,12 +394,13 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
 
   **Piège spécifique aux pages `Attribut:`/`Property:`** : les propriétés
   spéciales de SMW (`Allows value`, `Has type`…) s'affichent dans
-  `browsebysubject` sous leur nom interne (`_PVAL`, `_TYPE`…), pas sous leur
+  `smwbrowse` sous leur nom interne (`_PVAL`, `_TYPE`…), pas sous leur
   nom d'affichage. Filtrer sur le nom d'affichage donne un faux « absente ».
   Toujours faire un premier passage sans filtre pour voir les clés réelles.
 
   **Et `_PVAL` peut être en retard sur ce qui est réellement appliqué.** Après
-  l'ajout d'une valeur autorisée, `browsebysubject` sur la page de propriété
+  l'ajout d'une valeur autorisée, `smwbrowse` (alors `browsebysubject`) sur
+  la page de propriété
   peut rendre l'**ancienne** liste alors que la contrainte à jour est déjà
   appliquée — et **purger la page de propriété n'y change rien**. Mesuré le
   17 août 2026 sur `Specimen_status` : `_PVAL` rendait cinq valeurs quand la
@@ -443,7 +451,7 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   `{{#ifexpr: … > 0}}` cité en exemple s'évalue et rend une erreur d'expression.
 
   **Contrôle à faire** après toute écriture sur une page de documentation :
-  `browsebysubject` **sur cette page**, pour vérifier qu'elle ne porte que
+  `smwbrowse` **sur cette page**, pour vérifier qu'elle ne porte que
   `_MDAT` et `_SKEY`. Une page qui décrit le modèle de données peut le polluer.
 
 - **Les backticks ne protègent rien en wikitexte — ni `<code>`.** Un exemple
@@ -464,7 +472,7 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   catégorie de suivi apparue sans qu'on l'ait posée, comme celle des liens
   de fichiers brisés, signale une syntaxe non échappée, invisible au
   wikitexte et capable de vivre des semaines. Complète le contrôle
-  `browsebysubject` de la leçon précédente : celui-ci voit les annotations
+  `smwbrowse` de la leçon précédente : celui-ci voit les annotations
   parasites, celui-là les liens parasites.
 
   **Ce contrôle ne suffit pas : examiner aussi les _liens_ de la page**
@@ -479,7 +487,7 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
 
 - **Deux contrôles distincts, qui ne se recouvrent pas.** `Erreurs de
   traitement SMW` (`[[_ERRC::+]]`) voit les valeurs **rejetées** par SMW.
-  `browsebysubject` sans filtre sur une page voit les annotations
+  `smwbrowse` sans filtre sur une page voit les annotations
   **acceptées à tort**. Une annotation fausse mais valide —
   `Item_ref::+` — n'apparaît que dans le second. Aucun des deux ne
   suffit seul.
@@ -494,7 +502,7 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   sont pas lisibles immédiatement.** La file de propagation des changements
   de SMW doit d'abord se vider. Une première lecture peut ne montrer
   qu'une clé `_CHGPRO` portant les valeurs en JSON, sans aucun fait direct
-  (`Has type`, `Property_range`… absents de `browsebysubject`). **Ce n'est
+  (`Has type`, `Property_range`… absents de `smwbrowse`, alors `browsebysubject`). **Ce n'est
   pas un échec de stockage.** Relire après vidage de la file plutôt que
   réécrire. Constaté le 19 août 2026, seize jobs en attente
   (`action=query&meta=siteinfo&siprop=statistics`, clé `jobs`).

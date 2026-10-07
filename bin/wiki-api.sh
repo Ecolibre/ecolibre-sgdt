@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
-# Usage: bin/wiki-api.sh "action=browsebysubject&subject=Foo&property=Bar"
+# Usage: bin/wiki-api.sh "action=smwbrowse&browse=subject&params={\"subject\":\"Foo\",\"ns\":0}"
 #        bin/wiki-api.sh --facts "subject=Foo&ns=102"
 #
 # Exécute n'importe quelle chaîne de paramètres d'API MediaWiki en GET, avec
 # la session courante. Couvre tout ce pour quoi bin/wiki-get.sh n'a pas de
-# raccourci dédié : browsebysubject, expandtemplates, intestactions,
+# raccourci dédié : smwbrowse, expandtemplates, intestactions,
 # query&meta=siteinfo, query&list=allpages, query&list=backlinks, etc.
 #
-# --facts : raccourci pour action=browsebysubject. Ne pas répéter action=
-#   dans la chaîne (refusé comme action= dupliqué, voir plus bas). Affiche
-#   une ligne « propriété -> [valeurs] » par fait, au lieu du JSON brut —
-#   c'est la mise en forme réécrite en python3 à chaque appel de
-#   browsebysubject depuis la création de ce script.
+# --facts : raccourci pour action=smwbrowse&browse=subject. Ne pas répéter
+#   action= dans la chaîne (refusé comme action= dupliqué, voir plus bas).
+#   subject= (encodé comme le reste de la chaîne), ns= (0 par défaut) et
+#   subobject= sont réécrits en params={"subject":…,"ns":…}. Affiche une
+#   ligne « propriété -> [valeurs] » par fait, au lieu du JSON brut.
+#   Jusqu'au 7 octobre 2026, ce raccourci appelait action=browsebysubject,
+#   déprécié par Semantic MediaWiki en 3.0.0 et supprimé en 7.0.0 ; le bloc
+#   query rendu par smwbrowse est identique, smwbrowse ajoute seulement un
+#   bloc meta.
 #
 # Lecture seule stricte :
 #   - toujours curl -G : aucune donnée n'est jamais envoyée dans le corps
@@ -69,7 +73,25 @@ fi
 
 PARAMS="$1"
 if [ "$FACTS_MODE" = 1 ]; then
-  PARAMS="action=browsebysubject&${PARAMS}"
+  # subject, ns et subobject passent dans le JSON de params= ; tout autre
+  # paramètre reste au premier niveau, tel que l'appelant l'a écrit.
+  PARAMS=$(python3 -c '
+import sys, json, urllib.parse
+pairs = urllib.parse.parse_qsl(sys.argv[1], keep_blank_values=True)
+inner, rest = {}, []
+for k, v in pairs:
+    if k == "subject" or k == "subobject":
+        inner[k] = v
+    elif k == "ns":
+        inner[k] = int(v)
+    else:
+        rest.append(urllib.parse.quote(k, safe="") + "=" + urllib.parse.quote(v, safe=""))
+if "subject" not in inner:
+    sys.exit("ERREUR: --facts exige subject=")
+inner.setdefault("ns", 0)
+p = json.dumps(inner, ensure_ascii=False, separators=(",", ":"))
+print("&".join(["action=smwbrowse", "browse=subject", "params=" + urllib.parse.quote(p, safe="")] + rest))
+' "$PARAMS")
 fi
 
 ACTION=$(python3 -c '

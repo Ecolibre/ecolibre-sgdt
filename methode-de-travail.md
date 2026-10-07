@@ -104,7 +104,7 @@ Un aperçu ne se juge pas seul. Le 3 octobre 2026, l'aperçu d'un retrait, dont 
 
 **Un relevé vide se vérifie sur la source.** Un filtre, une expression régulière, une requête peuvent manquer une occurrence pour une raison de forme et rendre un silence qu'on prend pour un fait. Le lot 8 a été déclaré absent d'un index où il figurait, parce que l'expression employée l'avait sauté. Avant de conclure qu'une chose n'est pas là, la chercher autrement, ou lire la source. Dans du code, un motif ne vaut que s'il couvre les formes d'écriture du langage visé : chercher `action=edit` dans du PHP qui construit `"action" => "edit"` rend une absence fausse. Constaté le 5 octobre 2026 sur le module `interop` de Communecter, où seule la lecture du fichier a montré l'écriture.
 
-**Un `result: Success` ne prouve pas que la donnée est stockée.** Vérifier après écriture, par `browsebysubject`.
+**Un `result: Success` ne prouve pas que la donnée est stockée.** Vérifier après écriture, par `smwbrowse` (`bin/wiki-api.sh --facts`).
 
 **Ne pas conclure une absence d'une mesure qui ne détecte pas l'absence.** Constater qu'aucune page n'existe ne prouve pas que la chose n'existe pas. Sur ce wiki, la négation d'une propriété se compile silencieusement en sa forme positive.
 
