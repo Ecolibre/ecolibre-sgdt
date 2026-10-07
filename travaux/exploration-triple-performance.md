@@ -42,9 +42,12 @@ et 8 utilisateurs actifs.
 Espaces de noms : Attribut 102, Modèle 10, Formulaire 106, Concept 108, smw/schema 112,
 Structure 3000, Formation 3002, Iframe 3004.
 
-151 pages dans l'espace Attribut, mais 195 propriétés connues du magasin : les
-propriétés spéciales et les propriétés employées sans page déclarée n'apparaissent pas
-dans l'espace Attribut. Compter les pages de cet espace sous-estime le modèle réel.
+151 pages dans l'espace Attribut, mais au moins 195 entrées rendues par `smwbrowse` en
+mode propriété, avec une suite annoncée qui n'a pas été suivie. Compter les pages de
+l'espace Attribut sous-estime donc le nombre de propriétés réellement connues du
+magasin. La cause de l'écart n'a pas été mesurée : l'hypothèse la plus simple est que
+les propriétés spéciales et celles employées sans page déclarée n'ont pas de page dans
+cet espace, mais elle reste à vérifier.
 
 493 modèles, 14 formulaires.
 
@@ -104,8 +107,10 @@ génériques, et chaque valeur est une page du wiki.
   conservation des sols 20, Système non irrigué 18, Non labour 14, Labour 12,
   Techniques culturales simplifiées 12, Agroécologie 12, Agroforesterie 12.
 
-Deux propriétés absorbent cent une notions. Là où un modèle naïf créerait une propriété
-par attribut, ils créent une page par notion.
+Deux propriétés absorbent 96 notions distinctes : 36 et 65 valeurs, dont cinq communes
+aux deux listes (Agriculture Biologique, Agriculture de conservation des sols, Système
+irrigué, Méthanisation agricole, Conventionnel). Là où un modèle naïf créerait une
+propriété par attribut, ils créent une page par notion.
 
 Conséquence pour le lot 31 : quand une valeur est une page, elle porte sa propre
 définition, sa discussion et son autorité. Débattre d'une caractéristique devient
@@ -171,10 +176,14 @@ appartient au lot 31 quand il s'ouvrira.
 
 ## 8. Dette de modélisation observée chez eux
 
-`Est dans l'exploitation` est renseignée sur 282 pages, vide sur dix-huit des vingt
-fiches tirées, et ses deux valeurs non vides pointent vers des pages de l'espace
-principal qui n'existent pas. Une propriété déclarée, à moitié remplie, pointant vers du
-vide. C'est la dette ordinaire d'un wiki qui vieillit, et elle nous guette.
+`Est dans l'exploitation` est renseignée sur 282 pages, sur 4 031 articles. Sur les
+vingt premières fiches rendues par la requête, prises dans l'ordre alphabétique et non
+tirées au sort, elle est vide dix-huit fois, et ses deux valeurs non vides pointent vers
+des pages de l'espace principal qui n'existent pas. L'échantillon n'étant pas aléatoire,
+il ne dit rien du taux de remplissage réel ; en revanche, le fait que les deux seules
+valeurs observées ne résolvent vers rien est établi. Une propriété déclarée, peu
+remplie, dont les valeurs vues pointent vers du vide. C'est la dette ordinaire d'un wiki
+qui vieillit, et elle nous guette.
 
 ## 9. Ce qu'il faut en faire
 
@@ -213,3 +222,7 @@ Pistes écartées, avec leur motif :
   était erroné : cet appel a été retiré de Semantic MediaWiki à la version 3, le bon
   nom est smwbrowse. Corrigé dans la seconde série.
 - 7 octobre 2026 : rédaction du présent rapport, exploration close.
+- 7 octobre 2026 : trois corrections apportées au rapport, signalées par Claude Code à
+  la relecture des relevés : une addition de valeurs distinctes qui ignorait leur
+  intersection, un échantillon alphabétique décrit comme tiré au sort, et une cause non
+  mesurée donnée à l'écart entre 151 et 195 propriétés.
