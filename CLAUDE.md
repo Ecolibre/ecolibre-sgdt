@@ -400,11 +400,10 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
 
   **Et `_PVAL` peut être en retard sur ce qui est réellement appliqué.** Après
   l'ajout d'une valeur autorisée, `smwbrowse` (alors `browsebysubject`) sur
-  la page de propriété
-  peut rendre l'**ancienne** liste alors que la contrainte à jour est déjà
-  appliquée — et **purger la page de propriété n'y change rien**. Mesuré le
-  17 août 2026 sur `Specimen_status` : `_PVAL` rendait cinq valeurs quand la
-  charge `_CHGPRO` en portait six, et « en réserve » était pourtant déjà
+  la page de propriété peut rendre l'**ancienne** liste alors que la
+  contrainte à jour est déjà appliquée — et **purger la page de propriété n'y
+  change rien**. Mesuré le 17 août 2026 sur `Specimen_status` : `_PVAL`
+  rendait cinq valeurs quand la charge `_CHGPRO` en portait six, et « en réserve » était pourtant déjà
   acceptée à l'enregistrement. **La vérification qui fait foi est le
   ré-enregistrement d'un item réel portant la nouvelle valeur, puis la lecture
   de ses faits** — pas la lecture de la page de propriété. Conclure « la valeur
@@ -502,10 +501,10 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   sont pas lisibles immédiatement.** La file de propagation des changements
   de SMW doit d'abord se vider. Une première lecture peut ne montrer
   qu'une clé `_CHGPRO` portant les valeurs en JSON, sans aucun fait direct
-  (`Has type`, `Property_range`… absents de `smwbrowse`, alors `browsebysubject`). **Ce n'est
-  pas un échec de stockage.** Relire après vidage de la file plutôt que
-  réécrire. Constaté le 19 août 2026, seize jobs en attente
-  (`action=query&meta=siteinfo&siprop=statistics`, clé `jobs`).
+  (`Has type`, `Property_range`… absents de `smwbrowse`, alors
+  `browsebysubject`). **Ce n'est pas un échec de stockage.** Relire après
+  vidage de la file plutôt que réécrire. Constaté le 19 août 2026, seize
+  jobs en attente (`action=query&meta=siteinfo&siprop=statistics`, clé `jobs`).
 
 - **Le 24 août 2026, dans un environnement Claude Code hébergé (cloud
   Anthropic), le proxy sortant a refusé wiki.ecolibre.org (403 au
