@@ -38,6 +38,18 @@
 # passé en argument ici. Cherché d'abord dans $SGDT_PRIVE (par défaut
 # ../ecolibre-sgdt-prive/, voisin du dépôt), puis dans le dépôt. Absent des
 # deux : lecture anonyme, sans échec.
+#
+# Session expirée : un fichier de cookies présent ne garantit pas une
+# session valide, et l'API répond alors en anonyme sans le dire. Seulement
+# quand la chaîne contient intestactions et qu'un fichier de cookies a été
+# trouvé, le script lit d'abord action=query&meta=userinfo avec les mêmes
+# cookies ; si la réponse décrit un anonyme, il avertit sur stderr que le
+# résultat d'intestactions sera celui d'un visiteur anonyme, puis poursuit
+# sans échouer. Si cette lecture échoue, il poursuit sans rien dire.
+# Restreint à intestactions, seule lecture dont le sens dépend d'être
+# connecté : un contrôle sur chaque appel doublerait toutes les lectures.
+# Ajouté le 8 octobre 2026 (lot 21, tâche 15), après une lecture de verrou
+# faussée par une session expirée à la tâche 14.
 set -euo pipefail
 
 readonly WIKI_API="https://wiki.ecolibre.org/api.php"
@@ -131,6 +143,21 @@ fi
 CURL_OPTS=(-sS -G)
 if [ -n "$COOKIES" ]; then
   CURL_OPTS+=(-b "$COOKIES")
+fi
+
+if [ -n "$COOKIES" ]; then
+  case "$PARAMS" in
+    *intestactions*)
+      USERINFO=$(curl -sS -G -b "$COOKIES" "$WIKI_API" \
+        --data "action=query&meta=userinfo&format=json" 2>/dev/null) || USERINFO=""
+      if printf '%s' "$USERINFO" | python3 -c '
+import sys, json
+sys.exit(0 if "anon" in json.load(sys.stdin)["query"]["userinfo"] else 1)
+' 2>/dev/null; then
+        echo "AVERTISSEMENT: session expirée — le résultat d'intestactions sera celui d'un visiteur anonyme. Relancer bin/wiki-login.sh." >&2
+      fi
+      ;;
+  esac
 fi
 
 # Ajoute format=json/formatversion=2 par défaut si absents de $PARAMS,
