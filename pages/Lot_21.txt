@@ -1,10 +1,10 @@
 {{Lot
 |Work_package_number=21
 |Work_package_status=ouvert
-|Work_package_summary=Faire des grandeurs physiques et de leurs unités des pages porteuses d'attributs, et décider comment une valeur mesurée s'attache à un item.
+|Work_package_summary=Faire des grandeurs physiques et de leurs unités des pages porteuses d'attributs, décider comment une valeur mesurée s'attache à un item, et poser le socle qui en découle : une propriété par grandeur, pour tout le modèle.
 |Work_package_opening_date=2026-10-02
 |Work_package_closure_report=https://github.com/Ecolibre/ecolibre-sgdt/blob/90b0a66d221e2a791ab1194136048f786983c630/travaux/lot-21-tache2-mesure.md
-|Work_package_overlaps=Lot 12 — Contenants et étiquetage,Lot 26 — Renommage des propriétés par domaine,Lot 31 — Qualification des données et confiance entre pairs
+|Work_package_overlaps=Lot 12 — Contenants et étiquetage,Lot 19 — Vocabulaire et multilingue,Lot 26 — Renommage des propriétés par domaine,Lot 31 — Qualification des données et confiance entre pairs
 |Work_package_revises=Lot 8 — Facettes de type d'item,Lot 9 — Exemplaires plantés du jardin-forêt,Lot 10 — Procédés et outils
 }}
 
@@ -34,7 +34,7 @@
 
 '''La spécification et la mesure sont portées par des sous-objets.''' Mesuré le 4 octobre 2026 : les sous-objets sont stockés, et une requête les traverse jusqu'à trois sauts, de l'item jusqu'à la page de grandeur en passant par le sous-objet et l'unité.
 
-'''Un mode se vise par le filtre de classe.''' Mesuré le 5 octobre 2026 : une requête sur une propriété rend la page et ses sous-objets mêlés, mais la même requête portant en plus la catégorie de la classe ne rend que la page. Les sous-objets ne portent pas <code>_INST</code>, seul le sujet principal le porte. Les deux autres pistes envisagées — une propriété distincte par mode, un marqueur de mode porté par le sous-objet — sont donc inutiles.
+'''Le filtre de classe sépare la page de ses sous-objets.''' Mesuré le 5 octobre 2026 : une requête sur une propriété rend la page et ses sous-objets mêlés, mais la même requête portant en plus la catégorie de la classe ne rend que la page. Les sous-objets ne portent pas <code>_INST</code>, seul le sujet principal le porte. Rédaction corrigée le 8 octobre 2026 : la version du 6 octobre concluait de là que le filtre de classe suffisait à viser un mode, et que le marqueur porté par le sous-objet était inutile. C'est faux. Le filtre isole la valeur scalaire ; la spécification et la mesure sont toutes deux des sous-objets de la même page, et rien ne les distingue sans marqueur. La conception arrêtée depuis supprime le scalaire, ce qui retire au filtre de classe son dernier emploi.
 
 '''Une unité manquante est rendue impossible par la forme de la saisie, pas par un contrôle.''' Mesuré le 5 octobre 2026 : un champ pour le nombre et une liste pour l'unité, assemblés par un modèle, produisent une annotation valide ; le nombre passe par <code>Module:Nombre</code>, qui remplace le point décimal par la virgule dans le seul cas non ambigu, si bien que « 0.9 » et « 0,9 » donnent la même valeur stockée. Si l'unité est vide, le modèle ne rend rien et aucune annotation n'est écrite : le sous-objet d'essai correspondant n'existe pas. Si le nombre est douteux, « 1.2.3 » par exemple, la valeur est refusée visiblement et recensée dans les erreurs de traitement. Ce point ouvert est clos.
 
@@ -44,11 +44,53 @@
 
 '''L'ordre des unités d'affichage s'écrit à l'envers selon le type.''' Chez Quantity, la première unité déclarée s'affiche ; chez Temperature, la dernière (entrée 61 des Limites connues). Une température absolue qui doit s'afficher en degrés Celsius se déclare donc <code>Display units::K, °C</code>. Les deux règles étant inverses, la page de grandeur devra porter les déclarations toutes faites, à recopier : personne ne retiendra une règle inversée.
 
+== La conception arrêtée ==
+
+Arrêtée du 6 au 8 octobre 2026, après la phase de mesure. Elle déborde l'objet initial du lot, qui a été élargi en conséquence.
+
+'''Une propriété par grandeur, et non une par caractéristique.''' Décidé le 8 octobre 2026. Le wiki déclarait jusqu'ici une propriété par caractéristique : <code>Nominal diameter</code>, <code>Secondary diameter</code>, <code>Max thickness</code> et <code>Max head</code> mesurent trois fois la même grandeur, une longueur, et redéclarent trois fois leur type et leurs unités. Le socle devient une propriété par grandeur, soit quelques dizaines au lieu de centaines. Motif : deux ateliers s'accorderont sur « diamètre », jamais sur « diamètre secondaire », qui est un mot de notre catalogue et non une notion partagée. Si chaque caractéristique est une propriété, chaque partenaire invente les siennes et la jointure est perdue d'avance, ce que le SGDT veut précisément éviter. Prix accepté : les requêtes s'allongent, et la reprise des propriétés existantes devient une refonte plutôt qu'un changement de type.
+
+'''Cette décision engage le modèle entier, pas seulement ce lot.''' Le [[Lot 10 — Procédés et outils|lot 10]], dont <code>Measured_quantities</code> devient caduque ; le [[Lot 12 — Contenants et étiquetage|lot 12]], dont les contenants porteront des cotes ; le [[Lot 26 — Renommage des propriétés par domaine|lot 26]], qui renommera un socle partagé et non des noms isolés ; le [[Lot 7 — Nomenclature quantifiée et entité réception|lot 7]] et le [[Lot 19 — Vocabulaire et multilingue|lot 19]]. Le recoupement entre lots ne se déclarant que d'un côté (entrée 51 des Limites connues), aucun de ces lots ne verra passer la décision : elle est nommée ici pour qu'on la retrouve.
+
+'''Trois propriétés par grandeur : la valeur, le minimum, le maximum.''' <code>Diameter</code>, <code>Diameter min</code>, <code>Diameter max</code>. Les comparateurs sur des bornes de ce genre ont été mesurés le 4 octobre 2026. Les deux autres formes envisagées, un rôle de borne porté par le sous-objet ou deux bornes dans un sous-objet distinct, multiplieraient les sous-objets pour économiser des propriétés, c'est-à-dire déplaceraient la complexité là où elle se voit le moins.
+
+'''Toute valeur de grandeur est portée par un sous-objet, sans exception.''' Le mode scalaire disparaît. Un item peut porter deux diamètres, et un scalaire n'en loge qu'un : la forme dépendrait alors de l'item, et une requête devrait chercher à deux endroits sans savoir lequel. Prix accepté : plus aucune valeur ne s'écrit en une ligne. Gain : une seule forme, donc aucun choix à la saisie, et un seul mécanisme de sélection au lieu de deux.
+
+'''Le mode est porté par une propriété, <code>Characteristic mode</code>, en énumération fermée à deux valeurs : spécification et mesure.''' Une catégorie ne conviendrait pas, un sous-objet n'en portant pas (mesuré le 5 octobre 2026). Deux valeurs seulement : la provenance d'une mesure, son incertitude et la façon dont elle a été obtenue relèvent du [[Lot 31 — Qualification des données et confiance entre pairs|lot 31]], et une énumération fermée est ce qu'il y a de plus coûteux à enrichir une fois le verrou posé (entrée 65).
+
+'''Un rôle distingue deux valeurs de la même grandeur sur le même item.''' Nominal, extérieur, intérieur, maximal admissible. Porté par le sous-objet. Son vocabulaire et sa forme restent à arrêter.
+
+'''Un rattachement distingue ce qui caractérise une partie de l'item.''' Le diamètre de l'orifice d'aspiration est le diamètre d'un orifice, pas de la pompe. Un sous-objet peut porter un rattachement ; la définition de ces entités relève du [[Lot 12 — Contenants et étiquetage|lot 12]], et le lot 21 se borne à ménager la place.
+
+'''Une tolérance se stocke en deux bornes absolues, jamais en écart.''' Un mécanicien écrit « 20 ±0,1 », « 20 -0,1/+0,2 » ou « H7 » : trois écritures de la même chose. Le formulaire les accepte toutes et fait la soustraction ; le sous-objet porte la valeur et les deux bornes calculées. Une requête devient alors directe, et la question du décalage d'origine des températures s'évanouit, une borne absolue étant une température absolue. La forme d'origine est conservée telle quelle dans un champ de texte à côté, parce qu'un dessin se relit et qu'un « H7 » ne se reconstitue pas depuis deux nombres.
+
+'''Ce que porte une page de grandeur.''' Les libellés par langue en Monolingual text ; le symbole usuel ; une définition en une phrase ; l'unité principale, en lien vers une page d'unité ; les unités admises, en liens, multivalué ; le type à employer, Quantity ou Temperature ; le bloc de déclaration tout fait, à transclure, l'ordre des unités d'affichage déjà écrit dans le bon sens ; le nom de la propriété correspondante ; une équivalence vers un identifiant externe. La dimension physique et la grandeur de base dont elle dérive n'y figurent pas : aucun mécanisme ne s'en servirait, et une page de grandeur s'enrichit plus tard sans risque, étant une page ordinaire.
+
+'''Ce que porte une page d'unité.''' Les libellés par langue ; le symbole, c'est-à-dire la chaîne exacte qu'un contributeur tape ; les alias acceptés à la saisie, pour qui n'a pas les caractères sous la main ; la grandeur dont elle est une unité ; le facteur de conversion vers l'unité principale ; le code UCUM ; une équivalence vers un identifiant externe ; son appartenance au SI et à quel titre. Le trio symbole, alias, facteur est exactement ce qu'attend une ligne de déclaration : une page d'unité porte donc déjà tout ce qu'il faut pour l'écrire.
+
+'''Le bloc de déclaration est écrit à la main sur la page de grandeur, et transclus par les propriétés.''' Écrit à la main, une ligne par unité, recopiée du symbole et du facteur portés par les pages d'unité : un lecteur voit exactement ce qui sera déclaré. Transclus plutôt que recopié dans chaque propriété, parce que la liste des unités admises appartient à la grandeur et non à chacune de ses propriétés, ce qui est tout l'objet du lot. L'effet d'une modification du bloc sur les propriétés qui le transcluent n'est pas mesuré : voir les risques connus.
+
+'''Les titres sont français, les noms de propriétés anglais.''' Une page de grandeur ou d'unité porte un titre français, et une unité porte son nom développé, « Millimètre » et non « mm » : un titre se lit, un symbole se tape. Un nom de propriété est un identifiant technique, écrit une fois et jamais traduit, et l'anglais le rapproche des équivalences externes. Le pont se fait sur la page de grandeur, qui porte le nom de sa propriété comme elle porte son code UCUM.
+
+'''La jointure entre wikis passe par un identifiant externe, pas par le titre.''' QUDT pour les grandeurs, UCUM et QUDT pour les unités. Aucun n'est obligatoire : une grandeur ou une unité sans équivalent connu reste valable, simplement moins joignable. Les rendre obligatoires bloquerait la création d'unités métier que personne n'a normalisées, et il y en aura.
+
+'''La portée d'une propriété ne porte plus l'unité.''' Elle garde ce que l'unité ne dit pas : une borne, une cardinalité, une énumération. '''Avertissement''' : ce champ est une consigne lue par un humain, rien ne la fait respecter. Croire qu'une portée écrite est une contrainte appliquée est le genre de malentendu qui se paie deux ans plus tard.
+
+'''<code>Measured quantities</code> devient caduque.''' Dire qu'un appareil mesure un débit, c'est désormais porter un sous-objet de débit en mode mesure. Son sort, suppression ou renommage, appartient au [[Lot 10 — Procédés et outils|lot 10]] ; elle est signalée ici pour qu'on cesse de la remplir.
+
+'''La reprise des propriétés existantes ne migre rien : elle réécrit les pages porteuses.''' <code>Max thickness</code> à 0,2 devient un sous-objet portant une épaisseur de 0,2 mm, en mode spécification, avec le rôle maximal. Trois valeurs sur deux pages. Les anciennes propriétés restent en place et se vident, et leur sort appartient au [[Lot 26 — Renommage des propriétés par domaine|lot 26]]. '''Aucune écriture n'a donc lieu sur les quatre pages de propriété existantes''', ce qui écarte tout risque de verrou sur elles. La règle d'ordre inscrite aux risques connus le 6 octobre 2026, écrire l'unité puis changer le type, devient sans objet.
+
 == Ce qui est écarté, et pourquoi ==
 
 '''Traiter dans ce lot les quatre besoins du lot 9.''' Écarté le 4 octobre 2026. Le motif de la règle, un seul mécanisme, est satisfait par une construction conçue une fois et réemployée ; la déployer ici pour les quatre ferait de ce lot celui de la réception, de la récolte, de la présence et de la qualification à la fois.
 
 '''Le type Record pour les tolérances.''' Écarté le 4 octobre 2026 : inutile, puisque le sous-objet porte ensemble l'unité, la tolérance et la requête.
+
+'''Une grandeur « écart de température », distincte de la température.''' Envisagée le 6 octobre 2026, parce que le type Temperature applique le décalage d'origine à un écart et le rend faux. Écartée le 8 octobre 2026 : les tolérances se stockant en bornes absolues, il n'existe plus d'écart nulle part, et une borne absolue est une température ordinaire. La mesure du décalage garde sa valeur d'avertissement, et justifie précisément ce choix. Si un écart devait un jour être stocké tel quel, il faudrait une grandeur distincte.
+
+'''Une page d'unité portant deux appartenances.''' Envisagée le 6 octobre 2026 pour le degré Celsius, unité de deux grandeurs à la fois. Tombe avec la précédente : une unité appartient à une grandeur, sans exception.
+
+'''Le bloc de déclaration engendré par une requête sur les pages d'unité.''' Écarté le 8 octobre 2026. Une requête s'exécuterait au moment d'analyser une page de propriété, et son résultat déciderait du type des données ; si elle rendait les unités dans un autre ordre, l'unité d'affichage par défaut changerait sans que personne ait rien touché. C'est ajouter une pièce mobile à l'endroit le plus rigide du système. L'automatisation se reposera quand la fédération aura des dizaines de grandeurs.
 
 == Ce qui est exclu du périmètre ==
 
@@ -70,22 +112,32 @@
 
 Le choix de l'unité principale reste une décision collective, qui engage tous les ateliers partenaires : celui du 4 octobre 2026, l'unité SI cohérente, est provisoire et se rouvre au premier partenaire.
 
-Les descriptions des propriétés de diamètre nominal et secondaire prescrivent le point décimal, que l'installation rejette, et le diamètre secondaire sépare ses valeurs par la virgule, qui découpe une virgule décimale (entrée 57 des Limites connues). Aucune valeur n'en dépend aujourd'hui. Ces deux pages sont libres au 6 octobre 2026 et doivent le rester : les corriger maintenant les verrouillerait et interdirait ensuite le changement de type (entrée 62). La correction de la description et la migration du type s'écrivent donc ensemble, en une seule écriture par propriété.
+Les descriptions des propriétés de diamètre nominal et secondaire prescrivent le point décimal, que l'installation rejette, et le diamètre secondaire sépare ses valeurs par la virgule, qui découpe une virgule décimale (entrée 57 des Limites connues). Aucune valeur n'en dépend. Depuis le 8 octobre 2026, ces deux propriétés ne sont plus reprises par ce lot : elles se vident et leur sort appartient au [[Lot 26 — Renommage des propriétés par domaine|lot 26]]. Elles sont libres au 8 octobre 2026 et doivent le rester, les corriger les verrouillant pour rien.
+
+Quatre arbitrages restent à rendre avant la première écriture dans l'espace Attribut, et les deux premiers seuls sont bloquants :
+
+* le vocabulaire des rôles, et sa forme : énumération fermée, ou pages d'un vocabulaire ouvert ;
+* les noms des propriétés, celles du socle comme celles que portent les pages de grandeur et d'unité, puisqu'une déclaration neuve doit être juste du premier coup ;
+* le nom du champ qui conserve la forme d'origine d'une tolérance ;
+* la liste des grandeurs à créer en premier.
+
+Le lot n'est bloqué par rien d'autre. Les opérations côté serveur, dont l'examen du verrou de propagation, restent en attente de la migration et ne commandent plus aucune étape de ce lot.
 
 == Point de départ ==
 
-Trois hypothèses du travail préparatoire d'août 2026 restent à trancher pendant la conception ; la mesure du 4 octobre 2026 ne les touchait pas.
+Les trois hypothèses du travail préparatoire d'août 2026 ont toutes été tranchées entre le 6 et le 8 octobre 2026, et leur résolution figure ci-dessus.
 
-* La forme d'une caractéristique, scalaire ou sous-objet, déclarée une fois par grandeur, niveau et mode, jamais choisie à la saisie : sinon une requête devrait chercher à deux endroits sans savoir lequel.
-* L'unité sortie de la portée des propriétés et remplacée par un lien vers la page de grandeur, la portée ne gardant que le range formel.
-* La page d'unité portant un code UCUM et une équivalence vers QUDT, sans rien importer.
+* La forme d'une caractéristique est désormais unique : un sous-objet, toujours, le scalaire ayant disparu.
+* L'unité est sortie de la portée des propriétés, remplacée par un bloc de déclaration transclus depuis la page de grandeur.
+* La page d'unité porte un code UCUM et une équivalence externe, sans rien importer, et aucun des deux n'est obligatoire.
 
-L'existant à reprendre est minime : une poignée de valeurs hors positions, relevé du 4 octobre 2026. Une quarantaine de grandeurs sont visées à terme.
+L'existant à reprendre est minime : trois valeurs sur deux pages, relevé du 4 octobre 2026. Une quarantaine de grandeurs sont visées à terme.
 
 == Risques connus ==
 
 * Changer le type d'une propriété qui porte déjà une valeur fonctionne, et verrouille la page ensuite. Mesuré le 6 octobre 2026 : le passage de Temperature à Quantity a été accepté sur une propriété libre, la valeur stockée est passée de 275,15 à 2 en moins de trois minutes sans qu'il faille réécrire la page porteuse, et la page de propriété était verrouillée dans le même temps (entrée 62 des Limites connues). Le risque n'est donc pas de ne pas pouvoir migrer, mais de ne plus pouvoir revenir sur la déclaration.
-* La valeur recalculée l'est à partir de la saisie portée par la page de l'item. Une valeur saisie sans unité, comme les nombres nus que portent aujourd'hui les propriétés de production, n'a pas été mesurée dans ce cas. '''Ordre à suivre à la migration : écrire d'abord l'unité sur les pages porteuses, puis seulement changer le type de la propriété.'''
+* Ce risque ne concerne plus ce lot depuis le 8 octobre 2026 : la reprise des propriétés existantes ne change aucun type, elle réécrit les pages porteuses. Il reste valable pour tout lot qui changerait le type d'une propriété en production.
+* Une propriété neuve se crée sans danger, une à la fois, sous réserve de la barrière du type résolu : onze créations isolées entre le 4 et le 6 octobre 2026 ont toutes rendu le bon type. Le gel du type résolu n'est survenu qu'une fois, sur une rafale de onze pages écrites en treize secondes (entrée 59 des Limites connues). Ce qui arrive souvent est le verrou d'écriture, qui ne gêne pas l'usage (entrée 63) mais interdit de revenir sur la déclaration : une déclaration neuve doit donc être juste du premier coup.
 * Une page de propriété d'essai se supprime directement, jamais après avoir été vidée : le blanchiment la verrouille (entrée 33 des Limites connues).
 * Ajouter une unité à une grandeur modifie une déclaration partagée par toutes ses propriétés, qui se réanalysent alors : l'effet sur le verrou de propagation n'est pas mesuré.
 

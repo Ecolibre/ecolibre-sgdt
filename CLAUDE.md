@@ -284,7 +284,7 @@ Ce que Cyril peut lancer seul, et ce qui relève de fuzzy : voir
 
   **Le verrou d'écriture n'est pas un critère.** `smw-change-propagation-protection` n'empêche ni le stockage ni la requête : mesuré le 5 octobre 2026, une propriété verrouillée stocke et répond exactement comme une propriété libre de même type. Ne jamais éliminer ni abandonner une propriété parce que sa page est verrouillée. Le verrou se lit sans rien écrire par `intestactions`, et il se consigne.
 
-  **En revanche il fige la déclaration.** Toute écriture qui modifie le type d'une propriété la verrouille en moins de trois minutes, et aucun verrou observé entre le 4 et le 6 octobre 2026 ne s'est levé. Une page de propriété s'écrit donc une seule fois, dans sa forme définitive, type, conversions, unités d'affichage et description comprises. Ne jamais corriger une description sur une propriété dont le type doit encore changer : les deux écritures n'en font qu'une.
+  **En revanche il fige la déclaration, et c'est une panne, pas une règle du modèle.** Toute écriture qui modifie le type d'une propriété la verrouille en moins de trois minutes, et aucun verrou observé entre le 4 et le 6 octobre 2026 ne s'est levé, alors que trois verrous d'août 2026 s'étaient levés seuls en quelques jours. Un verrou temporaire le temps d'une propagation est le comportement documenté de SMW ; qu'il ne se lève pas ne l'est pas, et la cause probable est la file de travaux qui ne tourne pas. **Précaution d'exploitation, valable tant que ce défaut dure :** écrire une page de propriété une seule fois, dans sa forme définitive, type, conversions, unités d'affichage et description comprises, et ne jamais corriger une description sur une propriété dont le type doit encore changer. **Condition de sortie :** dès qu'un verrou se lève à nouveau de lui-même, cette précaution tombe et une propriété se corrige normalement.
 
   Après avoir créé une propriété, n'émettre aucune requête nommant cette propriété tant que `_CHGPRO` n'a pas disparu de ses faits ; la seule sonde autorisée pendant cette attente est la lecture des faits de la page et celle de `intestactions`, qui ne résolvent aucun type. Ce n'est pas la rafale qui décide : mesuré les 4 et 5 octobre 2026, une rafale de huit créations a réussi, une création isolée a échoué.
 
@@ -590,6 +590,7 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   modifier un fichier que l'outillage a pu changer, le relire par une
   commande.
 - `sleep` au premier plan est bloqué par l'environnement Claude Code, avec le message « Blocked: sleep 60 followed by… ». Pour une pause fixe, lancer `sleep` en arrière-plan et attendre sa notification de fin. Pour attendre la file de travaux, `bin/wiki-wait-jobs.sh`. Mesuré le 4 octobre 2026, lot 21 tâche 8.
+- Un fichier d'ajout ne contient qu'une seule entrée, et `bin/wiki-append.sh` ne s'appelle qu'une fois par entrée. Cinq entrées ajoutées ensemble coûtent une seule révision mais se défont ensemble ; cinq appels coûtent cinq révisions et chacune s'annule seule. La règle existait déjà et une consigne du 6 octobre 2026 l'a contredite : c'est la consigne qui était en tort.
 
 ## Garde-fous d'exécution (dépôt git)
 
