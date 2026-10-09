@@ -35,9 +35,10 @@ Dans ce dossier, versionnés, sans aucun secret :
 | `Dockerfile` | image PHP 7.4 + Apache et extensions PHP requises |
 | `apache-miroir.conf` | URL courtes `/wiki/Titre` |
 | `compose.yml` | les trois services |
-| `LocalSettings_miroir.php` | configuration de production, neuf écarts |
+| `LocalSettings_miroir.php` | configuration de production, écarts 1 à 9 et 11 |
+| `php-miroir.ini` | limites PHP d'Apache relevées en production |
 | `miroir.env.exemple` | noms des variables d'environnement, valeurs factices |
-| `ecarts-avec-la-production.md` | les neuf écarts et leur motif |
+| `ecarts-avec-la-production.md` | les onze écarts et leur motif |
 
 Hors du dépôt, dans le **dossier de données** (ici
 `/home/spheres/miroir-wiki/`, jamais dans un dossier synchronisé) :

@@ -2,12 +2,14 @@
 
 À relire le jour où un essai sur le miroir donne un résultat surprenant,
 **avant** de chercher la cause dans le réglage éprouvé : la surprise vient
-peut-être de l'un de ces neuf écarts, et d'eux seuls.
+peut-être de l'un de ces onze écarts, et d'eux seuls.
 
 `miroir/LocalSettings_miroir.php` reprend la configuration de production
-(`LocalSettings_ecolibre.php`) avec exactement ces neuf écarts, chacun marqué
-« ÉCART n » dans le fichier. Toute autre différence de comportement est une
-erreur du miroir, à corriger.
+(`LocalSettings_ecolibre.php`) ; les écarts 1 à 9 et 11 y sont marqués « ÉCART n ».
+L'écart 10 porte sur l'image PHP (`miroir/Dockerfile`). Les limites PHP
+d'Apache (`miroir/php-miroir.ini`) sont celles de la production et ne sont
+pas un écart. Toute autre différence de comportement est une erreur du
+miroir, à corriger.
 
 Une mise au net sans effet de comportement n'est pas comptée : les extensions
 que la production charge deux fois, dont Lockdown, ne sont chargées qu'une
@@ -89,3 +91,67 @@ fichier existent, avec leurs métadonnées en base, mais sans leur fichier :
 les liens d'image et les vignettes sont cassés. C'est attendu. Un essai qui
 porte sur l'affichage d'images ne se fait pas sur le miroir sans y avoir
 d'abord recopié les fichiers concernés.
+
+## 10. Modules PHP absents du miroir
+
+La production charge 64 modules PHP sous Apache (relevé du 9 octobre 2026) ;
+le miroir en charge 43. Les 21 absents :
+`FFI`, `geoip`, `gettext`, `igbinary`,
+`imagick`, `imap`, `memcache`, `pdo_mysql`, `pdo_pgsql`, `pgsql`, `pspell`,
+`redis`, `shmop`, `soap`, `sockets`, `sysvmsg`, `sysvsem`, `sysvshm`,
+`tidy`, `xmlrpc`, `xsl`.
+
+Motif : aucun n'est employé par MediaWiki 1.39 ni par les 26 extensions et
+habillages chargés, **dans la configuration d'Ecolibre**. Mesuré par une
+recherche des appels de chaque module dans le cœur, son `vendor/`, les
+habillages et les extensions chargées (tests exclus), le 9 octobre 2026 :
+
+- aucun appel du tout : `FFI`, `geoip`, `gettext`, `memcache`,
+  `pdo_mysql`, `pdo_pgsql`, `pspell`, `shmop`, `soap`, `sysvmsg`,
+  `sysvsem`, `sysvshm`, `tidy`, `xmlrpc`, `xsl` ;
+- `imap` : un seul appel, dans du code mis en commentaire
+  (`vendor/pear/mail_mime/Mail/mimePart.php`) ;
+- `igbinary` : seulement dans `MemcachedPeclBagOStuff`, alors que
+  `CACHE_MEMCACHED` désigne `MemcachedPhpBagOStuff` (client PHP pur) ;
+- `imagick` : seulement pour les vignettes quand `$wgUseImageMagick` est
+  faux, et pour le SVG ; Ecolibre réduit ses images par la commande
+  `convert` et n'autorise pas le SVG ;
+- `pgsql` : seulement pour une base PostgreSQL ; la base est MariaDB ;
+- `redis` : seulement si un cache ou une file Redis est configuré ; aucun
+  ne l'est ;
+- `sockets` : seulement pour les purges HTCP (`$wgHTCPRouting`), les
+  journaux UDP et `rebuildLocalisationCache.php --threads` ; aucun n'est
+  configuré.
+
+Conséquence : un essai qui ajouterait l'un de ces usages (Redis, purges
+HTCP, `$wgUseImageMagick = false`, journaux UDP…) ne s'éprouve pas sur le
+miroir sans y avoir d'abord ajouté le module correspondant.
+
+## 11. `$wgJobRunRate = 0`
+
+Aucun travail de la file n'est exécuté pendant une requête web. La
+production laisse la valeur par défaut, 1 : chaque requête web y exécute en
+moyenne un travail en attente.
+
+Motif : sur le miroir, une requête de lecture ne doit pas modifier la base,
+sinon une mesure ne se répète pas. Avec la valeur par défaut, un simple
+appel à `api.php` peut exécuter un travail en attente (mise à jour de liens,
+propagation SMW…) et changer ce que l'appel suivant lira.
+
+Conséquence : les travaux s'accumulent dans la file tant qu'on ne les lance
+pas. Les effets différés d'une écriture (tables de liens, faits SMW
+propagés, catégories) n'apparaissent pas d'eux-mêmes.
+
+Pour lever l'écart, quand on veut éprouver quelque chose qui dépend des
+travaux :
+
+- soit lancer la file délibérément, au moment choisi :
+
+  ```
+  docker compose --env-file /home/spheres/miroir-wiki/miroir.env -f miroir/compose.yml exec -u www-data wiki php maintenance/runJobs.php
+  ```
+
+- soit remettre la valeur par défaut, en retirant la ligne
+  `$wgJobRunRate = 0;` de `LocalSettings_miroir.php`, puis relancer le
+  service `wiki` (`up -d --force-recreate wiki`), et l'y remettre après
+  l'essai.

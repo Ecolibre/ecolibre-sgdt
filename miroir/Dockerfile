@@ -11,9 +11,13 @@ RUN sed -i 's|http://deb.debian.org|http://archive.debian.org|g' /etc/apt/source
       libfreetype6-dev libxml2-dev imagemagick diffutils \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" intl calendar mysqli gd zip opcache \
+         bcmath exif pcntl \
     && pecl install apcu && docker-php-ext-enable apcu \
     && a2enmod rewrite \
     && rm -rf /var/lib/apt/lists/*
+
+# Limites PHP de la production, relevées le 9 octobre 2026 (lot 22, tâche 6).
+COPY php-miroir.ini /usr/local/etc/php/conf.d/miroir.ini
 
 # URL courtes : $wgScriptPath vide, $wgArticlePath = '/wiki/$1'.
 COPY apache-miroir.conf /etc/apache2/conf-available/miroir.conf

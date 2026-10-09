@@ -263,6 +263,14 @@ Ce que Cyril peut lancer seul, et ce qui relève de fuzzy : voir
 
    Le reste est reconnaissance en lecture seule, ou rédaction à soumettre
    avant publication.
+7. **Un fichier déposé dans un arbre servi par un serveur web s'annonce au
+   préalable**, avec son contenu, son chemin et sa durée de vie prévue. Vaut
+   pour le miroir local comme pour tout autre serveur. Le retrait se vérifie
+   par une mesure — absence du fichier, nombre de requêtes qui l'ont visé
+   dans le journal —, pas par le code de retour de la commande de
+   suppression. Ajoutée le 09/10/2026 : la sonde `limites_tache6.php` de la
+   tâche 6 du lot 22, déposée à la racine du MediaWiki du miroir, n'avait été
+   décrite qu'après coup.
 
 ## Règles impératives (modèle de données)
 - **Aucune virgule dans les noms de tableaux kanban ni de pages** : la virgule est

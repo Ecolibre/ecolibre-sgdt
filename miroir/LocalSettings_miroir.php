@@ -1,9 +1,11 @@
 <?php
 # Miroir local du wiki Ecolibre — lot 22 du SGDT.
 #
-# Reprend la configuration de production (LocalSettings_ecolibre.php) avec
-# exactement neuf écarts, marqués « ÉCART n » ci-dessous et décrits dans
-# miroir/ecarts-avec-la-production.md. Toute autre différence de comportement
+# Reprend la configuration de production (LocalSettings_ecolibre.php). Le
+# miroir compte exactement onze écarts, décrits dans
+# miroir/ecarts-avec-la-production.md : les dix qui relèvent de ce fichier
+# (1 à 9, et 11) sont marqués « ÉCART n » ci-dessous ; le dixième porte sur
+# les modules PHP de l'image (miroir/Dockerfile). Toute autre différence de comportement
 # avec la production est une erreur de ce fichier.
 #
 # Aucun secret ici : les valeurs secrètes se lisent par getenv(), depuis
@@ -71,6 +73,13 @@ $wgCacheDirectory = "$IP/cache/ecolibre";
 $wgUseFileCache = true;
 $wgInvalidateCacheOnLocalSettingsChange = false;
 $wgCachePages = false;
+
+# ÉCART 11 — aucun travail de la file exécuté pendant une requête web.
+# Sur le miroir, une requête de lecture ne doit pas modifier la base, sinon
+# une mesure ne se répète pas. La production laisse la valeur par défaut, 1.
+# Pour éprouver ce qui dépend des travaux : retirer cette ligne, ou lancer
+# maintenance/runJobs.php délibérément.
+$wgJobRunRate = 0;
 
 ## Fichiers
 # ÉCART 9 — images/ecolibre et cache/ecolibre sont vides sur le miroir :
