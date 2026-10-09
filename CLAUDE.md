@@ -459,7 +459,9 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
 
   **Contrôle à faire** après toute écriture sur une page de documentation :
   `smwbrowse` **sur cette page**, pour vérifier qu'elle ne porte que
-  `_MDAT` et `_SKEY`. Une page qui décrit le modèle de données peut le polluer.
+  `_MDAT` et `_SKEY`, plus `_INST` quand elle est volontairement rangée dans
+  une catégorie : `_INST` porte alors cette catégorie et rien d'autre. Une
+  page qui décrit le modèle de données peut le polluer.
 
 - **Les backticks ne protègent rien en wikitexte — ni `<code>`.** Un exemple
   de syntaxe SMW ou de lien écrit entre backticks, ou entre balises `<code>`,
