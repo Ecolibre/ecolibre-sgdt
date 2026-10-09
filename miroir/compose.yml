@@ -1,0 +1,68 @@
+# Miroir local du wiki Ecolibre — lot 22 du SGDT.
+#
+# Toujours lancé avec le fichier d'environnement hors dépôt :
+#   docker compose --env-file /home/spheres/miroir-wiki/miroir.env -f miroir/compose.yml <commande>
+# Voir miroir/README.md.
+
+name: ecolibre-miroir
+
+services:
+  db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MIROIR_DB_ROOT_PASSWORD:?miroir.env manquant}
+      MARIADB_DATABASE: ${MIROIR_DB_NAME:?}
+      MARIADB_USER: ${MIROIR_DB_USER:?}
+      MARIADB_PASSWORD: ${MIROIR_DB_PASSWORD:?}
+    volumes:
+      - db-data:/var/lib/mysql
+      - ${MIROIR_DATA:?}/${MIROIR_DUMP:?}:/dump/ecolibre.sql.gz:ro
+    networks:
+      - interne
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  memcached:
+    image: memcached:1.6-alpine
+    restart: unless-stopped
+    networks:
+      - interne
+
+  wiki:
+    build: .
+    image: ecolibre-miroir-wiki:lot22
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      memcached:
+        condition: service_started
+    environment:
+      MIROIR_DB_SERVER: db
+      MIROIR_DB_NAME: ${MIROIR_DB_NAME:?}
+      MIROIR_DB_USER: ${MIROIR_DB_USER:?}
+      MIROIR_DB_PASSWORD: ${MIROIR_DB_PASSWORD:?}
+      MIROIR_SECRET_KEY: ${MIROIR_SECRET_KEY:?}
+      MIROIR_UPGRADE_KEY: ${MIROIR_UPGRADE_KEY:?}
+    volumes:
+      - ${MIROIR_DATA:?}/coeur/mediawiki-1.39:/var/www/html
+      - ./LocalSettings_miroir.php:/var/www/html/LocalSettings.php:ro
+    ports:
+      - "127.0.0.1:8080:80"
+    networks:
+      - interne
+      - sortie
+
+volumes:
+  db-data:
+
+networks:
+  # Réseau interne : db et memcached n'ont aucune route vers l'extérieur.
+  interne:
+    internal: true
+  # Seul le service wiki y est relié, pour que le port publié fonctionne.
+  sortie:

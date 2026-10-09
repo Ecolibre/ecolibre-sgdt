@@ -65,6 +65,7 @@ versionné, voir `.gitignore`) échappe à ça.
 | `allow Bash(git fetch:*)`, `allow Bash(git check-ignore:*)` | Lecture seule : état du distant, vérification du `.gitignore` | 03/10/2026 |
 | `allow WebFetch(domain:www.mediawiki.org)`, `allow WebFetch(domain:www.wikidata.org)` | Documentation MediaWiki ; données de référence (codes INSEE, taxons) | 03/10/2026 |
 | `allow WebSearch` | Recherche de documentation | 03/10/2026 |
+| `allow Bash(docker:*)` | Pilotage du miroir local du lot 22. Docker tourne en mode sans privilèges, hors du groupe docker : cette règle ne donne pas la racine de la machine | 09/10/2026 |
 
 **`.claude/settings.local.json` doit rester vide** (`allow` et `deny` vides).
 Les permissions vont dans `.claude/settings.json`, jamais dans le fichier
