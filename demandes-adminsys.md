@@ -304,4 +304,8 @@ Par ordre d'urgence.
 - **Financement de l'hébergement.**
 - **Politique de sauvegarde.**
 - **Rotation du mot de passe de `mediawiki_ecolibre_prod`**, exposé en
-  juillet 2026.
+  juillet 2026. Exposé une seconde fois le 9 octobre 2026, dans le terminal
+  de Cyril et dans une conversation claude.ai, par une commande écrite par
+  l'architecte dont le masquage était défectueux. Le compte n'est joignable
+  que depuis le serveur (`$wgDBserver` vaut `localhost`). C'est un second
+  motif à cette demande déjà ouverte, pas une demande nouvelle.

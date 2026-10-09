@@ -271,6 +271,19 @@ Ce que Cyril peut lancer seul, et ce qui relève de fuzzy : voir
    suppression. Ajoutée le 09/10/2026 : la sonde `limites_tache6.php` de la
    tâche 6 du lot 22, déposée à la racine du MediaWiki du miroir, n'avait été
    décrite qu'après coup.
+8. **Un filtre se vérifie sur ce qu'il produit, jamais sur son intention.**
+   Une commande censée masquer un secret s'essaie sur un cas où le secret
+   est présent ; un motif d'exclusion se contrôle en listant ce que
+   l'archive contient. Ajoutée le 09/10/2026 : deux fois dans le lot 22, un
+   filtre écrit par l'architecte n'a pas fait ce qu'il annonçait, une fois
+   en affichant le mot de passe de la base, une fois en laissant un fichier
+   de configuration entrer dans une archive.
+9. **Pas de script du scratchpad tant que le travail tient en quelques
+   lignes dans la commande.** La fenêtre de confirmation ne montre qu'un
+   chemin de fichier : un script nommé rend opaque ce qui serait lisible
+   écrit dans la commande elle-même. Ajoutée le 09/10/2026, après deux
+   refus dans le lot 22 (`verif1.py` et `verif3.py` en tâche 6,
+   `permaliens.sh` en tâche 9).
 
 ## Règles impératives (modèle de données)
 - **Aucune virgule dans les noms de tableaux kanban ni de pages** : la virgule est

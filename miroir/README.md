@@ -10,6 +10,11 @@ part d'un dump de la base et d'une archive du code, pris une fois.
 Avant d'interpréter un résultat surprenant, relire
 [`ecarts-avec-la-production.md`](ecarts-avec-la-production.md).
 
+Le pourquoi du miroir — ce qu'il reproduit, ce qu'il ne reproduit pas, les
+routes écartées — est sur le wiki, page
+[Miroir local du wiki](https://wiki.ecolibre.org/wiki/Miroir_local_du_wiki).
+Ce README porte les commandes, les chemins et le dépannage.
+
 ## Ce qui tourne
 
 | Service | Image | Rôle | Port publié |
