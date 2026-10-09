@@ -199,6 +199,28 @@ qu'un wiki, et `LocalSettings.php` est directement celui du miroir.
 docker compose --env-file /home/spheres/miroir-wiki/miroir.env -f miroir/compose.yml exec -u www-data wiki php maintenance/runJobs.php
 ```
 
+## Changer la configuration du miroir
+
+**Modifier `miroir/LocalSettings_miroir.php` ne suffit pas à changer le
+miroir.** Le fichier est monté seul dans le conteneur : un éditeur qui le
+remplace au lieu de le réécrire sur place laisse le conteneur sur
+l'ancienne version. Après tout changement de configuration — pas seulement
+la levée de l'écart 11 —, recréer le conteneur :
+
+```
+docker compose --env-file /home/spheres/miroir-wiki/miroir.env -f miroir/compose.yml up -d --force-recreate --wait wiki
+```
+
+**Vérifier qu'un réglage a vraiment pris par sa valeur effective**, lue dans
+le conteneur, et non par le contenu du fichier côté hôte. Par exemple, pour
+`$wgJobRunRate` :
+
+```
+docker compose --env-file /home/spheres/miroir-wiki/miroir.env -f miroir/compose.yml exec -T -u www-data wiki php maintenance/getConfiguration.php --settings=wgJobRunRate --format=json
+```
+
+doit rendre `{"wgJobRunRate":0}` sur le miroir livré.
+
 ## Arrêter, redémarrer, détruire
 
 ```
