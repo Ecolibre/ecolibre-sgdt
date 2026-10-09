@@ -84,7 +84,7 @@ Et dans ce dépôt : `methode-de-travail.md` décrit le protocole entre les inte
   reformuler ou compléter une entrée au milieu de la page reste une
   réécriture complète par `wiki-put.sh`. *Limites connues du SGDT* a été
   réorganisée le 6 septembre 2026 (provenance en tête, liste en fin de
-  page, commentaire garde-fou collé à la dernière entrée) pour rendre ce
+  page, commentaire garde-fou placé avant la liste) pour rendre ce
   script utilisable sur elle.
 - `bin/wiki-api.sh "chaîne de paramètres"` — exécuter n'importe quel appel de
   lecture de l'API MediaWiki en GET (`smwbrowse`, `siteinfo`, `allpages`,
