@@ -108,7 +108,7 @@ Une étiquette ne se choisit ni par prudence ni par politesse. Marquer VALIDATIO
 
 Trois niveaux, sans note chiffrée : enjeu fort, enjeu moyen, enjeu faible.
 
-Deux points au maximum par lot portent l'enjeu fort. Au-delà, c'est que la hiérarchie n'a pas été faite : la faire avant d'envoyer. Si un troisième enjeu fort apparaît plus tard dans le lot, il se marque fort et l'architecte rétrograde explicitement l'un des deux précédents, en le nommant par son numéro, dans la même réponse. Le plafond ne se contourne pas en silence.
+Deux points au maximum par réponse portent l'enjeu fort. Au-delà, c'est que la hiérarchie n'a pas été faite : la faire avant d'envoyer. Si un troisième enjeu fort apparaît alors que deux points marqués fort sont encore ouverts, il se marque fort et l'architecte rétrograde explicitement l'un des deux, en le nommant par son numéro, dans la même réponse. Un point déjà répondu ne se rétrograde pas. Le plafond ne se contourne pas en silence.
 
 ### Le bloc de décision
 
