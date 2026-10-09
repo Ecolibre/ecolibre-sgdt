@@ -60,13 +60,13 @@ Enfin, sa première ligne nomme son destinataire, et elle annonce les demandes d
 
 ## Format des échanges
 
-Chaque réponse de l'architecte est faite de points numérotés. Chaque point suit cet ordre : le contexte ou le problème, puis la question, puis la suggestion. Le numéro est annoncé avant que le point soit développé, parce que Cyril lit au fil et répond en cours de route. Le but est qu'il puisse répondre « point N : ok » sans retaper un raisonnement identique à la recommandation.
+Chaque réponse de l'architecte est faite de points numérotés. La disposition interne d'un point est décrite plus bas, à la section "La forme d'un point". Le numéro est annoncé avant que le point soit développé, parce que Cyril lit au fil et répond en cours de route. Le but est qu'il puisse répondre « point N : ok » sans retaper un raisonnement identique à la recommandation.
 
 La numérotation court sur toute la conversation : chaque réponse reprend au numéro suivant. Un numéro désigne ainsi un seul point, y compris à la clôture, qui doit retrouver chaque arbitrage dans le fil. Un point resté sans réponse garde son numéro.
 
 Chaque réponse s'ouvre sur une ligne d'état : les points acquis depuis la réponse précédente, ceux en cours, ceux encore ouverts. Le 3 octobre 2026, des points acceptés sans accusé de réception ont paru laissés de côté.
 
-Une simple étape reste un point court : le contexte en une ligne, l'action demandée pour question, le texte à coller pour suggestion. Une information qui n'appelle aucune décision n'est pas un point : elle va dans le contexte du point qu'elle éclaire.
+Une simple étape reste un point court, à la même forme que les autres : l'action demandée tient lieu de question, le texte à coller tient lieu de proposition, et le contexte passe sous le séparateur, en une ligne. Une information qui n'appelle aucune décision n'est pas un point : elle va dans le contexte du point qu'elle éclaire.
 
 Chaque étape dit à Cyril exactement quoi faire : quel texte coller, où, et quoi faire du retour. Un seul texte à coller à la fois, contenant tout ce dont son destinataire a besoin.
 
@@ -77,6 +77,66 @@ Une consigne à la fois. Jamais de consigne tant qu'un arbitrage reste ouvert : 
 Une consigne corrigée est redonnée entière, prête à copier. Jamais de passage à remplacer.
 
 Quand Cyril travaille sur téléphone, les rapports doivent tenir en un seul bloc copiable.
+
+## La forme d'un point
+
+Révisé le 8 octobre 2026. Motif : un seul texte servait deux lecteurs aux besoins opposés, celui qui décide et veut décider vite, celui qui relit et clôt le lot et a besoin de toute la trace. La trace est conservée intégralement, mais elle passe sous un séparateur. Rien n'est retiré, tout est déplacé.
+
+### La ligne d'ouverture
+
+Chaque point s'ouvre sur une ligne unique, et une seule : numéro, étiquette, niveau d'enjeu, titre, puis la date s'il y en a une réelle.
+
+Exemple : 12. ARBITRAGE - enjeu fort - Nom de la propriété de rattachement - 8 octobre 2026
+
+La date n'apparaît que si elle est réelle et vérifiée : date d'une mesure, d'une décision rendue, d'une échéance. Jamais une date de rédaction, jamais une approximation. Un point sans date réelle s'arrête au titre.
+
+### Les quatre étiquettes
+
+L'étiquette dit ce qui est attendu de Cyril, et rien d'autre.
+
+FAIT : il manque une information que Cyril est seul à détenir. Elle ne se mesure pas et ne se déduit pas.
+
+ARBITRAGE : deux options au moins se défendent, le choix lui appartient.
+
+VALIDATION : l'architecte a une réponse, et il l'applique sauf objection.
+
+INFO : rien à faire, c'est consigné.
+
+Une étiquette ne se choisit ni par prudence ni par politesse. Marquer VALIDATION ce qui est un arbitrage fait passer une décision de Cyril pour une décision de l'architecte. Marquer ARBITRAGE ce dont on connaît la réponse lui renvoie un travail déjà fait.
+
+### Les trois niveaux d'enjeu
+
+Trois niveaux, sans note chiffrée : enjeu fort, enjeu moyen, enjeu faible.
+
+Deux points au maximum par lot portent l'enjeu fort. Au-delà, c'est que la hiérarchie n'a pas été faite : la faire avant d'envoyer. Si un troisième enjeu fort apparaît plus tard dans le lot, il se marque fort et l'architecte rétrograde explicitement l'un des deux précédents, en le nommant par son numéro, dans la même réponse. Le plafond ne se contourne pas en silence.
+
+### Le bloc de décision
+
+Sous la ligne d'ouverture, dans cet ordre, sans en-tête de champ : la question, en trois lignes au maximum ; la proposition de l'architecte, en deux lignes au maximum ; la décision par défaut, en une phrase, sous la forme "sans réponse de ta part, j'applique X".
+
+Cette décision par défaut est obligatoire sur tout point VALIDATION. C'est elle qui permet de sauter un point en connaissance de cause : sans elle, le silence devient un risque et oblige à lire.
+
+Sur ARBITRAGE et sur FAIT, il n'y a pas de décision par défaut : c'est le sens même de l'étiquette, et en inventer une reviendrait à trancher à la place de Cyril. La ligne devient alors la conséquence du silence, quand elle mérite d'être dite : "sans réponse de ta part, ce point reste ouvert et rien n'avance dessus". Sur INFO, pas de ligne.
+
+Épreuve de l'étiquette : si l'architecte ne sait pas quoi écrire comme décision par défaut sous un point marqué VALIDATION, c'est que le point n'est pas une validation. Le reclasser.
+
+Épreuve de la limite : si la question ne tient pas en trois lignes, ce n'est pas la limite qui est trop courte, c'est que le point en contient plusieurs. Le couper.
+
+### Le séparateur et le contexte
+
+Une ligne de séparation, puis le contexte.
+
+Le contexte est écrit pour la trace et pour la relecture de l'architecte : d'où vient le point, ce qui a été mesuré et quand, les options écartées et leur motif, les renvois aux pages du wiki et aux rapports du dossier travaux. Il garde tout ce que la procédure antérieure demandait, à la même profondeur. Il n'est pas abrégé pour alléger le haut : ce qui disparaît du contexte disparaît de la clôture du lot.
+
+Cyril n'y descend que si l'étiquette le lui demande.
+
+### Ce qui ne fait pas un point
+
+Une décision mineure ne se soumet pas. Trois conditions cumulatives : l'impact est faible, c'est-à-dire réversible, local, sans effet sur la modélisation ni sur ce qu'un contributeur lira ; l'architecte n'a pas de doute réel sur la meilleure option ; aucun arbitrage déjà rendu ne porte dessus. Si l'une des trois manque, cela reste un point.
+
+Ces décisions se reprennent en fin de recap, dans une liste, une phrase chacune, sans développement. Cette liste est la contrepartie du seuil : c'est l'architecte qui juge de ce qui est mineur, et sans elle il se donnerait à la fois le pouvoir de trancher et celui de masquer.
+
+Deux conséquences. INFO ne sert plus qu'à ce que Cyril doit savoir, pas à ce que l'architecte a fait. Et l'enjeu faible n'est plus le petit sujet, c'est le petit sujet sur lequel l'architecte n'a pas la réponse.
 
 ## Le destinataire de chaque texte
 
