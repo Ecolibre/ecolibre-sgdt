@@ -50,6 +50,12 @@
 # connecté : un contrôle sur chaque appel doublerait toutes les lectures.
 # Ajouté le 8 octobre 2026 (lot 21, tâche 15), après une lecture de verrou
 # faussée par une session expirée à la tâche 14.
+#
+# Pour éprouver ce cas : pointer SGDT_PRIVE sur un dossier contenant un
+# .cookies.txt vide. Renommer le vrai fichier ne teste rien : le script
+# retombe alors dans le cas « aucun fichier de cookies trouvé », où il n'y a
+# rien à avertir. Seul un fichier présent mais périmé déclenche
+# l'avertissement.
 set -euo pipefail
 
 readonly WIKI_API="https://wiki.ecolibre.org/api.php"

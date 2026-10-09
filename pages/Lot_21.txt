@@ -112,12 +112,12 @@ Arrêtée du 6 au 8 octobre 2026, après la phase de mesure. Elle déborde l'obj
 
 Le choix de l'unité principale reste une décision collective, qui engage tous les ateliers partenaires : celui du 4 octobre 2026, l'unité SI cohérente, est provisoire et se rouvre au premier partenaire.
 
-Les descriptions des propriétés de diamètre nominal et secondaire prescrivent le point décimal, que l'installation rejette, et le diamètre secondaire sépare ses valeurs par la virgule, qui découpe une virgule décimale (entrée 57 des Limites connues). Aucune valeur n'en dépend. Depuis le 8 octobre 2026, ces deux propriétés ne sont plus reprises par ce lot : elles se vident et leur sort appartient au [[Lot 26 — Renommage des propriétés par domaine|lot 26]]. Elles sont libres au 8 octobre 2026 et doivent le rester, les corriger les verrouillant pour rien.
+Les descriptions des propriétés de diamètre nominal et secondaire prescrivent le point décimal, que l'installation rejette, et le diamètre secondaire sépare ses valeurs par la virgule, qui découpe une virgule décimale (entrée 57 des Limites connues). Aucune valeur n'en dépend. Depuis le 8 octobre 2026, ces deux propriétés ne sont plus reprises par ce lot : elles se vident et leur sort appartient au [[Lot 26 — Renommage des propriétés par domaine|lot 26]]. Il n'y a donc plus lieu de les corriger ici, non parce qu'une écriture les verrouillerait, ce verrou se levant en quelques jours, mais parce qu'elles ne sont plus du ressort de ce lot.
 
 Quatre arbitrages restent à rendre avant la première écriture dans l'espace Attribut, et les deux premiers seuls sont bloquants :
 
 * le vocabulaire des rôles, et sa forme : énumération fermée, ou pages d'un vocabulaire ouvert ;
-* les noms des propriétés, celles du socle comme celles que portent les pages de grandeur et d'unité, puisqu'une déclaration neuve doit être juste du premier coup ;
+* les noms des propriétés, celles du socle comme celles que portent les pages de grandeur et d'unité. Le motif n'est pas le verrou, qui se lève en quelques jours, mais la fédération : un nom de propriété engage tous les wikis partenaires, et le renommer relève d'un lot entier, le [[Lot 26 — Renommage des propriétés par domaine|lot 26]] ;
 * le nom du champ qui conserve la forme d'origine d'une tolérance ;
 * la liste des grandeurs à créer en premier.
 
