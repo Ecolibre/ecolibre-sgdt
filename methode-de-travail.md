@@ -120,6 +120,8 @@ Un aperçu ne se juge pas seul. Le 3 octobre 2026, l'aperçu d'un retrait, dont 
 
 **Un garde-fou s'éprouve en rejouant l'erreur d'origine**, dans une session ou une conversation neuve, qui ignore qu'on la teste. Une conversation qui le sait s'y prépare, et sa réussite ne prouve rien. Le garde-fou du lot 34 a été éprouvé ainsi, dans les deux sens : l'ancien message d'ouverture, collé dans une session neuve de l'exécuteur, a été refusé en une ligne, sans aucune commande ; un texte destiné à l'exécuteur, collé dans une conversation neuve, a été signalé d'emblée.
 
+**Une entrée des *Limites connues* énonce ce qui a été observé, avec son compte et sa date, et ne généralise pas au-delà.** Du 6 au 9 octobre 2026, quatre tâches consécutives du lot 21 n'ont fait que réparer des entrées écrites les jours précédents : chaque fois, une poignée d'observations avait été inscrite au présent intemporel, et un cas de plus la démentait. « Six gels sur sept levés en deux à quatre jours, le septième non levé après cinq » se corrige en changeant un chiffre ; « le gel se résorbe en deux à quatre jours » se corrige en réécrivant l'entrée, et se propage d'ici là dans tous les textes qui la citent. Une règle de conduite tirée d'un petit nombre de cas se marque comme telle : repère, pas mesure.
+
 ## Ce qui rattrape les erreurs
 
 Aucune des étapes du cycle, prise seule.
