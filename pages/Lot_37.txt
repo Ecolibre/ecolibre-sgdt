@@ -1,0 +1,33 @@
+{{Lot
+|Work_package_number=37
+|Work_package_status=identifié
+|Work_package_summary=Emporter le contenu du wiki sur une clé, pour le consulter sur une machine privée de connexion.
+|Work_package_depends_on=Lot 35 — Récupération des fichiers téléversés
+|Work_package_overlaps=Lot 36 — Sauvegarde du wiki
+}}
+
+== Objet ==
+
+Objectif distinct, arbitré le 8 octobre 2026. Le lot 22 l'avait explicitement exclu de son périmètre et renvoyé après lui.
+
+== Ce qui est déjà tranché ==
+
+'''La consultation seulement.''' Écrire sur la copie hors ligne est l'objet du lot 38, et sort de celui-ci.
+
+'''Rien de ce qui est emporté ne revient vers la production.'''
+
+'''Le volume à emporter est connu.''' Mesuré le 10 octobre 2026 : 392,5 Mo de fichiers téléversés, et une base de 11 200 784 octets une fois décompressée.
+
+== Points ouverts ==
+
+La forme n'est pas arrêtée : export statique, copie de la base avec un wiki installé sur la machine isolée, ou wiki lancé depuis la clé.
+
+La machine isolée n'est pas désignée. Le poste cwl-toshiba, 3,8 Go de mémoire, avait été réservé à cet objectif le 8 octobre 2026 : à confirmer.
+
+== Dépendances ==
+
+Dépend du lot 35. Recoupe le lot 36. Le lot 38 en dépend.
+
+----
+
+Voir aussi la [[Gestion des lots]].

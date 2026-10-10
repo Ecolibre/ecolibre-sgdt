@@ -1,0 +1,33 @@
+{{Lot
+|Work_package_number=35
+|Work_package_status=identifié
+|Work_package_summary=Récupérer par l'API les fichiers téléversés sur le wiki, et les déposer sur le miroir local pour que ses images s'affichent.
+}}
+
+== Objet ==
+
+Le miroir local monté par le lot 22 porte les pages de fichier, mais pas les fichiers eux-mêmes : ses liens d'image sont cassés. Ce lot produit l'outil qui va chercher ces fichiers. Les lots 36 et 37 en ont besoin eux aussi, puisqu'ils emportent le même contenu hors du serveur.
+
+== Ce qui est déjà tranché ==
+
+'''Les fichiers se téléchargent par l'API, et non depuis l'archive déposée sur le serveur le 17 août 2026.''' Le wiki se lit en anonyme : cette route ne demande ni accès SSH ni intervention de quiconque, et elle se rejoue autant de fois qu'il le faut.
+
+'''Le volume est connu.''' Mesuré le 10 octobre 2026 : 79 fichiers téléversés, 392,5 Mo au total, tous en JPEG ou en PNG, le plus gros à 7,7 Mo. Aucun fichier n'a été téléversé depuis le 17 août 2026.
+
+'''Les vignettes ne se récupèrent pas.''' Elles se régénèrent à la demande, ImageMagick étant présent dans l'image du miroir.
+
+'''L'archive de 495 Mo reste le repli''', si des versions anciennes de fichiers venaient un jour à manquer.
+
+== Points ouverts ==
+
+L'emplacement des fichiers récupérés n'est pas arrêté. Il dépend de ce que décideront les lots 36 et 37.
+
+Personne n'a vérifié que les 79 fichiers suffisent : une page de fichier peut exister sans son fichier, et un fichier sans sa page. À mesurer.
+
+== Dépendances ==
+
+Rien en amont. Les lots 36 et 37 en dépendent.
+
+----
+
+Voir aussi la [[Gestion des lots]].

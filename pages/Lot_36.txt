@@ -1,0 +1,35 @@
+{{Lot
+|Work_package_number=36
+|Work_package_status=identifié
+|Work_package_summary=Se doter d'une sauvegarde du wiki que l'on contrôle soi-même, et en faire la preuve en la remontant sur le miroir local.
+|Work_package_depends_on=Lot 35 — Récupération des fichiers téléversés
+|Work_package_overlaps=Lot 37 — Consultation hors ligne
+}}
+
+== Objet ==
+
+Le lot 22 a exclu la sauvegarde de son périmètre, en la renvoyant à la gouvernance. Ce lot reprend le sujet par le côté où il ne demande rien à personne.
+
+== Ce qui est déjà tranché ==
+
+'''Il s'agit de la sauvegarde de Cyril, pas de la politique de sauvegarde du serveur.''' Celle-ci protège toute la ferme hébergée par l'adminsys, et relèvera du lot 24, avec lui.
+
+'''Une sauvegarde n'est validée qu'une fois remontée sur le miroir local du lot 22.''' Une sauvegarde jamais restaurée n'est pas une sauvegarde, et le miroir est précisément la machine qui restaure.
+
+'''Le dump de la base se produit par mysqldump, depuis le compte de Cyril.''' Route établie le 9 octobre 2026 : lire la base d'Ecolibre ne modifie aucune configuration et ne concerne aucun autre wiki de la ferme.
+
+== Points ouverts ==
+
+Rien n'est arrêté sur la destination de la sauvegarde, sa fréquence, le nombre d'exemplaires gardés, ni la machine sur laquelle tourne l'automatisme.
+
+Une sauvegarde emporte la table des comptes, donc des empreintes de mots de passe et des adresses de courriel. Son chiffrement et l'endroit où elle est rangée ne sont pas tranchés.
+
+La configuration de production porte des secrets. S'il faut la sauvegarder, et comment, n'est pas tranché.
+
+== Dépendances ==
+
+Dépend du lot 35 pour les fichiers téléversés. Recoupe le lot 37 : les deux emportent le même contenu hors du serveur.
+
+----
+
+Voir aussi la [[Gestion des lots]].

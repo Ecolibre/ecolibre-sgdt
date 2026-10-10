@@ -1,0 +1,30 @@
+{{Lot
+|Work_package_number=38
+|Work_package_status=identifié
+|Work_package_summary=Écrire sur une copie hors ligne du wiki et en rapporter le travail, sans rompre la séquence des références Base 36.
+|Work_package_depends_on=Lot 37 — Consultation hors ligne
+}}
+
+== Objet ==
+
+Sujet soulevé le 10 octobre 2026 et volontairement laissé pour plus tard. Rien n'y est cadré, et la discussion n'a pas eu lieu.
+
+== Ce qui est déjà tranché ==
+
+Deux contraintes héritées, et rien d'autre.
+
+'''Aucune référence Base 36 n'est créée hors ligne.''' Règle posée par le lot 22 : la séquence est unique et partagée, et une création locale produirait un doublon à la première synchronisation. Trouver comment lever cette contrainte est précisément l'objet de ce lot.
+
+'''MediaWiki ne réconcilie pas deux historiques.''' Deux personnes qui écrivent sur deux copies d'un même wiki ne voient pas leurs modifications fusionner.
+
+== Points ouverts ==
+
+Tout. Cyril pense qu'il existe plusieurs manières de traiter la question des références Base 36 ; aucune n'a été examinée.
+
+== Dépendances ==
+
+Dépend du lot 37.
+
+----
+
+Voir aussi la [[Gestion des lots]].
