@@ -22,7 +22,12 @@
       "Read(//home/spheres/.ssh/**)",
       "Read(//home/spheres/miroir-wiki/**/LocalSettings.php)",
       "Read(//home/spheres/miroir-wiki/*.sql.gz)",
-      "Read(//home/spheres/miroir-wiki/*.sql)"
+      "Read(//home/spheres/miroir-wiki/*.sql)",
+      "Read(//home/spheres/miroir-wiki/*.env)",
+      "Read(//home/spheres/miroir-wiki/**/*.env)",
+      "Edit(//home/spheres/miroir-wiki/*.env)",
+      "Read(//home/spheres/miroir-wiki/**/*.sql)",
+      "Read(//home/spheres/miroir-wiki/**/*.sql.gz)"
     ],
     "ask": [
       "Bash(git reset --hard:*)",
@@ -78,8 +83,8 @@
       "Bash(git show:*)",
       "Bash(cut:*)",
       "Bash(tee:*)",
-      "Read(//home/spheres/miroir-wiki/**)",
-      "Edit(//home/spheres/miroir-wiki/**)"
+      "Read(//home/spheres/miroir-wiki/coeur/**)",
+      "Edit(//home/spheres/miroir-wiki/coeur/**)"
     ]
   }
 }

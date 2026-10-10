@@ -614,6 +614,7 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   commande.
 - `sleep` au premier plan est bloqué par l'environnement Claude Code, avec le message « Blocked: sleep 60 followed by… ». Pour une pause fixe, lancer `sleep` en arrière-plan et attendre sa notification de fin. Pour attendre la file de travaux, `bin/wiki-wait-jobs.sh`. Mesuré le 4 octobre 2026, lot 21 tâche 8.
 - Un fichier d'ajout ne contient qu'une seule entrée, et `bin/wiki-append.sh` ne s'appelle qu'une fois par entrée. Cinq entrées ajoutées ensemble coûtent une seule révision mais se défont ensemble ; cinq appels coûtent cinq révisions et chacune s'annule seule. La règle existait déjà et une consigne du 6 octobre 2026 l'a contredite : c'est la consigne qui était en tort.
+- **Une interdiction `Read()` sur un fichier l'emporte sur une autorisation portant sur son dossier parent, et elle s'applique aux commandes shell, pas seulement à l'outil de lecture de fichier.** Mesuré le 10 octobre 2026 par deux refus : `cat /home/spheres/miroir-wiki/coeur/mediawiki-1.39/LocalSettings.php | wc -c`, alors que tout `miroir-wiki/**` était autorisé, refusé avec « denied » ; puis `cat /home/spheres/miroir-wiki/miroir.env | wc -c`, refusé de même, sans qu'aucun octet ne s'affiche. Le premier refus établit la préséance sur l'autorisation du dossier parent, les deux établissent l'application aux commandes shell. Vaut pour tout couple autorisation plus interdiction : l'autorisation de dossier ne lève pas l'interdiction de fichier. L'inverse ne tient pas : une interdiction ne ferme que ce qu'elle nomme, et une autorisation de dossier ouvre tout le reste. D'où la préférence pour une autorisation restreinte au sous-dossier sans secret plutôt qu'une liste d'interdictions toujours en retard sur le contenu du dossier.
 
 ## Garde-fous d'exécution (dépôt git)
 
@@ -740,6 +741,17 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   ses règles, à l'insu de celui qui clique. Sur le lot 34, ce relevé a prouvé
   à chaque tâche qu'aucune autorisation permanente n'avait été ajoutée, là
   où l'aperçu et l'annonce ne prouvaient rien. Ajoutée le 4 octobre 2026.
+- **L'exécuteur ne voit pas les fenêtres de confirmation.** Une commande
+  acceptée dans une fenêtre et une commande passée sans fenêtre lui rendent
+  le même résultat : il ne peut pas les distinguer. Seuls les refus par
+  interdiction se lisent avec certitude, puisqu'ils renvoient « denied ».
+  Ne jamais écrire qu'une commande « passe sans fenêtre » : c'est une
+  déduction, pas une mesure, et seule la personne devant l'écran peut la
+  faire. Pour mesurer une permission, annoncer chaque commande dans un
+  message séparé avant de la lancer, une seule à la fois, et attendre que
+  Cyril dise ce qu'il a vu. Ajoutée le 10 octobre 2026 : un compte rendu de
+  ce jour avait affirmé qu'un `ls -la` passait sans fenêtre, sans pouvoir
+  l'avoir observé.
 
 ## Ne jamais faire
 - Ne pas toucher au `composer.json` de MediaWiki (utiliser `composer.local.json`).
