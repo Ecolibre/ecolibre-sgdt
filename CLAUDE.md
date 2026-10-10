@@ -615,6 +615,7 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
 - `sleep` au premier plan est bloqué par l'environnement Claude Code, avec le message « Blocked: sleep 60 followed by… ». Pour une pause fixe, lancer `sleep` en arrière-plan et attendre sa notification de fin. Pour attendre la file de travaux, `bin/wiki-wait-jobs.sh`. Mesuré le 4 octobre 2026, lot 21 tâche 8.
 - Un fichier d'ajout ne contient qu'une seule entrée, et `bin/wiki-append.sh` ne s'appelle qu'une fois par entrée. Cinq entrées ajoutées ensemble coûtent une seule révision mais se défont ensemble ; cinq appels coûtent cinq révisions et chacune s'annule seule. La règle existait déjà et une consigne du 6 octobre 2026 l'a contredite : c'est la consigne qui était en tort.
 - **Une interdiction `Read()` sur un fichier l'emporte sur une autorisation portant sur son dossier parent, et elle s'applique aux commandes shell, pas seulement à l'outil de lecture de fichier.** Mesuré le 10 octobre 2026 par deux refus : `cat /home/spheres/miroir-wiki/coeur/mediawiki-1.39/LocalSettings.php | wc -c`, alors que tout `miroir-wiki/**` était autorisé, refusé avec « denied » ; puis `cat /home/spheres/miroir-wiki/miroir.env | wc -c`, refusé de même, sans qu'aucun octet ne s'affiche. Le premier refus établit la préséance sur l'autorisation du dossier parent, les deux établissent l'application aux commandes shell. Vaut pour tout couple autorisation plus interdiction : l'autorisation de dossier ne lève pas l'interdiction de fichier. L'inverse ne tient pas : une interdiction ne ferme que ce qu'elle nomme, et une autorisation de dossier ouvre tout le reste. D'où la préférence pour une autorisation restreinte au sous-dossier sans secret plutôt qu'une liste d'interdictions toujours en retard sur le contenu du dossier.
+- **Où porter l'effort contre les fenêtres de confirmation.** Classement des 48 confirmations relevées le 10 octobre 2026 : 13 contrôles de forme, 13 défauts de permission, 21 barrières de périmètre, une non classée. Les barrières de périmètre, famille la plus nombreuse, ne relèvent ni des règles de conduite ni des permissions de commande, mais d'une autorisation de chemin ; celles du chantier miroir ont été traitées le même jour, voir le tableau des permissions de `installation-nouveau-poste.md`.
 
 ## Garde-fous d'exécution (dépôt git)
 
@@ -636,20 +637,51 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   façon d'écrire.
 
   **Le critère : simplifier tant que la commande reste lisible et que la
-  simplification supprime effectivement la confirmation.** Une boucle sur
-  trois appels identiques sans traitement est à dérouler ; une boucle sur
-  huit appels avec traitement en sortie est à garder — la dérouler donnerait
-  vingt-quatre lignes pour éviter une fenêtre, ce qui est plus lourd que le
-  mal.
+  simplification supprime effectivement la confirmation.** Pour une boucle,
+  ce qui décide est le nombre d'itérations et la nature de la liste, pas la
+  présence d'un traitement en sortie. Liste écrite en clair et six
+  itérations ou moins : dérouler, même avec traitement. Au-delà, ou liste
+  calculée : garder la boucle. Le critère précédent, qui gardait toute
+  boucle avec traitement en sortie, ne décidait plus rien : mesuré le
+  10 octobre 2026, la plupart des boucles écrites ont un traitement en
+  sortie, et l'exception couvrait presque tous les cas.
 
-  **Pas de variable de chemin.** Écrire le chemin du scratchpad en toutes
-  lettres dans chaque commande, jamais par une variable abrégée du type
-  `S=/tmp/…`. Une variable dans une redirection ou un argument déclenche un
-  contrôle de forme à elle seule : sur les confirmations relevées entre le
-  11 septembre et le 3 octobre 2026, c'est devenu la première cause, devant
-  toutes les autres réunies. La consigne précédente, qui recommandait de
-  garder la variable pour la lisibilité, était une erreur d'arbitrage :
-  elle échangeait quelques lignes de lecture contre une fenêtre par commande.
+  Une boucle dont la liste est calculée, du type
+  `for u in $(grep -o ...)`, ne peut pas être déroulée. La confirmation est
+  inévitable : l'accepter, ou en faire un script de `bin/` si le besoin
+  revient.
+
+  **Pas de variable, de quelque nature que ce soit.** Écrire le chemin du
+  scratchpad en toutes lettres dans chaque commande, jamais par une
+  variable abrégée du type `S=/tmp/…`. La consigne précédente, qui
+  recommandait de garder la variable pour la lisibilité, était une erreur
+  d'arbitrage : elle échangeait quelques lignes de lecture contre une
+  fenêtre par commande. Une variable dans une redirection ou
+  un argument déclenche un contrôle de forme à elle seule : sur les
+  confirmations relevées entre le 11 septembre et le 3 octobre 2026, la
+  variable de chemin était devenue la première cause, devant toutes les
+  autres réunies. Sur 48 confirmations relevées le 10 octobre 2026, aucune
+  n'a été causée par une variable de chemin, et les chemins du scratchpad
+  y étaient écrits en toutes lettres. Le contrôle porte cependant sur toute variable,
+  pas sur les seules variables de chemin : six des treize contrôles de
+  forme du 10 octobre viennent d'une variable d'un autre type. Trois types
+  constatés ce jour-là, et la conduite pour chacun :
+  - **variable de boucle** : voir le critère des boucles ci-dessus ;
+  - **`${PIPESTATUS[0]}`**, pour récupérer le code de sortie du premier
+    maillon d'un tuyau : aucun contournement propre, il faudrait supprimer
+    le tuyau, donc ajouter une écriture. Trois occurrences le 10 octobre.
+    Par la règle sur les constructions refusées deux fois, c'est un
+    candidat à un script de `bin/`. Pas de script dédié : les trois
+    occurrences du 10 octobre viennent d'un même diagnostic, et le besoin
+    se contourne en laissant passer le texte d'erreur plutôt qu'en relevant
+    le code de sortie. À rouvrir si la construction réapparaît dans une
+    autre tâche ;
+  - **variable d'environnement qui est l'objet même de la commande**, du
+    type `SGDT_PRIVE=... commande` : la variable ne peut pas disparaître.
+    L'affectation préfixée pousse en outre le nom du script en deuxième
+    position et lui fait perdre sa règle `allow`, ce qui ajoute une
+    seconde cause à la même fenêtre.
+
   Quand le chemin complet rend la commande illisible, écrire un script dans
   le scratchpad avec le chemin en dur et l'appeler, plutôt que d'abréger par
   une variable. Ne pas se placer dans le scratchpad par `cd` : le répertoire
@@ -691,6 +723,21 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   ligne a pour effet de sortir leur contenu du champ de vision de Cyril :
   ce complément le remet. Le contenu va dans le même message que le
   lancement, pas dans un tour séparé.
+
+  Relevé du 10 octobre 2026 : c'est la règle de cette section qui a été le
+  plus souvent enfreinte — quatre fois, dans quatre sessions distinctes :
+  `historique19.sh`, `mesure.py`, `verif1.py` avec `verif3.py`, et
+  `permaliens.sh` — et la seule dont le non-respect ait exposé à un risque
+  réel, puisqu'un script exécuté sans que son contenu soit visible échappe
+  à l'ensemble des interdictions. La règle « ne pas conclure sur un
+  aperçu » a de son côté été appliquée plusieurs fois le même jour : c'est
+  par elle que les comptes de `.claude/settings.json` ont été vérifiés
+  après écriture, et c'est elle qui a fait corriger deux affirmations
+  déduites et non mesurées. Dans les
+  quatre cas, la règle a fini par être respectée après refus. Dans le
+  dernier, l'exécuteur a écrit les cinq lignes directement dans la commande
+  plutôt que dans un script, ce qui est la forme de conformité la plus
+  simple.
 - **Ne pas conclure sur un aperçu — vérifier après coup par un compte.**
   L'affichage tronque : le 21 août 2026, un aperçu d'écriture de
   `.claude/settings.json` a montré à trois reprises un bloc `allow` amputé
