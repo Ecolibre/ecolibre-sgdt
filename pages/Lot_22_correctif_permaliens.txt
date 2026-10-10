@@ -1,0 +1,82 @@
+{{Lot
+|Work_package_number=22
+|Work_package_status=clos
+|Work_package_summary=Monter un miroir local du wiki, pour éprouver un changement de configuration avant de le demander en production.
+|Work_package_opening_date=2026-10-09
+|Work_package_delivery_date=2026-10-09
+|Work_package_closure_date=2026-10-10
+|Work_package_closure_report=https://github.com/Ecolibre/ecolibre-sgdt/blob/302e513ab8ed3607fde0d033640502d6be95ebdd/travaux/lot-22-cloture.md
+|Work_package_produces=Miroir local du wiki
+}}
+
+== Objet ==
+
+Ce lot naît d'un incident. Le 18 août 2026, une modification de configuration appliquée directement sur la production a mis le wiki hors service pour tout le monde, pages et API confondues, faute d'une étape préalable que personne n'avait identifiée. Le lot 24 en a tiré sa règle, tout changement de configuration se vérifie d'abord sur le miroir local, et il reste à l'arrêt tant que ce miroir n'existe pas.
+
+== Ce qui est déjà tranché ==
+
+'''Docker plutôt qu'une installation native.''' La production tourne sur PHP 7.4, en fin de vie, et l'état doit pouvoir être remis à zéro entre deux essais.
+
+'''Restauration du dump complet, pas d'un extrait.''' Les tables de SMW et celles du cœur dépendent les unes des autres.
+
+'''Le miroir a sa propre configuration, autonome, et non une surcharge de celle de production.''' Le fichier de production est partagé par toute la ferme hébergée par l'adminsys et porte des secrets : il n'est ni copié dans le dépôt ni monté dans le conteneur. La configuration du miroir est écrite à part, versionnée, et ses écarts avec la production sont tenus à jour.
+
+'''Aucune référence Base 36 n'est créée hors ligne.''' La séquence est unique et partagée ; en créer une localement produirait un doublon à la première synchronisation.
+
+'''La machine hôte est le poste Ubuntu spheres.''' Décision du 8 octobre 2026 : ses 16 Go de mémoire évitent de confondre un défaut de configuration avec un manque de mémoire. Le poste cwl-toshiba, 3,8 Go, est réservé à l'objectif hors réseau qui viendra après ce lot.
+
+'''Le dump est une donnée de production.''' Ni dépôt git, ni dossier synchronisé, et les ports liés à l'interface locale seulement.
+
+'''Le dump est produit par Cyril lui-même, par mysqldump, et non repris de celui que l'adminsys avait déposé.''' Lire la base d'Ecolibre ne modifie aucune configuration et ne concerne aucun autre wiki de la ferme : c'est de la reconnaissance en lecture, que Cyril fait seul. La base décompressée pèse 11 200 784 octets, soit quelques secondes de travail : un dump frais ne coûte pas plus que l'ancien et supprime la question de l'âge des données au lieu de l'arbitrer. Celui en service est du 9 octobre 2026, 2 667 431 octets compressés, 97 tables dont 39 de SMW. L'archive des images déposée le 17 août 2026 reste sur le serveur, non rapatriée.
+
+'''Le cœur de MediaWiki est copié depuis la production, et non reconstruit depuis une image officielle.''' Le disque porte 40 extensions, dont 18 ne déclarent aucune version. Une reconstruction donnerait les mêmes numéros sans le même logiciel, et le miroir existe pour attraper l'effet de bord imprévu.
+
+'''Docker tourne en mode sans privilèges, le compte spheres restant hors du groupe docker et le démon système éteint.''' Appartenir au groupe docker équivaut à la racine de la machine.
+
+'''Les écarts entre le miroir et la production sont tenus à jour dans un fichier du dépôt, à relire avant de conclure qu'un essai a échoué.''' Ils sont douze au 10 octobre 2026.
+
+== Ce qui est écarté, et pourquoi ==
+
+'''Reconstruire le miroir depuis l'image officielle de MediaWiki, plutôt que copier le cœur de production.''' 18 des 40 extensions du disque ne déclarent aucune version. Écarté le 9 octobre 2026.
+
+'''Mettre le compte qui pilote Docker dans le groupe docker.''' Cela équivaut à lui donner la racine de la machine. Écarté le 9 octobre 2026.
+
+Le raisonnement détaillé est sur la page [[Miroir local du wiki]].
+
+== Ce que le lot exclut ==
+
+'''Toute écriture du miroir vers la production.''' Le miroir lit le serveur, il n'écrit jamais dessus : ni page, ni fichier, ni référence Base 36. Un réglage éprouvé sur le miroir est ensuite appliqué par le lot 24, ou demandé à l'adminsys.
+
+'''Les essais eux-mêmes.''' Le lot livre le miroir et la marche à suivre pour le remonter ; il n'éprouve aucun réglage particulier. Le premier réglage à éprouver relève du lot 24, l'installation d'extension du lot 20.
+
+'''Toute montée de version.''' Le miroir reproduit la production telle qu'elle est : PHP 7.4, MediaWiki 1.39.11, Semantic MediaWiki 4.2.0. Éprouver un changement de version est un autre sujet, qui demanderait un second miroir pour servir de témoin.
+
+'''Toute synchronisation continue avec la production.''' Le miroir est une photo restaurée à la demande, jamais un réplica tenu à jour.
+
+'''La politique de sauvegarde de la production.''' Un miroir restauré à la demande n'est pas une sauvegarde. La question relève de la gouvernance, pas de ce lot.
+
+'''La disponibilité du wiki quand le réseau internet est coupé.''' Archive consultable hors ligne, export statique, machine allumée en permanence : objectif distinct, arbitré le 8 octobre 2026, traité après ce lot.
+
+'''L'hébergement du wiki public.''' Que ce soit depuis une machine chez Cyril ou sur une machine louée, ainsi que la sortie du wiki de la ferme hébergée par l'adminsys.
+
+== Points ouverts ==
+
+Les images ne sont pas rapatriées : les pages de fichier existent sans leur fichier, et les liens d'image sont cassés. L'archive du 17 août 2026 reste sur le serveur si le besoin apparaît.
+
+Vingt et un modules PHP de la production manquent au miroir, aucun n'étant atteint par la configuration d'Ecolibre ; un essai qui en emploierait un demande de l'ajouter d'abord. La liste à jour est dans le [https://github.com/Ecolibre/ecolibre-sgdt/blob/20ea2a2cc9d5084d0b7f4fcfb78bc3d0665274c6/miroir/ecarts-avec-la-production.md fichier des écarts avec la production].
+
+== Fichiers produits ==
+
+* [https://github.com/Ecolibre/ecolibre-sgdt/blob/20ea2a2cc9d5084d0b7f4fcfb78bc3d0665274c6/miroir/README.md miroir/README.md] — la marche à suivre pour remonter le miroir depuis zéro, commandes exactes, dans l'ordre.
+* [https://github.com/Ecolibre/ecolibre-sgdt/blob/20ea2a2cc9d5084d0b7f4fcfb78bc3d0665274c6/miroir/compose.yml miroir/compose.yml] — les trois services, wiki, base et memcached, avec leurs volumes et le seul port publié, lié à l'interface locale.
+* [https://github.com/Ecolibre/ecolibre-sgdt/blob/20ea2a2cc9d5084d0b7f4fcfb78bc3d0665274c6/miroir/Dockerfile miroir/Dockerfile] — l'image PHP 7.4 et Apache, avec les modules PHP retenus.
+* [https://github.com/Ecolibre/ecolibre-sgdt/blob/20ea2a2cc9d5084d0b7f4fcfb78bc3d0665274c6/miroir/LocalSettings_miroir.php miroir/LocalSettings_miroir.php] — la configuration du miroir, reprise de la production, chaque écart marqué dans le fichier.
+* [https://github.com/Ecolibre/ecolibre-sgdt/blob/20ea2a2cc9d5084d0b7f4fcfb78bc3d0665274c6/miroir/ecarts-avec-la-production.md miroir/ecarts-avec-la-production.md] — les douze écarts entre le miroir et la production et leur motif, à relire avant de conclure qu'un essai a échoué.
+
+== Dépendances ==
+
+Rien en amont. Le lot 20 en dépend, puisqu'il installe une extension et modifie la configuration du site. Le lot 24, ouvert depuis le 10 septembre 2026, en dépend aussi : sa règle veut que tout changement de configuration soit éprouvé d'abord sur ce miroir.
+
+----
+
+Voir aussi la [[Gestion des lots]].
