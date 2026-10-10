@@ -93,7 +93,12 @@ Inscrites sur la page du lot, section « Ce qui est écarté, et pourquoi »
 - **Le douzième écart, le SAPI** : la production fait tourner PHP en
   `fpm-fcgi`, le miroir en `apache2handler`. Documenté en tâche 13, non
   résorbé, volontairement : un essai qui porte sur un délai d'exécution ne
-  se transpose pas.
+  se transpose pas. Les dix limites PHP vérifiées en tâche 6 restent
+  justes : l'égalité des valeurs entre `apache2/php.ini` et `fpm/php.ini`
+  de la production a été mesurée le 9 octobre 2026 par Cyril, dans son
+  terminal, en session SSH, et non par l'exécuteur. Cette mesure ne vit
+  que dans la conversation claude.ai : aucun fichier du dépôt ni aucune
+  page du wiki ne la porte.
 - **La rotation du mot de passe de `mediawiki_ecolibre_prod`**, demande à
   l'adminsys ouverte depuis juillet 2026, à laquelle ce lot a ajouté un
   second motif. Elle ne dépend pas de ce lot.
@@ -109,16 +114,22 @@ attrapée.
    dans le terminal de Cyril, et il est passé dans une conversation
    claude.ai, le 9 octobre 2026 (`demandes-adminsys.md`, section 2.4).
    **Ce qui l'a attrapée : rien, avant qu'il ne soit trop tard.** Le filtre
-   n'avait pas été essayé sur un cas où le secret est présent ; l'erreur
-   s'est vue à l'affichage même du secret. Aucun rapport de tâche du dépôt
-   ne consigne qui l'a relevée ni à quel moment. Conséquence : la règle 8
-   de `CLAUDE.md`, et le second motif de la demande de rotation.
+   n'avait été essayé sur aucun cas où le secret était présent ; l'erreur
+   s'est vue à l'affichage même du secret. L'architecte a vu le secret dans
+   la sortie collée par Cyril, donc après coup (source : l'architecte,
+   consigne de la tâche 14 ; aucun rapport du dépôt ne le porte). C'est de
+   là que viennent la règle 8 de `CLAUDE.md` et le second motif de la
+   demande de rotation.
 2. **Un motif d'exclusion a laissé un fichier de configuration entrer dans
    une archive.** Un filtre de l'architecte censé tenir la configuration
    hors d'une archive ne l'a pas fait (`CLAUDE.md`, règle 8). **Ce qui
-   l'a attrapée : aucun rapport de tâche du dépôt ne le dit.** La règle 8
-   prescrit désormais le contrôle qui l'aurait attrapée d'avance : lister
-   ce que l'archive contient.
+   l'a attrapée : la vérification qui tranche inscrite dans la consigne
+   elle-même**, qui listait le contenu de l'archive au lieu de relire le
+   motif, au premier essai. L'archive a été refaite avec le motif corrigé,
+   et la nouvelle vérifiée par trois contrôles de liste. Le contrôle a
+   fonctionné ; c'est le filtre qui avait échoué. Aucun rapport du dépôt ne
+   la couvre : cette archive a été faite dans le terminal de Cyril, pas par
+   l'exécuteur (source : l'architecte, consigne de la tâche 14).
 3. **17 extensions sans version déclarée, au lieu de 18.** Chiffre inscrit
    sur la page du lot. **Ce qui l'a attrapée : la liste relevée par Cyril
    sur le serveur**, puis le recompte de la tâche 10, qui lit chaque
@@ -137,9 +148,13 @@ attrapée.
    lancer aucune commande, pas même celles des étapes 1 à 3, comme le veut
    `CLAUDE.md`. Cyril a retiré l'étape et renvoyé la consigne.
 
-Trois des cinq ont été attrapées avant de produire leur effet, par une
-mesure ou par une règle écrite. Les deux qui portaient sur un filtre ne
-l'ont pas été : un filtre jugé sur son intention ne se contrôle pas.
+Trois des cinq ont été attrapées avant de produire leur effet : la
+deuxième par le contrôle de liste, avant que l'archive défectueuse ne
+serve ; la quatrième et la cinquième avant toute écriture. La troisième
+l'a été après coup, le chiffre faux ayant été inscrit sur la page du lot
+puis corrigé en tâche 10. La première ne l'a jamais été. Un filtre jugé
+sur son intention ne se contrôle pas ; jugé sur ce qu'il produit, il se
+contrôle.
 
 ## 7. Ce que les refus de Cyril ont changé
 
@@ -179,9 +194,10 @@ deux filtres défectueux de l'architecte (section 6, erreurs 1 et 2).
   rapports, la règle 9 vient bien de deux refus (tâches 6 et 9) ; la règle
   8 vient des deux filtres de l'architecte ; le refus de la tâche 6 a
   produit la règle 7.
-- **Ce qui a attrapé les deux filtres défectueux n'est écrit nulle part
-  dans le dépôt.** Section 6, erreurs 1 et 2 : laissé tel quel plutôt que
-  supposé.
-- **La page du lot compte encore « onze » écarts**, deux fois (« Ce qui est
-  déjà tranché » et « Fichiers produits »). Aucune écriture sur le wiki dans
-  cette tâche.
+- **Ce qui a attrapé les deux filtres défectueux n'était écrit nulle part
+  dans le dépôt.** Section 6, erreurs 1 et 2 : d'abord laissé tel quel
+  plutôt que supposé, puis complété en tâche 14 sur la réponse de
+  l'architecte, seule source.
+- **La page du lot comptait encore « onze » écarts**, deux fois. L'écriture de
+  clôture de la tâche 14, qui suit ce commit, les porte à douze : ce
+  rapport est écrit avant elle et ne peut pas en rendre compte.

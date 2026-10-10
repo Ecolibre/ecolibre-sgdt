@@ -4,8 +4,9 @@
 # Reprend la configuration de production (LocalSettings_ecolibre.php). Le
 # miroir compte exactement douze écarts, décrits dans
 # miroir/ecarts-avec-la-production.md : les dix qui relèvent de ce fichier
-# (1 à 9, et 11) sont marqués « ÉCART n » ci-dessous ; le dixième porte sur
-# les modules PHP de l'image (miroir/Dockerfile). Toute autre différence de comportement
+# (1 à 9, et 11) sont marqués « ÉCART n » ci-dessous ; le dixième et le
+# douzième portent sur l'image PHP (miroir/Dockerfile) : ses modules PHP,
+# et PHP en module Apache au lieu de FPM. Toute autre différence de comportement
 # avec la production est une erreur de ce fichier.
 #
 # Aucun secret ici : les valeurs secrètes se lisent par getenv(), depuis
