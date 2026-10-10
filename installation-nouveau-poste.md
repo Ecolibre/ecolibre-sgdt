@@ -66,6 +66,10 @@ versionné, voir `.gitignore`) échappe à ça.
 | `allow WebFetch(domain:www.mediawiki.org)`, `allow WebFetch(domain:www.wikidata.org)` | Documentation MediaWiki ; données de référence (codes INSEE, taxons) | 03/10/2026 |
 | `allow WebSearch` | Recherche de documentation | 03/10/2026 |
 | `allow Bash(docker:*)` | Pilotage du miroir local du lot 22. Docker tourne en mode sans privilèges, hors du groupe docker : cette règle ne donne pas la racine de la machine | 09/10/2026 |
+| `deny Read(//home/spheres/miroir-wiki/**/LocalSettings.php)`, `deny Read(//home/spheres/miroir-wiki/*.sql.gz)`, `deny Read(//home/spheres/miroir-wiki/*.sql)` | Le dossier du miroir contient `LocalSettings.php`, qui porte le mot de passe de base et les clés secrètes, et une sauvegarde SQL complète du wiki avec les empreintes de mots de passe des comptes. `Bash(cat:*)` est autorisé sans restriction de chemin | 10/10/2026 |
+| `allow Bash(git rev-list:*)`, `allow Bash(git show:*)`, `allow Bash(cut:*)` | Lecture pure, rien à annuler | 10/10/2026 |
+| `allow Bash(tee:*)` | Écrit, mais `cp`, `mv`, `sed`, `mkdir` et `python3` sont déjà autorisés sans restriction de chemin : `tee` n'ouvre rien de plus | 10/10/2026 |
+| `allow Read(//home/spheres/miroir-wiki/**)`, `allow Edit(//home/spheres/miroir-wiki/**)` | Supprime les confirmations du chantier miroir, bornée par les trois interdictions ci-dessus. Mesuré le 10/10/2026 : `ls -la` sur le dossier passe sans fenêtre, `cat` sur son `LocalSettings.php` est refusé, l'interdiction de fichier l'emporte sur l'autorisation de dossier | 10/10/2026 |
 
 **`.claude/settings.local.json` doit rester vide** (`allow` et `deny` vides).
 Les permissions vont dans `.claude/settings.json`, jamais dans le fichier

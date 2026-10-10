@@ -19,7 +19,10 @@
       "Edit(./.cookies.txt)",
       "Read(./Serveur3/**)",
       "Edit(./Serveur3/**)",
-      "Read(//home/spheres/.ssh/**)"
+      "Read(//home/spheres/.ssh/**)",
+      "Read(//home/spheres/miroir-wiki/**/LocalSettings.php)",
+      "Read(//home/spheres/miroir-wiki/*.sql.gz)",
+      "Read(//home/spheres/miroir-wiki/*.sql)"
     ],
     "ask": [
       "Bash(git reset --hard:*)",
@@ -70,7 +73,13 @@
       "WebFetch(domain:www.mediawiki.org)",
       "WebFetch(domain:www.wikidata.org)",
       "WebSearch",
-      "Bash(docker:*)"
+      "Bash(docker:*)",
+      "Bash(git rev-list:*)",
+      "Bash(git show:*)",
+      "Bash(cut:*)",
+      "Bash(tee:*)",
+      "Read(//home/spheres/miroir-wiki/**)",
+      "Edit(//home/spheres/miroir-wiki/**)"
     ]
   }
 }
