@@ -2,7 +2,7 @@
 # Miroir local du wiki Ecolibre — lot 22 du SGDT.
 #
 # Reprend la configuration de production (LocalSettings_ecolibre.php). Le
-# miroir compte exactement onze écarts, décrits dans
+# miroir compte exactement douze écarts, décrits dans
 # miroir/ecarts-avec-la-production.md : les dix qui relèvent de ce fichier
 # (1 à 9, et 11) sont marqués « ÉCART n » ci-dessous ; le dixième porte sur
 # les modules PHP de l'image (miroir/Dockerfile). Toute autre différence de comportement

@@ -2,11 +2,11 @@
 
 À relire le jour où un essai sur le miroir donne un résultat surprenant,
 **avant** de chercher la cause dans le réglage éprouvé : la surprise vient
-peut-être de l'un de ces onze écarts, et d'eux seuls.
+peut-être de l'un de ces douze écarts, et d'eux seuls.
 
 `miroir/LocalSettings_miroir.php` reprend la configuration de production
 (`LocalSettings_ecolibre.php`) ; les écarts 1 à 9 et 11 y sont marqués « ÉCART n ».
-L'écart 10 porte sur l'image PHP (`miroir/Dockerfile`). Les limites PHP
+Les écarts 10 et 12 portent sur l'image PHP (`miroir/Dockerfile`). Les limites PHP
 d'Apache (`miroir/php-miroir.ini`) sont celles de la production et ne sont
 pas un écart. Toute autre différence de comportement est une erreur du
 miroir, à corriger.
@@ -155,3 +155,31 @@ travaux :
   `$wgJobRunRate = 0;` de `LocalSettings_miroir.php`, puis relancer le
   service `wiki` (`up -d --force-recreate wiki`), et l'y remettre après
   l'essai.
+
+## 12. PHP sous FPM en production, en module Apache sur le miroir
+
+La production fait tourner PHP en `fpm-fcgi` ; le miroir en
+`apache2handler`, le module PHP chargé dans Apache par l'image
+`php:7.4-apache`. Mesuré par la clé `phpsapi` de
+`action=query&meta=siteinfo` : `fpm-fcgi` sur `wiki.ecolibre.org`,
+`apache2handler` sur `localhost:8080`, le 10 octobre 2026 ; la sonde de la
+tâche 6 du lot 22 avait déjà relevé `apache2handler` sur le miroir le
+9 octobre 2026.
+
+Motif : aucun choix. L'image officielle du miroir est construite autour du
+module Apache ; personne n'avait relevé le mode de la production avant la
+tâche 13 du lot 22. Passer le miroir en FPM serait un chantier que personne
+n'a demandé : l'écart documenté vaut mieux.
+
+Ce que l'écart emporte : FPM a ses propres limites de durée de requête et
+son propre gestionnaire de processus (nombre de processus, recyclage), que
+le module Apache n'a pas. Un essai qui porte sur un délai d'exécution, une
+requête longue ou le nombre de requêtes servies en parallèle ne se
+transpose donc pas du miroir à la production.
+
+Ce que l'écart n'emporte pas : les dix limites PHP vérifiées en tâche 6
+(`miroir/php-miroir.ini`) restent justes. Elles avaient été comparées aux
+valeurs vues par Apache ; les fichiers `apache2/php.ini` et `fpm/php.ini`
+de la production portent les mêmes valeurs, mesuré le 9 octobre 2026. Le
+résultat de la tâche 6 était juste, mais il l'était par chance : elle
+comparait le miroir au fichier que la production ne lit pas.
