@@ -1,0 +1,4 @@
+<noinclude>Modèle d'essai du lot 21 : une caractéristique générique, dont la grandeur est un paramètre. Émet un sous-objet anonyme. Ne pas supprimer sans consigne.</noinclude><includeonly>{{#subobject:
+|{{{grandeur|}}}={{#invoke:Nombre|virgule|{{{nombre|}}}}} {{{unité|}}}
+|Test lot21d rôle={{{rôle|}}}
+}}</includeonly>

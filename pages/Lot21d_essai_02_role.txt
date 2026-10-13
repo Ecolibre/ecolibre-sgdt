@@ -1,0 +1,2 @@
+[[Has type::Page]]
+[[Property_description_FR::Propriété d'essai du lot 21 : le rôle d'une caractéristique, porté par une page de vocabulaire. Ne pas supprimer sans consigne.]]
