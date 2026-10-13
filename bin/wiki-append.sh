@@ -49,10 +49,14 @@ if [ -f "$PRIVE_DIR/.env" ]; then
 elif [ -f "$DIR/.env" ]; then
   ENV_FILE="$DIR/.env"
 else
-  echo "ERREUR: .env introuvable (cherché dans $PRIVE_DIR/.env puis $DIR/.env)" >&2
+  ENV_FILE=""
+fi
+if [ -n "$ENV_FILE" ]; then
+  set -a; source "$ENV_FILE"; set +a
+elif [ -z "${WIKI_API:-}" ]; then
+  echo "ERREUR: ni .env (cherché dans $PRIVE_DIR/.env puis $DIR/.env) ni variable WIKI_API dans l'environnement" >&2
   exit 1
 fi
-set -a; source "$ENV_FILE"; set +a
 
 if [ -f "$PRIVE_DIR/.cookies.txt" ]; then
   C="$PRIVE_DIR/.cookies.txt"
