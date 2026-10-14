@@ -35,7 +35,8 @@ Ce lot lui donne une classe, décide de son rattachement, et dit où se consigne
 * la qualification d'une procédure par un tiers, et l'élargissement de son domaine d'application après essai confirmé ailleurs, qui relèvent du lot 31 ;
 * les référentiels externes, dont [[Norme de dimensionnement des rayons de vélo]] est le premier cas : ni item, ni procédé, et ce lot ne tranche pas s'ils forment une famille avec les modes opératoires ;
 * toute écriture dans l'espace MediaWiki, donc toute feuille de style, l'extension TemplateStyles n'étant pas installée ;
-* la classe Personne, lot 29, et l'état de conception, lot 42.
+* l'état de conception, lot 42 ;
+* une éventuelle classe Personne, évoquée par [[:Catégorie:Organisation]] et par le [[Récapitulatif technique du Système de Gestion de Données Techniques|récapitulatif technique]] sans être rattachée à aucun lot.
 
 == Points ouverts ==
 
