@@ -1,0 +1,2817 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:q2u="http://virtual-assembly.org/QualityQuantityUnit#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns="http://virtual-assembly.org/OpenSourceEcology#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://virtual-assembly.org/OpenSourceEcology">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="http://virtual-assembly.org/QualityQuantityUnit"/>
+  </owl:Ontology>
+  <owl:Class rdf:ID="MiniMaxiDoRequirement">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="QuantitativeDoRequirement"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="MiniMaxiCharacterization"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requiredBy_do_miniMaxi"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="FunctionalItem"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#requiredBy_do_miniMaxi"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="QualitativeBeRequirement">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="QualitativeCharacterization"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="BeRequirement"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requiredBy_be_qualitative"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#FunctionalItem"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#requiredBy_be_qualitative"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Machine">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="CentralConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="OSE_BusinessConcept_byView"/>
+  <owl:Class rdf:ID="Composition_Item">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="partOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="OrganicItem"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#partOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="wholeOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#OrganicItem"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#wholeOf"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="OrganicConcept"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="CompositionRelation"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="QuantitativeDoSpecification">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="DoSpecification"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Specification">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Characterization_byIntention"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#OrganicItem">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="memberOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="OrganicItemFamily"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#memberOf"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifiedBy_be_qualitative"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="QualitativeBeSpecification"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifiedBy_do_miniMaxi"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="MiniMaxiDoSpecification"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="offeredBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Entity"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="TargetTolerenceDoSpecification"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifiedBy_do_targetTolerence"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasPart"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Composition_Item"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="industrializedBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="IndustrialItem"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#FunctionalItem"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="satisfies"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasWhole"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Composition_Item"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="QualitativeDoSpecification"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifiedBy_do_qualitative"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="TargetTolerenceBeSpecification"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifiedBy_be_targetTolerence"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Item"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="neededBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#Entity"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#OrganicConcept"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="MiniMaxiBeSpecification"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifiedBy_be_miniMaxi"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#FunctionalItem">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="MiniMaxiBeRequirement"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requires_be_miniMaxi"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requires_do_qualitative"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="QualitativeDoRequirement"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="TargetTolerenceDoRequirement"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requires_do_targetTolerence"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#OrganicItem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="satisfiedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Item"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requires_be_targetTolerence"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="TargetTolerenceBeRequirement"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#FunctionalItem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="composedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requires_do_miniMaxi"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#MiniMaxiDoRequirement"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="composes"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#FunctionalItem"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="FunctionalConcept"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#QualitativeBeRequirement"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requires_be_qualitative"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Item">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#CentralConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#QualitativeCharacterization">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="characterizedBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="QualitativeCharacteristic"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Characterization_byNature"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="value"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Entity">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="localizedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#localizedBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Location"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="MachineInstance"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hosts"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="offers"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#OrganicItem"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#OrganicItem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="needs"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ZeMiscConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Parameterization">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:SymmetricProperty rdf:ID="impacts"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Parameterization"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="parameterizedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Characterization_byIntention"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="BeSpecification">
+    <rdfs:subClassOf rdf:resource="#Specification"/>
+  </owl:Class>
+  <owl:Class rdf:ID="PhysicalItem">
+    <rdfs:subClassOf rdf:resource="#Item"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="PhysicalConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class>
+    <owl:unionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#MiniMaxiBeSpecification"/>
+      <owl:Class rdf:about="#TargetTolerenceBeSpecification"/>
+    </owl:unionOf>
+  </owl:Class>
+  <owl:Class rdf:about="#FunctionalConcept">
+    <rdfs:subClassOf rdf:resource="#OSE_BusinessConcept_byView"/>
+  </owl:Class>
+  <owl:Class rdf:about="#OrganicConcept">
+    <rdfs:subClassOf rdf:resource="#OSE_BusinessConcept_byView"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Transformation">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#CentralConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="QuantitativeMeasurement">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="measure"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="measuredIn"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://virtual-assembly.org/QualityQuantityUnit#Unit"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#measuredIn"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Measurement"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class>
+    <owl:unionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#MiniMaxiBeSpecification"/>
+      <owl:Class rdf:about="#TargetTolerenceBeSpecification"/>
+    </owl:unionOf>
+  </owl:Class>
+  <owl:Class rdf:about="#TargetTolerenceBeSpecification">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="QuantitativeBeSpecification"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="TargetTolerenceCharacterization"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifies_be_targetTolerence"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#OrganicItem"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies_be_targetTolerence"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://virtual-assembly.org/QualityQuantityUnit#Unit"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#measuredIn"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#MachineInstance">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hostedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#Entity"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hostedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="instanceOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="MachineModel"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#instanceOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#PhysicalConcept"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Machine"/>
+  </owl:Class>
+  <owl:Class rdf:ID="MachineType">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="executes"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="TransformationSolution"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasModel"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#MachineModel"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="IndustrialConcept"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Machine"/>
+  </owl:Class>
+  <owl:Class rdf:ID="OSE_BusinessConcept_byType"/>
+  <owl:Class rdf:about="#CompositionRelation">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#CentralConcept"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="quantity"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#measuredIn"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://virtual-assembly.org/QualityQuantityUnit#Unit"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#measuredIn"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#TargetTolerenceBeRequirement">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="QuantitativeBeRequirement"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TargetTolerenceCharacterization"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#FunctionalItem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requiredBy_be_targetTolerence"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#requiredBy_be_targetTolerence"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="IndustrialCapability">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#characterizedBy"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifies"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#MachineModel"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#IndustrialConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="QuantitativeCharacteristic">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="parameterizes"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="QuantitativeParameterization"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasQuantity"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Characteristic"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <rdf:Description rdf:about="http://virtual-assembly.org/QualityQuantityUnit#Quantity">
+            <rdfs:subClassOf>
+              <owl:Restriction>
+                <owl:allValuesFrom rdf:resource="#QuantitativeCharacteristic"/>
+                <owl:onProperty>
+                  <owl:ObjectProperty rdf:ID="quantityOf"/>
+                </owl:onProperty>
+              </owl:Restriction>
+            </rdfs:subClassOf>
+          </rdf:Description>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasQuantity"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="PhysicalCapability">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#PhysicalConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#PhysicalConcept">
+    <rdfs:subClassOf rdf:resource="#OSE_BusinessConcept_byView"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Measurement">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="concerns"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="evaluates"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#PhysicalItem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#evaluates"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Characterization_byIntention"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#CentralConcept">
+    <rdfs:subClassOf rdf:resource="#OSE_BusinessConcept_byType"/>
+  </owl:Class>
+  <owl:Class rdf:ID="QualitativeMeasurement">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#value"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Measurement"/>
+  </owl:Class>
+  <owl:Class rdf:about="#TargetTolerenceDoSpecification">
+    <rdfs:subClassOf rdf:resource="#QuantitativeDoSpecification"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#TargetTolerenceCharacterization"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#OrganicItem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifies_do_targetTolerence"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies_do_targetTolerence"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://virtual-assembly.org/QualityQuantityUnit#Unit"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#measuredIn"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#OrganicItemFamily">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasMember"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#OrganicItem"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#OrganicConcept"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="QualitativeParameterisation"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="definedBy_qualitative"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="definedBy_quantitative"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#QuantitativeParameterization"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasPart"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Composition_ItemFamily"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#Composition_ItemFamily"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasWhole"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#QuantitativeBeSpecification">
+    <rdfs:subClassOf rdf:resource="#BeSpecification"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Requirement">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Characterization_byIntention"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#characterizedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="IndustrialProperty">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#IndustrialItem"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#characterizedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#IndustrialConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#QualitativeDoSpecification">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DoSpecification"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#QualitativeCharacterization"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#OrganicItem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifies_do_qualitative"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies_do_qualitative"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#TargetTolerenceCharacterization">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="QuantitativeCharacterization"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="target"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="toterance"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="description"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#QuantitativeDoRequirement">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="DoRequirement"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#TransformationSolution">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="executedBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#MachineType"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="realizedBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="IndustrialTransformation"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specializes"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#TransformationSolution"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="generalizes"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#TransformationSolution"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Transformation"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#IndustrialConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Characterization_byNature">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#characterizedBy"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#Characteristic"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#characterizedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="PeripheralConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="PhysicalTransformation">
+    <rdfs:subClassOf rdf:resource="#Transformation"/>
+    <rdfs:subClassOf rdf:resource="#PhysicalConcept"/>
+  </owl:Class>
+  <owl:Class rdf:about="#QuantitativeBeRequirement">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#BeRequirement"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#TargetTolerenceDoRequirement">
+    <rdfs:subClassOf rdf:resource="#QuantitativeDoRequirement"/>
+    <rdfs:subClassOf rdf:resource="#TargetTolerenceCharacterization"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#FunctionalItem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requiredBy_do_targetTolerence"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#requiredBy_do_targetTolerence"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#BeRequirement">
+    <rdfs:subClassOf rdf:resource="#Requirement"/>
+  </owl:Class>
+  <owl:Class rdf:ID="OrganicProperty">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#characterizedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#OrganicItem"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#OrganicConcept"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Skill">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ZeMiscConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#IndustrialItem">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#IndustrialConcept"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#Entity"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="orderedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Item"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="deliveredBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Entity"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="consumedBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Consumption"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="industrializes"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#OrganicItem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#industrializes"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#IndustrialProperty"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifiedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Production"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="producesBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#IndustrialTransformation">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="duration"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasOutcome"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#Production"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasUnit_cost"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="IndustrialParameter"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifiedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#executedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://virtual-assembly.org/QualityQuantityUnit#Unit"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasUnit_duration"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="realizes"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#TransformationSolution"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Transformation"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#IndustrialConcept"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasUnit_duration"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://virtual-assembly.org/QualityQuantityUnit#Unit"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasUnit_cost"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#MachineModel"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#executedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="cost"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#Consumption"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasIncome"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#realizes"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#MiniMaxiDoSpecification">
+    <rdfs:subClassOf rdf:resource="#QuantitativeDoSpecification"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#MiniMaxiCharacterization"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifies_do_miniMaxi"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#OrganicItem"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies_do_miniMaxi"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#measuredIn"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://virtual-assembly.org/QualityQuantityUnit#Unit"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Characterization_byIntention">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#PeripheralConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#QuantitativeCharacterization">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#QuantitativeCharacteristic"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#characterizedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Characterization_byNature"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://virtual-assembly.org/QualityQuantityUnit#Unit"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#measuredIn"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#measuredIn"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Location">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ZeMiscConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#QualitativeParameterisation">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="defines_qualitative"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#OrganicItemFamily"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#defines_qualitative"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#parameterizedBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#QualitativeCharacteristic"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Parameterization"/>
+  </owl:Class>
+  <owl:Class rdf:about="#MiniMaxiBeRequirement">
+    <rdfs:subClassOf rdf:resource="#QuantitativeBeRequirement"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#MiniMaxiCharacterization"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requiredBy_be_miniMaxi"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#FunctionalItem"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#requiredBy_be_miniMaxi"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#QualitativeDoRequirement">
+    <rdfs:subClassOf rdf:resource="#QualitativeCharacterization"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DoRequirement"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="requiredBy_do_qualitative"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#FunctionalItem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#requiredBy_do_qualitative"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class>
+    <owl:unionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#OrganicItem"/>
+      <owl:Class rdf:about="#FunctionalItem"/>
+    </owl:unionOf>
+  </owl:Class>
+  <owl:Class rdf:ID="PhysicalProperty">
+    <rdfs:subClassOf rdf:resource="#PhysicalConcept"/>
+  </owl:Class>
+  <owl:Class rdf:about="#MiniMaxiBeSpecification">
+    <rdfs:subClassOf rdf:resource="#QuantitativeBeSpecification"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#MiniMaxiCharacterization"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifies_be_miniMaxi"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#OrganicItem"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies_be_miniMaxi"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://virtual-assembly.org/QualityQuantityUnit#Unit"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#measuredIn"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class>
+    <owl:unionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#OrganicItem"/>
+      <owl:Class rdf:about="#FunctionalItem"/>
+    </owl:unionOf>
+  </owl:Class>
+  <owl:Class rdf:about="#MiniMaxiCharacterization">
+    <rdfs:subClassOf rdf:resource="#QuantitativeCharacterization"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="maximum"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="minimum"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#target"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#description"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#QuantitativeParameterization">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="defines_quantitative"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#OrganicItemFamily"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#defines_quantitative"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#parameterizedBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#QuantitativeCharacteristic"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Parameterization"/>
+  </owl:Class>
+  <owl:Class rdf:about="#IndustrialConcept">
+    <rdfs:subClassOf rdf:resource="#OSE_BusinessConcept_byView"/>
+  </owl:Class>
+  <owl:Class rdf:about="#IndustrialParameter">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#characterizedBy"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#IndustrialTransformation"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#IndustrialConcept"/>
+  </owl:Class>
+  <owl:Class rdf:about="#QualitativeBeSpecification">
+    <rdfs:subClassOf rdf:resource="#BeSpecification"/>
+    <rdfs:subClassOf rdf:resource="#QualitativeCharacterization"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="specifies_be_qualitative"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#OrganicItem"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifies_be_qualitative"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Characteristic">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#PeripheralConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#QualitativeCharacteristic">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://virtual-assembly.org/QualityQuantityUnit#BaseQuality"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasQuality"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#QualitativeParameterisation"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#parameterizes"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasQuality"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Characteristic"/>
+  </owl:Class>
+  <owl:Class>
+    <owl:unionOf rdf:parseType="Collection">
+      <owl:Class rdf:about="#OrganicItem"/>
+      <owl:Class rdf:about="#FunctionalItem"/>
+    </owl:unionOf>
+  </owl:Class>
+  <owl:Class rdf:about="#MachineModel">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#specifiedBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#IndustrialParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="modelOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasInstance"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#MachineInstance"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#modelOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#MachineType"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#executes"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#IndustrialTransformation"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#IndustrialConcept"/>
+    <rdfs:subClassOf rdf:resource="#Machine"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Composition_ItemFamily">
+    <rdfs:subClassOf rdf:resource="#OrganicConcept"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#OrganicItemFamily"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#partOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#partOf"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#wholeOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#OrganicItemFamily"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#wholeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#CompositionRelation"/>
+  </owl:Class>
+  <owl:Class rdf:about="#PeripheralConcept">
+    <rdfs:subClassOf rdf:resource="#OSE_BusinessConcept_byType"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Consumption">
+    <rdfs:subClassOf rdf:resource="#CompositionRelation"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="consummes"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#IndustrialItem"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#IndustrialTransformation"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="incomeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#consummes"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#incomeOf"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#ZeMiscConcept">
+    <rdfs:subClassOf rdf:resource="#OSE_BusinessConcept_byType"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Production">
+    <rdfs:subClassOf rdf:resource="#CompositionRelation"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#IndustrialItem"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="produces"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#IndustrialTransformation"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="outcomeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#outcomeOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#produces"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#DoRequirement">
+    <rdfs:subClassOf rdf:resource="#Requirement"/>
+  </owl:Class>
+  <owl:Class rdf:ID="PhysicalParameter">
+    <rdfs:subClassOf rdf:resource="#PhysicalConcept"/>
+  </owl:Class>
+  <owl:Class rdf:about="#DoSpecification">
+    <rdfs:subClassOf rdf:resource="#Specification"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="#requires_be_qualitative">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#requiredBy_be_qualitative"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#FunctionalItem"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="requires_be"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#incomeOf">
+    <rdfs:domain rdf:resource="#Consumption"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="centralObjectProperty"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#hasIncome"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fullfils_do_miniMaxi">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="fullfiled_do_quantitative_mm"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="fullfils_do_quantitative"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#executes">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#MachineModel"/>
+          <owl:Class rdf:about="#MachineType"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#executedBy"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="zeMiscObjectProperty"/>
+  <owl:ObjectProperty rdf:about="#composes">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#composedBy"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain rdf:resource="#FunctionalItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasWhole">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#wholeOf"/>
+    </owl:inverseOf>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#OrganicItem"/>
+          <owl:Class rdf:about="#OrganicItemFamily"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasUnit_duration">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain rdf:resource="#IndustrialTransformation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#evaluates">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="peripheralObjectProperty"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="evaluatedBy"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#Measurement"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#composedBy">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain rdf:resource="#FunctionalItem"/>
+    <owl:inverseOf rdf:resource="#composes"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasMember">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain rdf:resource="#OrganicItemFamily"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#memberOf"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#produces">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#producesBy"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#Production"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#needs">
+    <rdfs:domain rdf:resource="#Entity"/>
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#neededBy"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="specifies_do_quantitive">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="specifies_do"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="specifiedBy_do_quantitative"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="concretizedBy">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="concretizes"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifiedBy_do_quantitative">
+    <owl:inverseOf rdf:resource="#specifies_do_quantitive"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="specifiedBy_do"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requires_do_targetTolerence">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#requiredBy_do_targetTolerence"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#FunctionalItem"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="requires_do_quantitative"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="requiredBy_do">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="requires_do"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="requiredBy"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifiedBy_do">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#specifiedBy"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#specifies_do"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#memberOf">
+    <owl:inverseOf rdf:resource="#hasMember"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain rdf:resource="#OrganicItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#definedBy_qualitative">
+    <rdfs:domain rdf:resource="#OrganicItemFamily"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="definedBy"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#defines_qualitative"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfils_do_quantitative">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="fullfils_do"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="fullfiled_do_quantitative"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#modelOf">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#hasModel"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#MachineModel"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#concretizes">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <owl:inverseOf rdf:resource="#concretizedBy"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#generalizes">
+    <rdfs:domain rdf:resource="#TransformationSolution"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#specializes"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fullfiled_do">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#fullfils_do"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="fullfiledBy"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#characterizedBy">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#OrganicProperty"/>
+          <owl:Class rdf:about="#IndustrialProperty"/>
+          <owl:Class rdf:about="#IndustrialParameter"/>
+          <owl:Class rdf:about="#IndustrialCapability"/>
+          <owl:Class rdf:about="#Requirement"/>
+          <owl:Class rdf:about="#Characterization_byNature"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="characterises"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#defines_quantitative">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#definedBy_quantitative"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="defines"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#QuantitativeParameterization"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfils_do">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="fullfils"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf rdf:resource="#fullfiled_do"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasUnit_cost">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain rdf:resource="#IndustrialTransformation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fullfils_be_miniMaxi">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="fullfiledBy_be_miniMaxi"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="fullfils_be_quantitative"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifiedBy_be_miniMaxi">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#specifies_be_miniMaxi"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="specifiedBy_be_quantitative"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#OrganicItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifiedBy_do_targetTolerence">
+    <rdfs:domain rdf:resource="#OrganicItem"/>
+    <rdfs:subPropertyOf rdf:resource="#specifiedBy_do_quantitative"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#specifies_do_targetTolerence"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requiredBy_do_qualitative">
+    <rdfs:domain rdf:resource="#QualitativeDoRequirement"/>
+    <rdfs:subPropertyOf rdf:resource="#requiredBy_do"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#requires_do_qualitative"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="receivedBy">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="receives"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifiedBy">
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#IndustrialItem"/>
+          <owl:Class rdf:about="#IndustrialTransformation"/>
+          <owl:Class rdf:about="#MachineModel"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#specifies"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fullfiledBy_be">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="fullfils_be"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#fullfiledBy"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fullfiledBy_be_targetTolerence">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="fullfiledBy_be_quantitative"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="fullfils_be_targetTolerence"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#realizedBy">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain rdf:resource="#TransformationSolution"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#realizes"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#outcomeOf">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#hasOutcome"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#Production"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requiredBy_do_targetTolerence">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="requiredBy_do_quantitative"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf rdf:resource="#requires_do_targetTolerence"/>
+    <rdfs:domain rdf:resource="#TargetTolerenceDoRequirement"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specializes">
+    <rdfs:domain rdf:resource="#TransformationSolution"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <owl:inverseOf rdf:resource="#generalizes"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fullfiled_do_quantitative_tt">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#fullfiled_do_quantitative"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="fullfils_do_targetTolerence"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasQuality">
+    <rdfs:domain rdf:resource="#QualitativeCharacteristic"/>
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="qualityOf"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#satisfies">
+    <rdfs:domain rdf:resource="#OrganicItem"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#satisfiedBy"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifiedBy_do_miniMaxi">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#specifies_do_miniMaxi"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#specifiedBy_do_quantitative"/>
+    <rdfs:domain rdf:resource="#OrganicItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#industrializedBy">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#industrializes"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#OrganicItem"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#definedBy_quantitative">
+    <owl:inverseOf rdf:resource="#defines_quantitative"/>
+    <rdfs:domain rdf:resource="#OrganicItemFamily"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#definedBy"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requiredBy">
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="requires"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requires_be">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="requiredBy_be"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#requires"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasIncome">
+    <rdfs:domain rdf:resource="#IndustrialTransformation"/>
+    <owl:inverseOf rdf:resource="#incomeOf"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requires_do_quantitative">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#requiredBy_do_quantitative"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#requires_do"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#wholeOf">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <owl:inverseOf rdf:resource="#hasWhole"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Composition_Item"/>
+          <owl:Class rdf:about="#Composition_ItemFamily"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#parameterizes">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#parameterizedBy"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#Characteristic"/>
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requires_be_targetTolerence">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#requiredBy_be_targetTolerence"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="requires_be_quantitative"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#FunctionalItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="localizes">
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#localizedBy"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifies_be_targetTolerence">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="specifies_be_quantitative"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#TargetTolerenceBeSpecification"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#specifiedBy_be_targetTolerence"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requiredBy_be_targetTolerence">
+    <rdfs:domain rdf:resource="#TargetTolerenceBeRequirement"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="requiredBy_be_quantitative"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf rdf:resource="#requires_be_targetTolerence"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifies">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#OrganicProperty"/>
+          <owl:Class rdf:about="#IndustrialProperty"/>
+          <owl:Class rdf:about="#IndustrialParameter"/>
+          <owl:Class rdf:about="#IndustrialCapability"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <owl:inverseOf rdf:resource="#specifiedBy"/>
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fullfils_be_qualitative">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="fullfiledBy_be_qualitative"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#fullfils_be"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="delivers">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#deliveredBy"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#consummes">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain rdf:resource="#Consumption"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#consumedBy"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requiredBy_do_quantitative">
+    <owl:inverseOf rdf:resource="#requires_do_quantitative"/>
+    <rdfs:subPropertyOf rdf:resource="#requiredBy_do"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#quantityOf">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#hasQuantity"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <rdfs:domain rdf:resource="http://virtual-assembly.org/QualityQuantityUnit#Quantity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requires">
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <owl:inverseOf rdf:resource="#requiredBy"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#defines_qualitative">
+    <owl:inverseOf rdf:resource="#definedBy_qualitative"/>
+    <rdfs:domain rdf:resource="#QualitativeParameterisation"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#defines"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifiedBy_be_quantitative">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#specifies_be_quantitative"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="specifiedBy_be"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasPart">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#OrganicItem"/>
+          <owl:Class rdf:about="#OrganicItemFamily"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#partOf"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#concerns">
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <rdfs:domain rdf:resource="#Measurement"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifies_do_targetTolerence">
+    <rdfs:domain rdf:resource="#TargetTolerenceDoSpecification"/>
+    <owl:inverseOf rdf:resource="#specifiedBy_do_targetTolerence"/>
+    <rdfs:subPropertyOf rdf:resource="#specifies_do_quantitive"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#partOf">
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Composition_Item"/>
+          <owl:Class rdf:about="#Composition_ItemFamily"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <owl:inverseOf rdf:resource="#hasPart"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfiledBy_be_quantitative">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#fullfils_be_quantitative"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#fullfiledBy_be"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hosts">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#hostedBy"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <rdfs:domain rdf:resource="#Entity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hostedBy">
+    <rdfs:domain rdf:resource="#MachineInstance"/>
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <owl:inverseOf rdf:resource="#hosts"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifies_do_qualitative">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#specifies_do"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#specifiedBy_do_qualitative"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#QualitativeDoSpecification"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#parameterizedBy">
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <owl:inverseOf rdf:resource="#parameterizes"/>
+    <rdfs:domain rdf:resource="#Parameterization"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#receives">
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <owl:inverseOf rdf:resource="#receivedBy"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#satisfiedBy">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <owl:inverseOf rdf:resource="#satisfies"/>
+    <rdfs:domain rdf:resource="#FunctionalItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasInstance">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#instanceOf"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain rdf:resource="#MachineModel"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfiled_do_quantitative_mm">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#fullfiled_do_quantitative"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf rdf:resource="#fullfils_do_miniMaxi"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifiedBy_be_qualitative">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#specifiedBy_be"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#specifies_be_qualitative"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#OrganicItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requires_be_miniMaxi">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#requires_be_quantitative"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#requiredBy_be_miniMaxi"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#FunctionalItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasQuantity">
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <rdfs:domain rdf:resource="#QuantitativeCharacteristic"/>
+    <owl:inverseOf rdf:resource="#quantityOf"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifies_do">
+    <rdfs:subPropertyOf rdf:resource="#specifies"/>
+    <owl:inverseOf rdf:resource="#specifiedBy_do"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#producesBy">
+    <rdfs:domain rdf:resource="#IndustrialItem"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <owl:inverseOf rdf:resource="#produces"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfils">
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#fullfiledBy"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#localizedBy">
+    <rdfs:domain rdf:resource="#Entity"/>
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <owl:inverseOf rdf:resource="#localizes"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requiredBy_be_quantitative">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#requiredBy_be"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#requires_be_quantitative"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fullfiled_do_qualitative">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="fullfils_do_qualitative"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#fullfiled_do"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#offers">
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#offeredBy"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#Entity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="emits">
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="emitedBy"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifies_be_miniMaxi">
+    <rdfs:domain rdf:resource="#MiniMaxiBeSpecification"/>
+    <owl:inverseOf rdf:resource="#specifiedBy_be_miniMaxi"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#specifies_be_quantitative"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifies_be_qualitative">
+    <rdfs:domain rdf:resource="#QualitativeBeSpecification"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="specifies_be"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf rdf:resource="#specifiedBy_be_qualitative"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifies_be_quantitative">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#specifies_be"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf rdf:resource="#specifiedBy_be_quantitative"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifies_be">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#specifiedBy_be"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#specifies"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="orders">
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#orderedBy"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requires_do">
+    <rdfs:subPropertyOf rdf:resource="#requires"/>
+    <owl:inverseOf rdf:resource="#requiredBy_do"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#definedBy">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#defines"/>
+    </owl:inverseOf>
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfils_do_targetTolerence">
+    <owl:inverseOf rdf:resource="#fullfiled_do_quantitative_tt"/>
+    <rdfs:subPropertyOf rdf:resource="#fullfils_do_quantitative"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifies_do_miniMaxi">
+    <rdfs:subPropertyOf rdf:resource="#specifies_do_quantitive"/>
+    <rdfs:domain rdf:resource="#MiniMaxiDoSpecification"/>
+    <owl:inverseOf rdf:resource="#specifiedBy_do_miniMaxi"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requires_do_qualitative">
+    <owl:inverseOf rdf:resource="#requiredBy_do_qualitative"/>
+    <rdfs:subPropertyOf rdf:resource="#requires_do"/>
+    <rdfs:domain rdf:resource="#FunctionalItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfils_be">
+    <owl:inverseOf rdf:resource="#fullfiledBy_be"/>
+    <rdfs:subPropertyOf rdf:resource="#fullfils"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfils_do_qualitative">
+    <owl:inverseOf rdf:resource="#fullfiled_do_qualitative"/>
+    <rdfs:subPropertyOf rdf:resource="#fullfils_do"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifiedBy_be">
+    <rdfs:subPropertyOf rdf:resource="#specifiedBy"/>
+    <owl:inverseOf rdf:resource="#specifies_be"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#orderedBy">
+    <owl:inverseOf rdf:resource="#orders"/>
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <rdfs:domain rdf:resource="#IndustrialItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requiredBy_be_miniMaxi">
+    <owl:inverseOf rdf:resource="#requires_be_miniMaxi"/>
+    <rdfs:domain rdf:resource="#MiniMaxiBeRequirement"/>
+    <rdfs:subPropertyOf rdf:resource="#requiredBy_be_quantitative"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#instanceOf">
+    <owl:inverseOf rdf:resource="#hasInstance"/>
+    <rdfs:domain rdf:resource="#MachineInstance"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfiledBy">
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <owl:inverseOf rdf:resource="#fullfils"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#emitedBy">
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <owl:inverseOf rdf:resource="#emits"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfiledBy_be_miniMaxi">
+    <owl:inverseOf rdf:resource="#fullfils_be_miniMaxi"/>
+    <rdfs:subPropertyOf rdf:resource="#fullfiledBy_be_quantitative"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#consumedBy">
+    <owl:inverseOf rdf:resource="#consummes"/>
+    <rdfs:domain rdf:resource="#IndustrialItem"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfils_be_quantitative">
+    <owl:inverseOf rdf:resource="#fullfiledBy_be_quantitative"/>
+    <rdfs:subPropertyOf rdf:resource="#fullfils_be"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#defines">
+    <owl:inverseOf rdf:resource="#definedBy"/>
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#qualityOf">
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <owl:inverseOf rdf:resource="#hasQuality"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#neededBy">
+    <rdfs:domain rdf:resource="#OrganicItem"/>
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <owl:inverseOf rdf:resource="#needs"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#executedBy">
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <owl:inverseOf rdf:resource="#executes"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#IndustrialTransformation"/>
+          <owl:Class rdf:about="#TransformationSolution"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#offeredBy">
+    <rdfs:domain rdf:resource="#OrganicItem"/>
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <owl:inverseOf rdf:resource="#offers"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#realizes">
+    <rdfs:domain rdf:resource="#IndustrialTransformation"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <owl:inverseOf rdf:resource="#realizedBy"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#characterises">
+    <owl:inverseOf rdf:resource="#characterizedBy"/>
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requiredBy_be_qualitative">
+    <rdfs:domain rdf:resource="#QualitativeBeRequirement"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#requiredBy_be"/>
+    </rdfs:subPropertyOf>
+    <owl:inverseOf rdf:resource="#requires_be_qualitative"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requiredBy_be">
+    <owl:inverseOf rdf:resource="#requires_be"/>
+    <rdfs:subPropertyOf rdf:resource="#requiredBy"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasOutcome">
+    <owl:inverseOf rdf:resource="#outcomeOf"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain rdf:resource="#IndustrialTransformation"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requiredBy_do_miniMaxi">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#requires_do_miniMaxi"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#MiniMaxiDoRequirement"/>
+    <rdfs:subPropertyOf rdf:resource="#requiredBy_do_quantitative"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requires_be_quantitative">
+    <owl:inverseOf rdf:resource="#requiredBy_be_quantitative"/>
+    <rdfs:subPropertyOf rdf:resource="#requires_be"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfils_be_targetTolerence">
+    <rdfs:subPropertyOf rdf:resource="#fullfils_be_quantitative"/>
+    <owl:inverseOf rdf:resource="#fullfiledBy_be_targetTolerence"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifiedBy_be_targetTolerence">
+    <rdfs:subPropertyOf rdf:resource="#specifiedBy_be_quantitative"/>
+    <owl:inverseOf rdf:resource="#specifies_be_targetTolerence"/>
+    <rdfs:domain rdf:resource="#OrganicItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasModel">
+    <owl:inverseOf rdf:resource="#modelOf"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain rdf:resource="#MachineType"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#measuredIn">
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#QuantitativeMeasurement"/>
+          <owl:Class rdf:about="#QuantitativeCharacterization"/>
+          <owl:Class rdf:about="#CompositionRelation"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#evaluatedBy">
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <owl:inverseOf rdf:resource="#evaluates"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#deliveredBy">
+    <rdfs:subPropertyOf rdf:resource="#zeMiscObjectProperty"/>
+    <owl:inverseOf rdf:resource="#delivers"/>
+    <rdfs:domain rdf:resource="#IndustrialItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfiledBy_be_qualitative">
+    <owl:inverseOf rdf:resource="#fullfils_be_qualitative"/>
+    <rdfs:subPropertyOf rdf:resource="#fullfiledBy_be"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#industrializes">
+    <owl:inverseOf rdf:resource="#industrializedBy"/>
+    <rdfs:subPropertyOf rdf:resource="#centralObjectProperty"/>
+    <rdfs:domain rdf:resource="#IndustrialItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requires_do_miniMaxi">
+    <owl:inverseOf rdf:resource="#requiredBy_do_miniMaxi"/>
+    <rdfs:subPropertyOf rdf:resource="#requires_do_quantitative"/>
+    <rdfs:domain rdf:resource="#FunctionalItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#specifiedBy_do_qualitative">
+    <owl:inverseOf rdf:resource="#specifies_do_qualitative"/>
+    <rdfs:subPropertyOf rdf:resource="#specifiedBy_do"/>
+    <rdfs:domain rdf:resource="#OrganicItem"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#fullfiled_do_quantitative">
+    <rdfs:subPropertyOf rdf:resource="#fullfiled_do"/>
+    <owl:inverseOf rdf:resource="#fullfils_do_quantitative"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="#toterance">
+    <rdfs:domain rdf:resource="#TargetTolerenceCharacterization"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#target">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#TargetTolerenceCharacterization"/>
+          <owl:Class rdf:about="#MiniMaxiCharacterization"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#description">
+    <rdfs:domain rdf:resource="#OSE_BusinessConcept_byType"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#measure">
+    <rdfs:domain rdf:resource="#QuantitativeMeasurement"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#value">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#QualitativeMeasurement"/>
+          <owl:Class rdf:about="#QualitativeCharacterization"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#maximum">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:domain rdf:resource="#MiniMaxiCharacterization"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#quantity">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:domain rdf:resource="#CompositionRelation"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#duration">
+    <rdfs:domain rdf:resource="#IndustrialTransformation"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#cost">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#IndustrialTransformation"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#minimum">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:domain rdf:resource="#MiniMaxiCharacterization"/>
+  </owl:DatatypeProperty>
+  <owl:SymmetricProperty rdf:about="#impacts">
+    <owl:inverseOf rdf:resource="#impacts"/>
+    <rdfs:domain rdf:resource="#Parameterization"/>
+    <rdfs:subPropertyOf rdf:resource="#peripheralObjectProperty"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </owl:SymmetricProperty>
+  <QualitativeBeSpecification rdf:ID="QualitativeBeSpecification_4"/>
+  <TargetTolerenceBeSpecification rdf:ID="TargetTolerenceBeSpecification_6"/>
+  <QualitativeDoSpecification rdf:ID="QualitativeDoSpecification_8"/>
+  <QualitativeDoRequirement rdf:ID="QualitativeDoRequirement_2"/>
+  <QualitativeBeSpecification rdf:ID="QualitativeBeSpecification_2"/>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.5, Build 663)  http://protege.stanford.edu -->

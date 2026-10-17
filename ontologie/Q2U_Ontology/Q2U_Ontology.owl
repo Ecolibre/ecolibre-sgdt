@@ -1,0 +1,1129 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns="http://virtual-assembly.org/QualityQuantityUnit#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://virtual-assembly.org/QualityQuantityUnit">
+  <owl:Ontology rdf:about=""/>
+  <owl:Class rdf:ID="QualityConcept">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="QualityQuantityAndUnitConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DimentionalQuantity">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="DimentionalUnit"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasUnit"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="BaseQuantity"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="DimentionlessUnit">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="unitOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="DimentionlessQuantity"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="BaseUnit"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="QuantityExponentiation">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="DerivedQuantity"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="defines"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#defines"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#BaseQuantity"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="haseBase"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#haseBase"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="QuantityConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#DimentionalUnit">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#unitOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#DimentionalQuantity"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="baseOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="MultipliedAndDividedUnit"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#BaseUnit"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="ReferenceUnit">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#unitOf"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#unitOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Quantity"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasMultiple"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#MultipliedAndDividedUnit"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Unit"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="PerceptionMode">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="allowPerceptionOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="BaseQuality"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#QualityConcept"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#baseOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#BaseQuality"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#BaseQuality">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="perceivedThrough"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#PerceptionMode"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#BaseQuantity"/>
+              <owl:Class rdf:about="#DerivedQuantity"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="quantifiedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#QualityConcept"/>
+  </owl:Class>
+  <owl:Class rdf:about="#BaseUnit">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#unitOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#BaseQuantity"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#ReferenceUnit"/>
+  </owl:Class>
+  <owl:Class rdf:about="#MultipliedAndDividedUnit">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="multipleOf"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#ReferenceUnit"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#multipleOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Unit"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#haseBase"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#DimentionalUnit"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#haseBase"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Quantity">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="quantifies"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#BaseQuality"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasUnit"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#ReferenceUnit"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasUnit"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#QuantityConcept"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#DimentionlessQuantity">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DimentionlessUnit"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasUnit"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#BaseQuantity"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Unit">
+    <rdfs:subClassOf rdf:resource="#QualityQuantityAndUnitConcept"/>
+  </owl:Class>
+  <owl:Class rdf:about="#QuantityConcept">
+    <rdfs:subClassOf rdf:resource="#QualityQuantityAndUnitConcept"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    ></rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#BaseQuantity">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#BaseUnit"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasUnit"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Quantity"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#QuantityExponentiation"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#baseOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#DerivedQuantity">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="DerivedUnit"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasUnit"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Quantity"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="definedBy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#QuantityExponentiation"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#DerivedUnit">
+    <rdfs:subClassOf rdf:resource="#ReferenceUnit"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#unitOf"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#DerivedQuantity"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="#defines">
+    <rdfs:domain rdf:resource="#QuantityExponentiation"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#definedBy"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#allowPerceptionOf">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#perceivedThrough"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#PerceptionMode"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#quantifiedBy">
+    <rdfs:domain rdf:resource="#BaseQuality"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#quantifies"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#perceivedThrough">
+    <rdfs:domain rdf:resource="#BaseQuality"/>
+    <owl:inverseOf rdf:resource="#allowPerceptionOf"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#unitOf">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#hasUnit"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#ReferenceUnit"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#definedBy">
+    <owl:inverseOf rdf:resource="#defines"/>
+    <rdfs:domain rdf:resource="#DerivedQuantity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasUnit">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DimentionalQuantity"/>
+          <owl:Class rdf:about="#Quantity"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <owl:inverseOf rdf:resource="#unitOf"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#multipleOf">
+    <rdfs:domain rdf:resource="#MultipliedAndDividedUnit"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#hasMultiple"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#baseOf">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="#haseBase"/>
+    </owl:inverseOf>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#DimentionalUnit"/>
+          <owl:Class rdf:about="#PerceptionMode"/>
+          <owl:Class rdf:about="#BaseQuantity"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#quantifies">
+    <rdfs:domain rdf:resource="#Quantity"/>
+    <owl:inverseOf rdf:resource="#quantifiedBy"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#haseBase">
+    <owl:inverseOf rdf:resource="#baseOf"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#MultipliedAndDividedUnit"/>
+          <owl:Class rdf:about="#QuantityExponentiation"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasMultiple">
+    <owl:inverseOf rdf:resource="#multipleOf"/>
+    <rdfs:domain rdf:resource="#ReferenceUnit"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="coefficient">
+    <rdfs:domain rdf:resource="#MultipliedAndDividedUnit"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="symbol">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Unit"/>
+          <owl:Class rdf:about="#Quantity"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="exponent">
+    <rdfs:domain rdf:resource="#QuantityExponentiation"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="description">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="#QualityQuantityAndUnitConcept"/>
+  </owl:DatatypeProperty>
+  <DerivedQuantity rdf:ID="electricInductance">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >inductance électrique</rdfs:label>
+  </DerivedQuantity>
+  <PerceptionMode rdf:ID="BaseQuality_8">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Ouïe</rdfs:label>
+  </PerceptionMode>
+  <QuantityExponentiation rdf:ID="QuantityExponentiation_9">
+    <haseBase>
+      <DimentionalQuantity rdf:ID="time">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >T</symbol>
+        <hasUnit>
+          <DimentionalUnit rdf:ID="second">
+            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >seconde</rdfs:label>
+            <hasMultiple>
+              <MultipliedAndDividedUnit rdf:ID="MultipliedAndDividedUnit_42">
+                <coefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                >60.0</coefficient>
+                <multipleOf rdf:resource="#second"/>
+                <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >minute</rdfs:label>
+                <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >min</symbol>
+              </MultipliedAndDividedUnit>
+            </hasMultiple>
+            <hasMultiple>
+              <MultipliedAndDividedUnit rdf:ID="MultipliedAndDividedUnit_43">
+                <multipleOf rdf:resource="#second"/>
+                <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >h</symbol>
+                <coefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                >3600.0</coefficient>
+                <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >heure</rdfs:label>
+              </MultipliedAndDividedUnit>
+            </hasMultiple>
+            <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >s</symbol>
+            <unitOf rdf:resource="#time"/>
+          </DimentionalUnit>
+        </hasUnit>
+        <baseOf rdf:resource="#QuantityExponentiation_9"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >temps</rdfs:label>
+      </DimentionalQuantity>
+    </haseBase>
+    <exponent rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+    >-1</exponent>
+    <defines>
+      <DerivedQuantity rdf:ID="velocity">
+        <hasUnit>
+          <DerivedUnit rdf:ID="metrePerSecond">
+            <unitOf rdf:resource="#velocity"/>
+            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >mètre par seconde</rdfs:label>
+            <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >m.s-1</symbol>
+          </DerivedUnit>
+        </hasUnit>
+        <definedBy>
+          <QuantityExponentiation rdf:ID="QuantityExponentiation_8">
+            <defines rdf:resource="#velocity"/>
+            <exponent rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+            >1</exponent>
+            <haseBase>
+              <DimentionalQuantity rdf:ID="length">
+                <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >L</symbol>
+                <baseOf>
+                  <QuantityExponentiation rdf:ID="QuantityExponentiation_6">
+                    <defines>
+                      <DerivedQuantity rdf:ID="surface">
+                        <quantifies>
+                          <BaseQuality rdf:ID="Quality_23">
+                            <quantifiedBy>
+                              <DerivedQuantity rdf:ID="volume">
+                                <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                >volume</rdfs:label>
+                                <hasUnit>
+                                  <DerivedUnit rdf:ID="cubicMetre">
+                                    <unitOf rdf:resource="#volume"/>
+                                    <rdfs:label rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >mètre cube</rdfs:label>
+                                    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                    >m3</symbol>
+                                  </DerivedUnit>
+                                </hasUnit>
+                                <definedBy>
+                                  <QuantityExponentiation rdf:ID="QuantityExponentiation_7">
+                                    <haseBase rdf:resource="#length"/>
+                                    <defines rdf:resource="#volume"/>
+                                    <exponent rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                                    >3</exponent>
+                                  </QuantityExponentiation>
+                                </definedBy>
+                                <quantifies rdf:resource="#Quality_23"/>
+                              </DerivedQuantity>
+                            </quantifiedBy>
+                            <quantifiedBy rdf:resource="#surface"/>
+                            <quantifiedBy rdf:resource="#length"/>
+                            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                            >Forme</rdfs:label>
+                            <perceivedThrough>
+                              <PerceptionMode rdf:ID="BaseQuality_5">
+                                <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                >Toucher</rdfs:label>
+                                <allowPerceptionOf>
+                                  <BaseQuality rdf:ID="BaseQuality_10">
+                                    <rdfs:label rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >Texture</rdfs:label>
+                                    <perceivedThrough rdf:resource="#BaseQuality_5"/>
+                                    <perceivedThrough>
+                                      <PerceptionMode rdf:ID="BaseQuality_4">
+                                        <rdfs:label rdf:datatype=
+                                        "http://www.w3.org/2001/XMLSchema#string"
+                                        >Vue</rdfs:label>
+                                        <allowPerceptionOf rdf:resource="#BaseQuality_10"/>
+                                        <allowPerceptionOf rdf:resource="#Quality_23"/>
+                                        <allowPerceptionOf>
+                                          <BaseQuality rdf:ID="Quality_22">
+                                            <rdfs:label rdf:datatype=
+                                            "http://www.w3.org/2001/XMLSchema#string"
+                                            >Matière</rdfs:label>
+                                            <perceivedThrough>
+                                              <PerceptionMode rdf:ID="BaseQuality_6">
+                                                <allowPerceptionOf rdf:resource="#Quality_22"/>
+                                                <rdfs:label rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >Goût</rdfs:label>
+                                              </PerceptionMode>
+                                            </perceivedThrough>
+                                            <perceivedThrough rdf:resource="#BaseQuality_5"/>
+                                            <perceivedThrough rdf:resource="#BaseQuality_4"/>
+                                            <perceivedThrough>
+                                              <PerceptionMode rdf:ID="BaseQuality_7">
+                                                <allowPerceptionOf rdf:resource="#Quality_22"/>
+                                                <rdfs:label rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >Odeur</rdfs:label>
+                                              </PerceptionMode>
+                                            </perceivedThrough>
+                                          </BaseQuality>
+                                        </allowPerceptionOf>
+                                        <allowPerceptionOf>
+                                          <BaseQuality rdf:ID="DerivedQuality_3">
+                                            <perceivedThrough rdf:resource="#BaseQuality_4"/>
+                                            <rdfs:label rdf:datatype=
+                                            "http://www.w3.org/2001/XMLSchema#string"
+                                            >Luminosité</rdfs:label>
+                                            <quantifiedBy>
+                                              <DimentionalQuantity rdf:ID="luminousIntensity">
+                                                <rdfs:label rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >intensité lumineuse</rdfs:label>
+                                                <hasUnit>
+                                                  <DimentionalUnit rdf:ID="candela">
+                                                    <symbol rdf:datatype=
+                                                    "http://www.w3.org/2001/XMLSchema#string"
+                                                    >cd</symbol>
+                                                    <unitOf rdf:resource="#luminousIntensity"/>
+                                                    <rdfs:label
+                                                     rdf:datatype=
+                                                    "http://www.w3.org/2001/XMLSchema#string"
+                                                    >candela</rdfs:label>
+                                                  </DimentionalUnit>
+                                                </hasUnit>
+                                                <symbol rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >J</symbol>
+                                                <quantifies rdf:resource="#DerivedQuality_3"/>
+                                              </DimentionalQuantity>
+                                            </quantifiedBy>
+                                          </BaseQuality>
+                                        </allowPerceptionOf>
+                                        <allowPerceptionOf>
+                                          <BaseQuality rdf:ID="Quality_24">
+                                            <rdfs:label rdf:datatype=
+                                            "http://www.w3.org/2001/XMLSchema#string"
+                                            >Couleur</rdfs:label>
+                                            <perceivedThrough rdf:resource="#BaseQuality_4"/>
+                                          </BaseQuality>
+                                        </allowPerceptionOf>
+                                      </PerceptionMode>
+                                    </perceivedThrough>
+                                  </BaseQuality>
+                                </allowPerceptionOf>
+                                <allowPerceptionOf rdf:resource="#Quality_23"/>
+                                <allowPerceptionOf rdf:resource="#Quality_22"/>
+                              </PerceptionMode>
+                            </perceivedThrough>
+                            <perceivedThrough rdf:resource="#BaseQuality_4"/>
+                          </BaseQuality>
+                        </quantifies>
+                        <defines rdf:resource="#QuantityExponentiation_6"/>
+                        <hasUnit>
+                          <DerivedUnit rdf:ID="squareMetre">
+                            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                            >mètre carré</rdfs:label>
+                            <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                            >m2</symbol>
+                            <unitOf rdf:resource="#surface"/>
+                          </DerivedUnit>
+                        </hasUnit>
+                        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >surface</rdfs:label>
+                        <definedBy rdf:resource="#QuantityExponentiation_6"/>
+                      </DerivedQuantity>
+                    </defines>
+                    <definedBy rdf:resource="#surface"/>
+                    <exponent rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
+                    >2</exponent>
+                    <haseBase rdf:resource="#length"/>
+                  </QuantityExponentiation>
+                </baseOf>
+                <baseOf rdf:resource="#QuantityExponentiation_7"/>
+                <baseOf rdf:resource="#QuantityExponentiation_8"/>
+                <hasUnit>
+                  <DimentionalUnit rdf:ID="metre">
+                    <unitOf rdf:resource="#length"/>
+                    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >mètre</rdfs:label>
+                    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                    >m</symbol>
+                    <hasMultiple>
+                      <MultipliedAndDividedUnit rdf:ID="MultipliedAndDivisedUnit_2">
+                        <multipleOf rdf:resource="#metre"/>
+                        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >millimètre</rdfs:label>
+                        <coefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.001</coefficient>
+                        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >mm</symbol>
+                      </MultipliedAndDividedUnit>
+                    </hasMultiple>
+                    <hasMultiple>
+                      <MultipliedAndDividedUnit rdf:ID="MultipliedAndDividedUnit_41">
+                        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >cm</symbol>
+                        <coefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.01</coefficient>
+                        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >centimetre</rdfs:label>
+                        <multipleOf rdf:resource="#metre"/>
+                      </MultipliedAndDividedUnit>
+                    </hasMultiple>
+                    <hasMultiple>
+                      <MultipliedAndDividedUnit rdf:ID="MultipliedAndDividedUnit_1">
+                        <multipleOf rdf:resource="#metre"/>
+                        <coefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0245</coefficient>
+                        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >pouce</rdfs:label>
+                      </MultipliedAndDividedUnit>
+                    </hasMultiple>
+                  </DimentionalUnit>
+                </hasUnit>
+                <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >longueur</rdfs:label>
+                <quantifies rdf:resource="#Quality_23"/>
+              </DimentionalQuantity>
+            </haseBase>
+          </QuantityExponentiation>
+        </definedBy>
+        <definedBy rdf:resource="#QuantityExponentiation_9"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >vitesse</rdfs:label>
+      </DerivedQuantity>
+    </defines>
+  </QuantityExponentiation>
+  <DimentionlessUnit rdf:ID="unit">
+    <unitOf>
+      <DimentionlessQuantity rdf:ID="number">
+        <hasUnit rdf:resource="#unit"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >nombre</rdfs:label>
+      </DimentionlessQuantity>
+    </unitOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >unité</rdfs:label>
+    <hasMultiple>
+      <MultipliedAndDividedUnit rdf:ID="MultipliedAndDividedUnit_13">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >douzaine</rdfs:label>
+        <multipleOf rdf:resource="#unit"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >dz</symbol>
+        <coefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+        >12.0</coefficient>
+      </MultipliedAndDividedUnit>
+    </hasMultiple>
+  </DimentionlessUnit>
+  <DerivedUnit rdf:ID="joule">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >joule</rdfs:label>
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >J</symbol>
+    <unitOf>
+      <DerivedQuantity rdf:ID="energy">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >énergy</rdfs:label>
+        <hasUnit rdf:resource="#joule"/>
+      </DerivedQuantity>
+    </unitOf>
+  </DerivedUnit>
+  <DerivedQuantity rdf:ID="electricCapacitance">
+    <hasUnit>
+      <DerivedUnit rdf:ID="farad">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >F</symbol>
+        <unitOf rdf:resource="#electricCapacitance"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >farad</rdfs:label>
+      </DerivedUnit>
+    </hasUnit>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >capacité électrique</rdfs:label>
+  </DerivedQuantity>
+  <DerivedQuantity rdf:ID="power">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >puissance</rdfs:label>
+    <hasUnit>
+      <DerivedUnit rdf:ID="watt">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >W</symbol>
+        <unitOf rdf:resource="#power"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >watt</rdfs:label>
+      </DerivedUnit>
+    </hasUnit>
+  </DerivedQuantity>
+  <DimentionalQuantity rdf:ID="thermodynamicTemperature">
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Θ</symbol>
+    <hasUnit>
+      <DimentionalUnit rdf:ID="kelvin">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >K</symbol>
+        <unitOf rdf:resource="#thermodynamicTemperature"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >kelvin</rdfs:label>
+      </DimentionalUnit>
+    </hasUnit>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >température thermodynamique</rdfs:label>
+  </DimentionalQuantity>
+  <DimentionalUnit rdf:ID="ampere">
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A</symbol>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ampère</rdfs:label>
+    <unitOf>
+      <DimentionalQuantity rdf:ID="electricCurrent">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >I</symbol>
+        <hasUnit rdf:resource="#ampere"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >courant électrique</rdfs:label>
+      </DimentionalQuantity>
+    </unitOf>
+  </DimentionalUnit>
+  <DerivedQuantity rdf:ID="acceleration">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >accelération</rdfs:label>
+    <hasUnit>
+      <DerivedUnit rdf:ID="metrePerSecondSquared">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >m.s-2</symbol>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >mètre par seconde au carré</rdfs:label>
+        <unitOf rdf:resource="#acceleration"/>
+      </DerivedUnit>
+    </hasUnit>
+  </DerivedQuantity>
+  <DerivedUnit rdf:ID="siemens">
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >S</symbol>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >siemens</rdfs:label>
+    <unitOf>
+      <DerivedQuantity rdf:ID="electricConductance">
+        <hasUnit rdf:resource="#siemens"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >conductance électrique</rdfs:label>
+      </DerivedQuantity>
+    </unitOf>
+  </DerivedUnit>
+  <DimentionlessUnit rdf:ID="radian">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >radian</rdfs:label>
+    <unitOf>
+      <DimentionlessQuantity rdf:ID="angle">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >angle</rdfs:label>
+        <hasUnit rdf:resource="#radian"/>
+      </DimentionlessQuantity>
+    </unitOf>
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >rad</symbol>
+  </DimentionlessUnit>
+  <DimentionlessQuantity rdf:ID="currency">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >monnaie</rdfs:label>
+    <hasUnit>
+      <DimentionlessUnit rdf:ID="euro">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >€</symbol>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >euro</rdfs:label>
+        <unitOf rdf:resource="#currency"/>
+      </DimentionlessUnit>
+    </hasUnit>
+  </DimentionlessQuantity>
+  <DerivedQuantity rdf:ID="magneticFlux">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >flux magnétique</rdfs:label>
+    <hasUnit>
+      <DerivedUnit rdf:ID="weber">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >weber</rdfs:label>
+        <unitOf rdf:resource="#magneticFlux"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Wb</symbol>
+      </DerivedUnit>
+    </hasUnit>
+  </DerivedQuantity>
+  <DerivedQuantity rdf:ID="frequency">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >frequency</rdfs:label>
+    <hasUnit>
+      <DerivedUnit rdf:ID="hertz">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Hz</symbol>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >hertz</rdfs:label>
+        <unitOf rdf:resource="#frequency"/>
+      </DerivedUnit>
+    </hasUnit>
+  </DerivedQuantity>
+  <DerivedQuantity rdf:ID="catalyticActivity">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >activité catalytique</rdfs:label>
+    <hasUnit>
+      <DerivedUnit rdf:ID="katal">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >kat</symbol>
+        <unitOf rdf:resource="#catalyticActivity"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >katal</rdfs:label>
+      </DerivedUnit>
+    </hasUnit>
+  </DerivedQuantity>
+  <DerivedQuantity rdf:ID="force">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >force</rdfs:label>
+    <hasUnit>
+      <DerivedUnit rdf:ID="newton">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >newton</rdfs:label>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >N</symbol>
+        <unitOf rdf:resource="#force"/>
+      </DerivedUnit>
+    </hasUnit>
+  </DerivedQuantity>
+  <DerivedQuantity rdf:ID="radioactivity">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >radioactivity</rdfs:label>
+    <hasUnit>
+      <DerivedUnit rdf:ID="becquerel">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Bq</symbol>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >becquerel</rdfs:label>
+        <unitOf rdf:resource="#radioactivity"/>
+      </DerivedUnit>
+    </hasUnit>
+  </DerivedQuantity>
+  <DerivedQuantity rdf:ID="electricCharge">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >charge électrique</rdfs:label>
+    <hasUnit>
+      <DerivedUnit rdf:ID="coulomb">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >C</symbol>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >coulomb</rdfs:label>
+        <unitOf rdf:resource="#electricCharge"/>
+      </DerivedUnit>
+    </hasUnit>
+  </DerivedQuantity>
+  <DerivedUnit rdf:ID="gray">
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Gy</symbol>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >gray</rdfs:label>
+    <unitOf>
+      <DerivedQuantity rdf:ID="absorbedDose">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >dose absorbée</rdfs:label>
+        <hasUnit rdf:resource="#gray"/>
+      </DerivedQuantity>
+    </unitOf>
+  </DerivedUnit>
+  <DimentionlessQuantity rdf:ID="amountOfsubstance">
+    <hasUnit>
+      <DimentionlessUnit rdf:ID="mole">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >mol</symbol>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >mole</rdfs:label>
+        <unitOf rdf:resource="#amountOfsubstance"/>
+      </DimentionlessUnit>
+    </hasUnit>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >quantité de matière</rdfs:label>
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >N</symbol>
+  </DimentionlessQuantity>
+  <DerivedUnit rdf:ID="volt">
+    <unitOf>
+      <DerivedQuantity rdf:ID="voltage">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >tension électrique</rdfs:label>
+        <hasUnit rdf:resource="#volt"/>
+      </DerivedQuantity>
+    </unitOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >volt</rdfs:label>
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >V</symbol>
+  </DerivedUnit>
+  <DerivedUnit rdf:ID="sievert">
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Sv</symbol>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >sievert</rdfs:label>
+    <unitOf>
+      <DerivedQuantity rdf:ID="equivalentDose">
+        <hasUnit rdf:resource="#sievert"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >dose équivalente</rdfs:label>
+      </DerivedQuantity>
+    </unitOf>
+  </DerivedUnit>
+  <DimentionlessUnit rdf:ID="steradian">
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >sr</symbol>
+    <unitOf>
+      <DimentionlessQuantity rdf:ID="solidAngle">
+        <hasUnit rdf:resource="#steradian"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >angle solide</rdfs:label>
+      </DimentionlessQuantity>
+    </unitOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >steradian</rdfs:label>
+  </DimentionlessUnit>
+  <DerivedQuantity rdf:ID="magneticFieldStrengh">
+    <hasUnit>
+      <DerivedUnit rdf:ID="tesla">
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >T</symbol>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >tesla</rdfs:label>
+        <unitOf rdf:resource="#magneticFieldStrengh"/>
+      </DerivedUnit>
+    </hasUnit>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >force du champ magnétique</rdfs:label>
+  </DerivedQuantity>
+  <DerivedUnit rdf:ID="pascal">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >pascal</rdfs:label>
+    <unitOf>
+      <DerivedQuantity rdf:ID="pressure">
+        <hasUnit rdf:resource="#pascal"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >pression</rdfs:label>
+      </DerivedQuantity>
+    </unitOf>
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Pa</symbol>
+  </DerivedUnit>
+  <DerivedQuantity rdf:ID="illuminance">
+    <hasUnit>
+      <DerivedUnit rdf:ID="lux">
+        <unitOf rdf:resource="#illuminance"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >lx</symbol>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >lux</rdfs:label>
+      </DerivedUnit>
+    </hasUnit>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >illuminance</rdfs:label>
+  </DerivedQuantity>
+  <DimentionlessUnit rdf:about="#1">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >1</rdfs:label>
+    <unitOf>
+      <DimentionlessQuantity rdf:ID="ratio">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >ratio</rdfs:label>
+        <hasUnit rdf:resource="#1"/>
+      </DimentionlessQuantity>
+    </unitOf>
+  </DimentionlessUnit>
+  <DimentionlessQuantity rdf:ID="proportion">
+    <hasUnit>
+      <DimentionlessUnit rdf:ID="percent">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >pourcentage</rdfs:label>
+        <unitOf rdf:resource="#proportion"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >%</symbol>
+      </DimentionlessUnit>
+    </hasUnit>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >proportion</rdfs:label>
+  </DimentionlessQuantity>
+  <DimentionalQuantity rdf:ID="mass">
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >M</symbol>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >masse</rdfs:label>
+    <hasUnit>
+      <DimentionalUnit rdf:ID="kilogram">
+        <unitOf rdf:resource="#mass"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >kilogramme</rdfs:label>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >kg</symbol>
+      </DimentionalUnit>
+    </hasUnit>
+  </DimentionalQuantity>
+  <DerivedUnit rdf:ID="lumen">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >lumen</rdfs:label>
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >lm</symbol>
+    <unitOf>
+      <DerivedQuantity rdf:ID="luminousFlux">
+        <hasUnit rdf:resource="#lumen"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >flux lumineux</rdfs:label>
+      </DerivedQuantity>
+    </unitOf>
+  </DerivedUnit>
+  <DerivedUnit rdf:ID="ohm">
+    <unitOf>
+      <DerivedQuantity rdf:ID="electricResistance">
+        <hasUnit rdf:resource="#ohm"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >résistance électrique</rdfs:label>
+      </DerivedQuantity>
+    </unitOf>
+    <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Ω</symbol>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ohm</rdfs:label>
+  </DerivedUnit>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.5, Build 660)  http://protege.stanford.edu -->
