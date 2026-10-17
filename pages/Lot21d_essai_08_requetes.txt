@@ -1,0 +1,22 @@
+Page d'essai du lot 21 : les requêtes qui éprouvent la remontée d'un sous-objet à son item, et la stricte des comparateurs. Ne pas supprimer sans consigne.
+
+== R1 ==
+{{#ask: [[Test lot21d épaisseur::+]] |?Test lot21d épaisseur |?Test lot21d rôle |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R2 ==
+{{#ask: [[Test lot21d épaisseur::+]] |?-Has subobject |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R3 ==
+{{#ask: [[-Has subobject.Test lot21d épaisseur::+]] |format=list |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R4 ==
+{{#ask: [[-Has subobject.Test lot21d épaisseur::>0,3 mm]] |?-Has subobject.Test lot21d épaisseur |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R5 ==
+{{#ask: [[Test lot21d épaisseur::>0,3 mm]] |?Test lot21d épaisseur |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R6 ==
+{{#ask: [[-Has subobject.Test lot21d rôle::Utilisateur:Cywil/Bac à sable/Lot21d maximal admissible]] |format=list |limit=30 |default=AUCUN RÉSULTAT}}
+
+== R7 ==
+{{#ask: [[Test lot21d épaisseur::>0,2 mm]] |?Test lot21d épaisseur |format=table |mainlabel=Sujet |limit=30 |default=AUCUN RÉSULTAT}}

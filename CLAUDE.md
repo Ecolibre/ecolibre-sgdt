@@ -339,6 +339,22 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
 
 ## Leçons de méthode (wiki et outillage)
 
+- **Après la modification d'une page transclue, le retraitement des pages qui
+  la transcluent est différé de plusieurs minutes.** Ne rien conclure de
+  leurs faits tant que leur `touched`, lu par `action=query&prop=info`, n'a
+  pas dépassé l'heure de la modification : rien ne distingue des faits
+  périmés de faits à jour. Mesuré le 15 octobre 2026 sur une propriété
+  transcluant un bloc de déclaration d'unités, dont le `touched` n'a dépassé
+  l'heure de la modification qu'au bout de 4 min 29 s ; ses faits, identiques
+  avant et après, ne pouvaient pas le montrer. Le critère est le `touched`,
+  pas la durée : une seule mesure ne fait pas une loi. Et c'est une condition
+  nécessaire, non suffisante : le `touched` date l'invalidation de la page,
+  la mise à jour du magasin SMW est un autre travail de la file, et leur
+  ordre n'est pas mesuré. Quand la modification doit changer un fait, c'est
+  l'apparition de ce changement qui fait foi, et non le `touched` ; quand
+  elle ne doit en changer aucun, aucune lecture ne prouve rien, et il faut
+  l'écrire au lieu de conclure.
+
 - **Un retour à la ligne à l'intérieur de `[[ ]]` casse silencieusement un
   lien MediaWiki.** Aucune erreur d'API à l'écriture, mais le lien est absent
   de `pagelinks` et donc de `list=backlinks`. Toujours écrire un lien sur une

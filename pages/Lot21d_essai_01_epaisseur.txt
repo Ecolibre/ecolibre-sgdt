@@ -1,0 +1,6 @@
+[[Has type::Quantity]]
+[[Corresponds to::1 m, metre]]
+[[Corresponds to::1000 mm, millimetre]]
+[[Corresponds to::100 cm, centimetre]]
+[[Display units::mm, cm, m]]
+[[Property_description_FR::Propriété d'essai du lot 21 : une épaisseur, pour mesurer la remontée d'un sous-objet à son item, le modèle de saisie générique et la stricte des comparateurs. Ne pas supprimer sans consigne.]]

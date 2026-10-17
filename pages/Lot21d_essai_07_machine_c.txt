@@ -1,0 +1,3 @@
+Page d'essai du lot 21 : un item portant une caractéristique par le modèle générique. Ne pas supprimer sans consigne.
+
+{{Test lot21d caractéristique|grandeur=Test lot21d épaisseur|rôle=Utilisateur:Cywil/Bac à sable/Lot21d maximal admissible|nombre=0.5|unité=mm}}

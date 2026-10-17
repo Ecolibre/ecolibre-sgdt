@@ -1,0 +1,52 @@
+{{Lot
+|Work_package_number=43
+|Work_package_status=identifié
+|Work_package_summary=Donner une classe aux pages qui décrivent comment faire, et la rattacher au niveau référencé.
+}}
+
+== Objet ==
+
+Le wiki décrit ce qu'on a, à quatre niveaux. Il ne décrit pas ce qu'on en fait. La page [[Remplacer un rayon sur une roue à moyeu moteur]] est la première de son genre : elle n'appartient à aucune des quatre classes, ne porte ni modèle ni catégorie, et rien ne la rattache à l'objet qu'elle concerne.
+
+Ce lot lui donne une classe, décide de son rattachement, et dit où se consigne l'application datée d'une opération sur un exemplaire.
+
+== Ce qui est déjà tranché ==
+
+* '''Le mode opératoire se rattache au niveau référencé.''' Le fonctionnel nomme la fonction, l'organique nomme la solution, le référencé dit comment l'obtenir : une procédure d'obtention lui revient. Un tiers qui possède un objet voisin la retrouve par l'organique commun, sans qu'elle soit certifiée réutilisable chez lui. Tranché le 13 octobre 2026.
+* '''Le type et l'exemplaire se séparent.''' Un mode opératoire se documente au niveau du type ; son application se consigne, datée, sur l'exemplaire. Tranché le 13 octobre 2026, appliqué le 14 par le renommage de la première page.
+* '''Trois niveaux d'opération répondent aux niveaux d'items.''' Le procédé élémentaire existe déjà : c'est un item fonctionnel marqué comme procédé, aligné sur la DIN 8580. La transformation composée est la classe que ce lot crée. L'application datée est l'évènement, qui n'existe nulle part.
+* '''La genèse de l'exemplaire est la généralisation, pas la transformation industrielle.''' Un item référencé est le produit d'une transformation à partir d'autres référencés, à l'aide d'une ressource ; un exemplaire naît d'une application réelle de cette transformation. Mais 72 pages portent la facette végétal, et un plant ne sort d'aucune machine : sa genèse est déjà décrite par <code>Propagated_from</code>, <code>Propagation_method</code> et <code>Planting_date</code>. L'axiome vaut donc pour la genèse, dont la transformation industrielle et la multiplication sont deux formes. Tranché le 13 octobre 2026.
+* '''Une transformation ne produit un item référencé neuf que si son résultat est une définition qu'un tiers peut reproduire ou sourcer.''' Une réparation qui rend l'objet à sa définition d'origine change l'état de l'exemplaire, porté par <code>Service_status</code>, et ne crée aucun référencé. Tranché le 13 octobre 2026.
+* '''La maintenance préventive n'est pas une classe de plus.''' C'est une transformation type assortie d'une périodicité recommandée, dont les applications sont des évènements datés.
+
+== Périmètre ==
+
+'''Dedans :'''
+* la classe de la transformation composée : son modèle, son formulaire, ses propriétés ;
+* la propriété qui rattache une transformation à un item référencé, posée à côté de <code>Design_source</code> et de <code>Procurement_route</code> ;
+* le lien d'une transformation vers les procédés qu'elle enchaîne, les items qu'elle consomme et les outils qu'elle emploie ;
+* où se consigne l'application datée sur un exemplaire ;
+* la périodicité d'une transformation préventive ;
+* le gabarit d'affichage, de type tutoriel : en-tête, puis étapes numérotées avec leurs photos ;
+* la reprise de [[Remplacer un rayon sur une roue à moyeu moteur]] dans la classe, et la création du procédé « Démonter un pneu de vélo », seul lien rouge restant de cette page.
+
+'''Dehors :'''
+* la nomenclature quantifiée des entrées d'une transformation, qui est le lot 7 : ce lot en reprend le motif, il ne le redéfinit pas ;
+* la qualification d'une procédure par un tiers, et l'élargissement de son domaine d'application après essai confirmé ailleurs, qui relèvent du lot 31 ;
+* les référentiels externes, dont [[Norme de dimensionnement des rayons de vélo]] est le premier cas : ni item, ni procédé, et ce lot ne tranche pas s'ils forment une famille avec les modes opératoires ;
+* toute écriture dans l'espace MediaWiki, donc toute feuille de style, l'extension TemplateStyles n'étant pas installée ;
+* l'état de conception, lot 42 ;
+* une éventuelle classe Personne, évoquée par [[:Catégorie:Organisation]] et par le [[Récapitulatif technique du Système de Gestion de Données Techniques|récapitulatif technique]] sans être rattachée à aucun lot.
+
+== Points ouverts ==
+
+* Le nom de la classe, et celui de la propriété de rattachement.
+* La forme de l'application datée : sous-objet sur la page de l'exemplaire, ou section rédigée. Elle se trouve aujourd'hui, faute de mieux, dans une section de la page du mode opératoire.
+* La copie d'une procédure vers une variante, et ce qu'elle doit déclarer de son origine.
+* L'alignement sur schema.org/HowTo, dont les propriétés <code>step</code>, <code>tool</code>, <code>supply</code>, <code>totalTime</code> et <code>estimatedCost</code> recouvrent les champs d'un tutoriel, et sur OKH v2 pour la nomenclature. À vérifier : ce n'est qu'une piste.
+* Si « déformer », groupe 2 de la DIN 8580, rejoint la liste des procédés : la première page du wiki l'emploie, et il n'existe pas.
+* Le coût du gabarit d'affichage en styles en ligne, faute de TemplateStyles.
+
+----
+
+Voir aussi la [[Gestion des lots]] et les [[Limites connues du Système de Gestion de Données Techniques]].
