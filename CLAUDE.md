@@ -355,6 +355,17 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   elle ne doit en changer aucun, aucune lecture ne prouve rien, et il faut
   l'écrire au lieu de conclure.
 
+- **Une écriture ajoutée à une ligne d'un bloc de déclaration d'unités n'est
+  pas acceptée tout de suite.** Elle figure aussitôt dans les déclarations
+  stockées de la propriété qui transclut le bloc, et reste pourtant refusée à
+  la saisie pendant des heures. Mesuré du 15 au 18 octobre 2026 : refusée
+  encore seize heures après son ajout, une purge avec `forcelinkupdate` n'y
+  changeant rien, puis acceptée entre la seizième et la soixante et onzième
+  heure sans aucune intervention, sans nouvelle révision de la propriété et
+  sans trace au journal. Ne rien réparer, ne pas réenregistrer la propriété,
+  ne pas conclure à un échec : attendre et remesurer. Le délai exact n'est pas
+  mesuré.
+
 - **Un retour à la ligne à l'intérieur de `[[ ]]` casse silencieusement un
   lien MediaWiki.** Aucune erreur d'API à l'écriture, mais le lien est absent
   de `pagelinks` et donc de `list=backlinks`. Toujours écrire un lien sur une
