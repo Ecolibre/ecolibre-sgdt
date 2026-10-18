@@ -1,22 +1,67 @@
 # Ontologie du SGDT - fichiers d'origine
 
-Ce dossier porte les fichiers OWL de l'ontologie du SGDT, déposés tels quels,
-sans retouche.
+Ce dossier porte les fichiers d'ontologie détenus par Cyril Libert sur son
+poste, déposés tels quels, sans retouche. Ontologie dessinée à partir de 2017
+par Cyril Libert et Bernard Chabot. Ces fichiers ne décrivent pas le modèle en
+service sur wiki.ecolibre.org : le wiki fait autorité, pas ce dossier.
 
-Provenance et statut :
+## Ce que contient le dossier
 
-- Ils décrivent le schéma conceptuel dessiné en 2017 par Cyril Libert et
-  Bernard Chabot. Ils ne décrivent pas le modèle en service sur
-  wiki.ecolibre.org.
-- L'explication publique de ce schéma est le fil ouvert le 5 décembre 2022 sur
+Deux ontologies OWL qui n'en font qu'une : la seconde est importée par la
+première.
+
+- `OSE_BusinessOntology/` - l'ontologie du SGDT. Espace de noms
+  `http://virtual-assembly.org/OpenSourceEcology`. 75 classes, 138 propriétés
+  objet, 10 propriétés de données, 164 restrictions, 1 470 triplets. Elle
+  porte les quatre niveaux décrits dans le fil de 2022 : `FunctionalItem`,
+  `OrganicItem`, `IndustrialItem`, `PhysicalItem`, ainsi que `Machine`,
+  `MachineModel`, `MachineInstance`, `MachineType`,
+  `IndustrialTransformation`, `PhysicalTransformation`,
+  `TransformationSolution`, `Skill` et `Location`. Elle porte en outre une
+  couche d'exigences et de spécifications que le wiki n'a pas.
+  Fichiers datés du 11 mai 2018.
+
+- `Q2U_Ontology/` - l'ontologie des qualités, quantités et unités, importée
+  par la précédente. Espace de noms
+  `http://virtual-assembly.org/QualityQuantityUnit`. 18 classes,
+  12 propriétés objet, 4 propriétés de données, 29 restrictions,
+  598 triplets, 91 individus. Elle porte les grandeurs et les unités du
+  Système international, les facteurs de conversion par `coefficient` et
+  `multipleOf`, et la décomposition dimensionnelle par
+  `QuantityExponentiation`, `haseBase` et `exponent`. L'instanciation est
+  partielle : six facteurs de conversion seulement, quatre décompositions
+  dimensionnelles pour vingt-trois grandeurs dérivées, et les classes
+  `BaseUnit` et `ReferenceUnit` sans aucun individu.
+  Fichiers datés du 14 octobre 2024.
+
+Deux défauts relevés dans `Q2U_Ontology.owl` le 18 octobre 2026, laissés tels
+quels puisque les fichiers ne sont pas retouchés : le coefficient du pouce
+vaut `0.0245`, alors que le pouce vaut 0,0254 mètre par définition depuis
+1959 ; et les noms portent des fautes constantes, classes `Dimentional` et
+`Dimentionless`, propriété `haseBase`, individu `MultipliedAndDivisedUnit_2`
+au milieu de `MultipliedAndDividedUnit_1, 13, 41, 42, 43`.
+
+Les fichiers `.pprj` et `.repository` ne sont pas de l'OWL : ce sont les
+fichiers de projet de Protégé 3.x, l'éditeur avec lequel ces ontologies ont
+été écrites. Ils ne portent aucun modèle. Le `.repository` ne fait que
+déclarer où trouver l'ontologie importée.
+
+## Statut
+
+- L'explication publique du modèle est le fil ouvert le 5 décembre 2022 sur
   le forum de l'Assemblée Virtuelle, sujet 745 :
   https://forums.assemblee-virtuelle.org/t/systeme-de-gestion-de-donnees-techniques-oriente-open-source-hardware-et-ingenierie-cooperative/745
-- Le wiki fait autorité sur le modèle réel, pas ce dossier. Les deux ont déjà
-  divergé : le fil de 2022 nomme le troisième niveau "item industriel", le
-  wiki porte la catégorie "Referenced item".
+- Le wiki et ces fichiers ont déjà divergé, sur deux points relevés à ce jour.
+  Le troisième niveau s'appelle ici `IndustrialItem`, et le wiki porte la
+  catégorie `Referenced item`. Et le coefficient de conversion est écrit ici
+  dans le sens courant, celui de QUDT, la valeur d'une unité exprimée dans
+  l'unité principale ; le wiki écrit l'inverse, le nombre d'unités contenues
+  dans l'unité principale, parce que le bloc de déclaration d'unités de
+  Semantic MediaWiki impose ce format. Une valeur reprise d'un monde à
+  l'autre s'inverse, elle ne se recopie pas.
 - Ces fichiers servent de point de départ à une reprise de l'ontologie dans
   swowl (github.com/MyShivaRepo/swowl), éditeur OWL écrit par Bernard Chabot.
   swowl y tient le rôle d'outil d'édition et de visualisation : il ne devient
   pas la source du modèle.
 
-Déposé le 16 octobre 2026.
+Déposé le 17 octobre 2026. Contenu relevé les 17 et 18 octobre 2026.
