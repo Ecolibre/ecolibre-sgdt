@@ -54,13 +54,13 @@ déclarer où trouver l'ontologie importée.
 - Le wiki et ces fichiers divergent sur un point relevé à ce jour : le
   troisième niveau s'appelle ici `IndustrialItem`, et le wiki porte la
   catégorie `Referenced item`.
-- Le facteur de conversion, lui, ne diverge plus. A la tâche 48 du lot 21,
+- Le facteur de conversion, lui, ne diverge plus. À la tâche 48 du lot 21,
   le 19 octobre 2026, le wiki s'est aligné sur le sens courant, celui de ce
   fichier et de QUDT : une page d'unité porte 0,001 pour le millimètre,
-  comme `centimetre` porte ici `coefficient 0.01`. L'inversion ne subsiste
-  qu'à l'intérieur de Semantic MediaWiki, dont le bloc de déclaration des
-  unités d'une dimension attend 1000 pour le millimètre. C'est une
-  contrainte de l'outil, pas un écart de modèle.
+  comme l'unité `centimetre` porte ici un `coefficient` de 0.01.
+  L'inversion ne subsiste qu'à l'intérieur de Semantic MediaWiki, dont le
+  bloc de déclaration des unités d'une dimension attend 1000 pour le
+  millimètre. C'est une contrainte de l'outil, pas un écart de modèle.
 - Ces fichiers servent de point de départ à une reprise de l'ontologie dans
   swowl (github.com/MyShivaRepo/swowl), éditeur OWL écrit par Bernard Chabot.
   swowl y tient le rôle d'outil d'édition et de visualisation : il ne devient
