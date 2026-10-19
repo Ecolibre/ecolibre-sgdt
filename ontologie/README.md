@@ -2,11 +2,22 @@
 
 Ce dossier porte l'ontologie du SGDT, dessinée à partir de 2017 par Cyril
 Libert et Bernard Chabot. Les fichiers viennent de Bernard Chabot et sont
-tenus ici comme la copie de référence de l'ontologie.
+tenus ici comme la copie de référence de l'ontologie. Elle précède le wiki de
+plusieurs années : le wiki a été construit en prenant cette ontologie pour
+modèle.
 
-Référence de l'ontologie ne veut pas dire autorité sur le wiki. Le modèle en
-service sur wiki.ecolibre.org reste seul à faire foi pour ce que le wiki
-porte ; ce dossier dit ce que l'ontologie, elle, énonce.
+Deux autorités, qu'il ne faut pas confondre. Sur ce que le modèle devrait
+dire, c'est l'ontologie qui fait référence : le wiki en est l'implémentation,
+et il ne s'en écarte que là où Semantic MediaWiki l'impose, auquel cas l'écart
+se consigne. Sur ce que le wiki porte réellement, c'est le wiki qui fait foi,
+toujours, et jamais un rapport ni ce dossier : un fichier peut être périmé,
+l'état du wiki ne l'est jamais.
+
+Se conformer à l'ontologie porte sur la structure et le sens, pas sur
+l'orthographe des identifiants. Les deux mondes nomment différemment par
+nature : l'ontologie porte des identifiants OWL en un seul mot,
+`DimensionalUnit` ou `hasBase`, le wiki porte des noms d'attributs lisibles,
+`Unit dimension` ou `Quantity type`. Aucun nom n'est repris de l'un à l'autre.
 
 ## Ce que contient le dossier
 
@@ -31,7 +42,7 @@ première.
   598 triplets, 91 individus. Elle porte les grandeurs et les unités du
   Système international, les facteurs de conversion par `coefficient` et
   `multipleOf`, et la décomposition dimensionnelle par
-  `QuantityExponentiation`, `haseBase` et `exponent`. L'instanciation est
+  `QuantityExponentiation`, `hasBase` et `exponent`. L'instanciation est
   partielle : six facteurs de conversion seulement, quatre décompositions
   dimensionnelles pour vingt-trois grandeurs dérivées, et les classes
   `BaseUnit` et `ReferenceUnit` sans aucun individu.
@@ -54,22 +65,26 @@ Toute correction faite depuis figure ici.
   chiffres inversés dans la source. Le `.pprj` ne portait pas cette valeur
   et n'a pas été touché.
 
-Ce qui n'est pas corrigé, et le motif : les noms portent des fautes
-constantes, classes `Dimentional` et `Dimentionless`, propriété `haseBase`,
-individu `MultipliedAndDivisedUnit_2` au milieu de
-`MultipliedAndDividedUnit_1, 13, 41, 42, 43`. Les renommer changerait des
-identifiants publics de l'espace de noms `virtual-assembly.org`, pour un gain
-d'orthographe. Corriger une valeur fausse laisse les identifiants intacts ;
-renommer, non.
+- 20 octobre 2026, trois fautes d'orthographe corrigées dans des noms
+  d'entités : `Dimention` devient `Dimension`, ce qui couvre
+  `DimensionalQuantity`, `DimensionalUnit`, `DimensionlessQuantity` et
+  `DimensionlessUnit` ; `haseBase` devient `hasBase` ; l'individu
+  `MultipliedAndDivisedUnit_2` devient `MultipliedAndDividedUnit_2`. Les
+  identifiants changent donc dans l'espace de noms
+  `http://virtual-assembly.org/QualityQuantityUnit`. Rien n'en dépendait :
+  `OSE_BusinessOntology.owl` n'en référence aucun, et le wiki n'emploie
+  aucun de ces noms. Les deux fichiers de projet Protégé ont été corrigés en
+  même temps, faute de quoi ils auraient pointé sur des noms disparus.
 
 ## Statut
 
 - L'explication publique du modèle est le fil ouvert le 5 décembre 2022 sur
   le forum de l'Assemblée Virtuelle, sujet 745 :
   https://forums.assemblee-virtuelle.org/t/systeme-de-gestion-de-donnees-techniques-oriente-open-source-hardware-et-ingenierie-cooperative/745
-- Le wiki et ces fichiers divergent sur un point relevé à ce jour : le
-  troisième niveau s'appelle ici `IndustrialItem`, et le wiki porte la
-  catégorie `Referenced item`.
+- Un écart reste ouvert entre le wiki et ces fichiers : le troisième niveau
+  s'appelle ici `IndustrialItem`, et le wiki porte la catégorie
+  `Referenced item`. Sous le principe énoncé plus haut, cet écart est à
+  justifier ou à refermer. Il n'est pas tranché dans ce dossier.
 - Le facteur de conversion, lui, ne diverge plus. À la tâche 48 du lot 21,
   le 19 octobre 2026, le wiki s'est aligné sur le sens courant, celui de ce
   fichier et de QUDT : une page d'unité porte 0,001 pour le millimètre,
@@ -79,8 +94,8 @@ renommer, non.
   millimètre. C'est une contrainte de l'outil, pas un écart de modèle.
 - Ces fichiers servent de point de départ à une reprise de l'ontologie dans
   swowl (github.com/MyShivaRepo/swowl), éditeur OWL écrit par Bernard Chabot.
-  swowl y tient le rôle d'outil d'édition et de visualisation : il ne devient
-  pas la source du modèle.
+  swowl y tient le rôle d'outil d'édition et de visualisation : la source
+  reste le fichier OWL de ce dossier.
 
 Déposé le 17 octobre 2026. Contenu relevé les 17 et 18 octobre 2026.
 Dernière correction le 20 octobre 2026.

@@ -6244,7 +6244,7 @@
 ([Q2U_Ontology_ProjectKB_Class20008] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/QualityQuantityUnit#DimentionalUnit")
+	(name "http://virtual-assembly.org/QualityQuantityUnit#DimensionalUnit")
 	(property_list [Q2U_Ontology_ProjectKB_Class20011])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.OWLFormWidget"))
 
@@ -6456,7 +6456,7 @@
 ([Q2U_Ontology_ProjectKB_Class20042] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/QualityQuantityUnit#DimentionlessUnit")
+	(name "http://virtual-assembly.org/QualityQuantityUnit#DimensionlessUnit")
 	(property_list [Q2U_Ontology_ProjectKB_Class20045])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.OWLFormWidget"))
 
@@ -7334,7 +7334,7 @@
 
 	(height 60)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/QualityQuantityUnit#haseBase")
+	(name "http://virtual-assembly.org/QualityQuantityUnit#hasBase")
 	(property_list [Q2U_Ontology_ProjectKB_Class22501])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 320)
@@ -7437,18 +7437,18 @@
 
 ([Q2U_Ontology_ProjectKB_Class22571] of  String
 
-	(name ":COLUMN:NAME:DESCRIPTORhttp://virtual-assembly.org/QualityQuantityUnit#haseBase")
-	(string_value "haseBase"))
+	(name ":COLUMN:NAME:DESCRIPTORhttp://virtual-assembly.org/QualityQuantityUnit#hasBase")
+	(string_value "hasBase"))
 
 ([Q2U_Ontology_ProjectKB_Class22572] of  Integer
 
 	(integer_value -16777216)
-	(name ":COLOR:RGB:DESCRIPTORhttp://virtual-assembly.org/QualityQuantityUnit#haseBase"))
+	(name ":COLOR:RGB:DESCRIPTORhttp://virtual-assembly.org/QualityQuantityUnit#hasBase"))
 
 ([Q2U_Ontology_ProjectKB_Class22573] of  Integer
 
 	(integer_value 131)
-	(name ":PREFERRED:SIZE:DESCRIPTORhttp://virtual-assembly.org/QualityQuantityUnit#haseBase"))
+	(name ":PREFERRED:SIZE:DESCRIPTORhttp://virtual-assembly.org/QualityQuantityUnit#hasBase"))
 
 ([Q2U_Ontology_ProjectKB_Class22575] of  Integer
 
@@ -7594,13 +7594,13 @@
 
 ([Q2U_Ontology_ProjectKB_Class22645] of  String
 
-	(name "http://virtual-assembly.org/QualityQuantityUnit#haseBase")
-	(string_value "http://virtual-assembly.org/QualityQuantityUnit#haseBase"))
+	(name "http://virtual-assembly.org/QualityQuantityUnit#hasBase")
+	(string_value "http://virtual-assembly.org/QualityQuantityUnit#hasBase"))
 
 ([Q2U_Ontology_ProjectKB_Class22646] of  String
 
 	(name ":Visible:Slot:Index0")
-	(string_value "http://virtual-assembly.org/QualityQuantityUnit#haseBase"))
+	(string_value "http://virtual-assembly.org/QualityQuantityUnit#hasBase"))
 
 ([Q2U_Ontology_ProjectKB_Class22647] of  String
 
@@ -7857,13 +7857,13 @@
 
 ([Q2U_Ontology_ProjectKB_Class22688] of  String
 
-	(name ":COLUMN:NAME:DESCRIPTORhttp://virtual-assembly.org/QualityQuantityUnit#haseBase")
-	(string_value "haseBase"))
+	(name ":COLUMN:NAME:DESCRIPTORhttp://virtual-assembly.org/QualityQuantityUnit#hasBase")
+	(string_value "hasBase"))
 
 ([Q2U_Ontology_ProjectKB_Class22689] of  Integer
 
 	(integer_value -16777216)
-	(name ":COLOR:RGB:DESCRIPTORhttp://virtual-assembly.org/QualityQuantityUnit#haseBase"))
+	(name ":COLOR:RGB:DESCRIPTORhttp://virtual-assembly.org/QualityQuantityUnit#hasBase"))
 
 ([Q2U_Ontology_ProjectKB_Class2269] of  Boolean
 
@@ -7873,7 +7873,7 @@
 ([Q2U_Ontology_ProjectKB_Class22690] of  Integer
 
 	(integer_value 20)
-	(name ":PREFERRED:SIZE:DESCRIPTORhttp://virtual-assembly.org/QualityQuantityUnit#haseBase"))
+	(name ":PREFERRED:SIZE:DESCRIPTORhttp://virtual-assembly.org/QualityQuantityUnit#hasBase"))
 
 ([Q2U_Ontology_ProjectKB_Class2270] of  Property_List
 
@@ -7896,13 +7896,13 @@
 
 ([Q2U_Ontology_ProjectKB_Class22706] of  String
 
-	(name "http://virtual-assembly.org/QualityQuantityUnit#haseBase")
-	(string_value "http://virtual-assembly.org/QualityQuantityUnit#haseBase"))
+	(name "http://virtual-assembly.org/QualityQuantityUnit#hasBase")
+	(string_value "http://virtual-assembly.org/QualityQuantityUnit#hasBase"))
 
 ([Q2U_Ontology_ProjectKB_Class22707] of  String
 
 	(name ":Visible:Slot:Index0")
-	(string_value "http://virtual-assembly.org/QualityQuantityUnit#haseBase"))
+	(string_value "http://virtual-assembly.org/QualityQuantityUnit#hasBase"))
 
 ([Q2U_Ontology_ProjectKB_Class22708] of  String
 
@@ -8046,7 +8046,7 @@
 
 	(height -170)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/QualityQuantityUnit#haseBase")
+	(name "http://virtual-assembly.org/QualityQuantityUnit#hasBase")
 	(property_list [Q2U_Ontology_ProjectKB_Class2294])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 200)
@@ -8233,7 +8233,7 @@
 
 ([Q2U_Ontology_ProjectKB_Class40080] of  String
 
-	(name "http://virtual-assembly.org/QualityQuantityUnit#DimentionalQuantity")
+	(name "http://virtual-assembly.org/QualityQuantityUnit#DimensionalQuantity")
 	(string_value "http%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23label{+%28}http%3A%2F%2Fvirtual-assembly.org%2FQualityQuantityUnit%23symbol{%29}"))
 
 ([Q2U_Ontology_ProjectKB_Class40081] of  String
@@ -8264,11 +8264,11 @@
 ([Q2U_Ontology_ProjectKB_Class40086] of  String
 
 	(name "http://virtual-assembly.org/QualityQuantityUnit#QuantityExponentiation")
-	(string_value "http%3A%2F%2Fvirtual-assembly.org%2FQualityQuantityUnit%23defines{+%3A+}http%3A%2F%2Fvirtual-assembly.org%2FQualityQuantityUnit%23haseBase{+%5E}http%3A%2F%2Fvirtual-assembly.org%2FQualityQuantityUnit%23exponent"))
+	(string_value "http%3A%2F%2Fvirtual-assembly.org%2FQualityQuantityUnit%23defines{+%3A+}http%3A%2F%2Fvirtual-assembly.org%2FQualityQuantityUnit%23hasBase{+%5E}http%3A%2F%2Fvirtual-assembly.org%2FQualityQuantityUnit%23exponent"))
 
 ([Q2U_Ontology_ProjectKB_Class40087] of  String
 
-	(name "http://virtual-assembly.org/QualityQuantityUnit#DimentionalUnit")
+	(name "http://virtual-assembly.org/QualityQuantityUnit#DimensionalUnit")
 	(string_value "http%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23label{+%28}http%3A%2F%2Fvirtual-assembly.org%2FQualityQuantityUnit%23symbol{%29}"))
 
 ([Q2U_Ontology_ProjectKB_Class40088] of  Map_Entry

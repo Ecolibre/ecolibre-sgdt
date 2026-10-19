@@ -16,11 +16,11 @@
       <owl:Class rdf:ID="QualityQuantityAndUnitConcept"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="DimentionalQuantity">
+  <owl:Class rdf:ID="DimensionalQuantity">
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:allValuesFrom>
-          <owl:Class rdf:ID="DimentionalUnit"/>
+          <owl:Class rdf:ID="DimensionalUnit"/>
         </owl:allValuesFrom>
         <owl:onProperty>
           <owl:ObjectProperty rdf:ID="hasUnit"/>
@@ -31,14 +31,14 @@
       <owl:Class rdf:ID="BaseQuantity"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:ID="DimentionlessUnit">
+  <owl:Class rdf:ID="DimensionlessUnit">
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty>
           <owl:ObjectProperty rdf:ID="unitOf"/>
         </owl:onProperty>
         <owl:allValuesFrom>
-          <owl:Class rdf:ID="DimentionlessQuantity"/>
+          <owl:Class rdf:ID="DimensionlessQuantity"/>
         </owl:allValuesFrom>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -72,7 +72,7 @@
           <owl:Class rdf:about="#BaseQuantity"/>
         </owl:allValuesFrom>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:ID="haseBase"/>
+          <owl:ObjectProperty rdf:ID="hasBase"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -81,7 +81,7 @@
         <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
         >1</owl:cardinality>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="#haseBase"/>
+          <owl:ObjectProperty rdf:about="#hasBase"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -89,13 +89,13 @@
       <owl:Class rdf:ID="QuantityConcept"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:about="#DimentionalUnit">
+  <owl:Class rdf:about="#DimensionalUnit">
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="#unitOf"/>
         </owl:onProperty>
-        <owl:allValuesFrom rdf:resource="#DimentionalQuantity"/>
+        <owl:allValuesFrom rdf:resource="#DimensionalQuantity"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
@@ -232,15 +232,15 @@
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="#haseBase"/>
+          <owl:ObjectProperty rdf:about="#hasBase"/>
         </owl:onProperty>
-        <owl:allValuesFrom rdf:resource="#DimentionalUnit"/>
+        <owl:allValuesFrom rdf:resource="#DimensionalUnit"/>
       </owl:Restriction>
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onProperty>
-          <owl:ObjectProperty rdf:about="#haseBase"/>
+          <owl:ObjectProperty rdf:about="#hasBase"/>
         </owl:onProperty>
         <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
         >1</owl:cardinality>
@@ -277,10 +277,10 @@
       <owl:Class rdf:about="#QuantityConcept"/>
     </rdfs:subClassOf>
   </owl:Class>
-  <owl:Class rdf:about="#DimentionlessQuantity">
+  <owl:Class rdf:about="#DimensionlessQuantity">
     <rdfs:subClassOf>
       <owl:Restriction>
-        <owl:allValuesFrom rdf:resource="#DimentionlessUnit"/>
+        <owl:allValuesFrom rdf:resource="#DimensionlessUnit"/>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="#hasUnit"/>
         </owl:onProperty>
@@ -385,7 +385,7 @@
     <rdfs:domain>
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#DimentionalQuantity"/>
+          <owl:Class rdf:about="#DimensionalQuantity"/>
           <owl:Class rdf:about="#Quantity"/>
         </owl:unionOf>
       </owl:Class>
@@ -400,12 +400,12 @@
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:about="#baseOf">
     <owl:inverseOf>
-      <owl:ObjectProperty rdf:about="#haseBase"/>
+      <owl:ObjectProperty rdf:about="#hasBase"/>
     </owl:inverseOf>
     <rdfs:domain>
       <owl:Class>
         <owl:unionOf rdf:parseType="Collection">
-          <owl:Class rdf:about="#DimentionalUnit"/>
+          <owl:Class rdf:about="#DimensionalUnit"/>
           <owl:Class rdf:about="#PerceptionMode"/>
           <owl:Class rdf:about="#BaseQuantity"/>
         </owl:unionOf>
@@ -416,7 +416,7 @@
     <rdfs:domain rdf:resource="#Quantity"/>
     <owl:inverseOf rdf:resource="#quantifiedBy"/>
   </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="#haseBase">
+  <owl:ObjectProperty rdf:about="#hasBase">
     <owl:inverseOf rdf:resource="#baseOf"/>
     <rdfs:domain>
       <owl:Class>
@@ -467,12 +467,12 @@
     >Ouïe</rdfs:label>
   </PerceptionMode>
   <QuantityExponentiation rdf:ID="QuantityExponentiation_9">
-    <haseBase>
-      <DimentionalQuantity rdf:ID="time">
+    <hasBase>
+      <DimensionalQuantity rdf:ID="time">
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >T</symbol>
         <hasUnit>
-          <DimentionalUnit rdf:ID="second">
+          <DimensionalUnit rdf:ID="second">
             <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
             >seconde</rdfs:label>
             <hasMultiple>
@@ -500,13 +500,13 @@
             <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
             >s</symbol>
             <unitOf rdf:resource="#time"/>
-          </DimentionalUnit>
+          </DimensionalUnit>
         </hasUnit>
         <baseOf rdf:resource="#QuantityExponentiation_9"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >temps</rdfs:label>
-      </DimentionalQuantity>
-    </haseBase>
+      </DimensionalQuantity>
+    </hasBase>
     <exponent rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
     >-1</exponent>
     <defines>
@@ -525,8 +525,8 @@
             <defines rdf:resource="#velocity"/>
             <exponent rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
             >1</exponent>
-            <haseBase>
-              <DimentionalQuantity rdf:ID="length">
+            <hasBase>
+              <DimensionalQuantity rdf:ID="length">
                 <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                 >L</symbol>
                 <baseOf>
@@ -551,7 +551,7 @@
                                 </hasUnit>
                                 <definedBy>
                                   <QuantityExponentiation rdf:ID="QuantityExponentiation_7">
-                                    <haseBase rdf:resource="#length"/>
+                                    <hasBase rdf:resource="#length"/>
                                     <defines rdf:resource="#volume"/>
                                     <exponent rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
                                     >3</exponent>
@@ -613,12 +613,12 @@
                                             "http://www.w3.org/2001/XMLSchema#string"
                                             >Luminosité</rdfs:label>
                                             <quantifiedBy>
-                                              <DimentionalQuantity rdf:ID="luminousIntensity">
+                                              <DimensionalQuantity rdf:ID="luminousIntensity">
                                                 <rdfs:label rdf:datatype=
                                                 "http://www.w3.org/2001/XMLSchema#string"
                                                 >intensité lumineuse</rdfs:label>
                                                 <hasUnit>
-                                                  <DimentionalUnit rdf:ID="candela">
+                                                  <DimensionalUnit rdf:ID="candela">
                                                     <symbol rdf:datatype=
                                                     "http://www.w3.org/2001/XMLSchema#string"
                                                     >cd</symbol>
@@ -627,13 +627,13 @@
                                                      rdf:datatype=
                                                     "http://www.w3.org/2001/XMLSchema#string"
                                                     >candela</rdfs:label>
-                                                  </DimentionalUnit>
+                                                  </DimensionalUnit>
                                                 </hasUnit>
                                                 <symbol rdf:datatype=
                                                 "http://www.w3.org/2001/XMLSchema#string"
                                                 >J</symbol>
                                                 <quantifies rdf:resource="#DerivedQuality_3"/>
-                                              </DimentionalQuantity>
+                                              </DimensionalQuantity>
                                             </quantifiedBy>
                                           </BaseQuality>
                                         </allowPerceptionOf>
@@ -674,20 +674,20 @@
                     <definedBy rdf:resource="#surface"/>
                     <exponent rdf:datatype="http://www.w3.org/2001/XMLSchema#int"
                     >2</exponent>
-                    <haseBase rdf:resource="#length"/>
+                    <hasBase rdf:resource="#length"/>
                   </QuantityExponentiation>
                 </baseOf>
                 <baseOf rdf:resource="#QuantityExponentiation_7"/>
                 <baseOf rdf:resource="#QuantityExponentiation_8"/>
                 <hasUnit>
-                  <DimentionalUnit rdf:ID="metre">
+                  <DimensionalUnit rdf:ID="metre">
                     <unitOf rdf:resource="#length"/>
                     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                     >mètre</rdfs:label>
                     <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                     >m</symbol>
                     <hasMultiple>
-                      <MultipliedAndDividedUnit rdf:ID="MultipliedAndDivisedUnit_2">
+                      <MultipliedAndDividedUnit rdf:ID="MultipliedAndDividedUnit_2">
                         <multipleOf rdf:resource="#metre"/>
                         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                         >millimètre</rdfs:label>
@@ -717,13 +717,13 @@
                         >pouce</rdfs:label>
                       </MultipliedAndDividedUnit>
                     </hasMultiple>
-                  </DimentionalUnit>
+                  </DimensionalUnit>
                 </hasUnit>
                 <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                 >longueur</rdfs:label>
                 <quantifies rdf:resource="#Quality_23"/>
-              </DimentionalQuantity>
-            </haseBase>
+              </DimensionalQuantity>
+            </hasBase>
           </QuantityExponentiation>
         </definedBy>
         <definedBy rdf:resource="#QuantityExponentiation_9"/>
@@ -732,13 +732,13 @@
       </DerivedQuantity>
     </defines>
   </QuantityExponentiation>
-  <DimentionlessUnit rdf:ID="unit">
+  <DimensionlessUnit rdf:ID="unit">
     <unitOf>
-      <DimentionlessQuantity rdf:ID="number">
+      <DimensionlessQuantity rdf:ID="number">
         <hasUnit rdf:resource="#unit"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >nombre</rdfs:label>
-      </DimentionlessQuantity>
+      </DimensionlessQuantity>
     </unitOf>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >unité</rdfs:label>
@@ -753,7 +753,7 @@
         >12.0</coefficient>
       </MultipliedAndDividedUnit>
     </hasMultiple>
-  </DimentionlessUnit>
+  </DimensionlessUnit>
   <DerivedUnit rdf:ID="joule">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >joule</rdfs:label>
@@ -793,36 +793,36 @@
       </DerivedUnit>
     </hasUnit>
   </DerivedQuantity>
-  <DimentionalQuantity rdf:ID="thermodynamicTemperature">
+  <DimensionalQuantity rdf:ID="thermodynamicTemperature">
     <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Θ</symbol>
     <hasUnit>
-      <DimentionalUnit rdf:ID="kelvin">
+      <DimensionalUnit rdf:ID="kelvin">
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >K</symbol>
         <unitOf rdf:resource="#thermodynamicTemperature"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >kelvin</rdfs:label>
-      </DimentionalUnit>
+      </DimensionalUnit>
     </hasUnit>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >température thermodynamique</rdfs:label>
-  </DimentionalQuantity>
-  <DimentionalUnit rdf:ID="ampere">
+  </DimensionalQuantity>
+  <DimensionalUnit rdf:ID="ampere">
     <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >A</symbol>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >ampère</rdfs:label>
     <unitOf>
-      <DimentionalQuantity rdf:ID="electricCurrent">
+      <DimensionalQuantity rdf:ID="electricCurrent">
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >I</symbol>
         <hasUnit rdf:resource="#ampere"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >courant électrique</rdfs:label>
-      </DimentionalQuantity>
+      </DimensionalQuantity>
     </unitOf>
-  </DimentionalUnit>
+  </DimensionalUnit>
   <DerivedQuantity rdf:ID="acceleration">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >accelération</rdfs:label>
@@ -849,32 +849,32 @@
       </DerivedQuantity>
     </unitOf>
   </DerivedUnit>
-  <DimentionlessUnit rdf:ID="radian">
+  <DimensionlessUnit rdf:ID="radian">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >radian</rdfs:label>
     <unitOf>
-      <DimentionlessQuantity rdf:ID="angle">
+      <DimensionlessQuantity rdf:ID="angle">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >angle</rdfs:label>
         <hasUnit rdf:resource="#radian"/>
-      </DimentionlessQuantity>
+      </DimensionlessQuantity>
     </unitOf>
     <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >rad</symbol>
-  </DimentionlessUnit>
-  <DimentionlessQuantity rdf:ID="currency">
+  </DimensionlessUnit>
+  <DimensionlessQuantity rdf:ID="currency">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >monnaie</rdfs:label>
     <hasUnit>
-      <DimentionlessUnit rdf:ID="euro">
+      <DimensionlessUnit rdf:ID="euro">
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >€</symbol>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >euro</rdfs:label>
         <unitOf rdf:resource="#currency"/>
-      </DimentionlessUnit>
+      </DimensionlessUnit>
     </hasUnit>
-  </DimentionlessQuantity>
+  </DimensionlessQuantity>
   <DerivedQuantity rdf:ID="magneticFlux">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >flux magnétique</rdfs:label>
@@ -966,21 +966,21 @@
       </DerivedQuantity>
     </unitOf>
   </DerivedUnit>
-  <DimentionlessQuantity rdf:ID="amountOfsubstance">
+  <DimensionlessQuantity rdf:ID="amountOfsubstance">
     <hasUnit>
-      <DimentionlessUnit rdf:ID="mole">
+      <DimensionlessUnit rdf:ID="mole">
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >mol</symbol>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >mole</rdfs:label>
         <unitOf rdf:resource="#amountOfsubstance"/>
-      </DimentionlessUnit>
+      </DimensionlessUnit>
     </hasUnit>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >quantité de matière</rdfs:label>
     <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >N</symbol>
-  </DimentionlessQuantity>
+  </DimensionlessQuantity>
   <DerivedUnit rdf:ID="volt">
     <unitOf>
       <DerivedQuantity rdf:ID="voltage">
@@ -1007,19 +1007,19 @@
       </DerivedQuantity>
     </unitOf>
   </DerivedUnit>
-  <DimentionlessUnit rdf:ID="steradian">
+  <DimensionlessUnit rdf:ID="steradian">
     <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >sr</symbol>
     <unitOf>
-      <DimentionlessQuantity rdf:ID="solidAngle">
+      <DimensionlessQuantity rdf:ID="solidAngle">
         <hasUnit rdf:resource="#steradian"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >angle solide</rdfs:label>
-      </DimentionlessQuantity>
+      </DimensionlessQuantity>
     </unitOf>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >steradian</rdfs:label>
-  </DimentionlessUnit>
+  </DimensionlessUnit>
   <DerivedQuantity rdf:ID="magneticFieldStrengh">
     <hasUnit>
       <DerivedUnit rdf:ID="tesla">
@@ -1059,45 +1059,45 @@
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >illuminance</rdfs:label>
   </DerivedQuantity>
-  <DimentionlessUnit rdf:about="#1">
+  <DimensionlessUnit rdf:about="#1">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >1</rdfs:label>
     <unitOf>
-      <DimentionlessQuantity rdf:ID="ratio">
+      <DimensionlessQuantity rdf:ID="ratio">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >ratio</rdfs:label>
         <hasUnit rdf:resource="#1"/>
-      </DimentionlessQuantity>
+      </DimensionlessQuantity>
     </unitOf>
-  </DimentionlessUnit>
-  <DimentionlessQuantity rdf:ID="proportion">
+  </DimensionlessUnit>
+  <DimensionlessQuantity rdf:ID="proportion">
     <hasUnit>
-      <DimentionlessUnit rdf:ID="percent">
+      <DimensionlessUnit rdf:ID="percent">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >pourcentage</rdfs:label>
         <unitOf rdf:resource="#proportion"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >%</symbol>
-      </DimentionlessUnit>
+      </DimensionlessUnit>
     </hasUnit>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >proportion</rdfs:label>
-  </DimentionlessQuantity>
-  <DimentionalQuantity rdf:ID="mass">
+  </DimensionlessQuantity>
+  <DimensionalQuantity rdf:ID="mass">
     <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >M</symbol>
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >masse</rdfs:label>
     <hasUnit>
-      <DimentionalUnit rdf:ID="kilogram">
+      <DimensionalUnit rdf:ID="kilogram">
         <unitOf rdf:resource="#mass"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >kilogramme</rdfs:label>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
         >kg</symbol>
-      </DimentionalUnit>
+      </DimensionalUnit>
     </hasUnit>
-  </DimentionalQuantity>
+  </DimensionalQuantity>
   <DerivedUnit rdf:ID="lumen">
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >lumen</rdfs:label>
