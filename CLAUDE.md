@@ -659,19 +659,25 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   des permissions.
 - **Pousser en fin de session, systématiquement.** Un commit qui n'a pas
   quitté la machine ne protège pas de la machine.
-- **Rapatrier en début de tâche, systématiquement.** Avant la première
-  écriture d'une tâche, lancer `git fetch origin`, et fusionner
-  `origin/main` si la branche est en retard. Le dépôt reçoit des poussées
-  d'autres copies et d'autres sessions, locales et cloud : une tâche qui
-  commite sans avoir rapatrié travaille sur un `CLAUDE.md` et des scripts
-  `bin/` périmés, et voit sa poussée refusée en fin de tâche. Mesuré deux
-  fois. Le 17 octobre 2026, la copie locale était restée sur `25b03d7` du
-  11 octobre, 47 commits de retard, et la poussée a été refusée. Le
-  18 octobre 2026, la même copie affichait une branche alignée par
-  `git status -sb` alors que le distant avait avancé de `2a0e5ea` à
-  `851765c` : tant qu'on n'a pas rapatrié, `git status` se compare à une
-  référence de suivi périmée et ne prouve rien. Le rattrapage se fait par
-  fusion, jamais par rebasage ni par poussée forcée.
+- **Rapatrier en début de tâche, systématiquement, et de nouveau si la
+  poussée est refusée.** Avant la première écriture d'une tâche, lancer
+  `git fetch origin`, et fusionner `origin/main` si la branche est en
+  retard. Le dépôt reçoit des poussées d'autres copies et d'autres
+  sessions, locales et cloud : une tâche qui commite sans avoir rapatrié
+  travaille sur un `CLAUDE.md` et des scripts `bin/` périmés, et voit sa
+  poussée refusée en fin de tâche. Rapatrier au début ne suffit pas quand
+  une autre session pousse pendant la tâche : un refus de poussée se traite
+  par un nouveau `git fetch origin`, une fusion, puis une nouvelle
+  poussée, et au second refus on s'arrête et on le signale. Jamais de
+  rebasage, jamais de poussée forcée. Mesuré trois fois. Le 17 octobre
+  2026, la copie locale était restée sur `25b03d7` du 11 octobre,
+  47 commits de retard, et la poussée a été refusée. Le 18 octobre 2026,
+  la même copie affichait une branche alignée par `git status -sb` alors
+  que le distant avait déjà avancé : tant qu'on n'a pas rapatrié,
+  `git status` se compare à une référence de suivi périmée et ne prouve
+  rien. Le même jour, le distant est passé de `851765c` à `ee21ec0` puis
+  `bb0cbb9` en moins d'une heure, dont un commit survenu entre le
+  rapatriement d'une tâche et sa poussée.
 - **Écrire les commandes shell sous leur forme la plus simple.** Claude Code
   soumet à confirmation toute commande dont il ne peut pas analyser la forme
   à l'avance — boucles, substitutions `$(…)`, `<(…)`, accolades voisinant des
