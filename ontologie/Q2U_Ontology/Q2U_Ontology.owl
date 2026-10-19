@@ -712,7 +712,7 @@
                       <MultipliedAndDividedUnit rdf:ID="MultipliedAndDividedUnit_1">
                         <multipleOf rdf:resource="#metre"/>
                         <coefficient rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
-                        >0.0245</coefficient>
+                        >0.0254</coefficient>
                         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
                         >pouce</rdfs:label>
                       </MultipliedAndDividedUnit>

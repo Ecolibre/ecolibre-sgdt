@@ -1,9 +1,12 @@
-# Ontologie du SGDT - fichiers d'origine
+# Ontologie du SGDT
 
-Ce dossier porte les fichiers d'ontologie détenus par Cyril Libert sur son
-poste, déposés tels quels, sans retouche. Ontologie dessinée à partir de 2017
-par Cyril Libert et Bernard Chabot. Ces fichiers ne décrivent pas le modèle en
-service sur wiki.ecolibre.org : le wiki fait autorité, pas ce dossier.
+Ce dossier porte l'ontologie du SGDT, dessinée à partir de 2017 par Cyril
+Libert et Bernard Chabot. Les fichiers viennent de Bernard Chabot et sont
+tenus ici comme la copie de référence de l'ontologie.
+
+Référence de l'ontologie ne veut pas dire autorité sur le wiki. Le modèle en
+service sur wiki.ecolibre.org reste seul à faire foi pour ce que le wiki
+porte ; ce dossier dit ce que l'ontologie, elle, énonce.
 
 ## Ce que contient le dossier
 
@@ -34,17 +37,30 @@ première.
   `BaseUnit` et `ReferenceUnit` sans aucun individu.
   Fichiers datés du 14 octobre 2024.
 
-Deux défauts relevés dans `Q2U_Ontology.owl` le 18 octobre 2026, laissés tels
-quels puisque les fichiers ne sont pas retouchés : le coefficient du pouce
-vaut `0.0245`, alors que le pouce vaut 0,0254 mètre par définition depuis
-1959 ; et les noms portent des fautes constantes, classes `Dimentional` et
-`Dimentionless`, propriété `haseBase`, individu `MultipliedAndDivisedUnit_2`
-au milieu de `MultipliedAndDividedUnit_1, 13, 41, 42, 43`.
-
 Les fichiers `.pprj` et `.repository` ne sont pas de l'OWL : ce sont les
 fichiers de projet de Protégé 3.x, l'éditeur avec lequel ces ontologies ont
 été écrites. Ils ne portent aucun modèle. Le `.repository` ne fait que
 déclarer où trouver l'ontologie importée.
+
+## Corrections apportées
+
+Les fichiers ont été déposés le 17 octobre 2026 dans leur état d'origine, et
+cet état reste consultable dans l'historique du dépôt, au commit `b90ab66`.
+Toute correction faite depuis figure ici.
+
+- 20 octobre 2026, `Q2U_Ontology.owl` : le coefficient de
+  `MultipliedAndDividedUnit_1`, étiqueté "pouce", passe de `0.0245` à
+  `0.0254`. Un pouce vaut 0,0254 mètre, exactement, depuis 1959. Deux
+  chiffres inversés dans la source. Le `.pprj` ne portait pas cette valeur
+  et n'a pas été touché.
+
+Ce qui n'est pas corrigé, et le motif : les noms portent des fautes
+constantes, classes `Dimentional` et `Dimentionless`, propriété `haseBase`,
+individu `MultipliedAndDivisedUnit_2` au milieu de
+`MultipliedAndDividedUnit_1, 13, 41, 42, 43`. Les renommer changerait des
+identifiants publics de l'espace de noms `virtual-assembly.org`, pour un gain
+d'orthographe. Corriger une valeur fausse laisse les identifiants intacts ;
+renommer, non.
 
 ## Statut
 
@@ -67,3 +83,4 @@ déclarer où trouver l'ontologie importée.
   pas la source du modèle.
 
 Déposé le 17 octobre 2026. Contenu relevé les 17 et 18 octobre 2026.
+Dernière correction le 20 octobre 2026.
