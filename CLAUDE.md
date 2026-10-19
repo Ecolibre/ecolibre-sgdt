@@ -360,11 +360,15 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   stockées de la propriété qui transclut le bloc, et reste pourtant refusée à
   la saisie pendant des heures. Mesuré du 15 au 18 octobre 2026 : refusée
   encore seize heures après son ajout, une purge avec `forcelinkupdate` n'y
-  changeant rien, puis acceptée entre la seizième et la soixante et onzième
-  heure sans aucune intervention, sans nouvelle révision de la propriété et
-  sans trace au journal. Ne rien réparer, ne pas réenregistrer la propriété,
-  ne pas conclure à un échec : attendre et remesurer. Le délai exact n'est pas
-  mesuré.
+  changeant rien dans l'immédiat, puis acceptée entre la seizième et la
+  soixante et onzième heure sans autre intervention de notre part, sans
+  nouvelle révision de la propriété et sans trace au journal. La purge ayant
+  précédé l'acceptation, un effet différé de sa part n'est pas écarté, et le
+  journal ne montre ni les travaux de la file, ni ce qui tourne sur le
+  serveur. Ne rien réparer, ne pas réenregistrer la propriété, ne pas conclure
+  à un échec : attendre et remesurer. Le délai exact n'est pas mesuré ; dans
+  le seul cas observé, il était compris entre seize et soixante et onze
+  heures.
 
 - **Un retour à la ligne à l'intérieur de `[[ ]]` casse silencieusement un
   lien MediaWiki.** Aucune erreur d'API à l'écriture, mais le lien est absent
