@@ -1,0 +1,47 @@
+Cette page rassemble les choix que Semantic MediaWiki impose au système, et que le modèle n'aurait pas faits seul. Chacun y est écrit avec ce qui l'impose, ce qu'il serait sans cette contrainte, et ce qu'il en couterait d'en changer.
+
+Elle n'annonce aucune migration : aucune cible n'est choisie. Elle existe pour que ces choix se retrouvent d'un seul tenant le jour où la question se posera, plutôt qu'un par un sur les pages des lots qui les ont pris.
+
+Les entrées se citent par leur numéro, comme celles des [[Limites connues du Système de Gestion de Données Techniques|Limites connues]].
+
+# '''Le sens du facteur de conversion des unités.'''
+#* '''Le choix.''' Une page d'unité porte son facteur vers l'unité principale au sens courant : 0,001 pour le millimètre. Le bloc de déclaration porté par la dimension porte l'inverse du même nombre : 1000.
+#* '''Ce qui l'impose.''' Le format du bloc <code>Corresponds to</code> de Semantic MediaWiki, qui attend le nombre d'unités secondaires contenues dans une unité principale, et non le facteur qui ramène la valeur à l'unité principale.
+#* '''Sans cette contrainte.''' Un seul nombre, au sens de QUDT et de l'ontologie Q2U, écrit une fois et lu partout de la même façon.
+#* '''Cout d'une reprise.''' Nul du côté de la donnée : depuis le 18 octobre 2026, la valeur qui fait foi est déjà au sens courant sur les pages d'unité. Ce qui se perd, c'est le bloc de déclaration, dont le nombre inverse ne doit jamais être pris pour la source. Une reprise qui lirait le bloc plutôt que la page d'unité obtiendrait des longueurs fausses d'un facteur un million.
+
+# '''La virgule comme séparateur de valeurs multiples.'''
+#* '''Le choix.''' Aucun nom d'item fonctionnel, organique ou référencé ne contient de virgule, ni aucun nom de tableau kanban. Quatre règles métier le disent, posées entre le 25 juillet 2026 et le lot 10.
+#* '''Ce qui l'impose.''' La virgule est le séparateur de valeurs par défaut de Page Forms et des blocs d'annotation du wiki. Un nom qui en contient une est découpé en deux valeurs, sans erreur ni avertissement. Le paramètre qui change ce séparateur ne s'applique qu'à la propriété qui le précède immédiatement, ce qui interdit de le poser une fois pour toutes.
+#* '''Sans cette contrainte.''' Aucune interdiction sur les noms. Une liste de valeurs est une liste, pas une chaine de caractères à découper.
+#* '''Cout d'une reprise.''' Le cout est déjà payé, et il est invisible : il a été absorbé par les noms, pas par la donnée. Rien n'est à convertir. En revanche l'interdiction, elle, n'a plus de raison d'être hors de cet outil : c'est elle qu'il faudra penser à lever, plutôt que de la recopier par habitude dans le système suivant.
+
+# '''La virgule décimale contre le séparateur de valeurs.'''
+#* '''Le choix.''' Une propriété numérique multivaluée emploie le point-virgule, jamais la virgule.
+#* '''Ce qui l'impose.''' Sur ce wiki en langue française, la virgule est le seul séparateur décimal accepté : le type Number rejette le point, et le type Quantity lit le point comme le début d'une unité. Or la virgule est aussi le séparateur de valeurs. Sur une propriété numérique multivaluée séparée par des virgules, deux décimaux sont stockés comme quatre entiers, sans aucune erreur. Constaté le 4 octobre 2026 en bac à sable.
+#* '''Sans cette contrainte.''' Le point décimal, et un séparateur de liste qui ne soit pas un caractère de la valeur.
+#* '''Cout d'une reprise.''' Réel. Toutes les valeurs numériques sont stockées à la virgule décimale et doivent être renormalisées. Sur une propriété multivaluée, aucune règle automatique ne distingue une virgule décimale d'une virgule séparatrice : la reprise doit être guidée par le type et la cardinalité déclarés, et non par le texte.
+
+# '''Les trois propriétés de schéma.'''
+#* '''Le choix.''' <code>Property_cardinality</code>, <code>Property_domain</code> et <code>Property_range</code> sont portées par les pages d'attribut comme de simples annotations.
+#* '''Ce qui l'impose.''' Semantic MediaWiki ne sait déclarer ni le domaine, ni la portée, ni la cardinalité d'une propriété, et n'en tire aucune contrainte. Ces trois propriétés sont une convention du projet : elles ne sont ni vérifiées, ni opposables.
+#* '''Sans cette contrainte.''' Un schéma, SHACL ou équivalent, qui les exprime et les fait respecter à l'écriture.
+#* '''Cout d'une reprise.''' Faible pour la transposition, qui se fait ligne à ligne. Le cout est ailleurs : rien ne garantit que les données existantes respectent ce que ces trois propriétés annoncent, puisque rien ne l'a jamais vérifié. Le jour où un schéma les rendra opposables, il faudra s'attendre à des rejets sur des données déjà en place.
+
+# '''La cardinalité de <code>Part_of</code>.'''
+#* '''Le choix.''' <code>Part_of</code> est déclarée multiple, mais n'est réellement multivaluée que pour les items référencés, où elle sert de nomenclature. Aux trois autres niveaux, une liste déroulante à valeur unique l'en empêche.
+#* '''Ce qui l'impose.''' Semantic MediaWiki attache la cardinalité à la propriété, jamais au couple classe-propriété.
+#* '''Sans cette contrainte.''' La cardinalité se déclare par classe, et la nuance n'a plus besoin d'un formulaire pour exister.
+#* '''Cout d'une reprise.''' C'est la contrainte la plus facile à perdre. Elle ne vit aujourd'hui que dans les formulaires de saisie : une reprise qui ne lirait que les propriétés ne la verrait pas, et autoriserait partout ce qui n'est permis qu'au niveau référencé. Elle doit être relevée depuis les formulaires, pas depuis le modèle.
+
+# '''L'import de vocabulaire externe.'''
+#* '''Le choix.''' Les alignements avec les vocabulaires externes vivent dans des pages de l'espace <code>MediaWiki:</code>.
+#* '''Ce qui l'impose.''' C'est le seul mécanisme d'import de Semantic MediaWiki. Cet espace exige le droit <code>editinterface</code>, que ne possède ni un compte ordinaire ni un compte robot.
+#* '''Sans cette contrainte.''' Les alignements seraient des données comme les autres, lisibles et modifiables par les mêmes moyens que le reste.
+#* '''Cout d'une reprise.''' Les alignements se transposent sans difficulté, mais ils échappent à tout relevé qui ne lit que les pages de contenu. Ils sont à inventorier à part, sous peine de publier un jeu de données qui a perdu ses correspondances avec les vocabulaires du dehors.
+
+----
+
+Voir aussi le [[Récapitulatif technique du Système de Gestion de Données Techniques]], les [[Limites connues du Système de Gestion de Données Techniques]] et la [[Gestion des lots]].
+
+[[Catégorie:Page de suivi]]
