@@ -1,0 +1,46 @@
+{{Lot
+|Work_package_number=45
+|Work_package_status=identifié
+|Work_package_summary=Clore les lots 9, 10 et 11, livrés en aout 2026 et jamais clos, dont la relecture demande quatre passages dans quatre conversations.
+|Work_package_depends_on=Lot 44 — Mémoire des choix contraints et clôture des travaux
+}}
+
+== Objet ==
+
+Clore les lots 9, 10 et 11, livrés entre le 16 et le 31 aout 2026 et jamais clos. Ils ont été séparés des sept autres lots en retard parce que leur relecture ne se fait pas en passant.
+
+== Ce qui est déjà tranché ==
+
+'''Ces trois clôtures ne sont pas dans le [[Lot 44 — Mémoire des choix contraints et clôture des travaux|lot 44]].''' Décidé par Cyril le 20 octobre 2026. Motif mesuré le 19 octobre 2026 dans le dossier des travaux : le lot 9 porte 26 fichiers, le lot 10 quinze, le lot 11 trente-huit, quand les sept autres lots en retard en portent un ou deux chacun, quatre pour le lot 8. Le coût ne vient pas du criblage des rapports, qui se fait vite, mais de la relecture des conversations, que rien ne raccourcit.
+
+'''La procédure appliquée est celle que le lot 44 aura corrigée.''' C'est le motif de la dépendance.
+
+'''Une clôture qui n'a pas pu faire son étape 1 ne pose pas l'état clos.''' Décidé le 19 octobre 2026 dans le lot 44, et vaut ici : le lot reste livré et sa page porte le motif.
+
+== Périmètre ==
+
+'''Dedans :'''
+* la clôture des lots 9, 10 et 11, en quatre passages.
+
+'''Dehors :'''
+* la clôture des lots 1 à 6 et 8, qui relève du [[Lot 44 — Mémoire des choix contraints et clôture des travaux|lot 44]] ;
+* toute reprise du travail de ces trois lots : une clôture relit et consigne, elle ne rouvre rien.
+
+== Point de départ ==
+
+Mesures du 19 octobre 2026.
+
+Les conversations qui ont mené ces trois lots existent toutes : une pour le lot 9, deux pour le lot 10, une pour le lot 11. Quatre conversations, quatre passages, le lot 10 en demandant deux.
+
+== Risques connus ==
+
+* '''Une des deux conversations du lot 10 est archivée.'''
+* '''La conversation du lot 11 porte une affirmation à vérifier.''' Un message d'assistant du 7 septembre 2026 y dit que le lot est clos et consigné, alors que sa page porte l'état livré et aucune date de clôture. Seule la relecture dira si une clôture a eu lieu sans être enregistrée, ou si le mot y est employé au sens courant.
+
+== Dépendances ==
+
+Dépend du [[Lot 44 — Mémoire des choix contraints et clôture des travaux|lot 44]] : la [[Procédure de clôture d'un lot]] y est complétée, et c'est elle qui s'applique ici.
+
+----
+
+Voir aussi la [[Gestion des lots]] et la [[Procédure de clôture d'un lot]].
