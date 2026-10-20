@@ -239,6 +239,14 @@ propre.
 
 ---
 
+## swowl, éditeur de l'ontologie
+
+swowl n'est pas nécessaire au travail sur le wiki. Sa procédure, de
+l'installation au chargement de l'ontologie, vit dans
+`ontologie/installation-swowl.md`.
+
+---
+
 ## Machine qui ne t'appartient pas
 
 Sur un poste partagé ou prêté, ne jamais créer le répertoire privé : sans
