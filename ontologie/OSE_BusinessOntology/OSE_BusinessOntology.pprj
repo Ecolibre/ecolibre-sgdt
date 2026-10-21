@@ -5401,7 +5401,7 @@
 ([OSE_BusinessOntology_ProjectKB_Class100012] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_do_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_do_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class100013]))
 
 ([OSE_BusinessOntology_ProjectKB_Class100013] of  Property_List
@@ -5474,7 +5474,7 @@
 ([OSE_BusinessOntology_ProjectKB_Class100026] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_be_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_be_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class100027]))
 
 ([OSE_BusinessOntology_ProjectKB_Class100027] of  Property_List
@@ -5526,7 +5526,7 @@
 
 	(height -110)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_do_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_do_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class100035])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 200)
@@ -5540,7 +5540,7 @@
 
 	(height -160)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#requiredBy_do_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#requiredBy_do_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class100039])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 400)
@@ -6928,7 +6928,7 @@
 ([OSE_BusinessOntology_ProjectKB_Class101132] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_be_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_be_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class101133]))
 
 ([OSE_BusinessOntology_ProjectKB_Class101133] of  Property_List
@@ -7110,7 +7110,7 @@
 
 	(height -90)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_do_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_do_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class103719])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.MultiResourceWidget")
 	(width 200)
@@ -7189,8 +7189,8 @@
 
 	(height 120)
 	(is_hidden FALSE)
-	(label "specifiedBy_do_targetTolerence")
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_do_targetTolerence")
+	(label "specifiedBy_do_targetTolerance")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_do_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class104923])
 	(widget_class_name "edu.stanford.smi.protegex.widget.instancetable.InstanceTableWidget")
 	(width 400)
@@ -7421,8 +7421,8 @@
 
 	(height 120)
 	(is_hidden FALSE)
-	(label "specifiedBy_be_targetTolerence")
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_be_targetTolerence")
+	(label "specifiedBy_be_targetTolerance")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_be_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class104931])
 	(widget_class_name "edu.stanford.smi.protegex.widget.instancetable.InstanceTableWidget")
 	(width 400)
@@ -7482,8 +7482,8 @@
 
 	(height 120)
 	(is_hidden FALSE)
-	(label "requires_be_targetTolerence")
-	(name "http://virtual-assembly.org/OpenSourceEcology#requires_be_targetTolerence")
+	(label "requires_be_targetTolerance")
+	(name "http://virtual-assembly.org/OpenSourceEcology#requires_be_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class104971])
 	(widget_class_name "edu.stanford.smi.protegex.widget.instancetable.InstanceTableWidget")
 	(width 400)
@@ -7661,8 +7661,8 @@
 
 	(height 120)
 	(is_hidden FALSE)
-	(label "requires_do_targetTolerence")
-	(name "http://virtual-assembly.org/OpenSourceEcology#requires_do_targetTolerence")
+	(label "requires_do_targetTolerance")
+	(name "http://virtual-assembly.org/OpenSourceEcology#requires_do_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class104977])
 	(widget_class_name "edu.stanford.smi.protegex.widget.instancetable.InstanceTableWidget")
 	(width 400)
@@ -7903,8 +7903,8 @@
 
 ([OSE_BusinessOntology_ProjectKB_Class110039] of  String
 
-	(name "http://virtual-assembly.org/OpenSourceEcology#TargetTolerenceBeSpecification")
-	(string_value "http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23specifies_be_targetTolerence{+.+}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23characterizedBy{+%3A+}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23target{+%2B%2F-+}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23toterance{+%28}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23measuredIn{%29}"))
+	(name "http://virtual-assembly.org/OpenSourceEcology#TargetToleranceBeSpecification")
+	(string_value "http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23specifies_be_targetTolerance{+.+}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23characterizedBy{+%3A+}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23target{+%2B%2F-+}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23toterance{+%28}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23measuredIn{%29}"))
 
 ([OSE_BusinessOntology_ProjectKB_Class110040] of  String
 
@@ -7993,8 +7993,8 @@
 
 ([OSE_BusinessOntology_ProjectKB_Class110057] of  String
 
-	(name "http://virtual-assembly.org/OpenSourceEcology#TargetTolerenceDoSpecification")
-	(string_value "http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23specifies_do_targetTolerence{+.+}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23characterizedBy{+%3A+}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23target{+%2B%2F-+}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23toterance{+%28}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23measuredIn{-}"))
+	(name "http://virtual-assembly.org/OpenSourceEcology#TargetToleranceDoSpecification")
+	(string_value "http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23specifies_do_targetTolerance{+.+}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23characterizedBy{+%3A+}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23target{+%2B%2F-+}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23toterance{+%28}http%3A%2F%2Fvirtual-assembly.org%2FOpenSourceEcology%23measuredIn{-}"))
 
 ([OSE_BusinessOntology_ProjectKB_Class110058] of  Widget
 
@@ -8006,7 +8006,7 @@
 ([OSE_BusinessOntology_ProjectKB_Class110092] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#TargetTolerenceCharacterization")
+	(name "http://virtual-assembly.org/OpenSourceEcology#TargetToleranceCharacterization")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class100351])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.OWLFormWidget"))
 
@@ -8933,7 +8933,7 @@
 ([OSE_BusinessOntology_ProjectKB_Class120014] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_be_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_be_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class120015]))
 
 ([OSE_BusinessOntology_ProjectKB_Class120015] of  Property_List
@@ -8970,7 +8970,7 @@
 ([OSE_BusinessOntology_ProjectKB_Class120020] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_do_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifiedBy_do_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class120021]))
 
 ([OSE_BusinessOntology_ProjectKB_Class120021] of  Property_List
@@ -11952,7 +11952,7 @@
 ([OSE_BusinessOntology_ProjectKB_Class130010] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_do_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_do_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class130011]))
 
 ([OSE_BusinessOntology_ProjectKB_Class130011] of  Property_List
@@ -12025,7 +12025,7 @@
 ([OSE_BusinessOntology_ProjectKB_Class130024] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_be_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_be_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class130025]))
 
 ([OSE_BusinessOntology_ProjectKB_Class130025] of  Property_List
@@ -19481,7 +19481,7 @@
 
 	(height 60)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_be_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_be_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class60039])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 400)
@@ -20145,7 +20145,7 @@
 ([OSE_BusinessOntology_ProjectKB_Class60208] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#TargetTolerenceDoSpecification")
+	(name "http://virtual-assembly.org/OpenSourceEcology#TargetToleranceDoSpecification")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class60244])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.OWLFormWidget"))
 
@@ -20360,7 +20360,7 @@
 
 	(height -90)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_be_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_be_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class60276])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 400)
@@ -20374,7 +20374,7 @@
 
 	(height 60)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_do_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_do_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class60278])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 400)
@@ -20753,7 +20753,7 @@
 ([OSE_BusinessOntology_ProjectKB_Class60501] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#TargetTolerenceBeSpecification")
+	(name "http://virtual-assembly.org/OpenSourceEcology#TargetToleranceBeSpecification")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class62404])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.OWLFormWidget"))
 
@@ -22217,7 +22217,7 @@
 ([OSE_BusinessOntology_ProjectKB_Class71051] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#TargetTolerenceBeRequirement")
+	(name "http://virtual-assembly.org/OpenSourceEcology#TargetToleranceBeRequirement")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class71087])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.OWLFormWidget"))
 
@@ -22443,7 +22443,7 @@
 
 	(height -80)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_be_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_be_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class71119])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 400)
@@ -22457,7 +22457,7 @@
 
 	(height 60)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#requiredBy_be_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#requiredBy_be_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class71121])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 400)
@@ -22705,7 +22705,7 @@
 
 	(height -60)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#requires_do_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#requires_do_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class71252])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 400)
@@ -23001,7 +23001,7 @@
 ([OSE_BusinessOntology_ProjectKB_Class71358] of  Widget
 
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#TargetTolerenceDoRequirement")
+	(name "http://virtual-assembly.org/OpenSourceEcology#TargetToleranceDoRequirement")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class71394])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.OWLFormWidget"))
 
@@ -23221,7 +23221,7 @@
 
 	(height -90)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_be_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_be_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class71426])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 400)
@@ -23235,7 +23235,7 @@
 
 	(height -60)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_do_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#specifies_do_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class71428])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 400)
@@ -23249,7 +23249,7 @@
 
 	(height 60)
 	(is_hidden FALSE)
-	(name "http://virtual-assembly.org/OpenSourceEcology#requiredBy_do_targetTolerence")
+	(name "http://virtual-assembly.org/OpenSourceEcology#requiredBy_do_targetTolerance")
 	(property_list [OSE_BusinessOntology_ProjectKB_Class71430])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.SingleResourceWidget")
 	(width 400)
