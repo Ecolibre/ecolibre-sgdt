@@ -10,11 +10,6 @@ Le dépôt `ecolibre-sgdt` est supposé cloné dans `~/ecolibre-sgdt`, comme sur
 le poste du relevé, où il était dans le dossier personnel de l'utilisateur
 Linux. Dans les commandes, `~` désigne ce dossier personnel.
 
-État de cette note : deux manques, signalés là où ils se trouvent, l'un en
-section 4 (les paquets à installer), l'autre en section 7 (le contenu des
-fichiers de chargement et de comptage). Tant qu'ils ne sont pas comblés, la
-note ne suffit pas seule.
-
 ## 1. Ce qu'est swowl, et ce qu'il n'est pas
 
 swowl est un éditeur et visualiseur d'ontologies OWL écrit par Bernard
@@ -65,7 +60,18 @@ Deux pièges, constatés le 21 octobre 2026 :
 
 ## 4. Installation
 
-### Python et paquets
+### Paquets et version de Python
+
+Installer les paquets nécessaires, avant de créer l'environnement Python :
+
+```
+sudo apt update
+sudo apt install -y git curl python3-venv
+```
+
+Le 21 octobre 2026, `python3-venv` a été installé avant la création de
+l'environnement. On n'a pas éprouvé si son absence empêche cette création :
+on l'installe par sécurité.
 
 Le jeu de versions de ce dossier vaut pour Python 3.14 (section 9).
 Afficher la version du `python3` du système :
@@ -76,12 +82,6 @@ python3 --version
 
 Le relevé du 21 octobre 2026 affichait `Python 3.14.4`.
 
-> **Manque à cette note : les paquets à installer.** Les commandes qui
-> suivent appellent `git`, `python3` avec son module `venv`, et `curl`. Sur
-> le poste du relevé, ils étaient présents ; le compte rendu ne dit pas s'il
-> a fallu les installer, ni par quels paquets. Cette note ne donne donc
-> aucune commande `apt`.
-
 ### Récupérer swowl
 
 swowl se clone dans `~/swowl`, en dehors du dépôt `ecolibre-sgdt` :
@@ -89,6 +89,11 @@ swowl se clone dans `~/swowl`, en dehors du dépôt `ecolibre-sgdt` :
 ```
 git clone https://github.com/MyShivaRepo/swowl.git ~/swowl
 ```
+
+Les nombres de référence ont été relevés sur le commit `8a1cb11` du
+1er septembre 2026. On ne se place pas sur ce commit, un clone ordinaire
+suffit, mais si les nombres de la section 7 ne se retrouvent plus, c'est le
+premier endroit où regarder.
 
 ### Créer l'environnement Python et installer les versions éprouvées
 
@@ -122,12 +127,6 @@ TypeError: Query() got an unexpected keyword argument 'enum'
 
 ## 5. Démarrer et arrêter
 
-Créer le dossier où swowl dépose ses fichiers :
-
-```
-mkdir -p ~/swowl-data
-```
-
 Démarrer swowl en arrière-plan, sur `127.0.0.1` et le port 8000. Son
 journal va dans `~/swowl/swowl.log` :
 
@@ -156,6 +155,10 @@ La liste doit montrer `127.0.0.1:8000`, et aucune autre adresse sur le
 port 8000.
 
 Ouvrir ensuite dans le navigateur de la machine : <http://127.0.0.1:8000/>
+
+L'accès depuis un navigateur Windows vers un serveur lancé dans WSL a été
+vérifié le 21 octobre 2026 avec un serveur de test sur le port 8000, et il
+fonctionne. Le même accès avec swowl lui-même n'a pas encore été confirmé.
 
 Arrêter swowl :
 
@@ -186,30 +189,40 @@ machine à l'autre.
 
 ## 7. Charger les deux ontologies et contrôler la non-perte
 
-swowl doit être démarré (section 5). Q2U se charge en premier, puisque OSE
-l'importe.
+swowl doit être démarré (section 5).
 
-> **Manque à cette note : le contenu de trois fichiers, et une commande.**
-> Les commandes ci-dessous lisent `/tmp/imp-q2u.json` et `/tmp/imp-ose.json`,
-> les corps des deux requêtes d'import, et `/tmp/compte.py`, le script de
-> comptage. Le compte rendu du 21 octobre 2026 ne reproduit pas leur
-> contenu : il dit seulement qu'il est identique à celui de la consigne qu'il
-> exécutait, et cette consigne n'est pas dans le dépôt. Il ne donne pas non
-> plus la commande qui a mesuré les nombres rendus à l'import. Tant que ces
-> éléments ne sont pas inscrits ici, cette section ne peut pas être suivie
-> telle quelle.
-
-Charger Q2U, puis OSE :
+Créer d'abord le dossier des fichiers produits par swowl :
 
 ```
-curl -sS -X POST http://127.0.0.1:8000/api/ontologies/import-from-path -H "Content-Type: application/json" -d @/tmp/imp-q2u.json
-curl -sS -X POST http://127.0.0.1:8000/api/ontologies/import-from-path -H "Content-Type: application/json" -d @/tmp/imp-ose.json
+mkdir -p ~/swowl-data
 ```
 
-Chaque réponse est l'ontologie complète en JSON, environ 125 Ko pour les
-deux, et non un compteur. Les nombres à retrouver sont les longueurs de ses
+Charger Q2U, qui vient en premier parce qu'OSE l'importe. Les trois
+premières lignes du bloc écrivent le corps de la requête dans
+`/tmp/imp-q2u.json`, le shell y remplaçant `$HOME` par le chemin du dossier
+personnel ; la quatrième l'envoie à swowl :
+
+```
+cat > /tmp/imp-q2u.json <<EOF
+{"name":"Q2U_Ontology","owl_path":"$HOME/ecolibre-sgdt/ontologie/Q2U_Ontology/Q2U_Ontology.owl","save_path":"$HOME/swowl-data/Q2U_Ontology.json","uri":"http://virtual-assembly.org/QualityQuantityUnit","prefix":"q2u"}
+EOF
+curl -sS -X POST http://127.0.0.1:8000/api/ontologies/import-from-path -H "Content-Type: application/json" -d @/tmp/imp-q2u.json | python3 -c "import sys,json; d=json.load(sys.stdin); print({k: (len(v) if isinstance(v,list) else v) for k,v in d.items() if k in ('classes','object_properties','datatype_properties','individuals','imports')})"
+```
+
+Puis OSE :
+
+```
+cat > /tmp/imp-ose.json <<EOF
+{"name":"OSE_BusinessOntology","owl_path":"$HOME/ecolibre-sgdt/ontologie/OSE_BusinessOntology/OSE_BusinessOntology.owl","save_path":"$HOME/swowl-data/OSE_BusinessOntology.json","uri":"http://virtual-assembly.org/OpenSourceEcology","prefix":"ose","ns_prefixes":[{"prefix":"q2u","namespace":"http://virtual-assembly.org/QualityQuantityUnit"}]}
+EOF
+curl -sS -X POST http://127.0.0.1:8000/api/ontologies/import-from-path -H "Content-Type: application/json" -d @/tmp/imp-ose.json | python3 -c "import sys,json; d=json.load(sys.stdin); print({k: (len(v) if isinstance(v,list) else v) for k,v in d.items() if k in ('classes','object_properties','datatype_properties','individuals','imports')})"
+```
+
+L'API ne rend pas des compteurs, mais l'ontologie entière, en JSON :
+environ 125 Ko pour les deux. Le petit programme Python placé à la fin de
+chaque commande `curl` lit cette réponse et n'affiche que la longueur de ses
 listes `classes`, `object_properties`, `datatype_properties`, `individuals`
-et `imports` :
+et `imports`, par exemple `'classes': 18`. Longueurs à retrouver :
 
 | | classes | object_properties | datatype_properties | individuals | imports |
 |---|---|---|---|---|---|
@@ -225,12 +238,28 @@ curl -sS "http://127.0.0.1:8000/api/ontologies/Q2U_Ontology/export?fmt=owl" -o /
 curl -sS "http://127.0.0.1:8000/api/ontologies/OSE_BusinessOntology/export?fmt=owl" -o /tmp/out_ose.owl
 ```
 
-Compter les deux fichiers sources du dépôt et les deux réexports. Le compte
-rendu écrit la commande ainsi, sans nommer les quatre fichiers ni donner
-leur ordre :
+Compter avec le script `ontologie/swowl-compte.py` du dépôt, en lui passant
+les quatre fichiers dans cet ordre exact, source puis réexport pour chaque
+ontologie :
 
 ```
-~/swowl/.venv/bin/python /tmp/compte.py <les quatre fichiers>
+~/swowl/.venv/bin/python ~/ecolibre-sgdt/ontologie/swowl-compte.py \
+  ~/ecolibre-sgdt/ontologie/Q2U_Ontology/Q2U_Ontology.owl /tmp/out_q2u.owl \
+  ~/ecolibre-sgdt/ontologie/OSE_BusinessOntology/OSE_BusinessOntology.owl /tmp/out_ose.owl
+```
+
+Le script affiche un bloc par fichier, dans le même ordre. Pour la source de
+Q2U, le bloc attendu est celui-ci, la première ligne portant le chemin
+complet du fichier :
+
+```
+--- /home/<utilisateur>/ecolibre-sgdt/ontologie/Q2U_Ontology/Q2U_Ontology.owl
+  triplets           : 598
+  classes nommees    : 18
+  proprietes objet   : 12
+  proprietes donnees : 4
+  restrictions       : 29
+  individus          : 91
 ```
 
 Nombres à retrouver, relevés le 21 octobre 2026 et confirmés sur deux
@@ -252,26 +281,112 @@ grep -c 'OpenSourceEcology#q2u:' /tmp/out_ose.owl
 Attendu : `12`.
 
 Le chargement puis le réexport perdent donc 41 triplets sur Q2U et 135 sur
-OSE, dont une restriction. Ces nombres sont la référence du contrôle de
-non-perte : aucun retour dans `ontologie/` ne se fait sans ce contrôle.
+OSE, dont une restriction. La section 8 dit ce qui est perdu.
+
+> **Avertissement.** Ces nombres ne valent que pour un chargement suivi d'un
+> réexport sans aucune modification. Dès qu'une ontologie est modifiée dans
+> swowl, ils changent légitimement et ne prouvent plus rien, alors que les
+> pertes de la section 8 continueraient, elles, de se produire en silence.
+> Un contrôle adapté à ce cas reste à concevoir. En attendant, rien ne
+> revient de swowl vers `ontologie/`.
 
 ## 8. Ce qui ne survit pas au chargement
 
-En résumé :
+Quatre pertes, toutes silencieuses, aucune signalée par swowl. Elles
+viennent des mesures du 21 octobre 2026.
 
-- les domaines exprimés par une union disparaissent entièrement :
-  12 propriétés dans OSE, 4 dans Q2U ;
-- les références d'OSE vers Q2U ressortent sous un identifiant faux :
-  12 occurrences, celles que compte le `grep` de la section 7 ;
-- l'unique axiome qu'OSE pose sur une classe de Q2U est perdu ;
-- une restriction de Q2U perd son contenu.
+**Première perte, les domaines exprimés par une union.** La propriété
+subsiste mais perd son domaine entièrement, sans qu'aucun membre de l'union
+soit conservé. Dans OSE, 12 propriétés sont touchées : `characterizedBy`,
+`executedBy`, `executes`, `hasPart`, `hasWhole`, `measuredIn`, `partOf`,
+`specifiedBy`, `specifies`, `target`, `value`, `wholeOf`. Dans Q2U, 4 le
+sont : `baseOf`, `hasBase`, `hasUnit`, `symbol`. Pour donner la mesure du
+dommage, `characterizedBy` avait pour domaine l'union de six classes, et
+n'en a plus aucun.
 
-Ces pertes sont silencieuses, et c'est la raison d'être du contrôle de la
-section 7. Le relevé du 21 octobre 2026, avec les comptes avant et après
-chargement, est dans `travaux/swowl-installation.md`.
+**Deuxième perte, les références d'OSE vers Q2U.**
+`http://virtual-assembly.org/QualityQuantityUnit#Unit` ressort en
+`http://virtual-assembly.org/OpenSourceEcology#q2u:Unit`, c'est-à-dire dans
+le mauvais espace de noms et avec le préfixe collé dans le nom local.
+12 occurrences, portant sur `Unit`, `Quantity` et `BaseQuality`. Le lien
+entre les deux ontologies ne survit donc pas.
+
+**Troisième perte, l'unique axiome qu'OSE pose sur une classe de Q2U :**
+`Quantity subClassOf (quantityOf allValuesFrom QuantitativeCharacteristic)`.
+swowl tient les entités importées en lecture seule et le perd. C'est la
+restriction qui manque au compte, 164 devenant 163.
+
+**Quatrième perte, une restriction de Q2U vidée de son contenu :** porteur
+`BaseQuality`, propriété `quantifiedBy`, contenu
+`union(BaseQuantity ou DerivedQuantity)`.
+
+Sans conséquence, pour complétude : 5 unions d'OSE également perdues sont
+des doublons orphelins laissés par Protégé, rattachés à rien.
+
+**Cause, lue dans le code de swowl et non déduite.** Dans
+`backend/triple_store.py`, l'import ne retient un domaine que s'il est un
+identifiant, et ignore sans avertissement un domaine porté par un nœud
+anonyme. Dans `backend/owl_model.py`, le domaine d'une propriété est déclaré
+comme une liste d'identifiants et non comme une expression de classe : une
+union n'y est pas représentable. Conséquence importante à signaler :
+ressaisir les membres à la main dans l'interface n'est pas un contournement,
+c'en est l'inverse, car swowl écrit alors un triplet `rdfs:domain` par
+entrée, ce qui se lit en OWL comme une intersection, soit A ET B, là où
+l'ontologie dit A OU B.
 
 ## 9. Si un jour la version de Python change
 
 `ontologie/swowl-requirements.txt` vaut pour Python 3.14, parce que les
 paquets qu'il épingle comprennent du code compilé. Sur une autre version de
 Python, il faut refaire le relevé et réécrire ce fichier.
+
+Méthode, en six étapes :
+
+1. Créer un environnement neuf. Ces commandes suppriment l'environnement en
+   place et le recréent :
+
+   ```
+   rm -rf ~/swowl/.venv
+   python3 -m venv ~/swowl/.venv
+   ~/swowl/.venv/bin/pip install --upgrade pip
+   ```
+
+2. Installer sans épingler :
+
+   ```
+   ~/swowl/.venv/bin/pip install fastapi "uvicorn[standard]" rdflib pydantic python-multipart pypdf python-docx
+   ```
+
+3. Vérifier le chargement du module depuis `backend`, par la commande de la
+   section 4, qui doit afficher `module charge` :
+
+   ```
+   (cd ~/swowl/backend && ~/swowl/.venv/bin/python -c "import main; print('module charge')")
+   ```
+
+4. Si l'erreur porte sur l'option `enum=` de `Query()`, réinstaller
+   FastAPI 0.154.0, puis refaire la vérification de l'étape 3 :
+
+   ```
+   ~/swowl/.venv/bin/pip install fastapi==0.154.0
+   ```
+
+   Si elle porte sur autre chose, descendre le paquet en cause de version en
+   version, en refaisant chaque fois la vérification de l'étape 3, jusqu'à ce
+   que le module se charge.
+
+5. Refaire ensuite le contrôle de non-perte complet de la section 7, swowl
+   démarré comme en section 5, et vérifier que tous les nombres se
+   retrouvent.
+
+6. Alors seulement, produire le nouveau fichier par `pip freeze`, y remettre
+   les lignes de commentaire d'en-tête, et le commiter. `pip freeze`
+   remplace tout le contenu du fichier : recopier d'abord ses lignes de
+   commentaire, celles qui commencent par `#`. Puis :
+
+   ```
+   ~/swowl/.venv/bin/pip freeze > ~/ecolibre-sgdt/ontologie/swowl-requirements.txt
+   ```
+
+   Remettre ensuite ces lignes en tête du fichier, en y mettant à jour la
+   date du relevé et la version de Python, et commiter le fichier.
