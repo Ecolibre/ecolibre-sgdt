@@ -26,13 +26,17 @@ première.
 
 - `OSE_BusinessOntology/` - l'ontologie du SGDT. Espace de noms
   `http://virtual-assembly.org/OpenSourceEcology`. 75 classes, 138 propriétés
-  objet, 10 propriétés de données, 164 restrictions, 1 470 triplets. Elle
-  porte les quatre niveaux décrits dans le fil de 2022 : `FunctionalItem`,
-  `OrganicItem`, `IndustrialItem`, `PhysicalItem`, ainsi que `Machine`,
-  `MachineModel`, `MachineInstance`, `MachineType`,
-  `IndustrialTransformation`, `PhysicalTransformation`,
-  `TransformationSolution`, `Skill` et `Location`. Elle porte en outre une
-  couche d'exigences et de spécifications que le wiki n'a pas.
+  objet, 10 propriétés de données, 5 individus, 164 restrictions,
+  1 470 triplets, soit 228 entités nommées. Elle porte les quatre niveaux
+  décrits dans le fil de 2022 : `FunctionalItem`, `OrganicItem`,
+  `IndustrialItem`, `PhysicalItem`, ainsi que `Machine`, `MachineModel`,
+  `MachineInstance`, `MachineType`, `IndustrialTransformation`,
+  `PhysicalTransformation`, `TransformationSolution`, `Skill` et `Location`.
+  Elle porte en outre une couche d'exigences et de spécifications que le wiki
+  n'a pas. Les cinq individus sont `QualitativeBeSpecification_2`,
+  `QualitativeBeSpecification_4`, `QualitativeDoRequirement_2`,
+  `QualitativeDoSpecification_8` et `TargetToleranceBeSpecification_6` : tout
+  contrôle de non-perte doit les compter.
   Fichiers datés du 11 mai 2018.
 
 - `Q2U_Ontology/` - l'ontologie des qualités, quantités et unités, importée
@@ -66,15 +70,49 @@ Toute correction faite depuis figure ici.
   et n'a pas été touché.
 
 - 20 octobre 2026, trois fautes d'orthographe corrigées dans des noms
-  d'entités : `Dimention` devient `Dimension`, ce qui couvre
+  d'entités de Q2U : `Dimention` devient `Dimension`, ce qui couvre
   `DimensionalQuantity`, `DimensionalUnit`, `DimensionlessQuantity` et
   `DimensionlessUnit` ; `haseBase` devient `hasBase` ; l'individu
-  `MultipliedAndDivisedUnit_2` devient `MultipliedAndDividedUnit_2`. Les
-  identifiants changent donc dans l'espace de noms
-  `http://virtual-assembly.org/QualityQuantityUnit`. Rien n'en dépendait :
-  `OSE_BusinessOntology.owl` n'en référence aucun, et le wiki n'emploie
-  aucun de ces noms. Les deux fichiers de projet Protégé ont été corrigés en
-  même temps, faute de quoi ils auraient pointé sur des noms disparus.
+  `MultipliedAndDivisedUnit_2` devient `MultipliedAndDividedUnit_2`. Rien
+  n'en dépendait : `OSE_BusinessOntology.owl` n'en référence aucun, et le
+  wiki n'emploie aucun de ces noms. Les deux fichiers de projet Protégé ont
+  été corrigés en même temps.
+
+- 21 octobre 2026, deux fautes d'orthographe corrigées dans des noms
+  d'entités d'OSE, 39 entités sur 228 : `Tolerence` devient `Tolerance`,
+  `fullfiled` devient `fulfilled` et `fullfils` devient `fulfils`. La
+  substitution est faite en deux temps et jamais sur `fullfil` seul, qui
+  donnerait `fulfiledBy`, encore fautif. Rien n'en dépendait : ces chaînes
+  ne figurent nulle part ailleurs dans le dépôt ni sur le wiki, qui écrit
+  déjà `Tolerance` correctement dans `Attribut:Wind tolerance` et
+  `Attribut:Tolerance as written`. Le fichier de projet Protégé d'OSE a été
+  corrigé en même temps.
+
+## Défauts connus, non corrigés
+
+- `OSE_BusinessOntology.owl` ne porte aucun `rdfs:label` ni `rdfs:comment` :
+  ses 228 entités nommées ne sont lisibles que par leur identifiant.
+  `Q2U_Ontology.owl` en porte 87 et 1. Les écrire serait un travail de
+  rédaction, pas une correction.
+
+- Cinq noeuds `owl:unionOf` ne sont rattachés à rien dans
+  `OSE_BusinessOntology.owl` : deux unions de `MiniMaxiBeSpecification` et
+  `TargetToleranceBeSpecification`, trois de `OrganicItem` et
+  `FunctionalItem`. Ce sont des doublons laissés par Protégé, sans effet sur
+  le modèle. Les retirer demanderait de toucher à la structure XML et non à
+  une chaîne de caractères, pour un gain nul.
+
+## Ce que swowl ne rend pas
+
+swowl sert à lire et à visualiser l'ontologie. Rien n'en revient vers ce
+dossier, et la mesure du 21 octobre 2026 dit pourquoi : seize propriétés ont
+un domaine exprimé par une union de classes, et swowl les perd entièrement à
+l'import, sans rien signaler ; les ressaisir à la main y écrit une
+intersection au lieu d'une union. Les seize sont `characterizedBy`,
+`executedBy`, `executes`, `hasPart`, `hasWhole`, `measuredIn`, `partOf`,
+`specifiedBy`, `specifies`, `target`, `value` et `wholeOf` dans OSE, puis
+`baseOf`, `hasBase`, `hasUnit` et `symbol` dans Q2U. Détail et commandes de
+vérification dans `ontologie/installation-swowl.md`.
 
 ## Statut
 
@@ -83,8 +121,15 @@ Toute correction faite depuis figure ici.
   https://forums.assemblee-virtuelle.org/t/systeme-de-gestion-de-donnees-techniques-oriente-open-source-hardware-et-ingenierie-cooperative/745
 - Un écart reste ouvert entre le wiki et ces fichiers : le troisième niveau
   s'appelle ici `IndustrialItem`, et le wiki porte la catégorie
-  `Referenced item`. Sous le principe énoncé plus haut, cet écart est à
-  justifier ou à refermer. Il n'est pas tranché dans ce dossier.
+  `Referenced item`. Le motif du renommage est connu. Lors d'un premier essai
+  avec des producteurs bio et locaux recrutés pour lister leurs produits, le
+  mot "industriel" s'est révélé trop connoté pour être expliqué, et les
+  titres de pages portaient alors le niveau d'item, ce qui donnait des
+  intitulés intenables. Les titres ne le portent plus. Cyril pose donc une
+  condition pour qu'un retour à "industriel" redevienne envisageable : que le
+  mot n'apparaisse nulle part sur la page finale, catégories comprises. Cet
+  écart se traite dans le lot 44, "Choix imposés par l'outil", pas dans ce
+  dossier.
 - Le facteur de conversion, lui, ne diverge plus. À la tâche 48 du lot 21,
   le 19 octobre 2026, le wiki s'est aligné sur le sens courant, celui de ce
   fichier et de QUDT : une page d'unité porte 0,001 pour le millimètre,
@@ -92,10 +137,6 @@ Toute correction faite depuis figure ici.
   L'inversion ne subsiste qu'à l'intérieur de Semantic MediaWiki, dont le
   bloc de déclaration des unités d'une dimension attend 1000 pour le
   millimètre. C'est une contrainte de l'outil, pas un écart de modèle.
-- Ces fichiers servent de point de départ à une reprise de l'ontologie dans
-  swowl (github.com/MyShivaRepo/swowl), éditeur OWL écrit par Bernard Chabot.
-  swowl y tient le rôle d'outil d'édition et de visualisation : la source
-  reste le fichier OWL de ce dossier.
 
 Déposé le 17 octobre 2026. Contenu relevé les 17 et 18 octobre 2026.
-Dernière correction le 20 octobre 2026.
+Dernière correction le 21 octobre 2026.
