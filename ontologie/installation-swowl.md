@@ -19,8 +19,10 @@ local, dans le navigateur de la machine.
 swowl n'est pas la source : la source reste le fichier OWL du dossier
 `ontologie/`. Il n'est ni un lieu de publication, ni un outil
 multi-utilisateur. Rien de ce qu'il produit ne fait autorité tant que ce
-n'est pas revenu dans `ontologie/`, et aucun retour ne s'y fait sans le
-contrôle de non-perte de la section 7.
+n'est pas revenu dans `ontologie/`, et aujourd'hui, rien n'y revient : le
+contrôle de non-perte ne vaut que pour un chargement suivi d'un réexport
+sans modification, et aucun contrôle adapté à un fichier modifié n'existe
+encore. Le détail est en section 7.
 
 ## 2. Sécurité, à lire avant tout
 
@@ -390,3 +392,35 @@ Méthode, en six étapes :
 
    Remettre ensuite ces lignes en tête du fichier, en y mettant à jour la
    date du relevé et la version de Python, et commiter le fichier.
+
+## 10. Ce qui reste ouvert
+
+État au 21 octobre 2026.
+
+**Premier point, le contrôle de non-perte après modification.** Les nombres
+de la section 7 ne valent que pour un chargement suivi d'un réexport sans
+modification. Un contrôle capable de distinguer, dans un fichier modifié,
+les changements voulus des pertes silencieuses de la section 8 reste à
+concevoir. Tant qu'il n'existe pas, rien ne revient de swowl vers
+`ontologie/`.
+
+**Deuxième point, l'accès depuis le navigateur.** Vérifié le 21 octobre 2026
+avec un serveur de test lancé dans WSL sur le port 8000, et il fonctionne.
+Le même accès avec swowl lui-même n'a pas encore été confirmé.
+
+**Troisième point, cinq défauts de swowl relevés le 21 octobre 2026, à
+signaler à son auteur.**
+
+1. Les domaines exprimés par une union sont perdus entièrement à l'import,
+   sans aucun avertissement.
+2. Les références vers une ontologie importée ressortent sous un identifiant
+   faux, le préfixe se retrouvant collé dans le nom local et l'identifiant
+   dans le mauvais espace de noms.
+3. Les axiomes qu'une ontologie pose sur une classe importée sont perdus,
+   les entités importées étant tenues en lecture seule.
+4. Une restriction dont le contenu est une union est conservée mais vidée de
+   ce contenu.
+5. `backend/requirements.txt` ne s'installe plus sur une Ubuntu LTS à jour,
+   et `main.py` utilise l'option `enum=` de `Query()` que FastAPI a retirée
+   en 0.155.0, ce qui empêche le serveur de démarrer avec une installation
+   faite aux versions du jour.
