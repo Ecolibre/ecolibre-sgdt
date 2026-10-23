@@ -32,16 +32,19 @@ Et dix lots sont livrés sans avoir jamais été clos.
 
 '''Sept des dix lots en retard se closent dans ce lot.''' Décidé par Cyril le 19 octobre 2026 pour les dix, puis restreint à sept le 20 octobre 2026 : les lots 1 à 6 et 8 restent ici, les lots 9, 10 et 11 passent au [[Lot 45 — Clôture des lots 9 à 11|lot 45]]. Motif mesuré le 19 octobre 2026 dans le dossier des travaux : ces trois lots portent 26, quinze et trente-huit fichiers, quand les sept autres en portent un ou deux chacun, quatre pour le lot 8.
 
+'''Le rangement des pages de développement en catégories est traité dans ce lot.''' Décidé par Cyril le 20 octobre 2026, au motif qu'ouvrir un lot pour cela couterait plus que de le faire. Deux pages seulement étaient sans catégorie, « Comment ce wiki est tenu » et « Guide de saisie », rangées depuis dans Documentation SGDT ; cette catégorie a reçu la description qui lui manquait, et les renvois des pages de référence citent désormais les deux catégories plutôt qu'une liste tenue à la main.
+
 '''L'ordre des quatre travaux.''' La page des choix imposés, puis le complément de la procédure de clôture d'un lot, puis la procédure de clôture d'une conversation, puis les sept clôtures. Motif : le [[Lot 21 — Grandeurs et unités|lot 21]] est ouvert et écrivait encore le 19 octobre 2026 ; si la page et le complément n'existent pas le jour où il se clôt, sa clôture ne versera rien.
 
 == Périmètre ==
 
 '''Dedans :'''
-* la page des choix imposés par l'outil, ses colonnes et sa première version ;
+* la page [[Choix imposés par l'outil]], ses colonnes et sa première version ;
 * le complément de la [[Procédure de clôture d'un lot]], qui y verse ;
 * une procédure de clôture d'une conversation de travail, et le remplacement de <code>controle-de-fin-de-session.md</code> ;
 * la clôture des lots 1 à 6 et 8, livrés et jamais clos ;
 * les retouches de <code>methode-de-travail.md</code> qu'entraînent ces décisions.
+* le rangement des pages de développement du wiki en catégories ;
 
 '''Dehors :'''
 * la clôture des lots 9, 10 et 11, qui relève du [[Lot 45 — Clôture des lots 9 à 11|lot 45]] ;
