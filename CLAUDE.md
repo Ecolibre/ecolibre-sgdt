@@ -134,6 +134,15 @@ dégradent en lecture anonyme si introuvables ; `wiki-login.sh`/`wiki-put.sh`/
 
 Les copies locales de pages vont dans `pages/`.
 
+**Ne jamais publier une page du wiki depuis un fichier de `pages/` sans avoir
+relu la page en ligne juste avant et comparé.** Ce dossier contient des
+instantanés et des fragments d'écritures passées, parfois en plusieurs
+exemplaires d'une même page. Un `wiki-put.sh` lancé depuis l'un d'eux ramène
+la page à son état d'alors, sans erreur ni avertissement. Relevé le 25 octobre
+2026 sur 119 fichiers : trois copies du Récapitulatif technique, deux des
+Limites connues, et une de chaque procédure datant du lot 34, figée au
+3 octobre 2026. Le ménage reste à faire ; la règle le rend non urgent.
+
 ## Dossier `travaux/`
 
 `travaux/` existe à la racine du dépôt et est synchronisé par **Syncthing**,

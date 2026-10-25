@@ -20,7 +20,7 @@ Et dix lots sont livrés sans avoir jamais été clos.
 
 '''La page s'appelle "Choix imposés par l'outil".''' Décidé le 19 octobre 2026. Le mot migration désigne déjà trois autres choses sur ce wiki : la migration de serveur, la copie de base vers le wiki privé, la reprise de valeurs. Aucune cible de migration n'est décidée, et nommer la page d'après un cahier des charges de migration lui ferait annoncer une décision que personne n'a prise.
 
-'''Chaque entrée porte trois choses : ce qui impose le choix, ce qu'il serait sans cette contrainte, et ce qu'il en coûterait d'en changer.''' C'est la troisième qui manque partout aujourd'hui.
+'''Chaque entrée porte quatre rubriques : le choix tel qu'il est, ce qui l'impose, ce qu'il serait sans cette contrainte, et ce qu'il en coûterait d'en changer.''' C'est la dernière qui manque partout aujourd'hui.
 
 '''La première version ne se limite pas au facteur de conversion.''' Décidé le 19 octobre 2026. Cinq choix imposés par l'outil sont déjà écrits dans le [[Récapitulatif technique du Système de Gestion de Données Techniques|Récapitulatif technique]] : la virgule comme délimiteur multivaleurs, d'où l'interdiction de la virgule dans un nom de page ; les trois propriétés de schéma que le moteur n'interprète pas et qui attendent un schéma SHACL ; la cardinalité de <code>Part_of</code>, attachée à la propriété et non au couple classe-propriété ; le point décimal, refusé par l'installation ; l'import de vocabulaire externe, qui passe par l'espace <code>MediaWiki:</code> et le droit <code>editinterface</code>. Motif : une page à une entrée ne montre pas sa forme, et ces cinq-là n'ont besoin que de la troisième colonne.
 
