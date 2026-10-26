@@ -24,8 +24,14 @@ Chaque élément établi pendant la session va à **une seule** destination.
 **Jamais sur le wiki, sous aucune forme :** noms d'hôtes, chemins
 d'installation, comptes système, mots de passe, contenu de
 `LocalSettings.php`, détails d'accès SSH. Ces informations vont dans le dépôt,
-qui n'est pas public au même titre. Si un élément de la session en contient,
+qui est public lui aussi : il est sur GitHub et se clone sans
+authentification. Tout ce qui y entre est lisible par n'importe qui, et le
+reste, puisque l'historique de git conserve ce qu'on en retire. Un secret qui
+y tomberait devrait être changé, et pas seulement supprimé.
+Si un élément de la session en contient,
 le signaler explicitement dans le rendu plutôt que de le router en silence.
+Avant d'écrire le nom ou l'adresse de quelqu'un dans un rapport, se poser la
+question de savoir s'il doit y figurer.
 
 ---
 

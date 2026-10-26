@@ -1,10 +1,15 @@
 # Installer swowl et y charger l'ontologie
 
 Procédure pour installer swowl sur un poste neuf et y charger les deux
-ontologies de ce dossier. Elle reprend l'installation du 21 octobre 2026,
-faite sur le poste Windows de Cyril, sous Ubuntu dans WSL2, avec
-Python 3.14.4 et swowl au commit `8a1cb11` du 1er septembre 2026. Le compte
-rendu de cette installation est dans `travaux/swowl-installation.md`.
+ontologies de ce dossier. Le relevé de référence est celui du 26 octobre
+2026 : swowl 1.2.4, commit `cbcf8a8` du 26 octobre 2026, sur le poste Ubuntu
+de Cyril, sous Ubuntu 26.10 et Python 3.14.8. Ce jour-là, la procédure a été
+refaite entièrement sur une machine neuve, et elle a fonctionné : le seul
+paquet manquant était `python3-venv`. Le compte rendu de cette installation
+est dans `travaux/swowl-installation-ubuntu-1-2-4.md`, celui du contrôle
+structurel dans `travaux/swowl-controle-structure.md`. La première
+installation, celle du 21 octobre 2026 sous WSL2 avec swowl 1.1.0, est
+racontée dans `travaux/swowl-installation.md`.
 
 Le dépôt `ecolibre-sgdt` est supposé cloné dans `~/ecolibre-sgdt`, comme sur
 le poste du relevé, où il était dans le dossier personnel de l'utilisateur
@@ -71,18 +76,17 @@ sudo apt update
 sudo apt install -y git curl python3-venv
 ```
 
-Le 21 octobre 2026, `python3-venv` a été installé avant la création de
-l'environnement. On n'a pas éprouvé si son absence empêche cette création :
-on l'installe par sécurité.
+Le 26 octobre 2026, sur la machine neuve, git et curl étaient déjà présents ;
+seul `python3-venv` manquait.
 
-Le jeu de versions de ce dossier vaut pour Python 3.14 (section 9).
-Afficher la version du `python3` du système :
+Le jeu de versions de secours de ce dossier vaut pour Python 3.14
+(section 9). Afficher la version du `python3` du système :
 
 ```
 python3 --version
 ```
 
-Le relevé du 21 octobre 2026 affichait `Python 3.14.4`.
+Le relevé du 26 octobre 2026 affichait `Python 3.14.8`.
 
 ### Récupérer swowl
 
@@ -92,24 +96,36 @@ swowl se clone dans `~/swowl`, en dehors du dépôt `ecolibre-sgdt` :
 git clone https://github.com/MyShivaRepo/swowl.git ~/swowl
 ```
 
-Les nombres de référence ont été relevés sur le commit `8a1cb11` du
-1er septembre 2026. On ne se place pas sur ce commit, un clone ordinaire
-suffit, mais si les nombres de la section 7 ne se retrouvent plus, c'est le
-premier endroit où regarder.
+Les nombres de référence ont été relevés sur swowl 1.2.4, commit `cbcf8a8`
+du 26 octobre 2026. On ne se place pas sur ce commit, un clone ordinaire
+suffit, mais si les résultats de la section 7 ne se retrouvent plus, c'est
+le premier endroit où regarder. La version installée se lit dans
+`~/swowl/backend/version.py`.
 
-### Créer l'environnement Python et installer les versions éprouvées
+### Créer l'environnement Python et installer les dépendances
+
+On installe par le fichier de swowl lui-même :
 
 ```
 python3 -m venv ~/swowl/.venv
 ~/swowl/.venv/bin/pip install --upgrade pip
-~/swowl/.venv/bin/pip install -r ~/ecolibre-sgdt/ontologie/swowl-requirements.txt
+~/swowl/.venv/bin/pip install -r ~/swowl/backend/requirements.txt
 ```
 
-Ne pas utiliser `backend/requirements.txt` du dépôt swowl, et ne pas
-installer les versions du jour : les versions de 2024 de ce fichier ne
-s'installent pas sur Python 3.14, et FastAPI 0.155.0 et au-delà retirent
-l'option `enum=` dont `main.py` dépend. On ne modifie pas swowl : on épingle
-les versions, dans `ontologie/swowl-requirements.txt`.
+Ce fichier passe sur Python 3.14 depuis swowl 1.1.2 : ses versions épinglées
+de 2024 ne s'installaient pas au-delà de Python 3.12, et son auteur l'a
+corrigé.
+
+`ontologie/swowl-requirements.txt` n'est plus le moyen normal d'installer :
+c'est le jeu de secours, éprouvé. On s'en sert si l'installation du jour
+échoue, ou si le comportement de swowl diverge de ce que décrit la
+section 7. La raison : les dépendances de swowl sont déclarées en bornes
+larges, et une version future de l'une d'elles pourrait de nouveau casser
+swowl, comme FastAPI 0.155.0 l'a fait le 20 octobre 2026. Dans ce cas :
+
+```
+~/swowl/.venv/bin/pip install -r ~/ecolibre-sgdt/ontologie/swowl-requirements.txt
+```
 
 ### Contrôler avant de démarrer
 
@@ -120,8 +136,10 @@ Charger le module de swowl, sans lancer le serveur :
 ```
 
 La commande doit afficher `module charge`. Si elle s'arrête au contraire sur
-l'erreur qui a fait échouer la première installation du 21 octobre 2026,
-la version de FastAPI est trop récente :
+une erreur, la cause se lit dans son message ; repasser alors par le jeu de
+secours ci-dessus. Pour mémoire, l'erreur qui avait fait échouer la première
+installation du 21 octobre 2026 venait d'une version de FastAPI trop
+récente pour swowl d'alors :
 
 ```
 TypeError: Query() got an unexpected keyword argument 'enum'
@@ -147,6 +165,14 @@ Attendu : `page d'accueil : HTTP 200`. Le 21 octobre 2026, quand le serveur
 avait planté au démarrage, cette commande rendait `HTTP 000`, et la cause se
 lisait à la fin de `~/swowl/swowl.log`.
 
+La version servie se lit par l'API :
+
+```
+curl -sS http://127.0.0.1:8000/api/version
+```
+
+Le 26 octobre 2026, elle rendait `{"version":"1.2.4"}`.
+
 Vérifier que swowl n'écoute que sur `127.0.0.1` :
 
 ```
@@ -158,9 +184,10 @@ port 8000.
 
 Ouvrir ensuite dans le navigateur de la machine : <http://127.0.0.1:8000/>
 
-L'accès depuis un navigateur Windows vers un serveur lancé dans WSL a été
-vérifié le 21 octobre 2026 avec un serveur de test sur le port 8000, et il
-fonctionne. Le même accès avec swowl lui-même n'a pas encore été confirmé.
+L'accès depuis le navigateur a été vérifié directement sur Ubuntu le
+26 octobre 2026, sans la couche WSL. Pour qui passe par WSL : l'accès depuis
+un navigateur Windows vers un serveur lancé dans WSL a été vérifié le
+21 octobre 2026 avec un serveur de test sur le port 8000, et il fonctionne.
 
 Arrêter swowl :
 
@@ -181,7 +208,7 @@ Après l'arrêt, `ss -ltn` ne doit plus montrer le port 8000.
 | Journal du serveur | `~/swowl/swowl.log` |
 | Fichiers produits par swowl | `~/swowl-data` (`Q2U_Ontology.json`, `OSE_BusinessOntology.json`) |
 | Registre de swowl | `~/.swowl` (`registry.json`, dossiers `analysis` et `ontologies`) |
-| Jeu de versions | `ontologie/swowl-requirements.txt`, dans ce dépôt |
+| Jeu de versions de secours | `ontologie/swowl-requirements.txt`, dans ce dépôt |
 
 Rien de ce qui est sous `~/swowl`, `~/swowl-data` ou `~/.swowl` ne va dans
 le dépôt, et rien n'a besoin d'être synchronisé entre machines : sur un
@@ -198,6 +225,8 @@ Créer d'abord le dossier des fichiers produits par swowl :
 ```
 mkdir -p ~/swowl-data
 ```
+
+### Charger
 
 Charger Q2U, qui vient en premier parce qu'OSE l'importe. Les trois
 premières lignes du bloc écrivent le corps de la requête dans
@@ -224,14 +253,21 @@ L'API ne rend pas des compteurs, mais l'ontologie entière, en JSON :
 environ 125 Ko pour les deux. Le petit programme Python placé à la fin de
 chaque commande `curl` lit cette réponse et n'affiche que la longueur de ses
 listes `classes`, `object_properties`, `datatype_properties`, `individuals`
-et `imports`, par exemple `'classes': 18`. Longueurs à retrouver :
+et `imports`, par exemple `'classes': 18`. Longueurs relevées pour
+swowl 1.2.4 :
 
-| | classes | object_properties | datatype_properties | individuals | imports |
-|---|---|---|---|---|---|
-| Q2U_Ontology | 18 | 12 | 4 | 91 | 0 |
-| OSE_BusinessOntology | 75 | 138 | 10 | 5 | 1 |
+| | classes | object_properties | datatype_properties | individuals | imports | avertissements |
+|---|---|---|---|---|---|---|
+| Q2U_Ontology | 18 | 12 | 4 | 91 | 0 | aucun |
+| OSE_BusinessOntology | 76 | 138 | 10 | 5 | 1 | 1 |
 
 L'unique import d'OSE est `http://virtual-assembly.org/QualityQuantityUnit`.
+L'avertissement d'OSE annonce cinq expressions de classe anonymes orphelines
+ignorées ; texte exact : « 5 expression(s) de classe anonyme(s)
+orpheline(s) (aucun axiome) ignorée(s) — sans effet sémantique. » La
+section 8 explique cet avertissement et les 76 classes.
+
+### Réexporter et compter
 
 Réexporter les deux ontologies en OWL :
 
@@ -250,29 +286,16 @@ ontologie :
   ~/ecolibre-sgdt/ontologie/OSE_BusinessOntology/OSE_BusinessOntology.owl /tmp/out_ose.owl
 ```
 
-Le script affiche un bloc par fichier, dans le même ordre. Pour la source de
-Q2U, le bloc attendu est celui-ci, la première ligne portant le chemin
-complet du fichier :
-
-```
---- /home/<utilisateur>/ecolibre-sgdt/ontologie/Q2U_Ontology/Q2U_Ontology.owl
-  triplets           : 598
-  classes nommees    : 18
-  proprietes objet   : 12
-  proprietes donnees : 4
-  restrictions       : 29
-  individus          : 91
-```
-
-Nombres à retrouver, relevés le 21 octobre 2026 et confirmés sur deux
-machines :
+Le script affiche un bloc par fichier, dans le même ordre. Nombres relevés
+le 26 octobre 2026 pour swowl 1.2.4, identiques sur deux machines, sous
+Python 3.14.8 et sous Python 3.14.4 :
 
 | | triplets | classes nommées | propriétés objet | propriétés données | restrictions | individus |
 |---|---|---|---|---|---|---|
 | Q2U source | 598 | 18 | 12 | 4 | 29 | 91 |
-| Q2U réexport | 557 | 18 | 12 | 4 | 29 | 91 |
+| Q2U réexport | 598 | 18 | 12 | 4 | 29 | 91 |
 | OSE source | 1470 | 75 | 138 | 10 | 164 | 5 |
-| OSE réexport | 1335 | 75 | 138 | 10 | 163 | 5 |
+| OSE réexport | 1441 | 76 | 138 | 10 | 164 | 5 |
 
 Compter enfin les identifiants mal formés dans le réexport d'OSE :
 
@@ -280,61 +303,108 @@ Compter enfin les identifiants mal formés dans le réexport d'OSE :
 grep -c 'OpenSourceEcology#q2u:' /tmp/out_ose.owl
 ```
 
-Attendu : `12`.
+Attendu : `0`.
 
-Le chargement puis le réexport perdent donc 41 triplets sur Q2U et 135 sur
-OSE, dont une restriction. La section 8 dit ce qui est perdu.
+### Les deux contrôles de non-perte
 
-> **Avertissement.** Ces nombres ne valent que pour un chargement suivi d'un
-> réexport sans aucune modification. Dès qu'une ontologie est modifiée dans
-> swowl, ils changent légitimement et ne prouvent plus rien, alors que les
-> pertes de la section 8 continueraient, elles, de se produire en silence.
-> Un contrôle adapté à ce cas reste à concevoir. En attendant, rien ne
-> revient de swowl vers `ontologie/`.
+**Le résultat qui compte n'est aucun des nombres ci-dessus, mais que les
+deux contrôles qui suivent ne signalent rien.** Les nombres aident à
+repérer d'où vient un écart ; ils ne prouvent pas l'absence de perte. Les
+deux contrôles se complètent : chacun regarde ce que l'autre ne regarde
+pas.
 
-## 8. Ce qui ne survit pas au chargement
+**Premier contrôle, les triplets : `ontologie/swowl-controle-perte.py`.**
+Il vérifie que chaque triplet de la source se retrouve dans l'export, un
+littéral typé `xsd:string` y valant un littéral simple. Il ignore par
+construction tout triplet contenant un nœud anonyme : il contrôle
+446 triplets sur 598 pour Q2U, et 684 sur 1470 pour OSE. Les restrictions,
+les unions et les autres expressions anonymes lui échappent donc, et il ne
+signale pas un triplet ajouté par l'export. On lui passe les quatre
+fichiers dans l'ordre source puis export pour chaque ontologie :
 
-Quatre pertes, toutes silencieuses, aucune signalée par swowl. Elles
-viennent des mesures du 21 octobre 2026.
+```
+~/swowl/.venv/bin/python ~/ecolibre-sgdt/ontologie/swowl-controle-perte.py \
+  ~/ecolibre-sgdt/ontologie/Q2U_Ontology/Q2U_Ontology.owl /tmp/out_q2u.owl \
+  ~/ecolibre-sgdt/ontologie/OSE_BusinessOntology/OSE_BusinessOntology.owl /tmp/out_ose.owl
+```
 
-**Première perte, les domaines exprimés par une union.** La propriété
-subsiste mais perd son domaine entièrement, sans qu'aucun membre de l'union
-soit conservé. Dans OSE, 12 propriétés sont touchées : `characterizedBy`,
-`executedBy`, `executes`, `hasPart`, `hasWhole`, `measuredIn`, `partOf`,
-`specifiedBy`, `specifies`, `target`, `value`, `wholeOf`. Dans Q2U, 4 le
-sont : `baseOf`, `hasBase`, `hasUnit`, `symbol`. Pour donner la mesure du
-dommage, `characterizedBy` avait pour domaine l'union de six classes, et
-n'en a plus aucun.
+Attendu : `ABSENTS DE L'EXPORT : 0` dans les deux blocs.
 
-**Deuxième perte, les références d'OSE vers Q2U.**
-`http://virtual-assembly.org/QualityQuantityUnit#Unit` ressort en
-`http://virtual-assembly.org/OpenSourceEcology#q2u:Unit`, c'est-à-dire dans
-le mauvais espace de noms et avec le préfixe collé dans le nom local.
-12 occurrences, portant sur `Unit`, `Quantity` et `BaseQuality`. Le lien
-entre les deux ontologies ne survit donc pas.
+**Second contrôle, les expressions anonymes :
+`ontologie/swowl-controle-structure.py`.** Il compare ce que le premier
+écarte. Chaque expression anonyme y est rendue par sa signature
+structurelle (propriété, contraintes, classes et valeurs, expressions
+imbriquées développées) et rangée avec son contexte immédiat : la classe
+qui la porte par `subClassOf`, `equivalentClass` ou `disjointWith`, la
+propriété dont elle est le domaine ou la portée, ou le fait qu'elle est
+orpheline. La source et l'export sont comparés dans les deux sens : une
+expression absente comme une expression ajoutée est signalée, et un
+identifiant remplacé à l'intérieur d'une restriction apparaît comme une
+absence suivie d'un ajout. On lui passe des triplets source, export, nom :
 
-**Troisième perte, l'unique axiome qu'OSE pose sur une classe de Q2U :**
-`Quantity subClassOf (quantityOf allValuesFrom QuantitativeCharacteristic)`.
-swowl tient les entités importées en lecture seule et le perd. C'est la
-restriction qui manque au compte, 164 devenant 163.
+```
+~/swowl/.venv/bin/python ~/ecolibre-sgdt/ontologie/swowl-controle-structure.py \
+  ~/ecolibre-sgdt/ontologie/Q2U_Ontology/Q2U_Ontology.owl /tmp/out_q2u.owl Q2U \
+  ~/ecolibre-sgdt/ontologie/OSE_BusinessOntology/OSE_BusinessOntology.owl /tmp/out_ose.owl OSE
+```
 
-**Quatrième perte, une restriction de Q2U vidée de son contenu :** porteur
-`BaseQuality`, propriété `quantifiedBy`, contenu
-`union(BaseQuantity ou DerivedQuantity)`.
+Attendu :
 
-Sans conséquence, pour complétude : 5 unions d'OSE également perdues sont
-des doublons orphelins laissés par Protégé, rattachés à rien.
+- pour Q2U, zéro absent et zéro ajouté sur toutes les lignes ;
+- pour OSE, zéro partout, sauf cinq expressions orphelines absentes,
+  nommées ainsi :
 
-**Cause, lue dans le code de swowl et non déduite.** Dans
-`backend/triple_store.py`, l'import ne retient un domaine que s'il est un
-identifiant, et ignore sans avertissement un domaine porté par un nœud
-anonyme. Dans `backend/owl_model.py`, le domaine d'une propriété est déclaré
-comme une liste d'identifiants et non comme une expression de classe : une
-union n'y est pas représentable. Conséquence importante à signaler :
-ressaisir les membres à la main dans l'interface n'est pas un contournement,
-c'en est l'inverse, car swowl écrit alors un triplet `rdfs:domain` par
-entrée, ce qui se lit en OWL comme une intersection, soit A ET B, là où
-l'ontologie dit A OU B.
+```
+     ABSENT x3 : (FunctionalItem ou OrganicItem)
+     ABSENT x2 : (MiniMaxiBeSpecification ou TargetTolerenceBeSpecification)
+```
+
+Ces cinq-là sont les unions orphelines que swowl annonce ignorer à l'import
+(section 8) ; elles ne sont pas une perte.
+
+> **Portée du second contrôle.** Il n'examine une expression anonyme que si
+> elle est rattachée par `subClassOf`, `equivalentClass`, `disjointWith`,
+> `domain` ou `range`, ou si elle est orpheline. Une expression rattachée
+> par un autre prédicat, par exemple `rdf:type` sur un individu ou
+> `propertyChainAxiom`, ne serait pas comparée. Sur nos deux ontologies, un
+> comptage fait le 26 octobre 2026 montre que seuls `subClassOf` et
+> `domain` relient un sujet nommé à un nœud anonyme : 29 et 4 dans Q2U,
+> 164 et 12 dans OSE. La couverture est donc complète aujourd'hui. **Ce
+> comptage est à refaire si l'ontologie change.**
+
+**Pourquoi pas une comparaison par isomorphisme de graphes.** Elle a été
+essayée le 26 octobre 2026, avec `rdflib.compare`, et écartée : elle rend
+288 fausses différences sur OSE et 24 sur Q2U alors qu'il n'y a aucune
+perte, parce que sa canonicalisation identifie un nœud anonyme par la
+structure entière dont il dépend. Elle a produit une fausse alerte sur les
+cardinalités, qui a demandé une vérification pour rien.
+
+> **Avertissement.** Ces contrôles ne valent que pour un chargement suivi
+> d'un réexport sans aucune modification. Dès qu'une ontologie est modifiée
+> dans swowl, les nombres changent légitimement et les contrôles signalent
+> des différences voulues, sans pouvoir les distinguer d'une perte. Un
+> contrôle adapté à ce cas reste à concevoir. En attendant, rien ne revient
+> de swowl vers `ontologie/`.
+
+## 8. Ce qui reste observable sur un aller-retour
+
+Sur swowl 1.2.4, un chargement suivi d'un réexport laisse trois différences
+visibles. **Aucune n'est une perte.**
+
+- **Les cinq expressions d'union orphelines laissées par Protégé dans OSE
+  sont ignorées**, rattachées à rien et donc sans effet sémantique. L'import
+  l'annonce explicitement par son avertissement (section 7). Ce sont les
+  cinq absences du second contrôle.
+- **Une déclaration de classe est ajoutée** pour la classe importée sur
+  laquelle OSE pose un axiome, `q2u:Quantity`. D'où 76 classes au lieu de 75
+  dans OSE.
+- **Les libellés typés `xsd:string` ressortent en littéraux simples.** En
+  RDF 1.1, c'est la même chose : ce n'est pas une différence sémantique.
+
+Pour l'histoire : quatre pertes avaient été mesurées sur la version de
+swowl du 21 octobre 2026. Elles ont été signalées à son auteur, qui les a
+corrigées entre le 22 et le 26 octobre 2026. Le détail de ce qu'elles
+étaient est dans `travaux/swowl-installation.md`.
 
 ## 9. Si un jour la version de Python change
 
@@ -395,32 +465,18 @@ Méthode, en six étapes :
 
 ## 10. Ce qui reste ouvert
 
-État au 21 octobre 2026.
+État au 26 octobre 2026.
 
-**Premier point, le contrôle de non-perte après modification.** Les nombres
-de la section 7 ne valent que pour un chargement suivi d'un réexport sans
-modification. Un contrôle capable de distinguer, dans un fichier modifié,
-les changements voulus des pertes silencieuses de la section 8 reste à
-concevoir. Tant qu'il n'existe pas, rien ne revient de swowl vers
-`ontologie/`.
+Les cinq défauts de swowl relevés le 21 octobre 2026 et listés ici
+jusqu'alors ont tous été corrigés par son auteur.
 
-**Deuxième point, l'accès depuis le navigateur.** Vérifié le 21 octobre 2026
-avec un serveur de test lancé dans WSL sur le port 8000, et il fonctionne.
-Le même accès avec swowl lui-même n'a pas encore été confirmé.
+**Premier point, le contrôle de non-perte après modification.** Les
+contrôles de la section 7 ne valent que pour un chargement suivi d'un
+réexport sans modification. Un contrôle capable de distinguer, dans un
+fichier modifié, les changements voulus d'une perte reste à concevoir.
+Tant qu'il n'existe pas, rien ne revient de swowl vers `ontologie/`.
 
-**Troisième point, cinq défauts de swowl relevés le 21 octobre 2026, à
-signaler à son auteur.**
-
-1. Les domaines exprimés par une union sont perdus entièrement à l'import,
-   sans aucun avertissement.
-2. Les références vers une ontologie importée ressortent sous un identifiant
-   faux, le préfixe se retrouvant collé dans le nom local et l'identifiant
-   dans le mauvais espace de noms.
-3. Les axiomes qu'une ontologie pose sur une classe importée sont perdus,
-   les entités importées étant tenues en lecture seule.
-4. Une restriction dont le contenu est une union est conservée mais vidée de
-   ce contenu.
-5. `backend/requirements.txt` ne s'installe plus sur une Ubuntu LTS à jour,
-   et `main.py` utilise l'option `enum=` de `Query()` que FastAPI a retirée
-   en 0.155.0, ce qui empêche le serveur de démarrer avec une installation
-   faite aux versions du jour.
+**Deuxième point, la couverture du contrôle structurel.** Elle est complète
+sur les deux ontologies d'aujourd'hui (section 7, portée du second
+contrôle). Elle est à revérifier, par le même comptage des prédicats qui
+relient un sujet nommé à un nœud anonyme, si l'ontologie change.

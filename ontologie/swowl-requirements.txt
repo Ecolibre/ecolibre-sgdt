@@ -1,14 +1,15 @@
-# Jeu de versions éprouvé pour swowl, relevé le 21 octobre 2026.
-# Vaut pour Python 3.14. Sur une autre version de Python, refaire le relevé.
-# Ne pas utiliser backend/requirements.txt du dépôt swowl : ses versions de 2024
-# ne s'installent pas sur Python 3.14. Ne pas installer les versions du jour non
-# plus : FastAPI 0.155.0 et au-delà retirent l'option enum= dont main.py dépend.
-PyYAML==6.0.3
+# Jeu de versions de secours pour swowl, relevé le 26 octobre 2026.
+# Ce n'est pas le moyen normal d'installer : on installe par backend/requirements.txt
+# du dépôt swowl. Ce fichier sert si cette installation échoue ou si le comportement
+# diverge, les dépendances de swowl étant déclarées en bornes larges.
+# Éprouvé pour Python 3.14 et swowl 1.2.4, obtenu à l'identique sur deux machines :
+# Ubuntu 26.10 sous Python 3.14.8, et un autre environnement sous Python 3.14.4.
+# Sur une autre version de Python, refaire le relevé.
 annotated-doc==0.0.5
 annotated-types==0.8.0
 anyio==4.15.1
 click==8.5.0
-fastapi==0.154.0
+fastapi==0.162.0
 h11==0.16.0
 httptools==0.9.0
 idna==3.20
@@ -17,12 +18,13 @@ opentelemetry-api==1.45.1
 pydantic==2.14.1
 pydantic_core==2.50.1
 pyparsing==3.3.3
-pypdf==6.21.1
+pypdf==6.21.2
 python-docx==1.2.0
 python-dotenv==1.2.4
 python-multipart==0.0.32
+PyYAML==6.0.3
 rdflib==7.6.0
-starlette==1.9.0
+starlette==1.10.0
 typing-inspection==0.4.4
 typing_extensions==4.16.0
 uvicorn==0.54.0
