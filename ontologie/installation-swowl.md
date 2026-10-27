@@ -423,10 +423,10 @@ Méthode, en six étapes :
    ~/swowl/.venv/bin/pip install --upgrade pip
    ```
 
-2. Installer sans épingler :
+2. Installer par le fichier de swowl lui-même, comme en section 4 :
 
    ```
-   ~/swowl/.venv/bin/pip install fastapi "uvicorn[standard]" rdflib pydantic python-multipart pypdf python-docx
+   ~/swowl/.venv/bin/pip install -r ~/swowl/backend/requirements.txt
    ```
 
 3. Vérifier le chargement du module depuis `backend`, par la commande de la
@@ -436,16 +436,22 @@ Méthode, en six étapes :
    (cd ~/swowl/backend && ~/swowl/.venv/bin/python -c "import main; print('module charge')")
    ```
 
-4. Si l'erreur porte sur l'option `enum=` de `Query()`, réinstaller
-   FastAPI 0.154.0, puis refaire la vérification de l'étape 3 :
+4. Si le module ne se charge pas, lire dans le message d'erreur le nom du
+   paquet en cause, et descendre ce paquet de version en version, en
+   refaisant chaque fois la vérification de l'étape 3, jusqu'à ce que le
+   module se charge. Le point de repère connu est
+   `ontologie/swowl-requirements.txt` : il porte un jeu complet qui a
+   fonctionné, et la version qu'il donne pour le paquet en cause est une
+   cible raisonnable. Par exemple, pour un paquet nommé `paquet` épinglé
+   en `1.2.3` dans ce fichier :
 
    ```
-   ~/swowl/.venv/bin/pip install fastapi==0.154.0
+   ~/swowl/.venv/bin/pip install paquet==1.2.3
    ```
 
-   Si elle porte sur autre chose, descendre le paquet en cause de version en
-   version, en refaisant chaque fois la vérification de l'étape 3, jusqu'à ce
-   que le module se charge.
+   Ce qui peut arriver est illustré par l'épisode FastAPI 0.155.0 du
+   20 octobre 2026, raconté dans `travaux/swowl-installation.md` : c'est de
+   l'histoire, pas une consigne.
 
 5. Refaire ensuite le contrôle de non-perte complet de la section 7, swowl
    démarré comme en section 5, et vérifier que tous les nombres se
