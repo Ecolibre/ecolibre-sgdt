@@ -1,0 +1,109 @@
+Une conversation de travail disparaît, et ce qui n'en est pas sorti disparaît avec elle. Cette procédure se lance avant d'abandonner un fil, qu'il soit terminé ou non.
+
+Elle ne refait pas la [[Procédure de clôture d'un lot]]. Si la conversation a mené un lot, celle-là se lance d'abord et couvre l'essentiel ; celle-ci reprend ce qui n'appartient à aucun lot, et prépare ce qui vient après.
+
+Elle remplace le fichier <code>controle-de-fin-de-session.md</code>, qui vivait dans le dépôt depuis le 12 août 2026 sans avoir jamais été modifié, et qui ignorait le système de lots.
+
+== Quand la lancer ==
+
+Trois cas, et la même procédure pour les trois. Le fil est terminé. Le fil est devenu trop long et une nouvelle conversation va le relayer. Le fil est abandonné sans être terminé.
+
+Le troisième coûte le plus cher à négliger : un fil abandonné en cours de route porte des arbitrages à demi rendus, que personne n'ira chercher puisque rien n'annonce qu'ils existent.
+
+== Où la lancer ==
+
+Dans la conversation concernée, pour la raison qui vaut déjà pour un lot : le texte intégral ne s'y lit d'un bout à l'autre que là.
+
+Texte à coller au début de la conversation à clore :
+
+<pre>
+Pour une conversation claude.ai du projet Wiki Ecolibre data.
+Si tu es Claude Code, ne lance aucune commande : réponds seulement que ce
+message est destiné à une conversation claude.ai.
+
+Clôture de cette conversation. Lis ce message en entier avant de répondre.
+
+Récupère d'abord la procédure, qui fait autorité :
+
+curl -s -G "https://wiki.ecolibre.org/api.php" --data-urlencode "action=parse" --data-urlencode "page=Procédure de clôture d'une conversation" --data-urlencode "prop=wikitext" --data-urlencode "format=json"
+
+N'utilise pas l'outil de récupération de pages web pour ce wiki : il sert
+des versions en cache et refuse les adresses non déjà citées. curl et
+l'API, toujours.
+
+Applique ensuite ses étapes. L'étape 2 porte sur le texte de cette
+conversation, que tu as sous les yeux. Ne t'appuie sur aucun résumé, ni le
+tien, ni celui de l'interface.
+
+Vérifie chaque affirmation contre le wiki ou le dépôt avant de l'écrire, et
+dis d'où vient ce que tu avances.
+
+Ne rédige aucune consigne d'écriture avant que j'aie arbitré. Rends-moi
+d'abord une liste : chaque trouvaille en un point numéroté, à la forme
+décrite par methode-de-travail.md, section "La forme d'un point". Je
+réponds point par point.
+</pre>
+
+== 1. Clore le lot, s'il y en a un ==
+
+Si la conversation a mené un lot et que ce lot est livré, appliquer d'abord la [[Procédure de clôture d'un lot]], lot par lot. Ce qui suit ne porte que sur ce qu'elle laisse.
+
+Un fil qui relaie un lot encore ouvert ne clôt pas ce lot : il passe directement à l'étape 2, puis produit le texte d'amorçage de l'étape 5.
+
+== 2. Recenser ce qui n'appartient à aucun lot ==
+
+Relire le fil et en extraire tout fait durable : une décision prise, une convention découverte, une limite rencontrée, la correction d'une affirmation antérieure, un travail ouvert.
+
+Y compris ce qui a été infirmé. Une hypothèse réfutée est un fait, et la consigner évite qu'elle revienne à la conversation suivante.
+
+== 3. Router ==
+
+Chaque élément va à une seule destination.
+
+{| class="wikitable"
+! Destination !! Ce qui y va
+|-
+| [[Récapitulatif technique du Système de Gestion de Données Techniques|Récapitulatif technique]] || Les conventions et mécanismes qui contraignent toute écriture future : syntaxe, types, cardinalités, nommage, structure des modèles et des formulaires. Le test : quelqu'un qui écrira une page dans six mois doit-il le savoir pour ne pas se tromper ?
+|-
+| [[Limites connues du Système de Gestion de Données Techniques|Limites connues]] || Ce que l'installation fait mal ou ne sait pas faire, et les contournements en vigueur. Le test : quelqu'un va-t-il buter là-dessus et croire à une erreur de sa part ?
+|-
+| [[Choix imposés par l'outil]] || Une décision de modèle que l'outil impose et qu'un autre ne forcerait pas. Le test est écrit sur cette page.
+|-
+| Points ouverts d'un lot || Un travail à faire. S'il n'appartient à aucun lot, il en devient un : créer sa page, lui attribuer le numéro suivant.
+|-
+| [[Notes en attente de rangement]] || Une idée dont on ne sait pas encore où elle va. Rien n'y reste.
+|-
+| Le dépôt || La méthode, l'outillage, les incidents de session, les leçons sur la conduite des écritures. Rien de cela n'est une donnée du wiki.
+|}
+
+Un élément qui ne rentre nulle part est le plus souvent un détail de fil : le dire, ne pas le forcer dans une case.
+
+== 4. Vérifier avant d'écrire ==
+
+Lire réellement chaque page de destination et constater si l'élément y figure déjà, et sous quelle forme. Ne jamais présumer du contenu d'une page sans l'avoir lue.
+
+Signaler avant tout le reste les endroits où le fil contredit ce que le wiki affirme aujourd'hui : c'est ce qui coûte le plus cher à laisser passer.
+
+== 5. Écrire, puis préparer la suite ==
+
+Les écritures passent par des consignes, une à la fois, après arbitrage.
+
+Quand une nouvelle conversation doit relayer celle-ci, la clôture produit en dernier le texte d'amorçage à lui coller : le lot concerné et son état, ce qui est tranché et ne se rejoue pas, ce qui reste ouvert, et où lire le reste. Ce n'est pas un résumé du fil, c'est ce qu'il faut savoir pour continuer sans rouvrir ce qui est fermé.
+
+== Pièges observés ==
+
+Ne pas recopier un rapport sur le wiki. Le rapport raconte comment on est arrivé au résultat ; le wiki n'énonce que le résultat.
+
+Une leçon de méthode n'est pas une convention du wiki. Elle va dans le dépôt.
+
+Une hypothèse réfutée se consigne comme réfutée, elle ne s'efface pas : sans quoi elle sera reformulée au fil suivant.
+
+Vérifier avant d'affirmer qu'une page est en tort. Il est déjà arrivé qu'un document de cadrage affirme qu'une page portait une information fausse, alors qu'elle était correcte.
+
+Un fait mesuré et une cause établie sont deux choses différentes. Consigner ce qui a été constaté, sans promouvoir une hypothèse plausible au rang d'explication.
+
+----
+
+Voir aussi la [[Procédure de clôture d'un lot]], la [[Procédure d'ouverture d'un lot]] et la [[Gestion des lots]].
+
+[[Catégorie:Page de suivi]]

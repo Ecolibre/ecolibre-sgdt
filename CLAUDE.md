@@ -209,6 +209,9 @@ Ce que Cyril peut lancer seul, et ce qui relève de fuzzy : voir
 `demandes-adminsys.md`.
 
 ## Garde-fous d'exécution (toute édition sur le wiki)
+
+**Rien de ce qui ouvre un accès ne va sur le wiki, sous aucune forme** : noms d'hôtes, chemins d'installation, comptes système, mots de passe, contenu de `LocalSettings.php`, détails d'accès SSH. Si un élément à publier en contient, le signaler plutôt que de le router en silence. Le dépôt est public lui aussi : il se clone sans authentification, et l'historique de git conserve ce qu'on en retire — un secret qui y tomberait devrait être changé, pas seulement supprimé. Avant d'écrire le nom ou l'adresse de quelqu'un dans un rapport, se demander s'il doit y figurer. Règle reprise de `controle-de-fin-de-session.md` avant sa suppression, le 28 octobre 2026.
+
 1. **Lire avant d'écrire.** Toujours récupérer le wikitexte courant
    (`wiki-get.sh` / `action=parse&prop=wikitext`), calculer le diff, le proposer,
    puis écrire. Jamais d'écriture à l'aveugle.

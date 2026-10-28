@@ -20,8 +20,10 @@ serait autrement perdu à la fermeture d'une conversation.
   ci-dessous pour l'emplacement attendu des identifiants.
 - **`CLAUDE.md`** — méthode de travail, garde-fous d'exécution et leçons
   apprises sur l'outillage et sur MediaWiki/Semantic MediaWiki/Page Forms.
-- **`controle-de-fin-de-session.md`** — procédure de répartition de
-  l'information entre le wiki et ce dépôt en fin de session.
+- **`methode-de-travail.md`** — le protocole entre Cyril, la conversation
+  claude.ai qui conçoit et Claude Code qui exécute : forme des consignes, des
+  points et des rapports. La clôture d'une conversation est décrite sur le
+  wiki, page « Procédure de clôture d'une conversation ».
 - **`travaux/`** — tout document destiné à être lu dans une conversation
   Claude : rapports de session (`rapport-*.md`, `rapport-reconnaissance.md`),
   cadrages, propositions et amendements de lot (`lot-*.md`,
