@@ -2,7 +2,7 @@ Une conversation de travail disparaît, et ce qui n'en est pas sorti disparaît 
 
 Elle ne refait pas la [[Procédure de clôture d'un lot]]. Si la conversation a mené un lot, celle-là se lance d'abord et couvre l'essentiel ; celle-ci reprend ce qui n'appartient à aucun lot, et prépare ce qui vient après.
 
-Elle remplace le fichier <code>controle-de-fin-de-session.md</code>, présent dans le dépôt depuis le 12 août 2026 et retouché une seule fois, le 26 octobre 2026, sur un point de sécurité. Sa table de routage, elle, n'avait pas bougé : elle ignorait le système de lots, créé le 1er septembre 2026.
+Elle remplace le fichier <code>controle-de-fin-de-session.md</code>, présent dans le dépôt depuis le 12 août 2026 et retouché une seule fois, le 26 octobre 2026, sur un point de sécurité. Sa table de routage, elle, n'avait pas bougé : elle ignorait le système de lots, dont la classe sémantique date du 1er septembre 2026.
 
 == Quand la lancer ==
 
