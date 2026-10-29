@@ -666,9 +666,10 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   n'est pas superficiel** : `git rev-parse --is-shallow-repository`. Un clone
   superficiel ne porte qu'une partie de l'historique, et `git log` sur un
   fichier y rend un résultat plausible mais faux, sans aucun avertissement.
-  `git fetch --unshallow` le complète. Constaté deux fois le 28 octobre 2026,
-  sur le même fichier, dans une session cloud et dans une conversation
-  claude.ai, avec deux résultats faux différents.
+  `git fetch --unshallow` le complète. Constaté deux fois sur le même fichier, avec
+  deux résultats faux différents : le 19 octobre 2026 dans une conversation
+  claude.ai, sur un clone fait en `--depth 1`, et le 28 octobre 2026 dans une
+  session cloud.
 - **État propre avant toute opération destructive ou massive dans le
   dépôt** — suppression, déplacement en nombre, réécriture d'un fichier
   existant. Si `git status` montre des modifications non commitées,
