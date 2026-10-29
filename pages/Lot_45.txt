@@ -1,13 +1,13 @@
 {{Lot
 |Work_package_number=45
 |Work_package_status=identifié
-|Work_package_summary=Clore les lots 9, 10 et 11, livrés en aout 2026 et jamais clos, dont la relecture demande quatre passages dans quatre conversations.
+|Work_package_summary=Clore les lots 9, 10 et 11, livrés en août 2026 et jamais clos, dont la relecture demande quatre passages dans quatre conversations.
 |Work_package_depends_on=Lot 44 — Mémoire des choix contraints et clôture des travaux
 }}
 
 == Objet ==
 
-Clore les lots 9, 10 et 11, livrés entre le 16 et le 31 aout 2026 et jamais clos. Ils ont été séparés des sept autres lots en retard parce que leur relecture ne se fait pas en passant.
+Clore les lots 9, 10 et 11, livrés entre le 16 et le 31 août 2026 et jamais clos. Ils ont été séparés des sept autres lots en retard parce que leur relecture ne se fait pas en passant.
 
 == Ce qui est déjà tranché ==
 
