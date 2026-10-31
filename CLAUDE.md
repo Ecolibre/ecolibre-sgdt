@@ -679,6 +679,19 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   des permissions.
 - **Pousser en fin de session, systématiquement.** Un commit qui n'a pas
   quitté la machine ne protège pas de la machine.
+
+  **Fin de tâche : la branche de session.** Une session Claude Code cloud
+  travaille sur une branche `claude/...`, là où une session locale pousse
+  sur `main`. En fin de tâche, après avoir commité :
+
+  - si `HEAD` est sur une branche de session et que `origin/main` en est
+    l'ancêtre direct, pousser par `git push origin HEAD:main` ;
+  - sinon, s'arrêter et le dire. Ne jamais fusionner ni rebaser de soi-même.
+
+  Sans cela le travail reste invisible pour l'architecte, qui ne voit que
+  `main`. Un rapport commité sur une branche de session et jamais poussé a
+  déjà laissé huit jours une correction d'ontologie hors de `main`, trouvée
+  par hasard le 29 octobre 2026.
 - **Rapatrier en début de tâche, systématiquement, et de nouveau si la
   poussée est refusée.** Avant la première écriture d'une tâche, lancer
   `git fetch origin`, et fusionner `origin/main` si la branche est en
