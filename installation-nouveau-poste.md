@@ -100,7 +100,23 @@ ni erreur ni avertissement. Le rangement des dossiers signalé le même jour
 `~/data/Ecolibre/local/`) les avait en outre rendues inopérantes sur la tour.
 Mesuré après correction, sur la tour, le 31/10/2026 : `cat` sur `miroir.env`
 et `cat` sur le `.env` du dépôt privé sont tous deux refusés (« denied »).
+Remesuré le 31/10/2026 sur le poste de l'utilisateur `cyril` (Framework),
+avec deux fichiers de test au seul contenu `TEST=1` : `cat` sur
+`../ecolibre-sgdt-prive/.env` et `cat` sur
+`~/data/Ecolibre/local/miroir-wiki/miroir.env` sont tous deux refusés
+(« denied »), sans aucune fenêtre de confirmation, constaté par Cyril. La
+forme `//**/` est ainsi validée sur un second utilisateur.
 Pas encore mesuré sur le portable.
+
+**Ces interdictions ferment aussi l'écriture et la suppression par le
+shell.** Mesuré le même jour, sur le même poste, sans aucune fenêtre de
+confirmation : la création des deux fichiers de test par redirection
+(`mkdir -p … && printf 'TEST=1\n' > …/.env && printf … > …/miroir.env`) et
+leur suppression (`rm … && rmdir …`) ont été refusées comme les lectures.
+Le refus porte sur la commande entière : la mesure ne dit pas lequel de ses
+maillons l'a déclenché. Conséquence : un fichier de test placé sous une
+interdiction se crée et se supprime par Cyril, avec le préfixe `!` dans
+l'invite de Claude Code, jamais par l'exécuteur.
 
 **Aucune protection ne vit dans `.claude/settings.local.json`.** Ce fichier
 n'est pas versionné : une règle qui y vit disparaît sans trace, sans diff
