@@ -92,24 +92,24 @@ gitignore : `//**/nom/` désigne un dossier `nom` à n'importe quel endroit.
 règles étaient écrites `//home/spheres/…` : les quatre interdictions du
 dépôt privé, les huit du miroir, celle des clés SSH et les deux
 autorisations du cœur du miroir. Elles ne valaient que pour l'utilisateur
-`spheres`, donc pour la tour. Sur les deux autres postes, où l'utilisateur
-s'appelle autrement, **aucune de ces protections n'a jamais fonctionné**, et
-rien ne le signalait : une règle qui ne correspond à aucun chemin ne produit
-ni erreur ni avertissement. Le rangement des dossiers signalé le même jour
-(dépôts sous `~/data/Ecolibre/depots/`, miroir sous
+`spheres`, donc pour la tour. Sur le Framework (utilisateur `cyril`) et le
+Toshiba (utilisateur `cwl-toshiba`), **aucune de ces protections n'a jamais
+fonctionné**, et rien ne le signalait : une règle qui ne correspond à aucun
+chemin ne produit ni erreur ni avertissement. Le rangement des dossiers
+signalé le même jour (dépôts sous `~/data/Ecolibre/depots/`, miroir sous
 `~/data/Ecolibre/local/`) les avait en outre rendues inopérantes sur la tour.
-Mesuré après correction, sur la tour, le 31/10/2026 : `cat` sur `miroir.env`
-et `cat` sur le `.env` du dépôt privé sont tous deux refusés (« denied »).
-Remesuré le 31/10/2026 sur le poste de l'utilisateur `cyril` (Framework),
-avec deux fichiers de test au seul contenu `TEST=1` : `cat` sur
-`../ecolibre-sgdt-prive/.env` et `cat` sur
+Mesuré après correction, sur la tour (utilisateur `spheres`), le
+31/10/2026 : `cat` sur `miroir.env` et `cat` sur le `.env` du dépôt privé
+sont tous deux refusés (« denied »). Remesuré le 31/10/2026 sur le
+Framework (utilisateur `cyril`), avec deux fichiers de test au seul contenu
+`TEST=1` : `cat` sur `../ecolibre-sgdt-prive/.env` et `cat` sur
 `~/data/Ecolibre/local/miroir-wiki/miroir.env` sont tous deux refusés
 (« denied »), sans aucune fenêtre de confirmation, constaté par Cyril. La
-forme `//**/` est ainsi validée sur un second utilisateur.
-Pas encore mesuré sur le portable.
+forme `//**/` est ainsi validée sur un second utilisateur. Le Toshiba n'est
+pas mesuré et ne le sera probablement pas : il n'a ni miroir ni dépôt privé.
 
 **Ces interdictions ferment aussi l'écriture et la suppression par le
-shell.** Mesuré le même jour, sur le même poste, sans aucune fenêtre de
+shell.** Mesuré le même jour, sur le Framework, sans aucune fenêtre de
 confirmation : la création des deux fichiers de test par redirection
 (`mkdir -p … && printf 'TEST=1\n' > …/.env && printf … > …/miroir.env`) et
 leur suppression (`rm … && rmdir …`) ont été refusées comme les lectures.
