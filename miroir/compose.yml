@@ -1,7 +1,7 @@
 # Miroir local du wiki Ecolibre — lot 22 du SGDT.
 #
 # Toujours lancé avec le fichier d'environnement hors dépôt :
-#   docker compose --env-file /home/spheres/miroir-wiki/miroir.env -f miroir/compose.yml <commande>
+#   docker compose --env-file ~/data/Ecolibre/local/miroir-wiki/miroir.env -f miroir/compose.yml <commande>
 # Voir miroir/README.md.
 
 name: ecolibre-miroir

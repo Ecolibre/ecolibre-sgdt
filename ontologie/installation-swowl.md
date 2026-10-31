@@ -18,8 +18,9 @@ structurel dans `travaux/swowl-controle-structure.md`. La première
 installation, celle du 21 octobre 2026 sous WSL2 avec swowl 1.1.0, est
 racontée dans `travaux/swowl-installation.md`.
 
-Le dépôt `ecolibre-sgdt` est supposé cloné dans `~/ecolibre-sgdt`, comme sur
-le poste du relevé, où il était dans le dossier personnel de l'utilisateur
+Le dépôt `ecolibre-sgdt` est supposé cloné dans `~/data/Ecolibre/depots/ecolibre-sgdt`,
+l'arborescence des postes de Cyril depuis le 31/10/2026. Sur le poste du
+relevé, il était directement dans le dossier personnel de l'utilisateur
 Linux. Dans les commandes, `~` désigne ce dossier personnel.
 
 ## 1. Ce qu'est swowl, et ce qu'il n'est pas
@@ -131,7 +132,7 @@ larges, et une version future de l'une d'elles pourrait de nouveau casser
 swowl, comme FastAPI 0.155.0 l'a fait le 20 octobre 2026. Dans ce cas :
 
 ```
-~/swowl/.venv/bin/pip install -r ~/ecolibre-sgdt/ontologie/swowl-requirements.txt
+~/swowl/.venv/bin/pip install -r ~/data/Ecolibre/depots/ecolibre-sgdt/ontologie/swowl-requirements.txt
 ```
 
 ### Contrôler avant de démarrer
@@ -288,9 +289,9 @@ les quatre fichiers dans cet ordre exact, source puis réexport pour chaque
 ontologie :
 
 ```
-~/swowl/.venv/bin/python ~/ecolibre-sgdt/ontologie/swowl-compte.py \
-  ~/ecolibre-sgdt/ontologie/Q2U_Ontology/Q2U_Ontology.owl /tmp/out_q2u.owl \
-  ~/ecolibre-sgdt/ontologie/OSE_BusinessOntology/OSE_BusinessOntology.owl /tmp/out_ose.owl
+~/swowl/.venv/bin/python ~/data/Ecolibre/depots/ecolibre-sgdt/ontologie/swowl-compte.py \
+  ~/data/Ecolibre/depots/ecolibre-sgdt/ontologie/Q2U_Ontology/Q2U_Ontology.owl /tmp/out_q2u.owl \
+  ~/data/Ecolibre/depots/ecolibre-sgdt/ontologie/OSE_BusinessOntology/OSE_BusinessOntology.owl /tmp/out_ose.owl
 ```
 
 Le script affiche un bloc par fichier, dans le même ordre. Nombres relevés
@@ -330,9 +331,9 @@ signale pas un triplet ajouté par l'export. On lui passe les quatre
 fichiers dans l'ordre source puis export pour chaque ontologie :
 
 ```
-~/swowl/.venv/bin/python ~/ecolibre-sgdt/ontologie/swowl-controle-perte.py \
-  ~/ecolibre-sgdt/ontologie/Q2U_Ontology/Q2U_Ontology.owl /tmp/out_q2u.owl \
-  ~/ecolibre-sgdt/ontologie/OSE_BusinessOntology/OSE_BusinessOntology.owl /tmp/out_ose.owl
+~/swowl/.venv/bin/python ~/data/Ecolibre/depots/ecolibre-sgdt/ontologie/swowl-controle-perte.py \
+  ~/data/Ecolibre/depots/ecolibre-sgdt/ontologie/Q2U_Ontology/Q2U_Ontology.owl /tmp/out_q2u.owl \
+  ~/data/Ecolibre/depots/ecolibre-sgdt/ontologie/OSE_BusinessOntology/OSE_BusinessOntology.owl /tmp/out_ose.owl
 ```
 
 Attendu : `ABSENTS DE L'EXPORT : 0` dans les deux blocs.
@@ -350,9 +351,9 @@ identifiant remplacé à l'intérieur d'une restriction apparaît comme une
 absence suivie d'un ajout. On lui passe des triplets source, export, nom :
 
 ```
-~/swowl/.venv/bin/python ~/ecolibre-sgdt/ontologie/swowl-controle-structure.py \
-  ~/ecolibre-sgdt/ontologie/Q2U_Ontology/Q2U_Ontology.owl /tmp/out_q2u.owl Q2U \
-  ~/ecolibre-sgdt/ontologie/OSE_BusinessOntology/OSE_BusinessOntology.owl /tmp/out_ose.owl OSE
+~/swowl/.venv/bin/python ~/data/Ecolibre/depots/ecolibre-sgdt/ontologie/swowl-controle-structure.py \
+  ~/data/Ecolibre/depots/ecolibre-sgdt/ontologie/Q2U_Ontology/Q2U_Ontology.owl /tmp/out_q2u.owl Q2U \
+  ~/data/Ecolibre/depots/ecolibre-sgdt/ontologie/OSE_BusinessOntology/OSE_BusinessOntology.owl /tmp/out_ose.owl OSE
 ```
 
 Attendu :
@@ -470,7 +471,7 @@ Méthode, en six étapes :
    commentaire, celles qui commencent par `#`. Puis :
 
    ```
-   ~/swowl/.venv/bin/pip freeze > ~/ecolibre-sgdt/ontologie/swowl-requirements.txt
+   ~/swowl/.venv/bin/pip freeze > ~/data/Ecolibre/depots/ecolibre-sgdt/ontologie/swowl-requirements.txt
    ```
 
    Remettre ensuite ces lignes en tête du fichier, en y mettant à jour la

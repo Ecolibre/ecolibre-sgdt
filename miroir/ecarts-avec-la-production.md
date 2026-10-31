@@ -148,7 +148,7 @@ travaux :
 - soit lancer la file délibérément, au moment choisi :
 
   ```
-  docker compose --env-file /home/spheres/miroir-wiki/miroir.env -f miroir/compose.yml exec -u www-data wiki php maintenance/runJobs.php
+  docker compose --env-file ~/data/Ecolibre/local/miroir-wiki/miroir.env -f miroir/compose.yml exec -u www-data wiki php maintenance/runJobs.php
   ```
 
 - soit remettre la valeur par défaut, en retirant la ligne

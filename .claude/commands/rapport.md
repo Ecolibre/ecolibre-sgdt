@@ -3,7 +3,7 @@ description: Écrit un rapport de session (écritures wiki, reconnaissance, éch
 ---
 
 Rédige un rapport de la session en cours dans `travaux/rapport-AAAA-MM-JJ.md`
-(`~/ecolibre-sgdt/travaux/`), où `AAAA-MM-JJ` est la date du jour (voir
+(`~/data/Ecolibre/depots/ecolibre-sgdt/travaux/`), où `AAAA-MM-JJ` est la date du jour (voir
 `currentDate` dans le contexte). Si le fichier existe déjà pour aujourd'hui,
 lis-le d'abord et complète-le plutôt que de l'écraser.
 
