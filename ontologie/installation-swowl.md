@@ -1,5 +1,12 @@
 # Installer swowl et y charger l'ontologie
 
+> Note du 29 octobre 2026 : l'ontologie OSE a été corrigée le 21 octobre
+> 2026 et cette correction est entrée dans `main` le 29 octobre.
+> `TargetTolerenceBeSpecification` s'appelle désormais
+> `TargetToleranceBeSpecification`, et `fullfil*` est devenu `fulfil*`. Les
+> noms cités plus bas sont ceux de l'état mesuré ce jour-là et ne sont pas
+> corrigés, pour que le relevé reste fidèle.
+
 Procédure pour installer swowl sur un poste neuf et y charger les deux
 ontologies de ce dossier. Le relevé de référence est celui du 26 octobre
 2026 : swowl 1.2.4, commit `cbcf8a8` du 26 octobre 2026, sur le poste Ubuntu

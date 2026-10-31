@@ -1,5 +1,12 @@
 # swowl : contrôle structurel des expressions anonymes
 
+> Note du 29 octobre 2026 : l'ontologie OSE a été corrigée le 21 octobre
+> 2026 et cette correction est entrée dans `main` le 29 octobre.
+> `TargetTolerenceBeSpecification` s'appelle désormais
+> `TargetToleranceBeSpecification`, et `fullfil*` est devenu `fulfil*`. Les
+> noms cités plus bas sont ceux de l'état mesuré ce jour-là et ne sont pas
+> corrigés, pour que le relevé reste fidèle.
+
 Date : 26 octobre 2026.
 Machine : poste Ubuntu de Cyril, Framework 16 (Ubuntu 26.10, Python 3.14.8).
 swowl : 1.2.4, commit `cbcf8a8`, celui installé le même jour (voir `swowl-installation-ubuntu-1-2-4.md`). Le serveur était allumé et répondait HTTP 200 : rien n'a été redémarré ni rechargé.
