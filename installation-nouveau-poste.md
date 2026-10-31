@@ -60,17 +60,47 @@ versionné, voir `.gitignore`) échappe à ça.
 | `allow Bash(bin/wiki-append.sh:*)` | Ajout en fin de page par `appendtext`, sans lire ni renvoyer le corps existant — script versionné | 06/09/2026 |
 | `allow Bash(bin/wiki-verify.sh:*)`, `allow Bash(bin/wiki-warnings.sh:*)` | Vérification après écriture et relevé d'avertissements SMW — besoins récurrents (respectivement 8 et 2 occurrences relevées dans l'analyse des confirmations Claude Code, conversation claude.ai du 21/08 au 03/10/2026), devenus scripts versionnés | 11/09/2026 |
 | `allow Bash(echo/date/od:*)` | Utilitaires d'affichage : n'écrivent aucun fichier, ne joignent aucun réseau. `echo` seul avait provoqué 17 des 89 confirmations analysées à cette date (même analyse) | 11/09/2026 |
-| `deny Read(//home/spheres/.ssh/**)` | Clés SSH du poste — complète `deny Bash(ssh:*)`. Promue depuis l'ancien fichier local | 03/10/2026 |
+| `deny Read(~/.ssh/**)` | Clés SSH du poste — complète `deny Bash(ssh:*)`. Promue depuis l'ancien fichier local. Écrite `//home/spheres/.ssh/**` jusqu'au 31/10/2026, voir sous le tableau | 03/10/2026 |
 | `allow Bash(awk:*)` | Contrôle de fichiers tabulés (colonnes d'un TSV). Même portée que `sed`, déjà autorisé | 03/10/2026 |
 | `allow Bash(git fetch:*)`, `allow Bash(git check-ignore:*)` | Lecture seule : état du distant, vérification du `.gitignore` | 03/10/2026 |
 | `allow WebFetch(domain:www.mediawiki.org)`, `allow WebFetch(domain:www.wikidata.org)` | Documentation MediaWiki ; données de référence (codes INSEE, taxons) | 03/10/2026 |
 | `allow WebSearch` | Recherche de documentation | 03/10/2026 |
 | `allow Bash(docker:*)` | Pilotage du miroir local du lot 22. Docker tourne en mode sans privilèges, hors du groupe docker : cette règle ne donne pas la racine de la machine | 09/10/2026 |
-| `deny Read(//home/spheres/miroir-wiki/**/LocalSettings.php)`, `deny Read(//home/spheres/miroir-wiki/*.sql.gz)`, `deny Read(//home/spheres/miroir-wiki/*.sql)` | Le dossier du miroir contient `LocalSettings.php`, qui porte le mot de passe de base et les clés secrètes, et une sauvegarde SQL complète du wiki avec les empreintes de mots de passe des comptes. `Bash(cat:*)` est autorisé sans restriction de chemin | 10/10/2026 |
-| `deny Read(//home/spheres/miroir-wiki/*.env)`, `deny Read(//home/spheres/miroir-wiki/**/*.env)`, `deny Edit(//home/spheres/miroir-wiki/*.env)`, `deny Read(//home/spheres/miroir-wiki/**/*.sql)`, `deny Read(//home/spheres/miroir-wiki/**/*.sql.gz)` | Seconde barrière, derrière la barrière de périmètre : `miroir.env` porte les valeurs secrètes que `LocalSettings_miroir.php` lit par `getenv()`, c'est le fichier le plus sensible du dossier. Les formes `**/` couvrent les sous-dossiers. Aucune interdiction sur l'archive `.tar.gz` du cœur : elle bloquerait aussi son extraction légitime ; elle reste à la racine, derrière la barrière, qui demande au lieu de refuser. Mesuré le 10/10/2026 : `cat` sur `miroir.env` est refusé | 10/10/2026 |
+| `deny Read(//**/miroir-wiki/**/LocalSettings.php)`, `deny Read(//**/miroir-wiki/*.sql.gz)`, `deny Read(//**/miroir-wiki/*.sql)` | Le dossier du miroir contient `LocalSettings.php`, qui porte le mot de passe de base et les clés secrètes, et une sauvegarde SQL complète du wiki avec les empreintes de mots de passe des comptes. `Bash(cat:*)` est autorisé sans restriction de chemin | 10/10/2026 |
+| `deny Read(//**/miroir-wiki/*.env)`, `deny Read(//**/miroir-wiki/**/*.env)`, `deny Edit(//**/miroir-wiki/*.env)`, `deny Read(//**/miroir-wiki/**/*.sql)`, `deny Read(//**/miroir-wiki/**/*.sql.gz)` | Seconde barrière, derrière la barrière de périmètre : `miroir.env` porte les valeurs secrètes que `LocalSettings_miroir.php` lit par `getenv()`, c'est le fichier le plus sensible du dossier. Les formes `**/` couvrent les sous-dossiers. Aucune interdiction sur l'archive `.tar.gz` du cœur : elle bloquerait aussi son extraction légitime ; elle reste à la racine, derrière la barrière, qui demande au lieu de refuser. Mesuré le 10/10/2026 : `cat` sur `miroir.env` est refusé. Remesuré le 31/10/2026 sous la forme `//**/`, au nouvel emplacement : refusé | 10/10/2026 |
 | `allow Bash(git rev-list:*)`, `allow Bash(git show:*)`, `allow Bash(cut:*)` | Lecture pure, rien à annuler | 10/10/2026 |
 | `allow Bash(tee:*)` | Écrit, mais `cp`, `mv`, `sed`, `mkdir` et `python3` sont déjà autorisés sans restriction de chemin : `tee` n'ouvre rien de plus | 10/10/2026 |
-| `allow Read(//home/spheres/miroir-wiki/coeur/**)`, `allow Edit(//home/spheres/miroir-wiki/coeur/**)` | Supprime les confirmations du chantier miroir sur le cœur MediaWiki extrait, qui est du code public. Écrite d'abord sur le dossier entier (`miroir-wiki/**`), puis restreinte le même jour : l'autorisation de dossier ouvrait plus que les interdictions ne fermaient, dont `miroir.env`, qu'aucune interdiction ne couvrait alors. Une liste de ce qu'il faut fermer est toujours en retard sur ce que le dossier contient : on autorise le seul sous-dossier public, la racine du miroir (`miroir.env`, sauvegardes SQL, archive) reste derrière la barrière de périmètre. Constaté le 10/10/2026 : l'interdiction de fichier l'emporte sur l'autorisation de dossier, vérifié par un refus explicite (`cat` sur `LocalSettings.php`, réponse « denied », alors que le dossier entier était autorisé). `allow Read(//home/spheres/miroir-wiki/coeur/**)` lève la barrière de périmètre pour une commande shell, y compris le listage d'un répertoire situé dessous : `ls /home/spheres/miroir-wiki/coeur/mediawiki-1.39/`, aucune fenêtre, constaté par Cyril le 10/10/2026. La racine du miroir, hors de cette autorisation, redemande confirmation : `ls -la /home/spheres/miroir-wiki/`, fenêtre apparue, constaté par Cyril le 10/10/2026 | 10/10/2026 |
+| `allow Read(~/data/Ecolibre/local/miroir-wiki/coeur/**)`, `allow Edit(~/data/Ecolibre/local/miroir-wiki/coeur/**)` | Supprime les confirmations du chantier miroir sur le cœur MediaWiki extrait, qui est du code public. Écrite d'abord sur le dossier entier (`miroir-wiki/**`), puis restreinte le même jour : l'autorisation de dossier ouvrait plus que les interdictions ne fermaient, dont `miroir.env`, qu'aucune interdiction ne couvrait alors. Une liste de ce qu'il faut fermer est toujours en retard sur ce que le dossier contient : on autorise le seul sous-dossier public, la racine du miroir (`miroir.env`, sauvegardes SQL, archive) reste derrière la barrière de périmètre. Constaté le 10/10/2026 : l'interdiction de fichier l'emporte sur l'autorisation de dossier, vérifié par un refus explicite (`cat` sur `LocalSettings.php`, réponse « denied », alors que le dossier entier était autorisé). `allow Read(//home/spheres/miroir-wiki/coeur/**)` lève la barrière de périmètre pour une commande shell, y compris le listage d'un répertoire situé dessous : `ls /home/spheres/miroir-wiki/coeur/mediawiki-1.39/`, aucune fenêtre, constaté par Cyril le 10/10/2026. La racine du miroir, hors de cette autorisation, redemande confirmation : `ls -la /home/spheres/miroir-wiki/`, fenêtre apparue, constaté par Cyril le 10/10/2026. Ces mesures datent de l'ancien emplacement et de l'ancienne forme `//home/spheres/miroir-wiki/coeur/**` | 10/10/2026 |
+| Toutes les règles qui nomment un chemin hors du dépôt : interdictions en `//**/<dossier>/…`, autorisations en `~/…` | Les chemins écrits pour un seul utilisateur ne protégeaient que la tour, et le rangement des dossiers les avait rendus faux sur la tour elle-même. Voir sous le tableau | 31/10/2026 |
+
+**Forme des chemins dans les règles.** Documentation :
+<https://code.claude.com/docs/en/permissions>, section des règles Read et
+Edit. `//chemin` est absolu ; `~/chemin` part du dossier personnel ;
+`/chemin` part de la racine du dépôt, pas de la racine du système ;
+`chemin` ou `./chemin` part du répertoire courant. Aucune variable
+(`$HOME`…) n'est documentée dans une règle. Les motifs suivent la syntaxe
+gitignore : `//**/nom/` désigne un dossier `nom` à n'importe quel endroit.
+- Une **interdiction** sur un fichier hors du dépôt s'écrit
+  `//**/<dossier>/…` : elle ne dépend ni du nom d'utilisateur ni de
+  l'emplacement du dossier. Elle peut couvrir trop large sans risque.
+- Une **autorisation** hors du dépôt s'écrit `~/…`, et reste étroite. Sur
+  un poste où l'arborescence diffère, elle ne s'applique pas : cela ne coûte
+  que des confirmations.
+- Jamais `//home/<utilisateur>/…`.
+
+**Défaut silencieux, corrigé le 31/10/2026.** Jusqu'à cette date, quinze
+règles étaient écrites `//home/spheres/…` : les quatre interdictions du
+dépôt privé, les huit du miroir, celle des clés SSH et les deux
+autorisations du cœur du miroir. Elles ne valaient que pour l'utilisateur
+`spheres`, donc pour la tour. Sur les deux autres postes, où l'utilisateur
+s'appelle autrement, **aucune de ces protections n'a jamais fonctionné**, et
+rien ne le signalait : une règle qui ne correspond à aucun chemin ne produit
+ni erreur ni avertissement. Le rangement des dossiers signalé le même jour
+(dépôts sous `~/data/Ecolibre/depots/`, miroir sous
+`~/data/Ecolibre/local/`) les avait en outre rendues inopérantes sur la tour.
+Mesuré après correction, sur la tour, le 31/10/2026 : `cat` sur `miroir.env`
+et `cat` sur le `.env` du dépôt privé sont tous deux refusés (« denied »).
+Pas encore mesuré sur le portable.
 
 **`.claude/settings.local.json` doit rester vide** (`allow` et `deny` vides).
 Les permissions vont dans `.claude/settings.json`, jamais dans le fichier
@@ -176,10 +206,16 @@ poste (voir aussi le paragraphe d'introduction et la section 4) :
 ## 3. Dépôt
 
 ```
-cd ~
+mkdir -p ~/data/Ecolibre/depots
+cd ~/data/Ecolibre/depots
 git clone https://github.com/Ecolibre/ecolibre-sgdt.git
 cd ecolibre-sgdt
 ```
+
+C'est l'arborescence des postes de Cyril depuis le 31/10/2026 : dépôts sous
+`~/data/Ecolibre/depots/`, miroir local sous `~/data/Ecolibre/local/`.
+L'autorisation du cœur du miroir dans `.claude/settings.json` la suppose ;
+les interdictions, elles, n'en dépendent pas.
 
 Identité des commits et enregistrement du jeton :
 
@@ -204,16 +240,16 @@ Les scripts `bin/` cherchent `.env` et `.cookies.txt` dans
 c'est-à-dire un répertoire **voisin** du dépôt, jamais dedans.
 
 ```
-mkdir -p ~/ecolibre-sgdt-prive
-nano ~/ecolibre-sgdt-prive/.env
+mkdir -p ~/data/Ecolibre/depots/ecolibre-sgdt-prive
+nano ~/data/Ecolibre/depots/ecolibre-sgdt-prive/.env
 ```
 
 Y placer les identifiants du compte wiki, au même format que sur le poste
 d'origine. Puis :
 
 ```
-chmod 600 ~/ecolibre-sgdt-prive/.env
-cd ~/ecolibre-sgdt
+chmod 600 ~/data/Ecolibre/depots/ecolibre-sgdt-prive/.env
+cd ~/data/Ecolibre/depots/ecolibre-sgdt
 bin/wiki-login.sh
 ```
 
@@ -229,7 +265,7 @@ export SGDT_PRIVE=/chemin/vers/le/repertoire-prive
 ## 5. Vérification
 
 ```
-cd ~/ecolibre-sgdt
+cd ~/data/Ecolibre/depots/ecolibre-sgdt
 bin/wiki-api.sh --facts "subject=Item ref&ns=102"
 git status
 ```
@@ -272,7 +308,7 @@ rm -f ~/.git-credentials
 Git ne gère pas les conflits tout seul. Avant de commencer une session :
 
 ```
-cd ~/ecolibre-sgdt
+cd ~/data/Ecolibre/depots/ecolibre-sgdt
 git pull
 ```
 

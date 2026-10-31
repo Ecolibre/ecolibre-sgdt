@@ -6,10 +6,10 @@
       "Read(./.env)",
       "Read(./.env.*)",
       "Read(./.cookies.txt)",
-      "Read(//home/spheres/ecolibre-sgdt-prive/.env)",
-      "Read(//home/spheres/ecolibre-sgdt-prive/.cookies.txt)",
-      "Edit(//home/spheres/ecolibre-sgdt-prive/.env)",
-      "Edit(//home/spheres/ecolibre-sgdt-prive/.cookies.txt)",
+      "Read(//**/ecolibre-sgdt-prive/.env)",
+      "Read(//**/ecolibre-sgdt-prive/.cookies.txt)",
+      "Edit(//**/ecolibre-sgdt-prive/.env)",
+      "Edit(//**/ecolibre-sgdt-prive/.cookies.txt)",
       "Bash(sudo:*)",
       "Bash(ssh:*)",
       "Bash(mysql:*)",
@@ -19,15 +19,15 @@
       "Edit(./.cookies.txt)",
       "Read(./Serveur3/**)",
       "Edit(./Serveur3/**)",
-      "Read(//home/spheres/.ssh/**)",
-      "Read(//home/spheres/miroir-wiki/**/LocalSettings.php)",
-      "Read(//home/spheres/miroir-wiki/*.sql.gz)",
-      "Read(//home/spheres/miroir-wiki/*.sql)",
-      "Read(//home/spheres/miroir-wiki/*.env)",
-      "Read(//home/spheres/miroir-wiki/**/*.env)",
-      "Edit(//home/spheres/miroir-wiki/*.env)",
-      "Read(//home/spheres/miroir-wiki/**/*.sql)",
-      "Read(//home/spheres/miroir-wiki/**/*.sql.gz)"
+      "Read(~/.ssh/**)",
+      "Read(//**/miroir-wiki/**/LocalSettings.php)",
+      "Read(//**/miroir-wiki/*.sql.gz)",
+      "Read(//**/miroir-wiki/*.sql)",
+      "Read(//**/miroir-wiki/*.env)",
+      "Read(//**/miroir-wiki/**/*.env)",
+      "Edit(//**/miroir-wiki/*.env)",
+      "Read(//**/miroir-wiki/**/*.sql)",
+      "Read(//**/miroir-wiki/**/*.sql.gz)"
     ],
     "ask": [
       "Bash(git reset --hard:*)",
@@ -83,8 +83,8 @@
       "Bash(git show:*)",
       "Bash(cut:*)",
       "Bash(tee:*)",
-      "Read(//home/spheres/miroir-wiki/coeur/**)",
-      "Edit(//home/spheres/miroir-wiki/coeur/**)"
+      "Read(~/data/Ecolibre/local/miroir-wiki/coeur/**)",
+      "Edit(~/data/Ecolibre/local/miroir-wiki/coeur/**)"
     ]
   }
 }
