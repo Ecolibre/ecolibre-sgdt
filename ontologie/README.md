@@ -102,18 +102,6 @@ Toute correction faite depuis figure ici.
   le modèle. Les retirer demanderait de toucher à la structure XML et non à
   une chaîne de caractères, pour un gain nul.
 
-## Ce que swowl ne rend pas
-
-swowl sert à lire et à visualiser l'ontologie. Rien n'en revient vers ce
-dossier, et la mesure du 21 octobre 2026 dit pourquoi : seize propriétés ont
-un domaine exprimé par une union de classes, et swowl les perd entièrement à
-l'import, sans rien signaler ; les ressaisir à la main y écrit une
-intersection au lieu d'une union. Les seize sont `characterizedBy`,
-`executedBy`, `executes`, `hasPart`, `hasWhole`, `measuredIn`, `partOf`,
-`specifiedBy`, `specifies`, `target`, `value` et `wholeOf` dans OSE, puis
-`baseOf`, `hasBase`, `hasUnit` et `symbol` dans Q2U. Détail et commandes de
-vérification dans `ontologie/installation-swowl.md`.
-
 ## Statut
 
 - L'explication publique du modèle est le fil ouvert le 5 décembre 2022 sur
