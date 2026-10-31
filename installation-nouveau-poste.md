@@ -102,6 +102,15 @@ Mesuré après correction, sur la tour, le 31/10/2026 : `cat` sur `miroir.env`
 et `cat` sur le `.env` du dépôt privé sont tous deux refusés (« denied »).
 Pas encore mesuré sur le portable.
 
+**Aucune protection ne vit dans `.claude/settings.local.json`.** Ce fichier
+n'est pas versionné : une règle qui y vit disparaît sans trace, sans diff
+ni commit pour le signaler. Constaté le 31/10/2026 en comparant la copie
+`ecolibre-sgdt.avant-retour` au dépôt : son fichier local portait trois
+interdictions (`./.env`, `./.cookies.txt`, `~/.ssh`), absentes du fichier
+local actuel, qui est vide. Rien n'est perdu, car les quinze règles de
+`.claude/settings.json` les couvrent sur les trois postes. Mais rien n'avait
+signalé leur disparition. Toute protection va dans `.claude/settings.json`.
+
 **`.claude/settings.local.json` doit rester vide** (`allow` et `deny` vides).
 Les permissions vont dans `.claude/settings.json`, jamais dans le fichier
 local : celui-ci n'est pas versionné, et ses règles échappent à la relecture
