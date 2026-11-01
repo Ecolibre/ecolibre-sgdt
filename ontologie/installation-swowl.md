@@ -1,7 +1,7 @@
 # Installer swowl et y charger l'ontologie
 
-> Note du 29 octobre 2026 : l'ontologie OSE a été corrigée le 21 octobre
-> 2026 et cette correction est entrée dans `main` le 29 octobre.
+> Note du 31 octobre 2026 : l'ontologie OSE a été corrigée le 21 octobre
+> 2026 et cette correction est entrée dans `main` le 31 octobre.
 > `TargetTolerenceBeSpecification` s'appelle désormais
 > `TargetToleranceBeSpecification`, et `fullfil*` est devenu `fulfil*`. Les
 > noms cités plus bas sont ceux de l'état mesuré ce jour-là et ne sont pas
