@@ -844,6 +844,12 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   nombre de suppressions est celui attendu. Ces deux contrôles tiennent en
   une ligne et ne dépendent d'aucun rendu. Les joindre au rapport, sans
   qu'il soit besoin de les demander.
+
+  **Le hash qu'un rapport cite est celui que `git show --stat` a imprimé**,
+  jamais un hash écrit de mémoire ou reconstitué. Le 1er novembre 2026, un
+  rapport a cité `75f0e0e` pour un commit qui s'appelait `d646566` : le hash
+  avait été écrit avant d'être lu. Un identifiant inventé est la pire espèce
+  d'erreur dans un rapport, parce qu'il a l'air vérifiable et ne l'est pas.
 - **Un `curl` d'écriture hors des scripts `bin/` requiert l'accord explicite
   de Cyril, à chaque fois.** Les refus posés par `wiki-api.sh` (`move` et les
   autres actions d'écriture) et par `wiki-put.sh` (espace de noms
