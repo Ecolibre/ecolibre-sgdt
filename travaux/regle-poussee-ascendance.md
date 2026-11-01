@@ -64,8 +64,9 @@ identique dans les deux versions.
 
 | Commit | Objet | `git show --stat` |
 |---|---|---|
-| `75f0e0e` | CLAUDE.md : la poussée sur main se décide par l'ascendance directe, pas par la branche | 1 fichier, 13 +, 5 − |
-| *(ce rapport)* | Rapport | 1 fichier |
+| `d646566` | CLAUDE.md : la poussée sur main se décide par l'ascendance directe, pas par la branche | 1 fichier, 13 +, 5 − |
+| `91c50df` | Rapport | 1 fichier, 98 + |
+| *(ce correctif)* | Hash du premier commit corrigé dans ce rapport | 1 fichier |
 
 Les 5 suppressions sont les cinq lignes de l'ancien texte qui changent : le
 titre en gras et les deux lignes qui le suivent, puis les deux lignes de la
@@ -95,4 +96,8 @@ première puce. La puce « sinon » et le paragraphe final sont restés en place
   lectures se défendent ; le texte a été recopié mot pour mot.
 - Le texte fourni écrit « - » (trait d'union entouré d'espaces) là où le
   reste de `CLAUDE.md` emploie le tiret long « — ». Recopié tel quel.
+- **Un hash inventé dans la première version de ce rapport.** Elle donnait
+  `75f0e0e` pour le commit de `CLAUDE.md`, écrit avant de lire le hash réel,
+  qui est `d646566`. L'erreur a été vue après la poussée de `91c50df` et
+  corrigée par un commit séparé.
 - Aucune question n'a été posée par le canal direct pendant l'exécution.
