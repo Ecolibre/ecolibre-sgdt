@@ -681,13 +681,21 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
 - **Pousser en fin de session, systématiquement.** Un commit qui n'a pas
   quitté la machine ne protège pas de la machine.
 
-  **Fin de tâche : la branche de session.** Une session Claude Code cloud
-  travaille sur une branche `claude/...`, là où une session locale pousse
-  sur `main`. En fin de tâche, après avoir commité :
+  **Fin de tâche : l'ascendance décide, pas la branche.** Après avoir
+  commité, vérifier si `origin/main` est l'ancêtre direct de `HEAD`, par
+  `git merge-base --is-ancestor origin/main HEAD` :
 
-  - si `HEAD` est sur une branche de session et que `origin/main` en est
-    l'ancêtre direct, pousser par `git push origin HEAD:main` ;
+  - si oui, pousser par `git push origin HEAD:main`, que `HEAD` soit sur
+    `main` ou sur une branche de session ;
   - sinon, s'arrêter et le dire. Ne jamais fusionner ni rebaser de soi-même.
+
+  Une session cloud démarre sur une branche `claude/...`, une session locale
+  sur `main` : les deux cas sont couverts par la même condition. C'est
+  l'ascendance directe qui rend la poussée sûre, pas l'endroit où se trouve
+  `HEAD` - une règle qui dépend de l'endroit se trompe dès qu'on se trouve
+  ailleurs. Le 1er novembre 2026, la règle précédente ne couvrait pas la
+  session qui venait de s'en servir, parce que sa consigne l'avait placée
+  sur `main` et non sur une branche.
 
   Sans cela le travail reste invisible pour l'architecte, qui ne voit que
   `main`. Un rapport commité sur une branche de session et jamais poussé a
