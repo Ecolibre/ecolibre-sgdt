@@ -62,6 +62,8 @@ Enfin, sa première ligne nomme son destinataire, et elle annonce les demandes d
 
 Le texte destiné au wiki suit l'orthographe traditionnelle, celle qu'emploie le reste du wiki : coût, apparaît, connaît, entraîner, boîte. Sur son état au 19 octobre 2026, six familles de mots y donnent cinquante et une formes traditionnelles et aucune forme rectifiée. L'exécuteur ne corrigera pas une forme rectifiée de lui-même, puisque la règle du texte fourni lui interdit de retoucher ce qu'on lui donne : il la signalera, et il faudra une écriture de plus. Constaté le 28 octobre 2026, treize occurrences introduites sur trois pages entre le 20 et le 25 octobre.
 
+Tout résumé de modification fourni dans une consigne suit la forme que prescrit le garde-fou 2 de `CLAUDE.md` : « Format en usage depuis le lot 6 : `[Lot X][<à quel titre>] <action>` ». L'exécuteur applique un résumé fourni mot pour mot, et un résumé de modification ne se corrige plus une fois écrit : l'erreur d'une consigne passe telle quelle dans l'historique. La convention est mesurée comme largement abandonnée : 38 modifications du wiki sur 43, entre le 19 octobre et le 4 novembre 2026, n'ont pas de second crochet, sur cinq lots différents (relevé du 4 novembre 2026, `travaux/lot-44-entree-74-et-resumes.md`).
+
 ## Format des échanges
 
 Chaque réponse de l'architecte est faite de points numérotés. La disposition interne d'un point est décrite plus bas, à la section "La forme d'un point". Le numéro est annoncé avant que le point soit développé, parce que Cyril lit au fil et répond en cours de route. Le but est qu'il puisse répondre « point N : ok » sans retaper un raisonnement identique à la recommandation.
