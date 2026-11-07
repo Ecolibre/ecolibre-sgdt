@@ -334,8 +334,8 @@ numéro suivant.
 | N° | Objet | État |
 |---|---|---|
 | 1 | **Module d'audit Base36 : détection des doublons** (en plus des trous). | **ouverte** |
-| 2 | Les objets physiques rejoignent-ils la séquence Base36 auto-incrémentée ? | **fermée** — lot 9, 13/08/2026 : non, deux banques distinctes (`Item_ref` pour les trois classes de conception, `Inventory_number` pour les physiques). |
-| 3 | **`Module:Base36` s'arrête au tiret** (`clean:match("[%w]+")`) : une référence préfixée serait silencieusement mal lue. C'est pourquoi `ECL` est un affichage, jamais une valeur stockée. | **ouverte** |
+| 2 | Les objets physiques rejoignent-ils la séquence Base36 auto-incrémentée ? | **fermée** — lot 4, 26/07/2026 : non, deux banques distinctes (`Item_ref` pour les trois classes de conception, `Inventory_number` pour les physiques). |
+| 3 | **`Module:Base36` s'arrête au tiret** (`clean:match("[%w]+")`) : une référence préfixée serait silencieusement mal lue. C'est pourquoi la valeur de numérotation, `Inventory_number`, ne porte jamais de préfixe : c'est la seule de la banque d'inventaire que le module reçoit. Le code de site vit dans `Inventory_site` et la référence composée, préfixée, est bien stockée dans `Inventory_ref`. | **ouverte** |
 | 4 | `+sep=,` sur `Part_of` de `Modèle:Referenced item`. | **fermée** — était déjà en place avant le lot 9, constaté en tâche 7bis (fait vérifié en ligne, pas supposé). |
 | 5 | Filtre de catégorie manquant sur les requêtes `Part_of` des modèles d'item. | **fermée** — 15/08/2026, en deux éditions `[Correctif]` : `Modèle:Physical item` (« Éléments contenus », revid 544) et `Modèle:Referenced item` (« Composants enfants / BOM », revid 549). |
 
