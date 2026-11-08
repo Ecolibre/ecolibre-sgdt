@@ -701,6 +701,15 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   `main`. Un rapport commité sur une branche de session et jamais poussé a
   déjà laissé huit jours une correction d'ontologie hors de `main`, trouvée
   par hasard le 29 octobre 2026.
+
+  **Les branches de session s'accumulent sur `origin` sans que personne les
+  regarde.** Neuf y dormaient au 29 octobre 2026, dont une qui portait depuis
+  huit jours une correction d'ontologie absente de `main`, trouvée par accident
+  en cherchant autre chose. La règle de poussée ci-dessus empêche que cela
+  recommence pour les nouvelles ; elle ne dit rien des anciennes.
+  `git rev-list --count origin/main..<branche>` sur chaque branche distante
+  suffit à les contrôler : tout compte non nul signale du travail que `main`
+  ignore.
 - **Rapatrier en début de tâche, systématiquement, et de nouveau si la
   poussée est refusée.** Avant la première écriture d'une tâche, lancer
   `git fetch origin`, et fusionner `origin/main` si la branche est en
