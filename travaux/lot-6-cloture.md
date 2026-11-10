@@ -176,3 +176,67 @@ qui se corrige, et ce qui se note ».
 - **« Gestion des lots » figure encore parmi les pages qui lient l'ancien
   titre du lot 6**, bien que son rendu affiche le nouveau. Sa table de liens
   n'a pas encore été mise à jour ; le lien passe par la redirection.
+
+## Écriture finale du 10 novembre
+
+Exécutée le 10 novembre 2026, de 22 h 29 à 22 h 32 UTC, dans la même
+session. Deux pages, deux lignes, puis le second test du séparateur, sans
+arrêt ni question.
+
+Étape 0 : `git fetch origin`, puis `git status --porcelain`, sortie vide ;
+`HEAD` et `origin/main` au même commit, `1313318`. `bin/wiki-login.sh` rend
+`Success Cywil`.
+
+### Révisions
+
+| Étape | Page | Révision | Heure (UTC) | Résumé |
+|---|---|---|---|---|
+| 1 | Modèle:Organic facet fitting | 1758 → 1763 | 22:30:15 | `[Lot 6][Clôture] affichage des diamètres secondaires au point-virgule, la virgule servant de décimale` |
+| 2 | Utilisateur:Cywil/Bac à sable | 1762 → 1764 | 22:30:31 | `[Lot 6][Clôture] ligne descriptive du bac à sable restaurée` |
+| test | Utilisateur:Cywil/Bac à sable | 1764 → 1765 | 22:30:50 | `[Lot 6][Clôture] second test du séparateur, affichage au point-virgule` |
+| test | Utilisateur:Cywil/Bac à sable | 1765 → 1766 | 22:31:06 | `[Lot 6][Clôture] bac à sable rendu à sa ligne descriptive` |
+
+Toutes par `bin/wiki-put.sh`, toutes `result: Success`, et
+`bin/wiki-verify.sh` a rendu `IDENTIQUE` après chacune.
+
+- **Étape 1** : le modèle relu était identique à la révision 1758. La ligne
+  ancienne y figurait une fois, ligne 35, et elle seule a changé. La ligne
+  10, `|Secondary_diameter={{#arraymap:{{{Secondary_diameter|}}}|;|@@@|@@@|;}}`,
+  est inchangée.
+- **Étape 2** : le bac à sable relu était vide, 0 octet. La ligne écrite est
+  identique, au caractère près, à celle de la révision 1273 du 5 septembre
+  2026.
+
+### Rendu observé, avant et après
+
+- **Avant**, par une prévisualisation `action=parse&text=` qui n'enregistre
+  rien, avec le même appel : « Autres diamètres (mm) » rend **« 25,4, 32 »**.
+- **Après**, sur la révision 1765 du bac à sable, qui porte la ligne
+  descriptive puis l'appel
+  `{{Organic facet fitting|Nominal_diameter=25|Secondary_diameter=25,4;32}}` :
+  « Autres diamètres (mm) » rend **« 25,4; 32 »**, « Diamètre nominal (mm) »
+  rend « 25 », et la ligne descriptive est présente.
+- **Faits stockés** par cet appel (`bin/wiki-api.sh --facts`) :
+  `Secondary_diameter -> ['25.4', '32']`, soit toujours deux valeurs,
+  `Nominal_diameter -> ['25']`, `Item_facet -> Facette raccord`, et `_INST`
+  à `Item à facette raccord`.
+- **Après le retrait de l'appel**, révision 1766 : la page fait 89 octets,
+  comme la révision 1273. Elle ne porte aucune catégorie, et pour seuls
+  faits `_MDAT` et `_SKEY`. `[[Secondary_diameter::+]]` rend **0**, et
+  `[[Category:Item à facette raccord]]` rend **0**.
+- `Modèle:Organic facet fitting` se rend avec 0 élément d'erreur et aucun
+  avertissement du parseur. Ses deux catégories, `Pages avec des liens de
+  fichiers brisés` et `Modèles de documentation`, sont celles qu'il portait
+  avant cette tâche.
+
+### Relevé de `.claude/settings.local.json`
+
+Absent au début de l'écriture finale, absent à la fin : aucune règle.
+
+### Écarts et surprises
+
+- **Le résumé de l'écriture de test a été formulé par moi**, la consigne ne
+  le donnant pas : `[Lot 6][Clôture] second test du séparateur, affichage au
+  point-virgule`.
+- Rien d'autre à signaler : les deux lignes anciennes étaient en place
+  telles que la consigne les décrivait, et les comptes sont revenus à zéro.
