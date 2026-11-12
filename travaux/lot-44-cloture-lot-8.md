@@ -372,3 +372,249 @@ vide » et de « cette valeur-là est inconnue ».
   Confirmations : je ne les vois pas ; `.claude/settings.local.json` est
   absent au début et à la fin, donc aucune autorisation permanente n'a été
   inscrite.
+
+## Seconde série
+
+Exécutée le 12 novembre 2026, de 23 h 19 à 23 h 26 UTC, dans la même session
+et sur la même branche. Elle répond aux questions A à D de la première série.
+A : le point ouvert est retiré, et le défaut trouvé en C le remplace. B : le
+registre est purgé, et l'entrée 77 des Limites connues est complétée. C : pas
+de correction, la suggestion est reprise dans le point ouvert. D : les
+guillemets avaient été retirés par l'architecte, ils sont remis en guillemets
+droits.
+
+Quatre écritures sur quatre pages, toutes réussies du premier coup, et deux
+purges. La mesure préalable de la tâche 4 a tenu : l'entrée 77 a donc été
+écrite. Des trois vérifications qui tranchent, la première et la troisième
+passent telles qu'écrites. La deuxième passe pour l'état du lot 8, `clos`
+dans l'index, mais pas pour sa date de clôture, que l'index n'affiche pour
+aucun lot faute de colonne (question G) ; la date figure sur la page du lot.
+
+### Étape 0
+
+`git status --porcelain` : sortie vide au début et avant le rapport.
+`git fetch origin` : `HEAD` et `origin/main` au même commit, `9924f24`.
+`.claude/settings.local.json` : absent au début et à la fin.
+`bin/wiki-login.sh` : `Success Cywil`, juste avant la première écriture.
+
+Les quatre pages lues au départ étaient identiques, au caractère près, à leur
+état relu après la première série : révisions 1767, 1768, 1769 et 1771.
+Chacune a de nouveau été comparée à sa copie par `bin/wiki-verify.sh` juste
+avant son écriture : `IDENTIQUE` les quatre fois. Protections : `protection: []`
+et aucun motif de refus sur les quatre. Le modèle reste à zéro transclusion.
+L'entrée 77 n'avait jamais été retouchée depuis sa création, à la
+révision 1747, et l'ancre du remplacement 4 y figure une seule fois.
+
+### Champ délégué : la date de clôture
+
+Sorties de `date -u`, la première avant de construire la page, la seconde
+juste avant l'écriture, faite à 23:23:09 :
+
+```text
+Thu Nov 12 23:22:36 UTC 2026
+Thu Nov 12 23:23:03 UTC 2026
+```
+
+Valeur écrite : **`2026-11-12`**. Le programme qui a construit la page
+refusait toute date différente de la date UTC du jour. Voir la question E.
+
+### Écritures
+
+| N° | Page | Révision | Heure (UTC) | Résumé | Outil |
+|---|---|---|---|---|---|
+| 1 | Lot 8 — Facettes de type d'item | 1767 → 1772 | 23:23:09 | `[Lot 44][Clôture du lot 8] lot clos, points ouverts mis à jour` | `bin/wiki-put.sh` |
+| 2 | Modèle:Organic facet fitting | 1769 → 1773 | 23:23:33 | `[Lot 44][Clôture du lot 8] guillemets rétablis dans le commentaire` | `bin/wiki-put.sh` |
+| 3 | Ajouter une facette | 1768 → 1774 | 23:23:54 | `[Lot 44][Clôture du lot 8] guillemets rétablis dans l'étape 2` | `bin/wiki-put.sh` |
+| 4 | Limites connues du Système de Gestion de Données Techniques | 1771 → 1775 | 23:24:31 | `[Lot 44][Clôture du lot 8] second cas observé sur l'entrée 77` | `bin/wiki-put.sh` |
+
+Les quatre ont rendu `result: Success`, et `bin/wiki-verify.sh` a rendu
+`IDENTIQUE` après chacune. La quatrième est une réécriture complète :
+`bin/wiki-append.sh` n'ajoute qu'en fin de page, et l'entrée 77 n'est plus
+la dernière. Méthode inchangée depuis la première série : textes de la
+consigne recopiés dans des fichiers, puis remplacement exact par programme,
+chaque ancien texte devant figurer une seule fois. Comme en première série,
+le retrait d'affichage de trois espaces des textes 1a à 1c, 2, 3 et 4 n'a pas
+été recopié, la page ne le portant pas.
+
+#### Écriture 1, en schéma
+
+```diff
+@@ -1,10 +1,11 @@
+ {{Lot
+ |Work_package_number=8
+-|Work_package_status=livré
++|Work_package_status=clos
+ |Work_package_summary=… (inchangée)
+ |Work_package_opening_date=2026-08-11
+ |Work_package_delivery_date=2026-08-12
+-|Work_package_closure_report=https://github.com/Ecolibre/ecolibre-sgdt/blob/3a0e7af4e6b4d2e0ade4e1d645d568311e04afad/travaux/lot-8-cadrage-facettes.md
++|Work_package_closure_date=2026-11-12
++|Work_package_closure_report=https://github.com/Ecolibre/ecolibre-sgdt/blob/main/travaux/lot-44-cloture-lot-8.md
+ |Work_package_produces=… (inchangée)
+ }}
+ 
+@@ -24,7 +25,9 @@
+ 
+ == Points ouverts ==
+ 
+-La page [[Ajouter une facette]] est rangée dans … Constaté le 8 septembre 2026 pendant le lot 28.
++Les listes numérotées de la page [[Ajouter une facette]] ne s'affichent pas dans l'ordre. … (premier paragraphe de la consigne)
++
++Le point ouvert inscrit à la livraison est résolu. … (second paragraphe de la consigne)
+ 
+ == Ce qui est écarté, et pourquoi ==
+```
+
+#### Écriture 2
+
+```diff
+@@ -5,8 +5,8 @@
+ l'appel de ce modèle suffit à signifier que la facette s'applique. Le
+ gabarit Page Forms est à instance optionnelle (minimum instances=0), donc
+ l'appel n'existe que si l'utilisateur a ajouté la facette. Une garde sur
+-Nominal_diameter confondrait le bloc est vide et le diamètre nominal est
+-inconnu : un raccord dont on ignore le diamètre sortirait silencieusement
++Nominal_diameter confondrait "le bloc est vide" et "le diamètre nominal est
++inconnu" : un raccord dont on ignore le diamètre sortirait silencieusement
+ de sa facette. Aligné le 12 novembre 2026 sur Modèle:Organic facet plant,
+ corrigé le 16 août 2026 pour le même motif. -->
+ {{#set:
+```
+
+#### Écritures 3 et 4
+
+Une seule ligne change sur chaque page : la ligne de l'étape 2, où
+« le bloc est vide et cette valeur-là est inconnue » devient
+« "le bloc est vide" et "cette valeur-là est inconnue" » ; et la ligne de
+l'entrée 77, au bout de laquelle le texte de la consigne s'ajoute après
+« n'est pas établi. ». Rien d'autre ne bouge.
+
+### Tâche 4 : les mesures avant écriture
+
+À 23:24:14 et 23:24:15 UTC, soit 26 minutes après l'écriture 2 de la
+première série (22:58:14), qui avait retiré `Ajouter une facette` de la
+catégorie :
+
+- `touched` du `Registre des facettes` : **2026-08-12T12:34:17Z**,
+  inchangé ;
+- liste rendue : **trois** éléments, « Ajouter une facette, Facette
+  raccord, Facette végétal » ;
+- `[[Category:Facette]]` par `action=ask` : deux résultats, `Facette raccord`
+  et `Facette végétal`.
+
+Les deux conditions tenaient : l'entrée 77 a été écrite à 23:24:31.
+
+### Tâche 5 : purges et vérifications
+
+Mesure faite avant les purges, pour l'entrée 77 : à 23:24:51, 1 min 42 s
+après l'écriture 1, l'index des lots montrait encore le lot 8 à l'état
+`livré`, avec l'ancien document, et son `touched` restait au
+2026-11-10T22:15:02Z.
+
+Purges : `bin/wiki-purge.sh "Registre des facettes"`, puis
+`bin/wiki-purge.sh "Gestion des lots"`. Chacune a rendu `purged: true` et
+`linkupdate: true`. Les `touched` sont passés à 23:25:01Z et 23:25:05Z.
+
+Vérifications qui tranchent :
+
+1. **Registre des facettes** : à 23:25:16, la liste rendue compte **deux**
+   éléments, `Facette raccord` et `Facette végétal`.
+2. **Gestion des lots** : à 23:25:17, la ligne du lot 8 du tableau « Faits »
+   porte **`clos`**, ouvert le 11 août 2026, livré le 12 août 2026, et pour
+   document le lien vers ce rapport. **Aucune date de clôture : le tableau
+   n'a pas de colonne pour elle.** Ses colonnes sont Lot, N°, État, Objet,
+   Ouvert le, Livré le et Documents, et sa requête ne demande pas
+   `Work_package_closure_date`. L'index a suivi dès la première purge : pas
+   de seconde purge.
+3. **Page du lot 8** : le wikitexte porte `|Work_package_status=clos` et
+   `|Work_package_closure_date=2026-11-12` ; ses faits,
+   `Work_package_status -> clos` et `Work_package_closure_date -> 1/2026/11/12`,
+   donc stockée comme une date, et le nouveau lien de rapport. Le calendrier
+   de la page affiche « Clos le 2026-11-12 ».
+
+Textes mot pour mot, vérifiés par programme sur les quatre pages relues
+après la dernière écriture : chaque nouveau texte y figure une fois, chaque
+ancien zéro fois, sauf celui de 1b, qui est le début du nouveau ; et défaire
+les remplacements redonne exactement la révision de départ. L'entrée
+modifiée est la 77, sur 78. Le modèle relu ne contient aucun `{{#if:`,
+63 accolades ouvrantes et 63 fermantes, et une seule paire
+`<includeonly>`. `Ajouter une facette` ne porte que
+`Catégorie:Documentation SGDT` et ne transclut aucun modèle.
+
+Contrôles complémentaires :
+
+- **Annotations** : `Ajouter une facette`, `_INST` (`Documentation_SGDT`),
+  `_MDAT` 23:23:54 et `_SKEY` ; les Limites connues, `_INST`
+  (`Page_de_suivi`), `_MDAT` 23:24:31 et `_SKEY` ; le modèle, `_SKEY` seul ;
+  la page du lot 8, les faits de son modèle, trois `_ASK`, `_INST` (`Lot`),
+  `_MDAT` 23:23:09 et `_SKEY`. Aucun `_ERRC`.
+- **Catégories** inchangées sur les quatre pages. **Liens** : 24 cibles,
+  une seule inexistante, `Modèle:Organic facet fitting/doc`, antérieure. Les
+  Limites connues lient désormais le `Registre des facettes`
+  (`list=backlinks`).
+- **Rendus** : la page du lot 8 garde ses trois sections et aucun `<pre>` ;
+  les Limites connues, une seule liste de 78 éléments ; `Ajouter une
+  facette`, toujours quatre listes pour cinq éléments, aucun tableau, et les
+  guillemets affichés.
+
+### Écarts et surprises de la seconde série
+
+#### Questions
+
+Lettres E, F et G, à la suite de la première série.
+
+**E.** La date de clôture écrite est le 12 novembre, et non le 13 de
+l'exemple. La consigne demandait la date du jour en UTC, lue par `date -u`,
+et donnait pour format « 2026-11-13 ». Il était 23:23 UTC le 12 novembre,
+soit déjà 0 h 23 le 13 novembre à Paris. J'ai suivi le critère, l'UTC.
+Faut-il garder cette date ? Suggestion : la garder, puisque c'est le critère
+écrit. Si la date voulue était celle de Paris, une écriture de plus la passe
+au 13.
+
+**F.** Le lien de rapport du lot 8 pointe sur `main`, contre la règle écrite
+sur `Gestion des lots` : « Ils sont liés depuis chaque page de lot par un
+permalien figé sur un commit. » Les treize autres lots clos suivent cette
+règle : les douze qui ont un rapport le lient par un commit, le lot 12 n'en
+a pas. Le lot 8 est le seul à pointer sur une branche, dont le contenu
+bougera. Faut-il le figer ? Suggestion : oui, une fois poussé le commit de
+cette série, remplacer `blob/main/` par `blob/<commit>/` dans le lien, par
+une écriture ; le hash ne peut se connaître qu'après le commit, ce qui
+explique sans doute le choix de `main`.
+
+**G.** L'index des lots n'affiche aucune date de clôture : la vérification
+« avec sa date de clôture » ne pouvait pas y passer. Faut-il lui ajouter la
+colonne ? Suggestion : oui, ajouter `|?Work_package_closure_date = Clos le`
+après `Livré le` dans la requête de la section « Faits », par une écriture.
+C'est une modification de la requête, pas une ligne ajoutée à la main. Le
+contrôle qui tranche serait la date du lot 8 dans cette colonne.
+
+#### Constats
+
+- **« Chacune de ses cinq étapes est repliée sur plusieurs lignes »**, dans
+  le nouveau point ouvert, n'est plus exact depuis le remplacement 2c de la
+  première série. L'étape 2 tient sur une seule ligne : quatre étapes sur
+  cinq sont repliées. C'est d'ailleurs pourquoi on compte quatre listes pour
+  cinq éléments, l'étape 3 s'affichant sous le numéro 2. Écrit tel que
+  fourni.
+- **« Treize minutes après l'écriture »**, dans l'entrée 77, n'est pas une
+  de mes mesures. Les miennes ont été faites à 4 minutes (`touched`, 23:02:36)
+  et 6 minutes (rendu, 23:04:17), en première série, puis à 26 minutes dans
+  cette série. Un `touched` resté au 12 août à 26 minutes implique qu'il l'était
+  aussi à 13.
+- **Deux phrases ont été écrites avant d'être vraies.** « Une purge l'a
+  résorbé. », dans l'entrée 77, et « n'apparaît plus dans la liste du
+  Registre des facettes », dans le point ouvert, ont été écrites à 23:24:31
+  et 23:23:09, avant la purge du registre de 23:25:01. Elles sont vraies
+  depuis, vérifié à 23:25:16.
+- **La dernière phrase ajoutée à l'entrée 77 généralise à partir d'un
+  cas** : « un changement de catégorie produit le même retard ».
+  `methode-de-travail.md` demande qu'une entrée énonce ce qui a été observé,
+  avec son compte et sa date, sans généraliser au-delà. L'entrée donne bien
+  son compte et sa date, « Second cas le 12 novembre 2026 ».
+- **L'index des lots n'a pas suivi le lot 8 sans purge**, mesuré à 1 min 42 s
+  après l'écriture, et il a suivi dès la première purge. C'est une sixième
+  clôture observée pour l'entrée 77, qui en relève cinq, celles des lots 1
+  à 5 ; ce cas-là n'est écrit nulle part sur le wiki.
+- **Canal direct** : aucun échange pendant cette série. Confirmations : je
+  ne les vois pas ; `.claude/settings.local.json` est absent au début et à
+  la fin.
