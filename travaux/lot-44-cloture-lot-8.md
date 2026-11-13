@@ -615,6 +615,15 @@ contrôle qui tranche serait la date du lot 8 dans cette colonne.
   après l'écriture, et il a suivi dès la première purge. C'est une sixième
   clôture observée pour l'entrée 77, qui en relève cinq, celles des lots 1
   à 5 ; ce cas-là n'est écrit nulle part sur le wiki.
-- **Canal direct** : aucun échange pendant cette série. Confirmations : je
-  ne les vois pas ; `.claude/settings.local.json` est absent au début et à
-  la fin.
+- **Canal direct, après une interruption.** L'exécution s'est arrêtée juste
+  après le commit `a502b9c`, fait le 12 novembre 2026 à 23:29:13 UTC. Ni son
+  contrôle par `git show --stat`, ni la poussée n'avaient eu lieu, et aucun
+  message de fin n'a été rendu. Cyril a écrit le 13 novembre :
+  « Réessayez ». J'ai repris au point d'arrêt, sans rien rejouer sur le
+  wiki. Le dépôt était intact : commit présent, arbre propre, aucune règle
+  locale. `git show --stat a502b9c` a rendu un fichier, 246 ajouts et aucune
+  suppression. À 16:25 UTC, après `git fetch origin`, `origin/main` était
+  toujours à `9924f24` et restait l'ancêtre de `HEAD`. Ce paragraphe a été
+  ajouté par un second commit. Confirmations : je ne les vois pas ;
+  `.claude/settings.local.json` est absent au début, à la reprise et à la
+  fin.
