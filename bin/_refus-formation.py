@@ -7,6 +7,9 @@
 # appellent ce détecteur avant tout appel réseau et s'arrêtent s'il refuse.
 # Aucune exception, aucune variable pour lever le refus : le travail sur ces
 # espaces se fait dans le dépôt privé formation-cao.
+# Depuis la suite de la tâche 3, le mode paramètres refuse aussi le JSON de
+# smwbrowse qui vise ces espaces, et toute page visée par son numéro
+# (pageids, revids, oldid…), que le contrôle par nom ne peut pas voir.
 #
 # Usage (helper interne, lancé par python3 -I) :
 #   _refus-formation.py --titre "T1" ["T2|T3" ...]
@@ -20,8 +23,11 @@ from urllib.parse import unquote_plus
 
 NOMS = r"(?:cao|solidworks|freecad|onshape|fusion|inventor|catia)"
 TITRE_RE = re.compile(r"^(?:discussion +)?" + NOMS + r" *:", re.IGNORECASE)
-DANS_VALEUR_RE = re.compile(r"(?:^|[\[|:= ])" + NOMS + r" *:", re.IGNORECASE)
+DANS_VALEUR_RE = re.compile(r"(?:^|[\[|:= \"{,])" + NOMS + r" *:", re.IGNORECASE)
+NS_JSON_RE = re.compile(r"\bns\"? *: *\"?(?:50[2-9]|51[0-5])(?!\d)")
 NUMEROS = {str(n) for n in range(502, 516)}
+PAR_NUMERO = {"pageids", "pageid", "revids", "oldid", "fromid", "toid",
+              "fromrev", "torev"}
 
 
 def normaliser(titre, decoder=True):
@@ -52,6 +58,13 @@ def mode_params(chaine):
         nom, _, valeur = paire.partition("=")
         nom = unquote_plus(nom)
         valeur = unquote_plus(valeur)
+        if nom in PAR_NUMERO:
+            sys.stderr.write("ERREUR: refus - '" + nom + "' vise une page par "
+                             "son numéro, ce qui échappe au contrôle des "
+                             "espaces de formation.\n")
+            sys.exit(1)
+        if NS_JSON_RE.search(valeur):
+            refuser(valeur)
         for morceau in valeur.split("|"):
             if titre_refuse(morceau, decoder=False):
                 refuser(morceau)

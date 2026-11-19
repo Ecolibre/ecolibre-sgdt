@@ -94,7 +94,9 @@ PARAMS="$1"
 # Lot 48 : refus des espaces de formation, sur la chaîne telle que reçue,
 # avant la transformation de --facts et tout appel réseau. En --facts, la
 # valeur de subject passe par la règle des titres et ns=502 à 515 est
-# refusé par la règle des paramètres ns.
+# refusé par la règle des paramètres ns. Sont aussi refusés le JSON de
+# smwbrowse qui vise ces espaces et toute page visée par son numéro
+# (pageids, revids, oldid, fromrev…).
 python3 -I "$(dirname "${BASH_SOURCE[0]}")/_refus-formation.py" --params "$PARAMS" || exit 1
 
 if [ "$FACTS_MODE" = 1 ]; then
