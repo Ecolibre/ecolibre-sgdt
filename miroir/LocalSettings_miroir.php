@@ -250,3 +250,50 @@ $wgNamespacePermissionLockdown[NS_CWL_TALK]['edit'] = ['sysop'];
 $wgVisualEditorAvailableNamespaces[NS_CWL] = true;
 $wgVisualEditorAvailableNamespaces[NS_CWL_TALK] = true;
 $smwgNamespacesWithSemanticLinks[NS_CWL] = true;
+
+// ---------------------------------------------------------
+// Lot 48 - Espaces de formation verrouillés, appliqué le 19 novembre 2026.
+// Numéros réservés, non créés : 512 et 513 pour Inventor, 514 et 515 pour Catia.
+// ---------------------------------------------------------
+define( 'NS_CAO', 502 );
+define( 'NS_CAO_TALK', 503 );
+define( 'NS_SOLIDWORKS', 504 );
+define( 'NS_SOLIDWORKS_TALK', 505 );
+define( 'NS_FREECAD', 506 );
+define( 'NS_FREECAD_TALK', 507 );
+define( 'NS_ONSHAPE', 508 );
+define( 'NS_ONSHAPE_TALK', 509 );
+define( 'NS_FUSION', 510 );
+define( 'NS_FUSION_TALK', 511 );
+
+$wgExtraNamespaces[NS_CAO] = 'CAO';
+$wgExtraNamespaces[NS_CAO_TALK] = 'Discussion_CAO';
+$wgExtraNamespaces[NS_SOLIDWORKS] = 'SolidWorks';
+$wgExtraNamespaces[NS_SOLIDWORKS_TALK] = 'Discussion_SolidWorks';
+$wgExtraNamespaces[NS_FREECAD] = 'FreeCAD';
+$wgExtraNamespaces[NS_FREECAD_TALK] = 'Discussion_FreeCAD';
+$wgExtraNamespaces[NS_ONSHAPE] = 'Onshape';
+$wgExtraNamespaces[NS_ONSHAPE_TALK] = 'Discussion_Onshape';
+$wgExtraNamespaces[NS_FUSION] = 'Fusion';
+$wgExtraNamespaces[NS_FUSION_TALK] = 'Discussion_Fusion';
+
+// Le groupe formation : Cyril et le robot de formation.
+$wgGroupPermissions['formation']['read'] = true;
+
+// Lecture, modification et toute autre action réservées au groupe formation ;
+// inclusion interdite, même entre pages de formation ; sous-pages et éditeur visuel.
+foreach ( [ NS_CAO, NS_CAO_TALK, NS_SOLIDWORKS, NS_SOLIDWORKS_TALK, NS_FREECAD, NS_FREECAD_TALK, NS_ONSHAPE, NS_ONSHAPE_TALK, NS_FUSION, NS_FUSION_TALK ] as $lot48ns ) {
+    $wgNamespacePermissionLockdown[$lot48ns]['*'] = [ 'formation' ];
+    $wgNonincludableNamespaces[] = $lot48ns;
+    $wgNamespacesWithSubpages[$lot48ns] = true;
+    $wgVisualEditorAvailableNamespaces[$lot48ns] = true;
+}
+
+// Semantic MediaWiki dans les cinq espaces de contenu.
+foreach ( [ NS_CAO, NS_SOLIDWORKS, NS_FREECAD, NS_ONSHAPE, NS_FUSION ] as $lot48ns ) {
+    $smwgNamespacesWithSemanticLinks[$lot48ns] = true;
+}
+
+// Décision du lot 48 pour tout le wiki : un résumé laissé vide n'est plus
+// rempli par le début du texte, qui se lirait sans connexion.
+$wgUseAutomaticEditSummaries = false;
