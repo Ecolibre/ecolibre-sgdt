@@ -236,6 +236,8 @@ L'outil de récupération de pages web de la conversation sert des versions en c
 
 GitHub sert l'adresse brute de ce fichier avec cinq minutes de cache (`cache-control: max-age=300`, mesuré le 3 octobre 2026). Pendant les cinq minutes qui suivent une poussée, une conversation neuve peut encore lire l'ancienne version : une règle modifiée s'applique à ce délai près.
 
+Le 19 novembre 2026, le contrôle automatique des actions d'une conversation claude.ai a refusé deux fois l'accès au dépôt, le curl de ce fichier puis l'ajout du dépôt à la session, avec le motif "Unauthorized Access", tant que la demande ne venait que des instructions du projet et de la procédure d'ouverture. Il l'a accepté dès que Cyril l'a autorisé dans un message. Un seul cas observé : c'est un repère, pas une mesure. Depuis ce jour, le message d'ouverture d'un lot porte une ligne d'autorisation.
+
 Les instructions du projet claude.ai se présentent à la conversation comme le début de son premier message, avant ce que Cyril y écrit. Une conversation qui voit le texte d'amorçage en tête de ce message n'en conclut pas que Cyril l'a collé lui-même.
 
 L'architecte ne peut pas lire l'horodatage des messages d'une conversation passée. Contournement : il demande « retrouve la date de l'échange qui commence par… » et Cyril la retrouve au Ctrl+F.
