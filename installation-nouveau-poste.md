@@ -49,7 +49,8 @@ versionné, voir `.gitignore`) échappe à ça.
 |---|---|---|
 | `deny Read/Edit(./.env, ./.env.*, ./.cookies.txt)` et leurs équivalents dans le dépôt privé | Secrets de session wiki, jamais lus ni modifiés par l'outillage Claude Code | 12/08/2026 |
 | `deny Read/Edit(./Serveur3/**)` | Le dossier porte le mot de passe de la base, la clé secrète et la clé de version du wiki | 20/08/2026 |
-| `deny Bash(sudo/ssh/mysql/mysqldump:*)` | Actions système ou base de données hors périmètre de l'outillage wiki | 12/08/2026 |
+| `deny Bash(sudo/mysql/mysqldump:*)` | Actions système ou base de données hors périmètre de l'outillage wiki | 12/08/2026 |
+| `ask Bash(ssh:*)` | Accès au serveur du wiki, ouvert pour le lot 48 sur décision de Cyril : Claude Code applique lui-même la configuration du site, avec une confirmation à chaque commande. Remplace l'interdiction posée le 12/08/2026 | 19/11/2026 |
 | `ask Bash(git reset --hard/git clean:*)` | Opérations qui écrasent ou suppriment du travail non commité — confirmation à chaque fois | 20/08/2026 |
 | `allow` sur les scripts `bin/wiki-*.sh`, les commandes de lecture usuelles (`grep`, `ls`, `cat`, `find`, `diff`, `jq`…) et `git status/diff/log/add/commit/push` | Usage quotidien sans confirmation répétée | 12/08/2026, complété le 20/08/2026 (`curl`, `python3`, `git push` déplacés d'`ask` vers `allow`) |
 | `allow WebFetch(domain:wiki.ecolibre.org)` | Lecture du wiki par l'outil web | 12/08/2026 |
@@ -60,7 +61,7 @@ versionné, voir `.gitignore`) échappe à ça.
 | `allow Bash(bin/wiki-append.sh:*)` | Ajout en fin de page par `appendtext`, sans lire ni renvoyer le corps existant — script versionné | 06/09/2026 |
 | `allow Bash(bin/wiki-verify.sh:*)`, `allow Bash(bin/wiki-warnings.sh:*)` | Vérification après écriture et relevé d'avertissements SMW — besoins récurrents (respectivement 8 et 2 occurrences relevées dans l'analyse des confirmations Claude Code, conversation claude.ai du 21/08 au 03/10/2026), devenus scripts versionnés | 11/09/2026 |
 | `allow Bash(echo/date/od:*)` | Utilitaires d'affichage : n'écrivent aucun fichier, ne joignent aucun réseau. `echo` seul avait provoqué 17 des 89 confirmations analysées à cette date (même analyse) | 11/09/2026 |
-| `deny Read(~/.ssh/**)` | Clés SSH du poste — complète `deny Bash(ssh:*)`. Promue depuis l'ancien fichier local. Écrite `//home/spheres/.ssh/**` jusqu'au 31/10/2026, voir sous le tableau | 03/10/2026 |
+| `deny Read(~/.ssh/**)` | Clés SSH du poste — complète `ask Bash(ssh:*)` : Claude Code peut se connecter au serveur, jamais lire les clés du poste. Promue depuis l'ancien fichier local. Écrite `//home/spheres/.ssh/**` jusqu'au 31/10/2026, voir sous le tableau | 03/10/2026 |
 | `allow Bash(awk:*)` | Contrôle de fichiers tabulés (colonnes d'un TSV). Même portée que `sed`, déjà autorisé | 03/10/2026 |
 | `allow Bash(git fetch:*)`, `allow Bash(git check-ignore:*)` | Lecture seule : état du distant, vérification du `.gitignore` | 03/10/2026 |
 | `allow WebFetch(domain:www.mediawiki.org)`, `allow WebFetch(domain:www.wikidata.org)` | Documentation MediaWiki ; données de référence (codes INSEE, taxons) | 03/10/2026 |
