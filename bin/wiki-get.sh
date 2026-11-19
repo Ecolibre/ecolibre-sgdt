@@ -31,6 +31,15 @@ set -euo pipefail
 readonly WIKI_API="https://wiki.ecolibre.org/api.php"
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# Lot 48 : refus des espaces de formation, avant tout appel réseau. Contrôle
+# le titre, et la catégorie de --category (ou le titre de --protection).
+if [ "$#" -eq 2 ] && { [ "$1" = "--category" ] || [ "$1" = "--protection" ]; }; then
+  python3 -I "$DIR/bin/_refus-formation.py" --titre "$2" || exit 1
+elif [ "$#" -ge 1 ]; then
+  python3 -I "$DIR/bin/_refus-formation.py" --titre "$1" || exit 1
+fi
+
 PRIVE_DIR="${SGDT_PRIVE:-$DIR/../ecolibre-sgdt-prive}"
 if [ -f "$PRIVE_DIR/.cookies.txt" ]; then
   COOKIES="$PRIVE_DIR/.cookies.txt"

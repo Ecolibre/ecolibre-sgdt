@@ -8,6 +8,10 @@
 # puis dans le dépôt lui-même. Introuvables dans les deux : échec explicite.
 set -euo pipefail
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# Lot 48 : refus des espaces de formation, avant .env et tout appel réseau.
+python3 -I "$DIR/bin/_refus-formation.py" --titre "${1:-}" || exit 1
+
 PRIVE_DIR="${SGDT_PRIVE:-$DIR/../ecolibre-sgdt-prive}"
 
 if [ -f "$PRIVE_DIR/.env" ]; then

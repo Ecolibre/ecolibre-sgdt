@@ -90,6 +90,13 @@ if [ "$#" -ne 1 ]; then
 fi
 
 PARAMS="$1"
+
+# Lot 48 : refus des espaces de formation, sur la chaîne telle que reçue,
+# avant la transformation de --facts et tout appel réseau. En --facts, la
+# valeur de subject passe par la règle des titres et ns=502 à 515 est
+# refusé par la règle des paramètres ns.
+python3 -I "$(dirname "${BASH_SOURCE[0]}")/_refus-formation.py" --params "$PARAMS" || exit 1
+
 if [ "$FACTS_MODE" = 1 ]; then
   # subject, ns et subobject passent dans le JSON de params= ; tout autre
   # paramètre reste au premier niveau, tel que l'appelant l'a écrit.

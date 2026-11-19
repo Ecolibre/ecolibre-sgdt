@@ -31,6 +31,9 @@ fi
 TITRE="$1"
 ENVOYE="$2"
 
+# Lot 48 : refus des espaces de formation, avant toute lecture.
+python3 -I "$(dirname "${BASH_SOURCE[0]}")/_refus-formation.py" --titre "$TITRE" || exit 1
+
 if [ ! -f "$ENVOYE" ]; then
   echo "ERREUR: fichier envoyé introuvable : $ENVOYE" >&2
   exit 1

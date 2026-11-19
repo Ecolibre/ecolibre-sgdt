@@ -911,3 +911,7 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
 - Ne pas toucher au `composer.json` de MediaWiki (utiliser `composer.local.json`).
 - Ne pas commiter `.env` ni `.cookies.txt`.
 - ne jamais passer bot=1 sur une écriture
+
+## Espaces de formation (lot 48)
+
+Les espaces CAO, SolidWorks, FreeCAD, Onshape et Fusion (numéros 502 à 511, discussions comprises), et les numéros réservés 512 à 515 (Inventor, Catia), portent les supports de formation de Cyril. Ils sont verrouillés au groupe formation, dont le compte de Cyril fait partie : le robot de ce dépôt, qui en hérite, peut techniquement les lire et y écrire. Il ne le fait jamais. Rien de ces espaces n'entre dans ce dépôt, ses rapports, ses commits ni ses messages : ni contenu, ni extrait de recherche. Les scripts de bin/ refusent tout titre de ces espaces, et wiki-api.sh tout paramètre qui les vise (bin/_refus-formation.py) ; ce refus ne se contourne par aucun autre moyen, ni curl direct, ni script Python de session. Le travail sur ces espaces se fait dans le dépôt privé formation-cao, avec le robot de formation. Seule exception passée : les trois pages d'essai du lot 48, créées le 19 novembre 2026 et à supprimer à sa clôture.
