@@ -48,6 +48,7 @@ versionné, voir `.gitignore`) échappe à ça.
 | Règle | Motif | Depuis |
 |---|---|---|
 | `deny Read/Edit(./.env, ./.env.*, ./.cookies.txt)` et leurs équivalents dans le dépôt privé | Secrets de session wiki, jamais lus ni modifiés par l'outillage Claude Code | 12/08/2026 |
+| `deny Bash(cat, head, tail, grep, sed, awk, od, python3 *.env*)` et les mêmes en `*.cookies.txt*`, seize règles reprises du dépôt privé de formation | Protection contre la lecture de .env par mégarde, par les commandes de lecture autorisées ; pas un verrou : cp puis cat sur un autre nom passe encore | 19/11/2026 |
 | `deny Read/Edit(./Serveur3/**)` | Le dossier porte le mot de passe de la base, la clé secrète et la clé de version du wiki | 20/08/2026 |
 | `deny Bash(sudo/mysql/mysqldump:*)` | Actions système ou base de données hors périmètre de l'outillage wiki | 12/08/2026 |
 | `ask Bash(ssh:*)` | Accès au serveur du wiki, ouvert pour le lot 48 sur décision de Cyril : Claude Code applique lui-même la configuration du site, avec une confirmation à chaque commande. Remplace l'interdiction posée le 12/08/2026 | 19/11/2026 |
