@@ -75,6 +75,10 @@ Elle se lance sur un poste local, où Cyril dépose l'archive. Une session cloud
 
 Décidé le 19 novembre 2026.
 
+Le script de contrôle reprend aussi les vérifications que `CLAUDE.md` demande après chaque écriture : faits sémantiques, catégories, liens rouges. Ajouté par l'architecte le 22 novembre 2026, après la passe 3 du lot 47 : son script ne relevait que les faits du lot clos et la classe `error` au rendu, et les catégories et les liens des six pages écrites, comme les faits des cinq autres, n'ont été vérifiés qu'après coup.
+
+Pour une consigne lourde lancée en session cloud, une autre voie est acceptée à l'essai par Cyril le 22 novembre 2026 : l'architecte pousse l'archive sur une branche `livraison/` du dépôt, jamais sur `main`, et la consigne en donne l'empreinte ; l'exécuteur la lit sans la fusionner, vérifie l'empreinte, fait les écritures, puis supprime la branche. Il faut pour cela que Cyril écrive, dans la conversation de l'architecte, qu'il l'autorise à ajouter le dépôt à sa session avec le droit d'y pousser : sans autorisation écrite, le contrôle automatique a refusé cet ajout le 19 novembre 2026. L'essai se fera à la première consigne lourde que Cyril lancera depuis son téléphone ; la règle complète s'écrira après lui.
+
 ## Format des échanges
 
 Chaque réponse de l'architecte est faite de points numérotés. La disposition interne d'un point est décrite plus bas, à la section "La forme d'un point". Le numéro est annoncé avant que le point soit développé, parce que Cyril lit au fil et répond en cours de route. Le but est qu'il puisse répondre « point N : ok » sans retaper un raisonnement identique à la recommandation.
