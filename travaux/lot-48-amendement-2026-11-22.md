@@ -5,7 +5,8 @@ Ce rapport rectifie `travaux/lot-48-cloture.md`, dont la liste des chemins
 rendaient le texte d'une page verrouillée par Lockdown.
 
 Session locale sur le Framework, 22 novembre 2026, branche `main`, après le
-commit `dc9ef70`.
+commit `ac147c3` (lu par `git log` après coup ; une première version de ce
+rapport citait `dc9ef70`, tiré d'un instantané de début de session périmé).
 
 **Résultat : configuration appliquée en production, vérification réussie au
 premier essai, aucun retour en arrière.** Ni `setupStore.php` ni `update.php`
