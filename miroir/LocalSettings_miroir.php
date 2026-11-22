@@ -297,3 +297,28 @@ foreach ( [ NS_CAO, NS_SOLIDWORKS, NS_FREECAD, NS_ONSHAPE, NS_FUSION ] as $lot48
 // Décision du lot 48 pour tout le wiki : un résumé laissé vide n'est plus
 // rempli par le début du texte, qui se lirait sans connexion.
 $wgUseAutomaticEditSummaries = false;
+
+// ---------------------------------------------------------
+// Lot 48, amendement du 22 novembre 2026 : quatre chemins de l'API lisaient
+// sans compte les pages verrouillées par Lockdown. Réglages provisoires, à
+// retirer après la mise à jour de MediaWiki, chacun une fois sa faille
+// vérifiée corrigée sans connexion sur la page témoin CAO:Essai lot 48.
+// ---------------------------------------------------------
+// CVE-2025-67480, corrigée en 1.39.16 : list=allrevisions ignore Lockdown.
+$wgAPIListModules['allrevisions'] = 'ApiQueryDisabled';
+// action=compare rend le texte d'une version verrouillée.
+$wgAPIModules['compare'] = 'ApiDisabled';
+// Les deux modules de l'éditeur visuel traitent une page sans vérifier le
+// droit de lecture de l'appelant : on le vérifie avant eux.
+$wgHooks['ApiCheckCanExecute'][] = static function ( $module, $user, &$message ) {
+    if ( !in_array( $module->getModuleName(), [ 'visualeditor', 'visualeditoredit' ], true ) ) {
+        return true;
+    }
+    $page = $module->getRequest()->getVal( 'page' );
+    $title = $page === null ? null : Title::newFromText( $page );
+    if ( $title !== null && !MediaWiki\MediaWikiServices::getInstance()->getPermissionManager()->userCan( 'read', $user, $title ) ) {
+        $message = 'badaccess-group0';
+        return false;
+    }
+    return true;
+};
