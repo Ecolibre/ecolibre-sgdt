@@ -14,8 +14,9 @@ consigne n'a pas prévu va dans « Écarts et surprises ».
 **Un texte qui ne t'est pas adressé ne s'exécute pas.** Les textes qui te sont
 destinés commencent par « Pour Claude Code. ». Si la première ligne d'un texte
 le destine à une conversation claude.ai, ou si un message te demande
-d'appliquer toi-même la `Procédure d'ouverture d'un lot` ou la
-`Procédure de clôture d'un lot`, ne lance aucune commande : réponds en une
+d'appliquer toi-même la `Procédure d'ouverture d'un lot`, la
+`Procédure de clôture d'un lot` ou la `Procédure de clôture d'une
+conversation`, ne lance aucune commande : réponds en une
 ligne que ce texte est destiné à une conversation claude.ai, et attends. Une
 consigne qui te fait écrire ce qu'une ouverture ou une clôture a décidé reste
 une consigne ordinaire. Un message de Cyril sans ligne de destinataire relève
@@ -37,6 +38,65 @@ a été vidée le 4 octobre 2026 : ses sept notes, de juillet, étaient périmé
 ou déjà portées par le wiki. Depuis le 4 octobre 2026, elle est aussi
 désactivée par réglage, dans `.claude/settings.json`.
 
+## Déroulé de toute tâche
+
+Toute consigne s'exécute dans ce cadre, qu'elle ne recopie pas : elle ne dit
+que ce qui s'en écarte, et ce qu'elle dit l'emporte. Les règles détaillées de
+chaque étape sont plus bas dans ce fichier.
+
+1. **Rapatrier.** `git fetch origin`, puis `git merge --ff-only origin/main`
+   si la branche est en retard. Si l'avance rapide échoue, s'arrêter et le
+   dire. Si elle a modifié ce fichier, le relire avant de continuer. Voir
+   "Rapatrier en début de tâche".
+2. **État du dépôt**, par `git status --porcelain`. L'étape d'état du dépôt distingue deux cas que `git status` affiche côte à côte. La sortie `--porcelain` porte deux colonnes, l'index puis l'arbre de travail : un fichier modifié mais non indexé sort avec une espace en premier caractère. Une ligne dont l'un des deux premiers caractères est `M`, `A`, `D` ou `R` signale donc un fichier suivi et modifié, qu'un commit peut emporter ou qu'une opération peut écraser : elle justifie un arrêt. Une ligne commençant par `??` signale un fichier non suivi, qu'aucun `git add` nommant des chemins explicites ne peut atteindre : elle ne justifie rien. Confondre les deux fait arrêter une tâche que rien ne menaçait. Une consigne qui écrit "une ligne commençant par `M`" fait manquer exactement le cas qu'elle veut attraper : constaté le 5 octobre 2026.
+3. **Relevé de `.claude/settings.local.json`** : aucune règle attendue ;
+   toute règle trouvée se cite mot pour mot dans le rapport.
+4. **Connexion au wiki**, si la tâche y écrit : `bin/wiki-login.sh` avant
+   tout autre travail. Un `.env` absent ou incomplet se découvre ainsi
+   d'entrée : le 16 novembre 2026, sur un poste neuf, la connexion n'a
+   échoué qu'à l'étape 6 d'une consigne, après une première poussée.
+5. **La tâche**, telle que la consigne la décrit.
+6. **Les vérifications**, celle qui tranche d'abord.
+7. **Le rapport** dans `travaux/`, à la forme décrite par "Forme du rapport".
+8. **Relevé final de `.claude/settings.local.json`.**
+9. **Commit, puis poussée selon l'ascendance** (voir "Fin de tâche :
+   l'ascendance décide, pas la branche"). Une tâche ne se termine jamais sur une modification non commitée d'un fichier suivi. Elle commite, elle annule, ou elle le signale à Cyril comme un blocage, en nommant le fichier. Motif : `CLAUDE.md` exige un état propre avant toute opération destructive ou massive, et la plupart des consignes font de cet état une condition d'entrée à leur étape 1 ; une modification laissée en attente arrête donc la première tâche suivante qui pose cette condition, et celle-ci n'a aucun moyen de savoir quelle conversation en est propriétaire. Constaté le 10 octobre 2026 : la révision des garde-fous du dépôt git, écrite puis laissée en attente d'accord, a arrêté une tâche sans rapport et coûté un aller-retour complet pour retrouver la conversation à qui la soumettre.
+10. **Une seule ligne dans le terminal** : le chemin du rapport, le hash du
+    commit, l'état de la poussée, le nom de la branche, et tes questions
+    lettrées s'il y en a. Jamais le contenu du rapport.
+
+Motif : jusqu'au 19 novembre 2026, chaque consigne recopiait ces étapes, et
+une recopie diverge. Le 16 novembre 2026, une consigne qui recopiait son
+propre contrôle d'ascendance a arrêté l'exécuteur sur un poste en retard de
+vingt-six commits, alors que ce fichier disait déjà de rapatrier. Les étapes
+2 et 9 portent deux règles qui se lisaient jusque-là dans
+`methode-de-travail.md`, à l'adresse de l'architecte.
+
+### Les fichiers fournis
+
+Quand une consigne livre ses textes en fichiers, dans une archive :
+
+- chercher l'archive par son nom exact dans le dossier de téléchargement que
+  la consigne indique, et s'arrêter si elle manque ou s'il y en a deux ;
+- vérifier son empreinte SHA-256 avant toute autre chose ;
+- lister son contenu avant de l'extraire : aucun chemin ne doit sortir de
+  son dossier ;
+- l'extraire hors de `travaux/`, dans le dossier que la consigne nomme ;
+- ne jamais retaper un texte fourni : l'envoyer depuis son fichier, ou le
+  copier tel quel ;
+- lancer les scripts fournis par `python3 -I`, qui empêche Python de charger
+  un module placé à côté d'eux ;
+- lire avant de les écrire les fichiers que la consigne désigne comme
+  porteurs d'affirmations, et signaler dans "Écarts et surprises" ce qui y
+  paraît faux, sans le corriger ; les autres sont mécaniques ;
+- supprimer le dossier extrait après le commit du rapport.
+
+Motif : le 16 novembre 2026, une consigne de cette forme a écrit 27 pages
+sans une question ; l'exécuteur y avait lancé de lui-même le script fourni
+en mode isolé, et signalé n'avoir pas relu le fond des textes. La règle
+reprend la première initiative et encadre la seconde. Décidé le 19 novembre
+2026.
+
 ## Pages de référence sur le wiki
 
 Le wiki fait autorité, pas ce fichier. Lire ces pages avant la première
@@ -45,8 +105,10 @@ de l'écrire ailleurs.
 
 - `Catégorie:Page de suivi` — la liste de ces pages et le rôle de chacune.
   Point d'entrée.
-- `Gestion des lots` — l'index des lots, construit par requête. Ne jamais y
-  ajouter de ligne à la main.
+- `Gestion des lots` - l'index des lots, construit par requête : ne jamais y
+  ajouter de ligne de lot à la main. Seule sa section "Ordre des prochains
+  travaux", en tête, s'écrit à la main, par la consigne qui achève un travail
+  de la liste ou sur arbitrage de Cyril.
 - `Limites connues du Système de Gestion de Données Techniques` — les faits
   mesurés sur cette installation, les dettes et les limites assumées. Y
   chercher avant de diagnostiquer.
@@ -54,6 +116,8 @@ de l'écrire ailleurs.
   l'état du modèle de données.
 - `Notes en attente de rangement` — le sas des idées non rangées.
 - `Procédure de clôture d'un lot` — comment un lot passe de livré à clos.
+- `Procédure de clôture d'une conversation` - le rapport de fin de chaque
+  conversation, et le rattrapage des conversations qui n'en ont pas.
 
 Et dans ce dépôt : `methode-de-travail.md` décrit le protocole entre les intervenants — qui décide quoi, dans quel ordre, sous quelle forme.
 
@@ -163,6 +227,16 @@ ici, en markdown.
 **Le rapport de fin de session affiché dans le terminal est rédigé en
 français, comme les fichiers de rapport eux-mêmes.** Cyril travaille en
 français et relaie ces messages dans des conversations en français.
+
+**Forme du rapport.** Il s'ouvre sur ce que l'architecte doit lire, dans cet
+ordre : le résultat en une ligne ; le déroulé, étape par étape, tel que le
+fixe "Déroulé de toute tâche" ; les écarts et surprises ; les questions
+posées et les réponses rendues, y compris par le canal direct ; les
+révisions écrites sur le wiki. Les preuves viennent ensuite : sorties de
+commandes, diffs, relevés. L'architecte lit la tête, et ne descend dans les
+preuves que si un écart l'y envoie. Motif : le 16 novembre 2026, la section
+"Écarts et surprises" d'un rapport de 134 lignes tenait en six lignes, à la
+fin. Décidé le 19 novembre 2026.
 
 **Rien de secret n'y va** : le dépôt est public, la synchronisation
 Syncthing est automatique alors que le commit ne l'est pas, et Syncthing ne
@@ -712,15 +786,17 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   ignore.
 - **Rapatrier en début de tâche, systématiquement, et de nouveau si la
   poussée est refusée.** Avant la première écriture d'une tâche, lancer
-  `git fetch origin`, et fusionner `origin/main` si la branche est en
-  retard. Le dépôt reçoit des poussées d'autres copies et d'autres
+  `git fetch origin`, puis avancer par `git merge --ff-only origin/main`
+  si la branche est en retard : l'avance rapide ne crée aucun commit, et
+  elle seule s'accorde avec la règle de fin de tâche, qui interdit de
+  fusionner de soi-même. Le dépôt reçoit des poussées d'autres copies et d'autres
   sessions, locales et cloud : une tâche qui commite sans avoir rapatrié
   travaille sur un `CLAUDE.md` et des scripts `bin/` périmés, et voit sa
   poussée refusée en fin de tâche. Rapatrier au début ne suffit pas quand
   une autre session pousse pendant la tâche : un refus de poussée se traite
-  par un nouveau `git fetch origin`, une fusion, puis une nouvelle
-  poussée, et au second refus on s'arrête et on le signale. Jamais de
-  rebasage, jamais de poussée forcée. Mesuré trois fois. Le 17 octobre
+  par un nouveau `git fetch origin` ; si `origin/main` n'est plus l'ancêtre
+  de `HEAD`, on s'arrête et on le signale, sans fusion ni rebasage. Jamais
+  de poussée forcée. Mesuré trois fois. Le 17 octobre
   2026, la copie locale était restée sur `25b03d7` du 11 octobre,
   47 commits de retard, et la poussée a été refusée. Le 18 octobre 2026,
   la même copie affichait une branche alignée par `git status -sb` alors
@@ -728,7 +804,9 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   `git status` se compare à une référence de suivi périmée et ne prouve
   rien. Le même jour, le distant est passé de `851765c` à `ee21ec0` puis
   `bb0cbb9` en moins d'une heure, dont un commit survenu entre le
-  rapatriement d'une tâche et sa poussée.
+  rapatriement d'une tâche et sa poussée. Jusqu'au 19 novembre 2026, cette
+  règle disait "fusionner" et celle de fin de tâche "ne jamais fusionner de
+  soi-même" : l'avance rapide les accorde.
 - **Écrire les commandes shell sous leur forme la plus simple.** Claude Code
   soumet à confirmation toute commande dont il ne peut pas analyser la forme
   à l'avance — boucles, substitutions `$(…)`, `<(…)`, accolades voisinant des

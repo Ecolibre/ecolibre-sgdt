@@ -6,6 +6,8 @@ Ce fichier décrit comment le projet se conduit, pas ce qu'il contient. Pour le 
 
 Révisé par le lot 34, en octobre 2026 : forme de chaque réponse, destinataire de chaque texte à coller, demandes de confirmation. Depuis, toute conversation du projet claude.ai « Wiki Ecolibre data » lit ce fichier avant sa première réponse et l'applique : c'est ce que demande le texte d'amorçage des instructions du projet, recopié dans « Où vit quoi ».
 
+Allégé par la passe 3 du lot 47, sur arbitrage de Cyril du 19 novembre 2026 : rapport de fin de chaque conversation, consigne livrée en fichiers, déroulé de toute tâche porté par `CLAUDE.md`, tours longs, et une règle sur la façon dont les règles changent.
+
 ## Qui fait quoi
 
 Trois intervenants.
@@ -27,6 +29,9 @@ Les deux Claude ne communiquent pas. Ils ne savent l'un de l'autre que ce que Cy
 5. L'exécuteur exécute, vérifie, et écrit un rapport dans `travaux/`.
 6. Cyril transmet le rapport.
 7. L'architecte vérifie lui-même, indépendamment du rapport.
+8. Le fil se termine par un rapport de fin, que l'architecte écrit pendant que tout est sous ses yeux et que la dernière consigne verse dans `travaux/`.
+
+L'architecte propose ce rapport de lui-même, dès qu'un lot est livré, qu'un relais se prépare ou que le fil s'allonge ; son plan et son versement sont décrits par la page `Procédure de clôture d'une conversation`. Décidé le 19 novembre 2026 : les clôtures des lots 1 à 5, menées des mois après la livraison, avaient coûté 41 réponses à relire le fil ; les passes 1 et 2 du lot 47, qui ont rendu leur rapport avant de s'arrêter, n'ont rien eu à relire.
 
 ## Le canal direct
 
@@ -42,9 +47,7 @@ Le contexte : d'où l'on part, ce que fait cette tâche, et pourquoi si ce n'est
 
 Les règles impératives propres à la tâche, y compris ce qu'il ne faut pas faire.
 
-L'étape d'état du dépôt distingue deux cas que `git status` affiche côte à côte. La sortie `--porcelain` porte deux colonnes, l'index puis l'arbre de travail : un fichier modifié mais non indexé sort avec une espace en premier caractère. Une ligne dont l'un des deux premiers caractères est `M`, `A`, `D` ou `R` signale donc un fichier suivi et modifié, qu'un commit peut emporter ou qu'une opération peut écraser : elle justifie un arrêt. Une ligne commençant par `??` signale un fichier non suivi, qu'aucun `git add` nommant des chemins explicites ne peut atteindre : elle ne justifie rien. Confondre les deux fait arrêter une tâche que rien ne menaçait. Une consigne qui écrit « une ligne commençant par `M` » fait manquer exactement le cas qu'elle veut attraper : constaté le 5 octobre 2026.
-
-Une tâche ne se termine jamais sur une modification non commitée d'un fichier suivi. Elle commite, elle annule, ou elle le signale à Cyril comme un blocage, en nommant le fichier. Motif : `CLAUDE.md` exige un état propre avant toute opération destructive ou massive, et la plupart des consignes font de cet état une condition d'entrée à leur étape 1 ; une modification laissée en attente arrête donc la première tâche suivante qui pose cette condition, et celle-ci n'a aucun moyen de savoir quelle conversation en est propriétaire. Constaté le 10 octobre 2026 : la révision des garde-fous du dépôt git, écrite puis laissée en attente d'accord, a arrêté une tâche sans rapport et coûté un aller-retour complet pour retrouver la conversation à qui la soumettre.
+Ce que `CLAUDE.md` prescrit à toute tâche, réuni sous "Déroulé de toute tâche" (rapatrier, état du dépôt, relevé des permissions, connexion au wiki, vérification, rapport, commit, poussée, ligne finale), ne se recopie pas dans une consigne : elle ne dit que ce qui s'en écarte. Le 16 novembre 2026, une consigne qui recopiait son propre contrôle d'ascendance a arrêté l'exécuteur sur un poste en retard de vingt-six commits, alors que `CLAUDE.md` disait déjà de rapatrier ; le 5 octobre 2026, une autre avait recopié de travers la règle d'état du dépôt. Les deux règles qui se lisaient ici, celle de l'état du dépôt et celle de la tâche qui ne se termine jamais sur une modification non commitée, sont passées dans ce déroulé avec leurs incidents. Décidé le 19 novembre 2026.
 
 Les étapes. Deux modes, et il faut savoir lequel on emploie.
 
@@ -54,15 +57,23 @@ Le **texte délégué** : quand l'architecte ne peut pas savoir d'avance quelle 
 
 Les vérifications, en nommant celle qui tranche. Une consigne qui demande dix contrôles sans dire lequel décide obtient dix « conforme ».
 
-Le rapport attendu, avec une section « Écarts et surprises ».
-
-Et l'instruction de n'afficher qu'une ligne dans le terminal : le chemin du fichier.
+Le rapport attendu. Sa forme est fixée par `CLAUDE.md`, section "Forme du rapport" : l'utile en tête, les preuves ensuite. L'architecte lit la tête, et ne descend dans les preuves que si un écart l'y envoie ; sa vérification se fait par ses propres mesures.
 
 Enfin, sa première ligne nomme son destinataire, et elle annonce les demandes de confirmation qu'elle peut déclencher, avec la réponse à leur donner : voir les deux sections qui suivent « Format des échanges ».
 
 Le texte destiné au wiki suit l'orthographe traditionnelle, celle qu'emploie le reste du wiki : coût, apparaît, connaît, entraîner, boîte. Sur son état au 19 octobre 2026, six familles de mots y donnent cinquante et une formes traditionnelles et aucune forme rectifiée. L'exécuteur ne corrigera pas une forme rectifiée de lui-même, puisque la règle du texte fourni lui interdit de retoucher ce qu'on lui donne : il la signalera, et il faudra une écriture de plus. Constaté le 28 octobre 2026, treize occurrences introduites sur trois pages entre le 20 et le 25 octobre.
 
 Tout résumé de modification fourni dans une consigne suit la forme que prescrit le garde-fou 2 de `CLAUDE.md` : « Format en usage depuis le lot 6 : `[Lot X][<à quel titre>] <action>` ». L'exécuteur applique un résumé fourni mot pour mot, et un résumé de modification ne se corrige plus une fois écrit : l'erreur d'une consigne passe telle quelle dans l'historique. La convention est mesurée comme largement abandonnée : 38 modifications du wiki sur 43, entre le 19 octobre et le 4 novembre 2026, n'ont pas de second crochet, sur cinq lots différents (relevé du 4 novembre 2026, `travaux/lot-44-entree-74-et-resumes.md`).
+
+### La consigne livrée en fichiers
+
+Dès qu'une consigne porte plus d'un texte de page ou plus de trois écritures, ses textes ne passent plus dans le message : l'architecte les livre en fichiers, dans une archive que Cyril télécharge, avec dans la consigne l'empreinte SHA-256 de l'archive, la liste des commandes et un script de contrôle à lancer avant et après les écritures. Le 16 novembre 2026, une consigne de cette forme a écrit 27 pages en moins de deux minutes, sans une question de l'exécuteur ; les consignes du lot 44 avaient porté en moyenne trois écritures chacune.
+
+Ce qu'elle retire : l'exécuteur ne lit plus les textes, et le regard qui avait relevé le 28 octobre 2026 une mesure périmée dans un texte fourni disparaît pour le contenu. Deux parades. L'architecte construit par script, ou par remplacement exact sur une copie de la page en ligne, tout texte qui n'est qu'une modification, pour ne rien retaper. Et la consigne dit quels fichiers portent des affirmations que l'exécuteur doit lire avant de les écrire, et lesquels sont mécaniques.
+
+Elle se lance sur un poste local, où Cyril dépose l'archive. Une session cloud ne reçoit que le dépôt qu'elle clone et le texte des messages (voir "Limites de l'outillage, mesurées") : en session cloud, une consigne porte donc ses textes en ligne.
+
+Décidé le 19 novembre 2026.
 
 ## Format des échanges
 
@@ -80,9 +91,15 @@ Un vrai regard critique est attendu : si une approche est mauvaise, le dire, d'o
 
 Une consigne à la fois. Jamais de consigne tant qu'un arbitrage reste ouvert : les réponses obligeraient à la réécrire, et le quota est une ressource.
 
-Une consigne corrigée est redonnée entière, prête à copier. Jamais de passage à remplacer.
+Une consigne corrigée est redonnée entière, prête à copier. Jamais de passage à remplacer. Une consigne livrée en fichiers se corrige en redonnant le seul fichier changé, avec sa nouvelle empreinte.
 
 Quand Cyril travaille sur téléphone, les rapports doivent tenir en un seul bloc copiable.
+
+### Les tours longs
+
+Une réponse courte part avant tout tour long : ce que l'architecte va lire, et ce qu'il rendra. Pendant le tour, chaque morceau prêt part aussitôt par un message court, sans attendre la fin. Le fond s'écrit dans un fichier de l'espace de travail avant d'être rendu : si la réponse n'arrive pas, Cyril écrit "renvoie", et elle repart sans rien relire. Un texte d'amorçage ne demande jamais de répondre sans réponse intermédiaire.
+
+Cas vécus, à la relecture d'ensemble du lot 47 : le 16 novembre 2026, à la passe 2, trois réponses perdues après de longues suites de lectures sans texte rendu, et un premier tour très long né d'une demande "sans réponse intermédiaire" ; le 19 novembre 2026, à la passe 3, une réponse jamais partie, le tour s'étant arrêté pendant les lectures, pour une cause non établie. Ce qui a fonctionné : la réponse courte d'abord, et des morceaux rendus en cours de tour. Décidé le 19 novembre 2026.
 
 ## La forme d'un point
 
@@ -208,6 +225,12 @@ Un arbitrage vieillit lentement, une mesure vieillit vite. Les décisions et leu
 
 Une idée écartée se consigne avec son motif et sa date. Sans le motif, elle revient.
 
+## Comment une règle change
+
+Une règle ne s'allège pas sans dire quelle panne elle a évitée : chaque règle du protocole vient d'un incident, qu'il faut retrouver avant de la retirer. Une règle ne s'ajoute pas sans dire ce qu'elle coûte à chaque lecture : `CLAUDE.md` dépasse 60 ko, chargés par chaque session de l'exécuteur, ce fichier en fait 29, lus par chaque conversation, et la procédure de clôture d'un lot avait été multipliée par 3,6 en dix semaines. Le texte d'une règle garde une ligne qui nomme son incident et sa date ; le récit va dans `travaux/`.
+
+Proposé par la passe 2 du lot 47, complété et décidé à sa passe 3, le 19 novembre 2026.
+
 ## Où vit quoi
 
 **Le wiki fait autorité.** Un contributeur sans dépôt et sans assistant doit pouvoir tout comprendre depuis lui. `Catégorie:Page de suivi` est le point d'entrée.
@@ -228,7 +251,9 @@ Si la commande échoue, dis-le et arrête-toi : sans ce fichier, tu n'as pas les
 
 **La mémoire de claude.ai** n'est pas un support des règles. Elle retient d'elle-même ce qui se dit en conversation, et peut garder une règle sous une forme que ce fichier a modifiée depuis. En cas d'écart, ce fichier l'emporte.
 
-**Deux pages du wiki portent le protocole lui-même** : `Procédure d'ouverture d'un lot` et `Procédure de clôture d'un lot`. Elles sont d'une autre nature que le reste du wiki — elles ne décrivent pas le SGDT, elles décrivent la conduite du travail, et un assistant les applique à lui-même. L'exécuteur n'y écrit jamais sans consigne explicite qui les nomme. Toute modification s'y voit dans l'historique de la page, et c'est là qu'il faut regarder si le comportement d'un assistant surprend.
+**Trois pages du wiki portent le protocole lui-même** : `Procédure d'ouverture d'un lot`, `Procédure de clôture d'un lot` et `Procédure de clôture d'une conversation`. Elles sont d'une autre nature que le reste du wiki : elles ne décrivent pas le SGDT, elles décrivent la conduite du travail, et un assistant les applique à lui-même. L'exécuteur n'y écrit jamais sans consigne explicite qui les nomme. Toute modification s'y voit dans l'historique de la page, et c'est là qu'il faut regarder si le comportement d'un assistant surprend.
+
+**L'ordre des prochains travaux** se tient en tête de `Gestion des lots`, sur le wiki : la consigne qui achève un travail l'en retire, et il ne change autrement que sur arbitrage de Cyril.
 
 ## Limites de l'outillage, mesurées
 
@@ -244,6 +269,14 @@ L'architecte ne peut pas lire l'horodatage des messages d'une conversation pass�
 
 La recherche dans les conversations rend des extraits et des résumés générés, pas le texte. Elle ne vaut pas relecture, et un résumé retient des affirmations en perdant leur adresse et leur motif.
 
-**Conséquence directe : la clôture d'un lot se fait dans la conversation qui l'a mené**, seul endroit où le texte intégral est disponible. Voir la page `Procédure de clôture d'un lot`.
+L'outil qui ouvre une conversation passée rend le nombre de tours du fil et le rang de chaque passage : c'est ainsi que se compte le coût d'une procédure en réponses, sans lire le fil. Mesuré le 16 novembre 2026, à la passe 3 du lot 47.
+
+Quand un fil devient long, l'outil remplace ses premiers échanges par un résumé. Le 13 novembre 2026, la clôture de la conversation des lots 1 à 5 l'a constaté, et a relu le fil dans le fichier de session de la conversation : c'est ce fichier qu'un rattrapage lit par script. Un seul cas observé : repère, pas mesure.
+
+**Conséquence directe : ce qui doit sortir d'une conversation en sort avant qu'elle s'arrête**, par son rapport de fin. Une conversation arrêtée sans rapport se rattrape dans ce fil même, seul endroit où le texte intégral est disponible. Voir la page `Procédure de clôture d'une conversation`.
+
+Sur ce wiki, la recherche de l'API, `list=search`, ne cherche que dans les titres si l'on ne précise pas `srwhat=text` : le 21 novembre 2026, le mot "Valueflows" y a rendu zéro résultat sans ce paramètre, et trois pages avec. Un relevé à zéro obtenu sans lui est faux. Relevé le 14 novembre 2026 par la conversation de cadrage du lot 47, remesuré le 21.
+
+Une session cloud de Claude Code ne reçoit que le dépôt GitHub qu'elle clone et le texte des messages : sa documentation ne prévoit aucune pièce jointe pour elle, et dit de pousser dans le dépôt ce qu'elle doit lire (lu le 21 novembre 2026). Une consigne livrée en fichiers demande donc un poste local.
 
 **L'architecte ne voit du dépôt que ce qui y a été poussé.** Un rapport écrit mais non commité, ou commité mais non poussé, n'existe pas pour lui : il ne le lit pas, et une consigne peut lui donner en toute bonne foi un nom de fichier déjà pris. Mesuré le 7 septembre 2026 sur le lot 28 — la consigne demandait d'écrire `travaux/lot-28-tache1-ouverture.md`, nom d'un rapport du 4 septembre resté hors de git, que l'exécuteur a refusé d'écraser. C'est ce qui donne son poids à la règle de `CLAUDE.md` : pousser en fin de session, systématiquement.

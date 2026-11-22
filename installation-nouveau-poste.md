@@ -271,8 +271,19 @@ mkdir -p ~/data/Ecolibre/depots/ecolibre-sgdt-prive
 nano ~/data/Ecolibre/depots/ecolibre-sgdt-prive/.env
 ```
 
-Y placer les identifiants du compte wiki, au même format que sur le poste
-d'origine. Puis :
+Y placer les identifiants du compte robot du wiki : trois lignes, que
+`bin/wiki-login.sh` charge par `source`.
+
+```
+WIKI_API=https://wiki.ecolibre.org/api.php
+WIKI_USER=<compte>@<nom du mot de passe de robot>
+WIKI_PASS=<mot de passe de robot>
+```
+
+Les deux dernières valeurs ne s'écrivent nulle part ailleurs que dans ce
+fichier. Le 16 novembre 2026, sur un poste neuf, le répertoire privé existait
+mais le `.env` manquait, et la connexion n'a échoué qu'en cours de tâche : ce
+format n'était écrit nulle part. Puis :
 
 ```
 chmod 600 ~/data/Ecolibre/depots/ecolibre-sgdt-prive/.env
