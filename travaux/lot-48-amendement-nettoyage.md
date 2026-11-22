@@ -1,7 +1,8 @@
 # Lot 48 — amendement, suite : nettoyage du serveur et forme des réponses de fermeture
 
 Session locale sur le Framework, 22 novembre 2026, branche `main`, après le
-commit `9f083da`. Suite de `travaux/lot-48-amendement-2026-11-22.md`, en réponse
+commit `c9d8491` (lu par `git log` après coup ; une première version de ce
+rapport citait `9f083da`, écrit de mémoire). Suite de `travaux/lot-48-amendement-2026-11-22.md`, en réponse
 à sa question A.
 
 ## Étape 1 — État du dépôt
@@ -59,3 +60,8 @@ Il ne reste que les deux copies attendues.
    écriture faite ailleurs sur le wiki entre les deux tâches.
 2. Le comptage des éléments `<li>` du rendu n'a été fait qu'après écriture ; il
    concorde avec les 80 entrées du wikitexte, avant comme après.
+3. Pour la deuxième fois aujourd'hui, le commit de départ a été écrit dans le
+   rapport avant d'être lu, et il était faux. La règle de CLAUDE.md sur les
+   hash vise ceux imprimés par `git show --stat` ; le commit de départ d'un
+   rapport devrait se lire de la même façon, par `git log -1` avant la
+   rédaction.
