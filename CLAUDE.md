@@ -937,6 +937,11 @@ sur la banque physique est notée ici. À traiter avec le lot de numérotation.
   rapport a cité `75f0e0e` pour un commit qui s'appelait `d646566` : le hash
   avait été écrit avant d'être lu. Un identifiant inventé est la pire espèce
   d'erreur dans un rapport, parce qu'il a l'air vérifiable et ne l'est pas.
+  Il en va de même du commit de départ d'un rapport : il se lit par
+  `git log -1 --format=%H` juste après la fusion de l'étape d'état du dépôt,
+  avant de rédiger, jamais de mémoire. Le 22 novembre 2026, deux rapports de
+  suite ont cité un commit de départ faux, parce qu'une autre conversation
+  avait commité sur main entre-temps.
 - **Un `curl` d'écriture hors des scripts `bin/` requiert l'accord explicite
   de Cyril, à chaque fois.** Les refus posés par `wiki-api.sh` (`move` et les
   autres actions d'écriture) et par `wiki-put.sh` (espace de noms
